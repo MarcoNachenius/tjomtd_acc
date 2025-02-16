@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl7iafk7adx8m"]
+
+[ext_resource type="Script" path="res://projectile_spawners/components/hurtbox/projectile_spawner_hurtbox.gd" id="1_1hqwr"]
+
+[node name="ProjectileSpawnerHurtbox" type="Area2D"]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_1hqwr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

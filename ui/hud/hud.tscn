@@ -1,0 +1,119 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0sf1c8f4dvee"]
+
+[ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_oerar"]
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("BALANCE_TEXT_LABEL", "BUILD_TOWERS_HBOX_CONTAINER", "TOWER_PROPERTIES_HBOX_CONTAINER", "REMAINING_LIVES_TEXT_LABEL", "START_NEW_WAVE_BUTTON", "WAVES_COMPLETED_TEXT_LABEL", "EXIT_BUILD_MODE_BUTTON", "REMOVE_BARRICADE_BUTTON")]
+script = ExtResource("1_oerar")
+BALANCE_TEXT_LABEL = NodePath("Scores/Balance")
+BUILD_TOWERS_HBOX_CONTAINER = NodePath("BuildTowers")
+TOWER_PROPERTIES_HBOX_CONTAINER = NodePath("TowerProperties")
+REMAINING_LIVES_TEXT_LABEL = NodePath("Scores/RemainingLives")
+START_NEW_WAVE_BUTTON = NodePath("MapCommands/StartNewWave")
+WAVES_COMPLETED_TEXT_LABEL = NodePath("Scores/WavesCompleted")
+EXIT_BUILD_MODE_BUTTON = NodePath("MapCommands/ExitBuildMode")
+REMOVE_BARRICADE_BUTTON = NodePath("TowerProperties/RemoveBarricade")
+
+[node name="Scores" type="VBoxContainer" parent="."]
+offset_right = 200.0
+offset_bottom = 211.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Balance" type="RichTextLabel" parent="Scores"]
+layout_mode = 2
+text = "Balance: "
+fit_content = true
+
+[node name="RemainingLives" type="RichTextLabel" parent="Scores"]
+layout_mode = 2
+text = "Remaining Lives: "
+fit_content = true
+
+[node name="WavesCompleted" type="RichTextLabel" parent="Scores"]
+layout_mode = 2
+text = "Waves Completed: "
+fit_content = true
+
+[node name="BuildTowers" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Barricade" type="Button" parent="BuildTowers"]
+layout_mode = 2
+text = "Barricade"
+
+[node name="BlackMarbleLvl1" type="Button" parent="BuildTowers"]
+layout_mode = 2
+text = "Black Marble
+Level 1"
+
+[node name="BlackMarbleLvl2" type="Button" parent="BuildTowers"]
+layout_mode = 2
+text = "Black Marble
+Lvl 2"
+
+[node name="BismuthLvl1" type="Button" parent="BuildTowers"]
+layout_mode = 2
+text = "Bismuth
+Level 1"
+
+[node name="MapCommands" type="VBoxContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="StartNewWave" type="Button" parent="MapCommands"]
+layout_mode = 2
+text = "Start New Wave"
+
+[node name="ShowPath" type="Button" parent="MapCommands"]
+layout_mode = 2
+text = "Show Path"
+
+[node name="ExitBuildMode" type="Button" parent="MapCommands"]
+visible = false
+layout_mode = 2
+text = "Exit Build Mode"
+
+[node name="TowerProperties" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="RemoveBarricade" type="Button" parent="TowerProperties"]
+layout_mode = 2
+text = "Remove
+Barricade"
+
+[connection signal="pressed" from="BuildTowers/Barricade" to="." method="_on_barricade_button_pressed"]
+[connection signal="pressed" from="BuildTowers/BlackMarbleLvl1" to="." method="_on_black_marble_lvl_1_button_pressed"]
+[connection signal="pressed" from="BuildTowers/BlackMarbleLvl2" to="." method="_on_black_marble_lvl_2_pressed"]
+[connection signal="pressed" from="BuildTowers/BismuthLvl1" to="." method="_on_bismuth_lvl_1_button_pressed"]
+[connection signal="pressed" from="MapCommands/StartNewWave" to="." method="_on_start_new_wave_button_pressed"]
+[connection signal="pressed" from="MapCommands/ShowPath" to="." method="_on_show_path_buttton_pressed"]
+[connection signal="pressed" from="MapCommands/ExitBuildMode" to="." method="_on_exit_build_mode_pressed"]
+[connection signal="pressed" from="TowerProperties/RemoveBarricade" to="." method="_on_remove_barricade_pressed"]

@@ -1,0 +1,8 @@
+===================================================
+Important Note on Sprite Naming Conventions Mistake
+===================================================
+The naming conventions for the compass direction suffixes for this creep's animated sprites are incorrectly named in the png files.
+
+For instance, the file named `move_n.png` should be named `move_nw.png`.
+
+Please ensure to rename the files accordingly to maintain consistency and avoid any confusion during the animation handling process.

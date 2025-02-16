@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://brnleveyqk14w"]
+
+[sub_resource type="TileSet" id="TileSet_wi2lp"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(128, 64)
+
+[node name="MainGrid" type="TileMap"]
+position = Vector2(64, 0)
+tile_set = SubResource("TileSet_wi2lp")
+format = 2

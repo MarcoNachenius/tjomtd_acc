@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="TjomTD test environment"
+config/features=PackedStringArray("4.3", "Mobile")
+
+[autoload]
+
+CreepConstants="*res://autoloads/creep_constants.gd"
+GameConstants="*res://autoloads/game_constants.gd"
+MapConstants="*res://autoloads/map_constants.gd"
+ProjectileConstants="*res://autoloads/projectile_constants.gd"
+ProjectileSpawnerConstants="*res://autoloads/projectile_spawner_constants.gd"
+TowerConstants="*res://autoloads/tower_constants.gd"
+WaveConstants="*res://autoloads/wave_constants.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="mobile"

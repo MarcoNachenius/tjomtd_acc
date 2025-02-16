@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b753uth04swol"]
+
+[ext_resource type="Texture2D" uid="uid://lwwfb7lpsvnd" path="res://maps/sprites/tiles/green_surface_map_grid.png" id="1_8rewh"]
+
+[node name="GreenSurfaceMapGrid" type="Sprite2D"]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+texture = ExtResource("1_8rewh")

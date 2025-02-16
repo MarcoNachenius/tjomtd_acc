@@ -1,0 +1,40 @@
+extends Projectile
+class_name SingleHitBullet
+
+
+@export var __damage: int
+
+
+func _process(delta):
+	_handle_movement()
+
+func _handle_movement():
+	assert(__velocity, "No velocity provided")
+	assert(__speed, "No speed provided")
+	position += __velocity * __isometric_speed
+
+## Self destructs after dealing damage
+func _inflict_damange(creep: Creep):
+	creep.take_damage(__damage)
+	queue_free()
+
+func _on_hurtbox_entered(area):
+	if !area.get_parent() is Creep:
+		return
+	var entered_creep: Creep = area.get_parent() 
+	if !entered_creep.is_detectable():
+		return
+	
+	_inflict_damange(entered_creep)
+
+
+# *******
+# SETTERS
+# *******
+
+func set_damage(amount: int):
+	__damage = amount
+
+# *******
+# GETTERS
+# *******

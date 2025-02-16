@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://csxbrftrm76nl"]
+
+[ext_resource type="Script" path="res://projectiles/missile/missile.gd" id="1_vr4tb"]
+[ext_resource type="Texture2D" uid="uid://kbfeom8xgdkn" path="res://towers/buildable_towers/bismuth/level_1/missile_sprite.png" id="2_4w723"]
+
+[node name="BismuthLvl1Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_vr4tb")
+MISSILE_SPRITE = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_4w723")

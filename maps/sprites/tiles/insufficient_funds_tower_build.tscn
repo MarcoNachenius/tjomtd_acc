@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://y7efwyyqtfj0"]
+
+[ext_resource type="Texture2D" uid="uid://bcbhurlnqlvnl" path="res://maps/sprites/tiles/insufficient_funds_tower_surface.png" id="1_rtt7d"]
+
+[node name="InsufficientFundsTowerBuild" type="Sprite2D"]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+texture = ExtResource("1_rtt7d")

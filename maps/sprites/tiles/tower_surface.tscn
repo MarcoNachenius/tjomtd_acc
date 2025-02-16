@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://clwquuky7iodd"]
+
+[ext_resource type="Texture2D" uid="uid://y7iqpuymhhv8" path="res://maps/sprites/tiles/planks.png" id="1_cm8gm"]
+
+[node name="TowerSurface" type="Sprite2D"]
+y_sort_enabled = true
+texture = ExtResource("1_cm8gm")
+offset = Vector2(0, -186)
