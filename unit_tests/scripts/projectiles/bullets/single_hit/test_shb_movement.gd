@@ -27,6 +27,7 @@ func test_isometric_movement_south_east():
 
     assert_almost_eq(single_hit_bullet.position.x, 0.0, 0.01, "X-coordinate should remain 0.0")
     assert_almost_eq(single_hit_bullet.position.y, 15.0, 0.01, "Y-coordinate should be approximately 15.0 (moved down by 15 units).")
+    assert_almost_eq(single_hit_bullet.__isometric_speed, 15.0, 0.01, "Isometric speed should be 15.0")
 
     single_hit_bullet.queue_free()
     dummy_target.queue_free()
@@ -55,6 +56,7 @@ func test_isometric_movement_north_west():
 
     assert_almost_eq(single_hit_bullet.position.x, 0.0, 0.01, "X-coordinate should remain 0.0")
     assert_almost_eq(single_hit_bullet.position.y, -15.0, 0.01, "Y-coordinate should be approximately 15.0 (moved up by 15 units).")
+    assert_almost_eq(single_hit_bullet.__isometric_speed, 15.0, 0.01, "Isometric speed should be 15.0")
 
     single_hit_bullet.queue_free()
     dummy_target.queue_free()
@@ -84,6 +86,7 @@ func test_isometric_movement_south_west():
 
     assert_almost_eq(single_hit_bullet.position.y, 0.0, 0.01, "Y-coordinate should remain 0.0")
     assert_almost_eq(single_hit_bullet.position.x, -30.0, 0.01, "X-coordinate should be approximately -30.0 (moved left by 30 units).")
+    assert_almost_eq(single_hit_bullet.__isometric_speed, 30.0, 0.01, "Isometric speed should be 30.0")
 
     single_hit_bullet.queue_free()
     dummy_target.queue_free()
@@ -113,6 +116,7 @@ func test_isometric_movement_north_east():
 
     assert_almost_eq(single_hit_bullet.position.y, 0.0, 0.01, "Y-coordinate should remain 0.0")
     assert_almost_eq(single_hit_bullet.position.x, 30.0, 0.01, "X-coordinate should be approximately 30.0 (moved right by 30 units).")
+    assert_almost_eq(single_hit_bullet.__isometric_speed, 30.0, 0.01, "Isometric speed should be 30.0")
 
     single_hit_bullet.queue_free()
     dummy_target.queue_free()
