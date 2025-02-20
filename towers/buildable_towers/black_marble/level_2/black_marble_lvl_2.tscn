@@ -24,6 +24,6 @@ texture = ExtResource("3_6l07g")
 [node name="TargetedRicochetBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("4_talk7")
 __bullet_damage = 1
-__bullet_speed = 40
+__bullet_speed = 20
 __cooldown_duration = 1.0
 __detection_range = 500

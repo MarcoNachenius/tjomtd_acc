@@ -26,7 +26,7 @@ func _handle_movement():
 	assert(__speed, "No speed provided")
 	position += __velocity * __isometric_speed
 
-
+# Executes additional logic during the _ready() method
 func _extended_onready():
 	__curr_ricochets = 0
 	# Create the ricochet detection hurtbox
@@ -40,8 +40,13 @@ func _inflict_damange(creep: Creep):
 	__last_damaged_creep = creep
 	__curr_ricochets += 1
 	# Destroy the bullet if it has reached the maximum ricochets
+	# If infinite ricochets are enabled, the bullet will not be destroyed
 	if !__infinite_ricochets and __curr_ricochets == __total_ricochets:
 		queue_free()
+	
+	# HANDLE RICOCHET
+	# ---------------
+	# Keep moving at the same velocity if there are no creeps in range
 	if __ricochet_detection_hurtbox.get_creeps_in_range().size() == 0:
 			return
 	# Change the target to first creep detected that is not the last damaged creep

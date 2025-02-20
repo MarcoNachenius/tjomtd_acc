@@ -10,10 +10,10 @@ enum WaveProperties {
 
 const WAVE_1: Dictionary = {
     WaveProperties.CREEP_ID: CreepConstants.CreepIDs.RED_SPIDER,
-    WaveProperties.CREEP_SPEED: 20,
+    WaveProperties.CREEP_SPEED: 10,
     WaveProperties.CREEP_HEALTH: 100,
-    WaveProperties.WAVE_SIZE: 2,
-    WaveProperties.SPAWN_COOLDOWN_TIME: 1
+    WaveProperties.WAVE_SIZE: 3,
+    WaveProperties.SPAWN_COOLDOWN_TIME: 0.5
 }
 
 const WAVE_2: Dictionary = {
