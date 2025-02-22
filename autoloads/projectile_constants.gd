@@ -13,7 +13,7 @@ enum SingleHitBullets {
 	BLACK_MARBLE_LVL_1
 }
 
-enum Missiles {
+enum SingleHitMissiles {
 	BISMUTH_LVL_1
 }
 
@@ -29,7 +29,7 @@ var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
 	TargetedRicochetBullets.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn")
 }
 
-var MISSILE_PRELOADS: Dictionary = {
-	Missiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
+var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
+	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
 }
 

@@ -1,5 +1,5 @@
 extends Projectile
-class_name Missile
+class_name SingleHitMissile
 
 @export var __damage: int
 @export var MISSILE_SPRITE: Sprite2D
