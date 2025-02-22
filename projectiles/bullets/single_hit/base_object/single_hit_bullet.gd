@@ -1,23 +1,32 @@
+## SingleHitBullet: A lightweight projectile for direct hits
+# Unlike TargetedRicochetBullet, this class does not include additional ricochet detection, 
+# making it a more lightweight and efficient option for straightforward projectile behavior.
+
 extends Projectile
 class_name SingleHitBullet
 
-
-@export var __damage: int
-
+@export var __damage: int  # Damage dealt to a creep upon impact
 
 func _process(delta):
 	_handle_movement()
 
+## Handles bullet movement in the isometric space
 func _handle_movement():
-	assert(__velocity, "No velocity provided")
-	assert(__speed, "No speed provided")
+	assert(__velocity, "No velocity provided")  # Ensure velocity is set before movement
+	assert(__speed, "No speed provided")  # Ensure speed is set before movement
 	position += __velocity * __isometric_speed
 
-## Self destructs after dealing damage
+## Inflicts damage to a target and removes the bullet from the scene
+#
+# The bullet will apply its damage to the creep and then self-destruct,
+# ensuring it only affects a single target upon impact.
 func _inflict_damange(creep: Creep):
 	creep.take_damage(__damage)
-	queue_free()
+	queue_free()  # Destroy the bullet after dealing damage
 
+## Detects when the bullet's hurtbox enters another area
+#
+# If the entered area belongs to a detectable Creep, the bullet applies damage.
 func _on_hurtbox_entered(area):
 	if !area.get_parent() is Creep:
 		return
@@ -27,14 +36,10 @@ func _on_hurtbox_entered(area):
 	
 	_inflict_damange(entered_creep)
 
-
 # *******
 # SETTERS
 # *******
 
+## Sets the damage value for this bullet
 func set_damage(amount: int):
 	__damage = amount
-
-# *******
-# GETTERS
-# *******
