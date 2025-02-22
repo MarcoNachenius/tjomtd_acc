@@ -125,3 +125,127 @@ func test_isometric_movement_north_east():
 	single_hit_bullet.queue_free()
 	dummy_target.queue_free()
 	await get_tree().process_frame  # Ensure they are removed before the next test
+
+
+## Test the movement of the bullet when the target is directly top-right of the bullet on the screen.
+func test_isometric_movement_north():
+	# Create test bullet
+	var single_hit_bullet = SingleHitBullet.new()
+	single_hit_bullet.set_speed(30)
+	single_hit_bullet.position = Vector2.ZERO  # Explicitly reset position
+
+	# Create test target
+	var dummy_target = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.DEMON].instantiate()
+	# Place the target top-right (positive X, negative Y).
+	dummy_target.position = Vector2(1000, -1000)
+
+	# Add the bullet and target to the scene tree
+	add_child_autofree(single_hit_bullet)
+	add_child_autofree(dummy_target)
+
+	# Assign the target to the bullet
+	single_hit_bullet.set_target(dummy_target)
+
+	# Prevent the target from moving during the test.
+	dummy_target.stun(10)
+
+	# Verify the initial positions of the bullet and target
+	assert_eq(single_hit_bullet.position, Vector2.ZERO, "Bullet should start at (0, 0) after being added to the scene tree.")
+	assert_eq(dummy_target.position, Vector2(1000, -1000), "Target should start at (1000, -1000) after being added to the scene tree.")
+
+	# Process a frame to update the bullet's position
+	await get_tree().process_frame
+
+	# Evaluate the bullet's position change
+	assert_almost_eq(single_hit_bullet.position.y, -18.106, 0.01, "Y-coordinate should be approximately -18.106 (moved up by 18.106 units).")
+	assert_almost_eq(single_hit_bullet.position.x, 18.106, 0.01, "X-coordinate should be approximately 18.106 (moved right by 18.106 units).")
+
+	# Evaluate the bullet's isometric speed
+	assert_almost_eq(single_hit_bullet.__isometric_speed, 25.6065, 0.01, "Isometric speed should be near 25.6065")
+
+	# Evaluate the bullet's velocity
+	assert_almost_eq(single_hit_bullet.__velocity.x, 0.7071, 0.01, "Velocity.x should be ~0.7071 for rightwards movement.")
+	assert_almost_eq(single_hit_bullet.__velocity.y, -0.7071, 0.01, "Velocity.y should be ~0.7071 for upwards movement.")
+
+	# Clean up test nodes
+	single_hit_bullet.queue_free()
+	dummy_target.queue_free()
+	await get_tree().process_frame  # Ensure they are removed before the next test
+
+## Test movement south (down-left)
+func test_isometric_movement_south():
+	var single_hit_bullet = SingleHitBullet.new()
+	single_hit_bullet.set_speed(30)
+	single_hit_bullet.position = Vector2.ZERO
+
+	var dummy_target = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.DEMON].instantiate()
+	dummy_target.position = Vector2(-1000, 1000)
+
+	add_child_autofree(single_hit_bullet)
+	add_child_autofree(dummy_target)
+	single_hit_bullet.set_target(dummy_target)
+	dummy_target.stun(10)
+
+	await get_tree().process_frame
+
+	assert_almost_eq(single_hit_bullet.position.y, 18.106, 0.01, "Y should be approximately 18.106 (moved down).")
+	assert_almost_eq(single_hit_bullet.position.x, -18.106, 0.01, "X should be approximately -18.106 (moved left).")
+
+	assert_almost_eq(single_hit_bullet.__velocity.x, -0.7071, 0.01, "Velocity.x should be ~-0.7071 for leftwards movement.")
+	assert_almost_eq(single_hit_bullet.__velocity.y, 0.7071, 0.01, "Velocity.y should be ~0.7071 for downwards movement.")
+
+	single_hit_bullet.queue_free()
+	dummy_target.queue_free()
+	await get_tree().process_frame
+
+## Test movement east (down-right)
+func test_isometric_movement_east():
+	var single_hit_bullet = SingleHitBullet.new()
+	single_hit_bullet.set_speed(30)
+	single_hit_bullet.position = Vector2.ZERO
+
+	var dummy_target = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.DEMON].instantiate()
+	dummy_target.position = Vector2(1000, 1000)
+
+	add_child_autofree(single_hit_bullet)
+	add_child_autofree(dummy_target)
+	single_hit_bullet.set_target(dummy_target)
+	dummy_target.stun(10)
+
+	await get_tree().process_frame
+
+	assert_almost_eq(single_hit_bullet.position.y, 18.106, 0.01, "Y should be approximately 18.106 (moved down).")
+	assert_almost_eq(single_hit_bullet.position.x, 18.106, 0.01, "X should be approximately 18.106 (moved right).")
+
+	assert_almost_eq(single_hit_bullet.__velocity.x, 0.7071, 0.01, "Velocity.x should be ~0.7071 for rightwards movement.")
+	assert_almost_eq(single_hit_bullet.__velocity.y, 0.7071, 0.01, "Velocity.y should be ~0.7071 for downwards movement.")
+
+	single_hit_bullet.queue_free()
+	dummy_target.queue_free()
+	await get_tree().process_frame
+
+## Test movement west (up-left)
+func test_isometric_movement_west():
+	var single_hit_bullet = SingleHitBullet.new()
+	single_hit_bullet.set_speed(30)
+	single_hit_bullet.position = Vector2.ZERO
+
+	var dummy_target = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.DEMON].instantiate()
+	dummy_target.position = Vector2(-1000, -1000)
+
+	add_child_autofree(single_hit_bullet)
+	add_child_autofree(dummy_target)
+	single_hit_bullet.set_target(dummy_target)
+	dummy_target.stun(10)
+
+	await get_tree().process_frame
+
+	assert_almost_eq(single_hit_bullet.position.y, -18.106, 0.01, "Y should be approximately -18.106 (moved up).")
+	assert_almost_eq(single_hit_bullet.position.x, -18.106, 0.01, "X should be approximately -18.106 (moved left).")
+
+	assert_almost_eq(single_hit_bullet.__velocity.x, -0.7071, 0.01, "Velocity.x should be ~-0.7071 for leftwards movement.")
+	assert_almost_eq(single_hit_bullet.__velocity.y, -0.7071, 0.01, "Velocity.y should be ~-0.7071 for upwards movement.")
+
+	single_hit_bullet.queue_free()
+	dummy_target.queue_free()
+	await get_tree().process_frame

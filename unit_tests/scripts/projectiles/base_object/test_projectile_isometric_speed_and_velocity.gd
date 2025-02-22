@@ -32,11 +32,15 @@ func test_isometric_speed_north_west():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (0, -10) is -PI/2, so cos(-PI/2) = 0 => isometric_speed = 5.
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
 	# velocity = (0, -1) => up on the screen.
 	assert_almost_eq(projectile.__isometric_speed, 5.0, 0.01,
 		"Isometric speed should be 5 when target is directly above (negative Y).")
 	assert_eq(projectile.__velocity, Vector2(0, -1),
 		"Velocity should be set to Vector2(0, -1) when target is above.")
+	
 
 
 # 2) NORTH-EAST: Rightwards (positive X)
@@ -54,6 +58,9 @@ func test_isometric_speed_north_east():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (10,0) is 0 => cos(0) = 1 => isometric_speed = 10.
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
 	# velocity = (1, 0) => moves right on screen.
 	assert_almost_eq(projectile.__isometric_speed, 10.0, 0.01,
 		"Isometric speed should equal 10 when target is to the right.")
@@ -76,6 +83,9 @@ func test_isometric_speed_south_west():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (-10,0) is PI => cos(PI) = -1 => abs(-1)=1 => isometric_speed=10.
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
 	# velocity = (-1, 0) => moves left on screen.
 	assert_almost_eq(projectile.__isometric_speed, 10.0, 0.01,
 		"Isometric speed should equal 10 when target is to the left.")
@@ -98,6 +108,9 @@ func test_isometric_speed_south_east():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (0,10) is PI/2 => cos(PI/2)=0 => isometric_speed=5.
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
 	# velocity = (0, 1) => moves down on screen.
 	assert_almost_eq(projectile.__isometric_speed, 5.0, 0.01,
 		"Isometric speed should be 5 when target is directly below (positive Y).")
@@ -120,8 +133,11 @@ func test_isometric_speed_north():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (10, -10) is -PI/4 => cos(-PI/4)=0.7071 => factor=0.85 => ~8.5355
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
 	# velocity ~ (0.7071, -0.7071) => moves up-right.
-	assert_almost_eq(projectile.__isometric_speed, (0.5 * abs(cos(-PI/4)) + 0.5) * 10, 0.01,
+	assert_almost_eq(projectile.__isometric_speed, 8.5355, 0.01,
 		"Isometric speed should be ~8.5355 when target is up-right.")
 	assert_almost_eq(projectile.__velocity.x, 0.7071, 0.01,
 		"Velocity.x should be ~0.7071 for up-right movement.")
@@ -144,9 +160,13 @@ func test_isometric_speed_south():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (-10,10) is 3*PI/4 => cos(3*PI/4)=-0.7071 => abs=>0.7071 => factor=0.85 => ~8.5355
-	# velocity ~ (-0.7071, 0.7071) => moves down-left.
-	assert_almost_eq(projectile.__isometric_speed, (0.5 * abs(cos(3*PI/4)) + 0.5) * 10, 0.01,
+	assert_almost_eq(projectile.__isometric_speed, 8.5355, 0.01,
 		"Isometric speed should be ~8.5355 when target is down-left.")
+	
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
+	# velocity ~ (-0.7071, 0.7071) => moves down-left.
 	assert_almost_eq(projectile.__velocity.x, -0.7071, 0.01,
 		"Velocity.x should be ~-0.7071 for down-left movement.")
 	assert_almost_eq(projectile.__velocity.y, 0.7071, 0.01,
@@ -168,9 +188,13 @@ func test_isometric_speed_west():
 	
 	projectile.set_target(dummy_target)
 	# Angle from (0,0) to (-10,-10) is -3*PI/4 => cos(-3*PI/4)=-0.7071 => abs=>0.7071 => ~8.5355
-	# velocity ~ (-0.7071, -0.7071) => moves up-left.
-	assert_almost_eq(projectile.__isometric_speed, (0.5 * abs(cos(-3*PI/4)) + 0.5) * 10, 0.01,
+	assert_almost_eq(projectile.__isometric_speed, 8.5355, 0.01,
 		"Isometric speed should be ~8.5355 when target is up-left.")
+	
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
+	# velocity ~ (-0.7071, -0.7071) => moves up-left.
 	assert_almost_eq(projectile.__velocity.x, -0.7071, 0.01,
 		"Velocity.x should be ~-0.7071 for up-left movement.")
 	assert_almost_eq(projectile.__velocity.y, -0.7071, 0.01,
@@ -191,10 +215,18 @@ func test_isometric_speed_east():
 	dummy_target.position = Vector2(10, 10)
 	
 	projectile.set_target(dummy_target)
+	
+	# Isometric speed
+	# ---------------
+	# __isometric_speed = (0.5 * abs(cos(direction_angle)) + 0.5) * __speed
 	# Angle from (0,0) to (10,10) is PI/4 => cos(PI/4)=0.7071 => factor=0.85 => ~8.5355
-	# velocity ~ (0.7071, 0.7071) => moves down-right.
-	assert_almost_eq(projectile.__isometric_speed, (0.5 * abs(cos(PI/4)) + 0.5) * 10, 0.01,
+	assert_almost_eq(projectile.__isometric_speed, 8.5355, 0.01,
 		"Isometric speed should be ~8.5355 when target is down-right.")
+	
+	# Velocity
+	# --------
+	# __velocity = (projectile.__target.global_position - projectile.global_position).normalized()
+	# velocity ~ (0.7071, 0.7071) => moves down-right.
 	assert_almost_eq(projectile.__velocity.x, 0.7071, 0.01,
 		"Velocity.x should be ~0.7071 for down-right movement.")
 	assert_almost_eq(projectile.__velocity.y, 0.7071, 0.01,
