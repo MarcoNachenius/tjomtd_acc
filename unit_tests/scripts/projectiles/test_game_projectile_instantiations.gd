@@ -1,5 +1,8 @@
 extends GutTest
 
+## Reset before each test case
+func before_each():
+	await get_tree().process_frame  # Ensure previous nodes are fully freed.
 
 func test_black_marble_lvl_1_projectile_instatiation():
 	# Black Marble Level 1

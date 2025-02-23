@@ -119,6 +119,15 @@ func _handle_death():
 	if __death_in_progress and !DEATH_ANIMATIONS.is_playing():
 		self._destroy()
 
+
+func _handle_idle():
+	# Check if the stun timer has expired
+	if __stun_timer.is_stopped():
+		_switch_state(States.MOVING)
+		return
+	# Play idle animation
+	IDLE_ANIMATIONS.play(CreepConstants.CompassDirToIdleAnimations[__curr_compass_direction])
+
 # Getters and Setters
 
 func get_is_wave_creep() -> bool:
@@ -334,24 +343,3 @@ func take_damage(amount: int):
 
 func _destroy():
 	queue_free()
-
-
-func _handle_idle():
-	# Check if the stun timer has expired
-	if __stun_timer.is_stopped():
-		_switch_state(States.MOVING)
-		return
-	# Play idle animation
-	IDLE_ANIMATIONS.play(CreepConstants.CompassDirToIdleAnimations[__curr_compass_direction])
-
-
-
-
-
-
-# **********
-# DEGBUGGING
-# **********
-
-func debug_shit_on_ready():
-	pass
