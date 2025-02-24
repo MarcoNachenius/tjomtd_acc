@@ -41,3 +41,4 @@ func set_damage(amount: int):
 # *******
 # GETTERS
 # *******
+
