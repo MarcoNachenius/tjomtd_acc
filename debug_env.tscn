@@ -7,10 +7,10 @@
 
 [node name="debug_env" type="Node2D" node_paths=PackedStringArray("__game_map")]
 script = ExtResource("1_1febu")
-__game_map = NodePath("GemTD")
+__game_map = NodePath("")
 
 [node name="GemTD" parent="." instance=ExtResource("3_br2u2")]
-__path_start_point = Vector2i(0, 14)
+position = Vector2(0, 2586)
 
 [node name="MapCamera" parent="." node_paths=PackedStringArray("__game_map") instance=ExtResource("4_xpk5n")]
 position = Vector2(0, 2586)

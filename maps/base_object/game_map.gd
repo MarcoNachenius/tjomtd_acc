@@ -1,4 +1,4 @@
-extends TileMap
+extends TileMapLayer
 class_name GameMap
 
 # ========
@@ -57,11 +57,11 @@ var __impediment_placement_type: ImpedimentPlacementTypes = ImpedimentPlacementT
 var __insufficient_balance_surface_highlight: Sprite2D
 var __invalid_build_position_surface_highlight: Sprite2D
 var __mandatory_waypoints: Array[Vector2i]
-var __main_tileset: TileMap
+var __main_tileset: TileMapLayer
 var __mouse_position: Vector2
 var __path_impediments: Array[Vector2i]
 var __path_line: Line2D
-var __placement_grid: TileMap
+var __placement_grid: TileMapLayer
 var __remaining_lives: int
 var __total_active_creeps: int
 var __total_active_wave_creeps: int
@@ -88,7 +88,7 @@ func _ready():
 	# ASTAR GRID
 	self._create_astar_grid()
 
-	# DERIVED TILEMAPS
+	# DERIVED TileMapLayerS
 	self._create_main_tileset()
 	self._create_placement_grid()
 
@@ -209,16 +209,16 @@ func _create_astar_grid():
 	# Commit the grid configuration to apply the changes.
 	__astar_grid.update()
 
-## Creates the main grid (TileMap) for the map, setting up its properties from scratch 
-## and adding it to the scene. This method ensures that the TileMap aligns properly 
+## Creates the main grid (TileMapLayer) for the map, setting up its properties from scratch 
+## and adding it to the scene. This method ensures that the TileMapLayer aligns properly 
 ## with the map's tile structure and is configured for isometric gameplay.
 func _create_main_tileset():
-	# Create a new TileMap instance to represent the map's main grid.
-	var new_tile_map = TileMap.new()
+	# Create a new TileMapLayer instance to represent the map's main grid.
+	var new_tile_map = TileMapLayer.new()
 
-	# Position the new TileMap such that its (0, 0) tile's center aligns with 
+	# Position the new TileMapLayer such that its (0, 0) tile's center aligns with 
 	# the top-left corner of the (0, 0) tile in the map's grid. This ensures
-	# proper alignment between the TileMap and the overall map layout.
+	# proper alignment between the TileMapLayer and the overall map layout.
 	new_tile_map.position = Vector2(self.tile_set.tile_size.x / 4, 0)
 
 	# Create a new TileSet to define the visual and structural properties of the tiles.
@@ -235,17 +235,17 @@ func _create_main_tileset():
 	# navigation and ensuring that four navigation tiles fit into one map tile.
 	new_tileset.tile_size = self.tile_set.tile_size / 2
 
-	# Assign the newly created TileMap to the __main_tileset variable for 
+	# Assign the newly created TileMapLayer to the __main_tileset variable for 
 	# easy reference and to signify it as the primary tile map for the map.
 	self.__main_tileset = new_tile_map
 
-	# Add the TileMap as a child node of the current scene, integrating it into 
+	# Add the TileMapLayer as a child node of the current scene, integrating it into 
 	# the map structure and making it visible in the game world.
 	add_child(new_tile_map)
 
 ## Constructs map's tower placement grid from scratch and adds it to scene.
 func _create_placement_grid():
-	var new_tile_map = TileMap.new()
+	var new_tile_map = TileMapLayer.new()
 	# Build tileset
 	var new_tileset = TileSet.new()
 	new_tile_map.tile_set = new_tileset
@@ -253,7 +253,7 @@ func _create_placement_grid():
 	new_tileset.tile_layout = new_tileset.TILE_LAYOUT_DIAMOND_DOWN
 	# Four navigation tiles must fit into one map tile
 	new_tileset.tile_size = self.tile_set.tile_size/2
-	# Assign tilemap to __main_tileset
+	# Assign TileMapLayer to __main_tileset
 	self.__placement_grid = new_tile_map
 	# Instantiate main tile grid as child of Map scene
 	add_child(new_tile_map)
