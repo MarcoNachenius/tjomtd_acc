@@ -2,7 +2,7 @@ extends Projectile
 class_name TargetedRicochetBullet
 
 ## TODO: Hide ricochet detection hurtbox whenever the bullet is
-## traveling towards the target. It should only be visible when
+## traveling towards the target. It should only be monitoring when
 ## the bullet is looking for a new target to ricochet to.
 
 
@@ -26,6 +26,22 @@ func _handle_movement():
 	assert(__speed, "No speed provided")
 	position += __velocity * __isometric_speed
 
+func _handle_ricochet():
+	# Keep moving at the same velocity if there are no creeps in range
+	if __ricochet_detection_hurtbox.get_creeps_in_range().size() == 0:
+		return
+	# Change the target to first creep detected that is not the last damaged creep
+	for creep_instance in __ricochet_detection_hurtbox.get_creeps_in_range():
+		if !is_instance_valid(creep_instance):
+			continue
+		if creep_instance == __last_damaged_creep:
+			continue
+		if !creep_instance.is_detectable():
+			continue
+		__target = creep_instance
+		update_velocity_towards_target()
+		update_isometric_speed()
+
 # Executes additional logic during the _ready() method
 func _extended_onready():
 	__curr_ricochets = 0
@@ -44,23 +60,8 @@ func _inflict_damange(creep: Creep):
 	if !__infinite_ricochets and __curr_ricochets == __total_ricochets:
 		queue_free()
 	
-	# HANDLE RICOCHET
-	# ---------------
-	# Keep moving at the same velocity if there are no creeps in range
-	if __ricochet_detection_hurtbox.get_creeps_in_range().size() == 0:
-			return
-	# Change the target to first creep detected that is not the last damaged creep
-	for creep_instance in __ricochet_detection_hurtbox.get_creeps_in_range():
-		if !is_instance_valid(creep_instance):
-			continue
-		if creep_instance == __last_damaged_creep:
-			continue
-		if !creep_instance.is_detectable():
-			continue
-		__target = creep_instance
-		update_velocity_towards_target()
-		update_isometric_speed()
-		break
+	# Handle ricochet
+	_handle_ricochet()
 
 
 func _on_hurtbox_entered(area):
