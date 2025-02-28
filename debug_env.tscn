@@ -5,9 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://c0sf1c8f4dvee" path="res://ui/hud/hud.tscn" id="4_h0i3i"]
 [ext_resource type="PackedScene" uid="uid://bs55s7u8lwp5p" path="res://game/components/camera/map_camera.tscn" id="4_xpk5n"]
 
-[node name="debug_env" type="Node2D" node_paths=PackedStringArray("__game_map")]
+[node name="debug_env" type="Node2D"]
 script = ExtResource("1_1febu")
-__game_map = NodePath("")
 
 [node name="GemTD" parent="." instance=ExtResource("3_br2u2")]
 position = Vector2(0, 2586)

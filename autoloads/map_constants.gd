@@ -52,6 +52,8 @@ const GTD_WP_6 = GTD_WP_5 + Vector2i(0, 53)
 const GEM_TD_MANDATORY_WAYPOINTS: Array[Vector2i] = [GTD_WP_1, GTD_WP_2, GTD_WP_3, GTD_WP_4, GTD_WP_5, GTD_WP_6]
 
 
+var GEM_TD_MAP_LOAD = load("res://maps/gem_td/gem_td.tscn")
+
 ## Does not include start or end points
 const GEM_TD_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = [
     # Waypoint 1
