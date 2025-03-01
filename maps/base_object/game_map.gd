@@ -312,9 +312,8 @@ func update_path_line():
 	__path_line = new_path_line
 	__path_line.visible = __path_line_visible
 
-## Calculates and returns the 2x2 grid points that would be occupied by a tower 
-## placed at the specified grid position. This is useful for determining 
-## which tiles will be affected by the placement of a tower.
+## Retrurns coordinates for main tileset as [top_left, top_right, bottom_left, bottom_right].
+## TOP RIGHT point of returned impediment points is equal to provided placement grid point
 func get_tower_impediment_points(placementGridPoint: Vector2i) -> Array[Vector2i]:
 	# Calculate the top-left grid point of the 2x2 area relative to the placement point.
 	var top_left: Vector2i = Vector2i(placementGridPoint.x - 1, placementGridPoint.y)

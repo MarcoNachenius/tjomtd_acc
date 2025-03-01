@@ -38,6 +38,7 @@ var TOWER_PLACEMENT_INSUFFICIENT_BALANCE_SURFACE = load("res://maps/sprites/tile
 
 
 # Gem TD Waypoints
+# (main grid coordinates)
 const GTD_WP_1 = Vector2i(23, 14)
 # 1 tile left, 27 tiles down
 const GTD_WP_2 = GTD_WP_1 + Vector2i(-1, 27)
