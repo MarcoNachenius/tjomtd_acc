@@ -393,7 +393,6 @@ func _handle_tower_placement():
 	
 	# Handle placement action
 	if Input.is_action_just_released("select") and __build_tower_preload and tower_placement_possible:
-		self.place_tower_impediment_points(placement_tile_position)
 		self.place_tower(placement_tile_position)
 
 
@@ -453,7 +452,7 @@ func _update_current_path():
 
 		# Check for no viable path
 		if path_segment.size() == 0:
-			return []
+			__curr_path = []
 		
 		# Avoid duplication of end point of one path segment with beginning of next segment
 		if !updated_path.is_empty():
@@ -569,6 +568,8 @@ func _set_map_tile_impediments():
 
 ## Instantiates a new tower at the specified grid position and adds it as a child to the current node.
 func place_tower(placementGridPoint: Vector2i):
+	# Place tower impediment points
+	place_tower_impediment_points(placementGridPoint)
 	# Create new tower
 	var new_tower: Tower = __build_tower_preload.instantiate()
 	new_tower.set_placement_grid_coordinate(placementGridPoint)

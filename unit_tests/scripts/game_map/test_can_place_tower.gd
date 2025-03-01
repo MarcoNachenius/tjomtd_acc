@@ -1,9 +1,8 @@
 extends GutTest 
 
-## Reset before each test case
 func before_each():
-	await get_tree().process_frame  # Ensure previous nodes are fully freed.
-
+	# Ensure previous nodes are fully freed.
+	await get_tree().process_frame
 
 ## Creating a blank map and processing the frame should create the map is important for 
 ## creating a test object to run the rest of the tests in this file.
