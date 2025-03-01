@@ -294,3 +294,80 @@ func test_get_tower_impediment_points_bottom_left_corner():
 	# Clean up
 	test_map.queue_free()
 
+func test_get_tower_impediment_points_bottom_right_corner():
+	# ================================================================
+	#					 ** CREATE BLANK MAP **
+	# ================================================================
+	var test_map: GameMap = GameMap.new()
+	# LINE_TD is used because it has no mandatory path stops
+	test_map.MAP_ID = MapConstants.MapID.LINE_TD
+	# Set the map's size to 10x10
+	test_map.MAP_HEIGHT = 10
+	test_map.MAP_WIDTH = 10
+	# Set the map's path start and end points
+	test_map.__path_start_point = Vector2i(0, 0)
+	test_map.__path_end_point = Vector2i(0, 19)
+	# Create test tileset
+	var test_tileset = TileSet.new()
+	test_tileset.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+	test_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+	test_tileset.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_VERTICAL
+	test_tileset.tile_size = Vector2i(256, 128)
+	# Asssign the test tileset to the map
+	test_map.tile_set = test_tileset
+	# Add the test map to the scene
+	add_child_autofree(test_map)
+	# Process frame to create the map
+	await get_tree().process_frame
+	# ================================================================
+
+	# Assert value of (19, 18) placement grid point (valid point)
+	var test_placement_grid_point = Vector2i(19, 18)
+	var top_left_main_tileset_point = Vector2i(18, 18)
+	var top_right_main_tileset_point = Vector2i(19, 18)
+	var bottom_right_main_tileset_point = Vector2i(19, 19)
+	var bottom_left_main_tileset_point = Vector2i(18, 19)
+	# Get impediment points
+	var impediment_points = test_map.get_tower_impediment_points(test_placement_grid_point)
+	
+	# Perform tests
+	assert_eq(test_map.get_tower_impediment_points(test_placement_grid_point).size(), 4, "There should be 4 points in the array")
+	assert_true(impediment_points.has(top_left_main_tileset_point), "Top left main tileset point should be in the array")
+	assert_true(impediment_points.has(top_right_main_tileset_point), "Top right main tileset point should be in the array")
+	assert_true(impediment_points.has(bottom_right_main_tileset_point), "Bottom right main tileset point should be in the array")
+	assert_true(impediment_points.has(bottom_left_main_tileset_point), "Bottom left main tileset point should be in the array")
+
+	# Assert value of (20, 18) placement grid point (invalid point: impediment points fall outside right border of the map)
+	test_placement_grid_point = Vector2i(20, 18)
+	top_left_main_tileset_point = Vector2i(19, 18)
+	top_right_main_tileset_point = Vector2i(20, 18)
+	bottom_right_main_tileset_point = Vector2i(20, 19)
+	bottom_left_main_tileset_point = Vector2i(19, 19)
+	# Get impediment points
+	impediment_points = test_map.get_tower_impediment_points(test_placement_grid_point)
+	
+	# Perform tests
+	assert_eq(test_map.get_tower_impediment_points(test_placement_grid_point).size(), 4, "There should be 4 points in the array")
+	assert_true(impediment_points.has(top_left_main_tileset_point), "Top left main tileset point should be in the array")
+	assert_true(impediment_points.has(top_right_main_tileset_point), "Top right main tileset point should be in the array")
+	assert_true(impediment_points.has(bottom_right_main_tileset_point), "Bottom right main tileset point should be in the array")
+	assert_true(impediment_points.has(bottom_left_main_tileset_point), "Bottom left main tileset point should be in the array")
+
+	# Assert value of (19, 19) placement grid point (invalid point: impediment points fall outside bottom border of the map)
+	test_placement_grid_point = Vector2i(19, 19)
+	top_left_main_tileset_point = Vector2i(18, 19)
+	top_right_main_tileset_point = Vector2i(19, 19)
+	bottom_right_main_tileset_point = Vector2i(19, 20)
+	bottom_left_main_tileset_point = Vector2i(18, 20)
+	# Get impediment points
+	impediment_points = test_map.get_tower_impediment_points(test_placement_grid_point)
+	
+	# Perform tests
+	assert_eq(test_map.get_tower_impediment_points(test_placement_grid_point).size(), 4, "There should be 4 points in the array")
+	assert_true(impediment_points.has(top_left_main_tileset_point), "Top left main tileset point should be in the array")
+	assert_true(impediment_points.has(top_right_main_tileset_point), "Top right main tileset point should be in the array")
+	assert_true(impediment_points.has(bottom_right_main_tileset_point), "Bottom right main tileset point should be in the array")
+	assert_true(impediment_points.has(bottom_left_main_tileset_point), "Bottom left main tileset point should be in the array")
+
+	# Clean up
+	test_map.queue_free()
