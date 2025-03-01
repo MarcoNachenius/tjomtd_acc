@@ -205,3 +205,81 @@ func test_can_place_tower_bottom_right_corner():
 
 	# Clean up
 	test_map.queue_free()
+
+func test_can_place_tower_over_start_point():
+	# ================================================================
+	#					 ** CREATE BLANK MAP **
+	# ================================================================
+	var test_map: GameMap = GameMap.new()
+	# LINE_TD is used because it has no mandatory path stops
+	test_map.MAP_ID = MapConstants.MapID.LINE_TD
+	# Set the map's size to 10x10
+	test_map.MAP_HEIGHT = 10
+	test_map.MAP_WIDTH = 10
+    # Ensure start and end points don't interfere with placement validity
+	test_map.__path_start_point = Vector2i(10, 10)
+	test_map.__path_end_point = Vector2i(19, 19)
+	# Create test tileset
+	var test_tileset = TileSet.new()
+	test_tileset.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+	test_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+	test_tileset.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_VERTICAL
+	test_tileset.tile_size = Vector2i(256, 128)
+	# Asssign the test tileset to the map
+	test_map.tile_set = test_tileset
+	# Add the test map to the scene
+	add_child_autofree(test_map)
+	# Process frame to create the map
+	await get_tree().process_frame
+	# ================================================================
+
+	# Test points that overlap the start point (10, 10)
+	var top_left_overlap_point = Vector2i(11, 10)
+	var top_right_overlap_point = Vector2i(10, 10)
+	var bottom_left_overlap_point = Vector2i(11, 9)
+	var bottom_right_overlap_point = Vector2i(10, 9)
+
+	assert_eq(test_map.__mandatory_waypoints[0], Vector2i(10, 10), "Start should be Vector2i(10, 10)")
+	assert_false(test_map.can_place_tower(top_left_overlap_point), "Tile placement at (11, 10) should be false")
+	assert_false(test_map.can_place_tower(top_right_overlap_point), "Tile placement at (10, 10) should be false")
+	assert_false(test_map.can_place_tower(bottom_left_overlap_point), "Tile placement at (11, 9) should be false")
+	assert_false(test_map.can_place_tower(bottom_right_overlap_point), "Tile placement at (10, 9) should be false")
+
+func test_can_place_tower_over_end_point():
+	# ================================================================
+	#					 ** CREATE BLANK MAP **
+	# ================================================================
+	var test_map: GameMap = GameMap.new()
+	# LINE_TD is used because it has no mandatory path stops
+	test_map.MAP_ID = MapConstants.MapID.LINE_TD
+	# Set the map's size to 10x10
+	test_map.MAP_HEIGHT = 10
+	test_map.MAP_WIDTH = 10
+    # Ensure start and end points don't interfere with placement validity
+	test_map.__path_start_point = Vector2i(0, 0)
+	test_map.__path_end_point = Vector2i(10, 10)
+	# Create test tileset
+	var test_tileset = TileSet.new()
+	test_tileset.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+	test_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+	test_tileset.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_VERTICAL
+	test_tileset.tile_size = Vector2i(256, 128)
+	# Asssign the test tileset to the map
+	test_map.tile_set = test_tileset
+	# Add the test map to the scene
+	add_child_autofree(test_map)
+	# Process frame to create the map
+	await get_tree().process_frame
+	# ================================================================
+
+	# Test points that overlap the start point (10, 10)
+	var top_left_overlap_point = Vector2i(11, 10)
+	var top_right_overlap_point = Vector2i(10, 10)
+	var bottom_left_overlap_point = Vector2i(11, 9)
+	var bottom_right_overlap_point = Vector2i(10, 9)
+
+	assert_eq(test_map.__mandatory_waypoints[-1], Vector2i(10, 10), "End should be Vector2i(10, 10)")
+	assert_false(test_map.can_place_tower(top_left_overlap_point), "Tile placement at (11, 10) should be false")
+	assert_false(test_map.can_place_tower(top_right_overlap_point), "Tile placement at (10, 10) should be false")
+	assert_false(test_map.can_place_tower(bottom_left_overlap_point), "Tile placement at (11, 9) should be false")
+	assert_false(test_map.can_place_tower(bottom_right_overlap_point), "Tile placement at (10, 9) should be false")
