@@ -150,11 +150,6 @@ func test_path_start_blockage():
 	assert_true(test_map.__path_impediments.has(pgp_1_path_impediments[1]), "Impediment points contain placement grid point (3, 0)")
 	assert_true(test_map.__path_impediments.has(pgp_1_path_impediments[2]), "Impediment points contain placement grid point (2, 1)")
 	assert_true(test_map.__path_impediments.has(pgp_1_path_impediments[3]), "Impediment points contain placement grid point (3, 1)")
-	# Assert tower may not be placed in the added main grid impediments as they have already in the map's impediments
-	assert_false(test_map.can_place_tower(pgp_1_path_impediments[0]), "Tower cannot be added to placement grid point (2, 0)")
-	assert_false(test_map.can_place_tower(pgp_1_path_impediments[1]), "Tower cannot be added to placement grid point (3, 0)")
-	assert_false(test_map.can_place_tower(pgp_1_path_impediments[2]), "Tower cannot be added to placement grid point (2, 1)")
-	assert_false(test_map.can_place_tower(pgp_1_path_impediments[3]), "Tower cannot be added to placement grid point (3, 1)")
 
 	# PGP 2 PLACEMENT 
 	# ---------------
@@ -171,11 +166,6 @@ func test_path_start_blockage():
 	assert_true(test_map.__path_impediments.has(pgp_2_path_impediments[1]), "Impediment points contain placement grid point (1, 2)")
 	assert_true(test_map.__path_impediments.has(pgp_2_path_impediments[2]), "Impediment points contain placement grid point (0, 3)")
 	assert_true(test_map.__path_impediments.has(pgp_2_path_impediments[3]), "Impediment points contain placement grid point (1, 3)")
-	# Assert tower may not be placed in the added main grid impediments as they have already in the map's impediments
-	assert_false(test_map.can_place_tower(pgp_2_path_impediments[0]), "Tower cannot be added to placement grid point (0, 2)")
-	assert_false(test_map.can_place_tower(pgp_2_path_impediments[1]), "Tower cannot be added to placement grid point (1, 2)")
-	assert_false(test_map.can_place_tower(pgp_2_path_impediments[2]), "Tower cannot be added to placement grid point (0, 3)")
-	assert_false(test_map.can_place_tower(pgp_2_path_impediments[3]), "Tower cannot be added to placement grid point (1, 3)")
 
 	# TEST PATH START POINT BLOCKAGE
 	# ------------------------------

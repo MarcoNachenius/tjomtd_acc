@@ -264,19 +264,22 @@ func _create_tower_placement_validity_tiles():
 	# Valid position tile
 	__invalid_build_position_surface_highlight = MapConstants.TOWER_PLACEMENT_RED_SURFACE.instantiate() as Sprite2D
 	__invalid_build_position_surface_highlight.visible = false
-	__invalid_build_position_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY # Set transparency
+	# Set transparency
+	__invalid_build_position_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY
 	add_child(__invalid_build_position_surface_highlight)
 
 	# Invalid position tile
 	__valid_build_position_surface_highlight = MapConstants.TOWER_PLACEMENT_GREEN_SURFACE.instantiate() as Sprite2D
 	__valid_build_position_surface_highlight.visible = false
-	__valid_build_position_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY # Set transparency
+	# Set transparency
+	__valid_build_position_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY
 	add_child(__valid_build_position_surface_highlight)
 
 	# Insufficient balance tile
 	__insufficient_balance_surface_highlight = MapConstants.TOWER_PLACEMENT_INSUFFICIENT_BALANCE_SURFACE.instantiate() as Sprite2D
 	__insufficient_balance_surface_highlight.visible = false
-	__insufficient_balance_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY # Set transparency
+	# Set transparency
+	__insufficient_balance_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY
 	add_child(__insufficient_balance_surface_highlight)
 
 func creep_mapped_to_local_path_positions() -> Array[Vector2i]:
@@ -450,9 +453,12 @@ func _update_current_path():
 		var to_point: Vector2i = __mandatory_waypoints[i + 1]
 		var path_segment = __astar_grid.get_id_path(from_point, to_point)
 
-		# Check for no viable path
+		# Check for path blockage
 		if path_segment.size() == 0:
 			__curr_path = []
+			# Create empty path line just in case show path line is called
+			self.update_path_line()
+			return
 		
 		# Avoid duplication of end point of one path segment with beginning of next segment
 		if !updated_path.is_empty():
