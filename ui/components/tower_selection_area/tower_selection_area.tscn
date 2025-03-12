@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bm252t6kun8jv"]
 
-[ext_resource type="Script" path="res://ui/components/tower_selection_area/tower_selection_area.gd" id="1_rrsoj"]
+[ext_resource type="Script" uid="uid://b5omdedga6o7w" path="res://ui/components/tower_selection_area/tower_selection_area.gd" id="1_rrsoj"]
 
 [node name="TowerSelectionArea" type="Area2D"]
 z_as_relative = false

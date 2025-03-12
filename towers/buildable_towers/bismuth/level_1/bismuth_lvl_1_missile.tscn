@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://csxbrftrm76nl"]
 
-[ext_resource type="Script" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_vr4tb"]
+[ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_vr4tb"]
 [ext_resource type="Texture2D" uid="uid://kbfeom8xgdkn" path="res://towers/buildable_towers/bismuth/level_1/missile_sprite.png" id="2_4w723"]
 
 [node name="BismuthLvl1Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]

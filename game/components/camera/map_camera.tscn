@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bs55s7u8lwp5p"]
 
-[ext_resource type="Script" path="res://game/components/camera/map_camera.gd" id="1_cf7op"]
+[ext_resource type="Script" uid="uid://wadk3qruggns" path="res://game/components/camera/map_camera.gd" id="1_cf7op"]
 
 [node name="MapCamera" type="Camera2D"]
 zoom = Vector2(0.25, 0.25)

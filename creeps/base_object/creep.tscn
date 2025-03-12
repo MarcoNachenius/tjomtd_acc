@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dl11ayubja1o1"]
 
-[ext_resource type="Script" path="res://creeps/base_object/creep.gd" id="1_la6ag"]
+[ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_la6ag"]
 
 [node name="Creep" type="Node2D"]
 y_sort_enabled = true

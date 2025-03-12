@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjufot6vyfg6v"]
 
-[ext_resource type="Script" path="res://projectiles/bullets/multi_hit/targeted_ricochet/targeted_ricochet_bullet.gd" id="1_y7rb8"]
+[ext_resource type="Script" uid="uid://dymbynlgky77q" path="res://projectiles/bullets/multi_hit/targeted_ricochet/targeted_ricochet_bullet.gd" id="1_y7rb8"]
 [ext_resource type="Texture2D" uid="uid://ccerd67ey8p2i" path="res://towers/buildable_towers/black_marble/level_2/black_marble_lvl_2_bullet.png" id="2_83u1i"]
 
 [node name="bm_lvl_2_bullet" type="Node2D"]

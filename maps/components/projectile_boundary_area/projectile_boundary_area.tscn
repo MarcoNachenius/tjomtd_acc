@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cuavt07gq6278"]
 
-[ext_resource type="Script" path="res://maps/components/projectile_boundary_area/projectile_boundary_area.gd" id="1_bqvy0"]
+[ext_resource type="Script" uid="uid://dqi7w5l0o5yn5" path="res://maps/components/projectile_boundary_area/projectile_boundary_area.gd" id="1_bqvy0"]
 
 [node name="ProjectileBoundaryArea" type="Area2D"]
 z_index = 1

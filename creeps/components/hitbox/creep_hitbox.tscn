@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmynhkco3cqwa"]
 
-[ext_resource type="Script" path="res://creeps/components/hitbox/creep_hitbox.gd" id="1_ibftv"]
+[ext_resource type="Script" uid="uid://bpeq1nf4vuavp" path="res://creeps/components/hitbox/creep_hitbox.gd" id="1_ibftv"]
 
 [node name="CreepHitbox" type="Area2D"]
 z_index = 1

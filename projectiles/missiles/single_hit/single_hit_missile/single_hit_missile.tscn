@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cm3hhu62eacgw"]
 
-[ext_resource type="Script" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_g28ep"]
+[ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_g28ep"]
 
 [node name="Missile" type="Node2D"]
 script = ExtResource("1_g28ep")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bexqtwwsrnksn"]
 
-[ext_resource type="Script" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_usvpu"]
+[ext_resource type="Script" uid="uid://jrge5wn50vuj" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_usvpu"]
 
 [node name="SingleHitBullet" type="Node2D"]
 z_index = 2

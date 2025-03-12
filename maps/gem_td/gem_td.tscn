@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://cyit2njm4tkdc"]
 
 [ext_resource type="TileSet" uid="uid://bsrvyxfc2qpck" path="res://maps/map_template/map_template_tileset.tres" id="1_7r565"]
-[ext_resource type="Script" path="res://maps/base_object/game_map.gd" id="2_f8x60"]
+[ext_resource type="Script" uid="uid://ce73sfykqm7sn" path="res://maps/base_object/game_map.gd" id="2_f8x60"]
 
 [node name="GemTD" type="TileMapLayer"]
 z_as_relative = false

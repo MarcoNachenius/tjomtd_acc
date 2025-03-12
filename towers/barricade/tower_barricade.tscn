@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dibr6lu826sr0"]
 
-[ext_resource type="Script" path="res://towers/base_object/tower.gd" id="1_mfdc2"]
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_mfdc2"]
 [ext_resource type="PackedScene" uid="uid://clwquuky7iodd" path="res://maps/sprites/tiles/tower_surface.tscn" id="2_4cw6k"]
 
 [node name="Barricade" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=141 format=3 uid="uid://bmncy832fxx1g"]
 
-[ext_resource type="Script" path="res://creeps/base_object/creep.gd" id="1_nbkc5"]
+[ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_nbkc5"]
 [ext_resource type="SpriteFrames" uid="uid://cjgih6s7f4vfp" path="res://creeps/red_spider/animation_sprites/movement/red_spider_movement_animation.tres" id="2_8hl8q"]
 [ext_resource type="Texture2D" uid="uid://dspiffdrcy5tc" path="res://creeps/red_spider/animation_sprites/death/death_e.png" id="3_bm6kw"]
 [ext_resource type="SpriteFrames" uid="uid://cntmvw6sjf3rv" path="res://creeps/red_spider/animation_sprites/idle/red_spider_idle_animations.tres" id="3_nnilb"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://4njqpqwb87ow"]
 
-[ext_resource type="Script" path="res://towers/base_object/tower.gd" id="1_wliup"]
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_wliup"]
 [ext_resource type="Texture2D" uid="uid://b2fxg0x24mltw" path="res://towers/buildable_towers/black_marble/level_1/tower_sprite_without_surface.png" id="2_fgkmm"]
 [ext_resource type="Texture2D" uid="uid://lwwfb7lpsvnd" path="res://maps/sprites/tiles/green_surface_map_grid.png" id="4_012vu"]
 [ext_resource type="PackedScene" uid="uid://clwquuky7iodd" path="res://maps/sprites/tiles/tower_surface.tscn" id="5_kdprt"]
-[ext_resource type="Script" path="res://projectile_spawners/single_bullet/single_hit/single_hit_single_bullet_spawner.gd" id="5_skkas"]
+[ext_resource type="Script" uid="uid://bsxteh17ub0se" path="res://projectile_spawners/single_bullet/single_hit/single_hit_single_bullet_spawner.gd" id="5_skkas"]
 
 [node name="BlackMarbleLvl1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
 editor_description = "Fires single-hit bullets one at a time."

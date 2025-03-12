@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://37olns7laabm"]
 
-[ext_resource type="Script" path="res://creeps/base_object/creep.gd" id="1_fvybj"]
+[ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_fvybj"]
 [ext_resource type="SpriteFrames" uid="uid://c04vlxrqrfvwe" path="res://creeps/demon/animation_sprites/movement/demon_movement.tres" id="2_187xw"]
 [ext_resource type="SpriteFrames" uid="uid://c2gvrv3ihej3w" path="res://creeps/demon/animation_sprites/idle/demon_idle.tres" id="3_7qn8y"]
 [ext_resource type="SpriteFrames" uid="uid://btrg871jxtxx8" path="res://creeps/demon/animation_sprites/death/demon_death.tres" id="3_o1av7"]

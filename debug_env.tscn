@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmp4hul46bqad"]
 
-[ext_resource type="Script" path="res://debug_env.gd" id="1_1febu"]
+[ext_resource type="Script" uid="uid://vir653xat0r3" path="res://debug_env.gd" id="1_1febu"]
 [ext_resource type="PackedScene" uid="uid://cyit2njm4tkdc" path="res://maps/gem_td/gem_td.tscn" id="3_br2u2"]
 [ext_resource type="PackedScene" uid="uid://c0sf1c8f4dvee" path="res://ui/hud/hud.tscn" id="4_h0i3i"]
 [ext_resource type="PackedScene" uid="uid://bs55s7u8lwp5p" path="res://game/components/camera/map_camera.tscn" id="4_xpk5n"]

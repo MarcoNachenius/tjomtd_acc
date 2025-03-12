@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxtsbfb18dn06"]
 
-[ext_resource type="Script" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_4g67r"]
+[ext_resource type="Script" uid="uid://jrge5wn50vuj" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_4g67r"]
 [ext_resource type="Texture2D" uid="uid://dquxlhbsyhddp" path="res://towers/buildable_towers/black_marble/level_1/bullet_sprite.png" id="2_oo3jc"]
-
 
 [node name="TowerBullet" type="Node2D"]
 z_index = 2

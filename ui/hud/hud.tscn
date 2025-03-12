@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0sf1c8f4dvee"]
 
-[ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_oerar"]
+[ext_resource type="Script" uid="uid://c5v40jes47i8w" path="res://ui/hud/hud.gd" id="1_oerar"]
 
 [node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("BALANCE_TEXT_LABEL", "BUILD_TOWERS_HBOX_CONTAINER", "TOWER_PROPERTIES_HBOX_CONTAINER", "REMAINING_LIVES_TEXT_LABEL", "START_NEW_WAVE_BUTTON", "WAVES_COMPLETED_TEXT_LABEL", "EXIT_BUILD_MODE_BUTTON", "REMOVE_BARRICADE_BUTTON")]
 script = ExtResource("1_oerar")
