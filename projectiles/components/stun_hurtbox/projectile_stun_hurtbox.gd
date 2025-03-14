@@ -91,4 +91,13 @@ func _on_area_entered(area):
     if !area.get_parent() is Creep:
         return
     
+    # Assume area is the creep's hitbox
     var entered_creep: Creep = area.get_parent()
+
+    # Ignore creeps that are not detectable or are already dying.
+    if !entered_creep.is_detectable() or entered_creep.get_curr_state() == Creep.States.DYING:
+        return
+
+    # Try to inflict the stun effect on the creep.
+    if randi_range(0, 99) > __stun_probability_percentage:
+        entered_creep.stun(__stun_duration_seconds)
