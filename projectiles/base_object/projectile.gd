@@ -2,6 +2,13 @@ extends Node2D
 class_name Projectile
 
 @export var __hurtbox_radius: int = 5
+## If set to true, a stun hurtbox will be created on ready.
+## The stun hurbox's radius will be the equal to the projectile's hurtbox radius.
+@export var __can_stun: bool = false
+## Duration of the stun in seconds.
+@export var __stun_duration_seconds: float = 0.0
+## Percentage chance(0-100) of stunning the creep.
+@export var __stun_probability_percentage: int = 0
 
 var __isometric_speed: float
 var __speed: int
@@ -11,6 +18,8 @@ var __hurtbox: ProjectileHurtbox
 
 func _ready():
 	_create_hurtbox()
+	# Only creates stun hurtbox if self.__can_stun export was set to true
+	_create_stun_hurtbox()
 	_extended_onready()
 
 ## Updates non-isometric velocity towards creep
@@ -64,3 +73,20 @@ func set_speed(amount: int):
 
 func _on_hurtbox_entered(area):
 	pass
+
+
+# ****
+# TODO
+# ****
+
+## The stun hurbox's radius will be the equal to the projectile's hurtbox radius.
+func _create_stun_hurtbox():
+	# Only creates stun hurtbox if self.__can_stun export was set to true
+	if !__can_stun:
+		return
+	
+	# Instatiate stun hurtbox
+	var new_stun_hurtbox: ProjectileStunHurtbox = ProjectileConstants.STUN_HURTBOX_PRELOAD.instantiate()
+	add_child(new_stun_hurtbox)
+	# Set stun hurtbox radius equal to hurtbox radius
+	new_stun_hurtbox.set_base_radius(__hurtbox_radius)

@@ -1,6 +1,7 @@
 extends Node
 
 var HURTBOX_PRELOAD: PackedScene = load("res://projectiles/components/hurtbox/projectile_hurtbox.tscn")
+var STUN_HURTBOX_PRELOAD: PackedScene = load("res://projectiles/components/stun_hurtbox/projectile_stun_hurtbox.tscn")
 
 enum ProjectileIDs {
 	TEST_SINGLE_HIT_BULLET,

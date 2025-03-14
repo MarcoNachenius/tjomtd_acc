@@ -1,44 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4swq63xw8wn7"]
+[gd_scene load_steps=2 format=3 uid="uid://fjkf5f6celxo"]
 
-[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_rblog"]
-[ext_resource type="Texture2D" uid="uid://b5mctlfoo16fg" path="res://towers/sprites/crystal_tower_without_surface.png" id="3_crkee"]
-[ext_resource type="Script" uid="uid://bsxteh17ub0se" path="res://projectile_spawners/single_bullet/single_hit/single_hit_single_bullet_spawner.gd" id="3_upkmd"]
-[ext_resource type="Texture2D" uid="uid://lwwfb7lpsvnd" path="res://maps/sprites/tiles/green_surface_map_grid.png" id="4_60lyb"]
-[ext_resource type="Texture2D" uid="uid://dwc14vpygoe1n" path="res://maps/sprites/tiles/stone.png" id="5_edxjy"]
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_f7x33"]
 
-[node name="TestTower" type="Node2D"]
-z_index = 2
-z_as_relative = false
-y_sort_enabled = true
-script = ExtResource("1_rblog")
-
-[node name="SingleHitSingleBulletSpawner" type="Node2D" parent="."]
-script = ExtResource("3_upkmd")
-__bullet_damage = 5
-__bullet_speed = 20
-BULLET_PRELOAD = 1
-__cooldown_duration = 1.0
-__detection_range = 200
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-texture = ExtResource("5_edxjy")
-offset = Vector2(0, -180)
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-z_index = 3
-z_as_relative = false
-y_sort_enabled = true
-texture = ExtResource("4_60lyb")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 2
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(0, -19)
-scale = Vector2(0.799999, 0.759999)
-texture = ExtResource("3_crkee")
-offset = Vector2(-8, 10)
+[node name="DebugTower" type="Node2D"]
+script = ExtResource("1_f7x33")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
