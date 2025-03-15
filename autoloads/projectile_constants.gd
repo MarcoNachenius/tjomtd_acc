@@ -8,6 +8,7 @@ enum ProjectileIDs {
 	BLACK_MARBLE_LVL_1,
 	BLACK_MARBLE_LVL_2,
 	BISMUTH_LVL_1,
+	TEST_TOWER_PROJECTILE
 }
 
 enum SingleHitBullets {
@@ -19,7 +20,8 @@ enum SingleHitMissiles {
 }
 
 enum TargetedRicochetBullets {
-	BLACK_MARBLE_LVL_2
+	BLACK_MARBLE_LVL_2,
+	TEST_TOWER_PROJECTILE
 }
 
 var SINGLE_HIT_BULLET_LOADS: Dictionary = {
@@ -27,10 +29,10 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary = {
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
-	TargetedRicochetBullets.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn")
+	TargetedRicochetBullets.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn"),
+	TargetedRicochetBullets.TEST_TOWER_PROJECTILE: load("res://towers/test_tower/test_tower_projectile.tscn")
 }
 
 var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
 	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
 }
-

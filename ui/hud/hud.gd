@@ -128,3 +128,10 @@ func _on_remove_barricade_pressed():
 	__game_map.remove_tower(__selected_tower)
 	TOWER_PROPERTIES_HBOX_CONTAINER.visible = false
 	BUILD_TOWERS_HBOX_CONTAINER.visible = true
+
+
+func _on_test_tower_pressed():
+	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.TEST_BUILD_TOWER])
+	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.TEST_BUILD_TOWER])
+	__game_map.set_state(__game_map.States.BUILD_MODE)
+	EXIT_BUILD_MODE_BUTTON.visible = true

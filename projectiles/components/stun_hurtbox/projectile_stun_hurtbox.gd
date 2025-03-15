@@ -96,7 +96,7 @@ func _on_area_entered(area):
     assert(area.get_parent() is Creep, "Non-creep object entered projectile spawner (review physics layer assignment)")
     if !area.get_parent() is Creep:
         return
-    
+
     # Assume area is the creep's hitbox
     var entered_creep: Creep = area.get_parent()
 
@@ -104,6 +104,10 @@ func _on_area_entered(area):
     if !entered_creep.is_detectable() or entered_creep.get_curr_state() == Creep.States.DYING:
         return
 
-    # Try to inflict the stun effect on the creep.
+    # Produce a random number between 0 and 99 to determine 
+    # whether the stun effect is applied based on the given probability.
+    # If the random number is less than the stun probability percentage,
+    # apply the stun effect to the creep.
     if randi_range(0, 99) < __stun_probability_percentage:
         entered_creep.stun(__stun_duration_seconds)
+
