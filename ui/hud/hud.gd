@@ -96,6 +96,16 @@ func _on_bismuth_lvl_1_button_pressed():
 	__game_map.set_state(__game_map.States.BUILD_MODE)
 	EXIT_BUILD_MODE_BUTTON.visible = true
 
+func _on_test_tower_pressed():
+	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.TEST_BUILD_TOWER])
+	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.TEST_BUILD_TOWER])
+	__game_map.set_state(__game_map.States.BUILD_MODE)
+	EXIT_BUILD_MODE_BUTTON.visible = true
+
+# ==========================
+# GAME NAVIGATION PROPERTIES
+# ==========================
+
 func _on_start_new_wave_button_pressed():
 	# Reset build tower values
 	__game_map.clear_build_tower_values()
@@ -130,8 +140,3 @@ func _on_remove_barricade_pressed():
 	BUILD_TOWERS_HBOX_CONTAINER.visible = true
 
 
-func _on_test_tower_pressed():
-	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.TEST_BUILD_TOWER])
-	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.TEST_BUILD_TOWER])
-	__game_map.set_state(__game_map.States.BUILD_MODE)
-	EXIT_BUILD_MODE_BUTTON.visible = true
