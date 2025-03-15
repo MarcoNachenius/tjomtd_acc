@@ -83,6 +83,12 @@ func get_detectable_creeps_in_range() -> Array[Creep]:
     return detectable_creeps
 
 
+func set_stun_duration_seconds(value: float) -> void:
+    __stun_duration_seconds = value
+
+func set_stun_probability_percentage(value: int) -> void:
+    __stun_probability_percentage = value
+
 # *******
 # SIGNALS
 # *******
@@ -99,5 +105,5 @@ func _on_area_entered(area):
         return
 
     # Try to inflict the stun effect on the creep.
-    if randi_range(0, 99) > __stun_probability_percentage:
+    if randi_range(0, 99) < __stun_probability_percentage:
         entered_creep.stun(__stun_duration_seconds)

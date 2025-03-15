@@ -87,6 +87,8 @@ func _create_stun_hurtbox():
 	
 	# Instatiate stun hurtbox
 	var new_stun_hurtbox: ProjectileStunHurtbox = ProjectileConstants.STUN_HURTBOX_PRELOAD.instantiate()
+	new_stun_hurtbox.set_stun_duration_seconds(__stun_duration_seconds)
+	new_stun_hurtbox.set_stun_probability_percentage(__stun_probability_percentage)
 	add_child(new_stun_hurtbox)
 	# Set stun hurtbox radius equal to hurtbox radius
 	new_stun_hurtbox.set_base_radius(__hurtbox_radius)
