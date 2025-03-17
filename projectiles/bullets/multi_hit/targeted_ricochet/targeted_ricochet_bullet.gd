@@ -50,7 +50,7 @@ func _extended_onready():
 	add_child(__ricochet_detection_hurtbox)
 	__ricochet_detection_hurtbox.set_base_radius(__ricochet_detection_radius)
 
-
+## Inflicts damage to the specified creep and handles ricochet logic.
 func _inflict_damange(creep: Creep):
 	creep.take_damage(__damage)
 	__last_damaged_creep = creep
@@ -59,6 +59,7 @@ func _inflict_damange(creep: Creep):
 	# If infinite ricochets are enabled, the bullet will not be destroyed
 	if !__infinite_ricochets and __curr_ricochets == __total_ricochets:
 		queue_free()
+		return
 	
 	# Handle ricochet
 	_handle_ricochet()
