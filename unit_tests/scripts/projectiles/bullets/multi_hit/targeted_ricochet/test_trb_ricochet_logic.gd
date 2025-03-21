@@ -54,7 +54,7 @@ func test_ricochet_between_two_targets_with_handle_ricochet_method():
 	assert_almost_eq(ricochet_bullet.__velocity.y, 0.0, 0.01, "Ricochet bullet normalized velocity y should be 0")
 
 	# Simlilate bullet's ricochet movement being triggered
-	ricochet_bullet._handle_ricochet()
+	ricochet_bullet._handle_ricochet(first_entered_creep)
 
 	# Assert that the bullet is now targeting the second creep
 	assert_almost_eq(ricochet_bullet.__isometric_speed, float(bullet_speed), 0.01, "Ricochet bullet isometric speed should be 5")
@@ -142,11 +142,10 @@ func test_ricochet_between_two_targets_with_damage_infliction():
 	assert_almost_eq(ricochet_bullet.__velocity.x, -1.0, 0.01, "Ricochet bullet normalized velocity x should be -1")
 	assert_almost_eq(ricochet_bullet.__velocity.y, 0.0, 0.01, "Ricochet bullet normalized velocity y should be 0")
 
-    # Assert that the last damaged creep is the first entered creep
+	# Assert that the last damaged creep is the first entered creep
 	assert_eq(ricochet_bullet.__last_damaged_creep, second_entered_creep, "Ricochet bullet last damaged creep should be the first entered creep")
 
 	# Clean up
 	first_entered_creep.queue_free()
 	second_entered_creep.queue_free()
 	ricochet_bullet.queue_free()
-
