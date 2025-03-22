@@ -4,8 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://msvcg4llrpn0" path="res://projectiles/bullets/multi_hit/random_ricochet/test_bullet/bullet_sprite.png" id="2_o5emq"]
 
 [node name="TestRRB" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_ygbla")
+__infinite_ricochets = true
+__hurtbox_radius = 10
 metadata/_custom_type_script = "uid://2jlk7ijvr8cd"
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 texture = ExtResource("2_o5emq")

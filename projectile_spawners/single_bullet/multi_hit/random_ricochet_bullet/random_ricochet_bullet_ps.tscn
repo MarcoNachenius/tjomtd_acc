@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://fbrfrya7t1co"]
+
+[ext_resource type="Script" uid="uid://ciswnqnqe0n4u" path="res://projectile_spawners/single_bullet/multi_hit/random_ricochet_bullet/random_ricochet_bullet_ps.gd" id="1_llfju"]
+
+[node name="RandomRicochetBulletPS" type="Node2D"]
+script = ExtResource("1_llfju")
+metadata/_custom_type_script = "uid://kaif82mfoojg"
