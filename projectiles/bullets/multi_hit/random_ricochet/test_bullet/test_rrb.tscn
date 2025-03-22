@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhs8f7et6ews1"]
+
+[ext_resource type="Script" uid="uid://2jlk7ijvr8cd" path="res://projectiles/bullets/multi_hit/random_ricochet/random_ricochet_bullet.gd" id="1_ygbla"]
+[ext_resource type="Texture2D" uid="uid://msvcg4llrpn0" path="res://projectiles/bullets/multi_hit/random_ricochet/test_bullet/bullet_sprite.png" id="2_o5emq"]
+
+[node name="TestRRB" type="Node2D"]
+script = ExtResource("1_ygbla")
+metadata/_custom_type_script = "uid://2jlk7ijvr8cd"
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_o5emq")

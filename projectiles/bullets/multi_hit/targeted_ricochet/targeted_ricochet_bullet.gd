@@ -1,17 +1,17 @@
 extends Projectile
 class_name TargetedRicochetBullet
 
-## TODO: Hide ricochet detection hurtbox whenever the bullet is
-## traveling towards the target. It should only be monitoring when
-## the bullet is looking for a new target to ricochet to.
-
-
+# EXPORTS
 @export var __damage: int
+## If set to true, the bullet will lose damage every time it hits a creep.
+@export var __damage_degredation_enabled: bool = false
+## The rate at which the bullet loses damage after hitting a creep.
+@export var __damage_degredation_rate: int
 @export var __infinite_ricochets: bool = false
 @export var __ricochet_detection_radius: int = 100
 @export var __total_ricochets: int = 3
 
-
+# LOCAL VARS
 var __curr_ricochets: int
 var __last_damaged_creep: Creep
 var __ricochet_detection_hurtbox: ProjectileHurtbox
@@ -91,6 +91,15 @@ func _inflict_damange(creep: Creep):
 	if !__infinite_ricochets and __curr_ricochets == __total_ricochets:
 		queue_free()
 		return
+
+	# Handle damage degredation
+	if __damage_degredation_enabled:
+		# Destroy the bullet if it has no more damage after hitting a creep
+		if __damage - __damage_degredation_rate <= 0:
+			queue_free()
+			return
+		# Reduce the damage of the bullet
+		__damage -= __damage_degredation_rate
 
 	# Handle ricochet
 	_handle_ricochet(creep)
