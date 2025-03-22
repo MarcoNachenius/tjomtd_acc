@@ -28,21 +28,23 @@ func _handle_movement():
 ## This method also avoids ping-ponging between the same two targets when there is 
 ## more than one viable ricochet target in range that is not the last hit creep.
 func _handle_ricochet():
-	# Generate random position with x and y values between -10 and 10
-	var random_next_position = position + Vector2(randi_range(-10, 10), randi_range(-10, 10))
+	# Gererate random x and y values between -10 and 10
+	var random_x_coordinate = randi_range(-10, 10)
+	var random_y_coordinate = randi_range(-10, 10)
+	# Consturct random position coordinates
+	var random_next_position = Vector2(random_x_coordinate, random_y_coordinate)
 
-	# Ensure random position does not cause bullet to stop moving
-	while random_next_position == Vector2.ZERO:
+	# Ensure random position does not cause bullet to stop moving or
+	# keep traveling in the same direction
+	while random_next_position == Vector2.ZERO or random_next_position.normalized() == __velocity:
 		random_next_position = position + Vector2(randi_range(-10, 10), randi_range(-10, 10))
 	
 	# Update the velocity to the new target
-	__velocity = (random_next_position).normalized()
+	__velocity = random_next_position.normalized()
 	
 	# Update the isometric speed
 	var direction_angle = position.angle_to_point(random_next_position)
 	__isometric_speed = (0.5 * abs(cos(direction_angle)) + 0.5) * __speed
-
-
 
 # Executes additional logic during the _ready() method
 func _extended_onready():

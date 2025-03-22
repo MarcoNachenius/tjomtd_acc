@@ -19,7 +19,7 @@ texture = ExtResource("2_tagma")
 [node name="RandomRicochetBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("3_bdjfp")
 __bullet_damage = 1
-__bullet_speed = 10
-__cooldown_duration = 1.0
-__detection_range = 500
+__bullet_speed = 30
+__cooldown_duration = 0.2
+__detection_range = 1000
 metadata/_custom_type_script = "uid://ciswnqnqe0n4u"
