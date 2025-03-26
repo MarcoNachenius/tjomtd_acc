@@ -53,24 +53,28 @@ func _handle_ricochet(damanged_creep: Creep):
 		# Add to remaining viable targets list
 		remaining_viable_targets.append(creep_instance)
 
+	# Handle case where there are no other viable targets in range
+	if remaining_viable_targets.is_empty() and !found_last_damaged_creep:
+		__last_damaged_creep = null
+		return
+
 	# Handle case where there are no other viable targets except for the last damaged creep.
 	if remaining_viable_targets.is_empty() and found_last_damaged_creep:
 		# Set target to last damaged creep
 		__target = __last_damaged_creep
 		# Replace the last damaged creep with the damaged creep.
 		__last_damaged_creep = damanged_creep
-		update_velocity_towards_target()
-		update_isometric_speed()
+		update_movement_towards_assigned_target()
 		return
 
 	# Handle case where there are more than one viable ricochet target in range that is not the last hit creep.
 	# Select a random target from the remaining viable targets.
-	var random_ricochet_target: Creep = remaining_viable_targets[randi() % remaining_viable_targets.size()]
+	var random_target_index: int = randi_range(0, remaining_viable_targets.size() - 1)
+	var random_ricochet_target: Creep = remaining_viable_targets[random_target_index]
 	# Replace the last damaged creep with the damaged creep.
 	__last_damaged_creep = damanged_creep
 	__target = random_ricochet_target
-	update_velocity_towards_target()
-	update_isometric_speed()
+	update_movement_towards_assigned_target()
 
 # Executes additional logic during the _ready() method
 func _extended_onready():

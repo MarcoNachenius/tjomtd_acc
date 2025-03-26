@@ -42,7 +42,7 @@ func _handle_ricochet():
 	# Update the velocity to the new target
 	__velocity = random_next_position.normalized()
 	
-	# Update the isometric speed
+	# Update isometric speed
 	var direction_angle = position.angle_to_point(random_next_position)
 	__isometric_speed = (0.5 * abs(cos(direction_angle)) + 0.5) * __speed
 
@@ -61,7 +61,7 @@ func _inflict_damange(creep: Creep):
 		queue_free()
 		return
 
-	# Handle damage degredation
+	# Handle potential damage degredation
 	if __damage_degredation_enabled:
 		# Destroy the bullet if it has no more damage after hitting a creep
 		if __damage - __damage_degredation_rate <= 0:

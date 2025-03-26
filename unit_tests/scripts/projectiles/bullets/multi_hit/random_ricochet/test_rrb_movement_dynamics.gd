@@ -41,6 +41,27 @@ func test_ricochet_movement_change():
     # Verify that the test bullet is still moving
     assert_ne(test_bullet.__velocity, Vector2.ZERO)
 
+    # REPEAT ENTIRE TEST ONCE MORE TO RULE OUT A FALSE POSITIVE DUE TO
+    # PROBABILISTIC ANOMALIES CAUSED BY THE RANDOMNESS OF THE RICOCHET MECHANISM
+    # --------------------------------------------------------------------------
+    # Set the velocity of the test bullet
+    test_bullet.set_target(test_creep)
+
+    # Capture initial velocity of the test bullet
+    initial_velocity = test_bullet.__velocity
+
+    # Verify intitial velocity of the test bullet
+    assert_eq(initial_velocity, Vector2(1, 0))
+
+    # Inflict damage on test creep
+    test_bullet._inflict_damange(test_creep)
+
+    # Verify that the velocity of the test bullet has changed
+    assert_ne(test_bullet.__velocity, initial_velocity)
+
+    # Verify that the test bullet is still moving
+    assert_ne(test_bullet.__velocity, Vector2.ZERO)
+
     # Clean up
     test_creep.queue_free()
     test_bullet.queue_free()
