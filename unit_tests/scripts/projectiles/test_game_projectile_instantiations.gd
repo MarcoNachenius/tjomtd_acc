@@ -15,10 +15,10 @@ func test_black_marble_lvl_1_projectile_instatiation():
 
 func test_black_marble_lvl_2_projectile_instatiation():
 	# Black Marble Level 2
-	var t_bullet = ProjectileConstants.TARGETED_RICOCHET_BULLET_LOADS[ProjectileConstants.TargetedRicochetBullets.BLACK_MARBLE_LVL_2].instantiate()
+	var t_bullet = ProjectileConstants.RANDOM_RICOCHET_BULLET_LOADS[ProjectileConstants.RandomRicochetBullets.BLACK_MARBLE_LVL_2].instantiate()
 	add_child_autofree(t_bullet)
 	assert_not_null(t_bullet, "Black Marble Level 2 Bullet instantiated as null from ProjectileConstants")
-	assert_true(t_bullet is TargetedRicochetBullet, "Black Marble Level 2 Bullet is not an instance of TargetedRicochetBullet")
+	assert_true(t_bullet is RandomRicochetBullet, "Black Marble Level 2 Bullet is not an instance of RandomRicochetBullet")
 	t_bullet.queue_free()
 	t_bullet = null
 

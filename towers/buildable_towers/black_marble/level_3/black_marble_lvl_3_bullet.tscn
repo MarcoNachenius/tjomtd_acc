@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqigiir2s4qh7"]
+
+[ext_resource type="Script" uid="uid://dymbynlgky77q" path="res://projectiles/bullets/multi_hit/targeted_ricochet/targeted_ricochet_bullet.gd" id="1_rji8m"]
+[ext_resource type="Texture2D" uid="uid://c3ewhmgjb2shc" path="res://towers/buildable_towers/black_marble/level_3/bm_lvl_3_bullet_sprite.png" id="2_77skr"]
+
+[node name="BlackMarbleLvl3Bullet" type="Node2D"]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_rji8m")
+metadata/_custom_type_script = "uid://dymbynlgky77q"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_77skr")

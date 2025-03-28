@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_jd50u"]
 [ext_resource type="PackedScene" uid="uid://clwquuky7iodd" path="res://maps/sprites/tiles/tower_surface.tscn" id="2_8oros"]
 [ext_resource type="Texture2D" uid="uid://b2nnf0rylscq2" path="res://towers/buildable_towers/black_marble/level_2/black_marble_lvl_2_tower.png" id="3_6l07g"]
-[ext_resource type="Script" uid="uid://bc7cfloxni2io" path="res://projectile_spawners/single_bullet/multi_hit/targeted_ricochet_bullet/targeted_ricochet_bullet_spawner.gd" id="4_talk7"]
+[ext_resource type="Script" uid="uid://ciswnqnqe0n4u" path="res://projectile_spawners/single_bullet/multi_hit/random_ricochet_bullet/random_ricochet_bullet_ps.gd" id="4_85b51"]
 
 [node name="BlackMarbleLvl2" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_jd50u")
+TOWER_ID = 2
 TOWER_SPRITE = NodePath("TowerSprite")
 
 [node name="TowerSurface" parent="." instance=ExtResource("2_8oros")]
@@ -21,9 +22,11 @@ position = Vector2(0, -39)
 scale = Vector2(0.5, 0.360947)
 texture = ExtResource("3_6l07g")
 
-[node name="TargetedRicochetBulletSpawner" type="Node2D" parent="."]
-script = ExtResource("4_talk7")
-__bullet_damage = 1
-__bullet_speed = 20
+[node name="RandomRicochetBulletSpawner" type="Node2D" parent="."]
+script = ExtResource("4_85b51")
+__bullet_damage = 20
+__bullet_speed = 10
+BULLET_PRELOAD = 1
 __cooldown_duration = 1.0
-__detection_range = 500
+__detection_range = 300
+metadata/_custom_type_script = "uid://ciswnqnqe0n4u"

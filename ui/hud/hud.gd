@@ -90,6 +90,18 @@ func _on_black_marble_lvl_1_button_pressed():
 	__game_map.set_state(__game_map.States.BUILD_MODE)
 	EXIT_BUILD_MODE_BUTTON.visible = true
 
+func _on_black_marble_lvl_2_pressed():
+	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_2])
+	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2])
+	__game_map.set_state(__game_map.States.BUILD_MODE)
+	EXIT_BUILD_MODE_BUTTON.visible = true
+
+func _on_black_marble_lvl_3_pressed():
+	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_3])
+	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3])
+	__game_map.set_state(__game_map.States.BUILD_MODE)
+	EXIT_BUILD_MODE_BUTTON.visible = true
+
 func _on_bismuth_lvl_1_button_pressed():
 	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_1])
 	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.BISMUTH_LVL_1])
@@ -124,11 +136,6 @@ func _on_show_path_buttton_pressed():
 		__game_map.hide_path_line()
 	else:
 		__game_map.show_path_line()
-
-func _on_black_marble_lvl_2_pressed():
-	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_2])
-	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2])
-	__game_map.set_state(__game_map.States.BUILD_MODE)
 
 func _on_exit_build_mode_pressed():
 	__game_map.switch_states(__game_map.States.NAVIGATION_MODE)
