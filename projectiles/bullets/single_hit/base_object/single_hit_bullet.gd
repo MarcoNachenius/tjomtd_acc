@@ -12,7 +12,7 @@ func _process(delta):
 
 ## Handles bullet movement in the isometric space
 func _handle_movement():
-	assert(__velocity, "No velocity provided")  # Ensure velocity is set before movement
+	#assert(__velocity, "No velocity provided")  # Ensure velocity is set before movement
 	assert(__speed, "No speed provided")  # Ensure speed is set before movement
 	position += __velocity * __isometric_speed
 

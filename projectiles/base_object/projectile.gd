@@ -44,11 +44,12 @@ func update_isometric_speed():
 	assert(__target, "Cannot calculate isometric speed. No target provided")
 	__isometric_speed = _calculated_isometric_speed()
 
-## Updates non-isometric velocity towards creep
-func update_velocity_towards_target():
-	assert(__target, "No current target asigned")
-	var new_velocity = (__target.global_position - global_position).normalized()
-	__velocity = new_velocity
+## Updates the projectile's velocity and isometric speed towards the provided angle in radians.
+func update_movement_towards_angle(AngleInRadians: float):
+	# Update velocity
+	__velocity = Vector2.from_angle(AngleInRadians) * Vector2(1, -1)
+	# Update isometric speed
+	__isometric_speed = (0.5 * abs(cos(AngleInRadians)) + 0.5) * __speed
 
 ## Updates the projectile's velocity and isometric speed towards the target.
 func update_movement_towards_assigned_target():
@@ -72,6 +73,12 @@ func update_movement_towards_target_global_position(TargetGlobalPosition: Vector
 	# Update isometric speed
 	var direction_angle = global_position.angle_to_point(TargetGlobalPosition)
 	__isometric_speed = (0.5 * abs(cos(direction_angle)) + 0.5) * __speed
+
+## Updates non-isometric velocity towards creep
+func update_velocity_towards_target():
+	assert(__target, "No current target asigned")
+	var new_velocity = (__target.global_position - global_position).normalized()
+	__velocity = new_velocity
 
 # ********
 # PRIVATES

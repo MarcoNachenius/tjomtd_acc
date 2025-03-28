@@ -3,9 +3,9 @@ class_name RandomRicochetBullet
 
 # EXPORTS
 @export var __damage: int
-## If set to true, the bullet will lose damage every time it hits a creep.
+## If set to true, bullet will lose damage every time it hits a creep.
 @export var __damage_degredation_enabled: bool = false
-## The rate at which the bullet loses damage after hitting a creep.
+## rate at which bullet loses damage after hitting a creep.
 @export var __damage_degredation_rate: int
 @export var __infinite_ricochets: bool = false
 @export var __total_ricochets: int = 3
@@ -23,10 +23,10 @@ func _handle_movement():
 	assert(__speed, "No speed provided")
 	position += __velocity * __isometric_speed
 
-## Alters the direction of the bullet to new target in range of richochet hurtbox,
+## Alters direction of bullet to new target in range of richochet hurtbox,
 ## if one exists. 
-## This method also avoids ping-ponging between the same two targets when there is 
-## more than one viable ricochet target in range that is not the last hit creep.
+## This method also avoids ping-ponging between same two targets when there is 
+## more than one viable ricochet target in range that is not last hit creep.
 func _handle_ricochet():
 	# Gererate random x and y values between -10 and 10
 	var random_x_coordinate = randi_range(-10, 10)
@@ -35,39 +35,39 @@ func _handle_ricochet():
 	var random_next_position = Vector2(random_x_coordinate, random_y_coordinate)
 
 	# Ensure random position does not cause bullet to stop moving or
-	# keep traveling in the same direction
+	# keep traveling in same direction
 	while random_next_position == Vector2.ZERO or random_next_position.normalized() == __velocity:
 		random_next_position = position + Vector2(randi_range(-10, 10), randi_range(-10, 10))
 	
-	# Update the velocity to the new target
+	# Update velocity to new target
 	__velocity = random_next_position.normalized()
 	
 	# Update isometric speed
 	var direction_angle = position.angle_to_point(random_next_position)
 	__isometric_speed = (0.5 * abs(cos(direction_angle)) + 0.5) * __speed
 
-# Executes additional logic during the _ready() method
+# Executes additional logic during _ready() method
 func _extended_onready():
 	__curr_ricochets = 0
 
-## Inflicts damage to the specified creep and handles ricochet logic.
+## Inflicts damage to specified creep and handles ricochet logic.
 func _inflict_damange(creep: Creep):
 	# Handle damage infliction
 	creep.take_damage(__damage)
 	__curr_ricochets += 1
 
-	# Destroy the bullet if it has reached the maximum ricochets
+	# Destroy bullet if it has reached maximum ricochets
 	if !__infinite_ricochets and __curr_ricochets >= __total_ricochets:
 		queue_free()
 		return
 
 	# Handle potential damage degredation
 	if __damage_degredation_enabled:
-		# Destroy the bullet if it has no more damage after hitting a creep
+		# Destroy bullet if it has no more damage after hitting a creep
 		if __damage - __damage_degredation_rate <= 0:
 			queue_free()
 			return
-		# Reduce the damage of the bullet
+		# Reduce damage of bullet
 		__damage -= __damage_degredation_rate
 
 	# Handle ricochet
@@ -80,7 +80,7 @@ func _on_hurtbox_entered(area):
 	var entered_creep: Creep = area.get_parent()
 	if !entered_creep.is_detectable():
 		return
-	# Inflict damage on the creep
+	# Inflict damage to creep
 	_inflict_damange(entered_creep)
 
 
