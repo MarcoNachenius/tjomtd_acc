@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn13ap2e2u2y7"]
+
+[ext_resource type="Script" uid="uid://dp6ge5piuiiht" path="res://projectile_spawners/multi_bullet/star_formation/star_formation_bullet_spawner.gd" id="1_boyjj"]
+
+[node name="StarFormationBulletSpawner" type="Node2D"]
+script = ExtResource("1_boyjj")
+metadata/_custom_type_script = "uid://kaif82mfoojg"

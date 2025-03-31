@@ -8,6 +8,7 @@ z_index = 2
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_rji8m")
+__ricochet_detection_radius = 300
 metadata/_custom_type_script = "uid://dymbynlgky77q"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

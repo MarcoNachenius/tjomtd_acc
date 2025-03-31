@@ -117,8 +117,10 @@ func _on_cooldown_timer_timeout():
 		_launch_projectiles()
 		__launch_cooled_down = false
 
+## This method strictly handles the launching of projectiles.
+## Any logic related to WHEN/IF to launch projectiles should be handled in the
+## _on_hurtbox_entered and _on_hurtbox_exited methods.
 func _launch_projectiles():
-	#print("launching projectiles")
 	pass
 
 func _handle_targeting_policy(detectableCreeps: Array[Creep]):
