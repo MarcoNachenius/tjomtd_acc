@@ -1,11 +1,5 @@
 extends GutTest
 
-## This test case is designed to verify the functionality of the SingleHitSingleBulletSpawner
-## when it is launched towards a target. The test case creates a dummy target and a bullet spawner,
-## simulates the conditions for launching a bullet, and verifies that the bullet is launched correctly.
-## None of the properties of the bullet spawner are tested in real time, as the test case is designed to
-## simulate the conditions for launching a bullet without having the creep enter the range of the spawner.
-
 ## Reset before each test case
 func before_each():
     await get_tree().process_frame  # Ensure previous nodes are fully freed.

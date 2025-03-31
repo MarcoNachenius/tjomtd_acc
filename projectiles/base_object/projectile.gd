@@ -30,6 +30,9 @@ func _ready():
 # *******
 # PUBLICS
 # *******
+func get_velocity() -> Vector2:
+	return __velocity
+
 ## Updates the velocity and isometric speed of the projectile towards the target.
 func set_target(target: Creep):
 	assert(target, "No target provided")

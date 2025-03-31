@@ -47,7 +47,6 @@ var RANDOM_RICOCHET_BULLET_LOADS: Dictionary = {
 }
 
 var BULLET_PATHS: Dictionary = {
-	BulletsForSpawner.BISMUTH_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_1: "res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_2: "res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_3: "res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn",
@@ -58,6 +57,5 @@ enum BulletsForSpawner {
 	BLACK_MARBLE_LVL_1,
 	BLACK_MARBLE_LVL_2,
 	BLACK_MARBLE_LVL_3,
-	BISMUTH_LVL_1,
 	TEST_RANDOM_RICOCHET_BULLET,
 }
