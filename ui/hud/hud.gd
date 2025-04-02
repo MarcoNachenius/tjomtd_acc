@@ -19,7 +19,7 @@ const WAVES_COMPLETED_STR_PREFIX: String = "Waves Completed: "
 var __selected_tower: Tower
 
 # ===============
-# BUILDIN METHODS
+# BUILTIN METHODS
 # ===============
 
 func _ready():

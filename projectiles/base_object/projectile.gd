@@ -50,7 +50,7 @@ func update_isometric_speed():
 ## Updates the projectile's velocity and isometric speed towards the provided angle in radians.
 func update_movement_towards_angle(AngleInRadians: float):
 	# Update velocity
-	__velocity = Vector2.from_angle(AngleInRadians) # Invert y-axis
+	__velocity = Vector2(1, 0).rotated(AngleInRadians)
 	# Update isometric speed
 	__isometric_speed = (0.5 * abs(cos(AngleInRadians)) + 0.5) * __speed
 
