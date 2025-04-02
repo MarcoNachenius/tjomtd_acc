@@ -145,5 +145,3 @@ func _on_remove_barricade_pressed():
 	__game_map.remove_tower(__selected_tower)
 	TOWER_PROPERTIES_HBOX_CONTAINER.visible = false
 	BUILD_TOWERS_HBOX_CONTAINER.visible = true
-
-
