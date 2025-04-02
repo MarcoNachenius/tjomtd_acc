@@ -40,6 +40,7 @@ func _ready():
 	if __start_launch_on_ready:
 		_launch_projectiles()
 	__launch_cooled_down = true
+	_execute_extended_onready_commands()
 
 # ********
 # PRIVATES

@@ -52,17 +52,56 @@ func test_shb_launch_north_west():
     # ==============
     # VERIFY RESULTS
     # ==============
-    # Verify that a bullet was launched
-    #var found_bullet: SingleHitBullet
-    #for child in bullet_spawner.get_children():
-    #    if child is SingleHitBullet:
-    #        found_bullet = child
-    #        break
-#
-    #assert_not_null(found_bullet, "Bullet should have been launched")
-    #assert_almost_eq(found_bullet.__velocity.x, 0.0, 0.01, "Bullet should have no x velocity")
-    #assert_almost_eq(found_bullet.__velocity.y, 1.0, 0.01, "Bullet should have y velocity of 1")
-    #assert_almost_eq(found_bullet.__isometric_speed, 5.0, 0.01, "Bullet should have isometric speed of 5.0")
+    #Verify that a bullet was launched
+    var found_bullets: Array[Projectile] = []
+    for child in bullet_spawner.get_children():
+        if child is Projectile:
+            found_bullets.append(child)
+
+    var expected_velocities = [
+    Vector2(1.0, 0.0),
+    Vector2(-1.0, 0.0),
+    Vector2(0.0, 1.0),
+    Vector2(0.0, -1.0)
+    ]
+
+    # Ensure four bullets were launched
+    assert_eq(found_bullets.size(), 4, "Four bullets should have been launched")
+
+    # Extract velocities and compare
+    var actual_velocities = []
+    for bullet in found_bullets:
+        actual_velocities.append(bullet.get_velocity())  # Assuming a get_velocity() method
+
+    # Sort both lists to avoid order mismatch issues
+    actual_velocities.sort()
+    expected_velocities.sort()
+
+    # Extract the actual velocities
+    var actual_0 = actual_velocities[0]
+    var actual_1 = actual_velocities[1]
+    var actual_2 = actual_velocities[2]
+    var actual_3 = actual_velocities[3]
+    
+    # Expected velocities
+    var expected_0 = expected_velocities[0]
+    var expected_1 = expected_velocities[1]
+    var expected_2 = expected_velocities[2]
+    var expected_3 = expected_velocities[3]
+    
+    # Compare each bullet's velocity with precision of 0.1
+    assert_almost_eq(actual_0.x, expected_0.x, 0.1, "Bullet 0 velocity X does not match expected")
+    assert_almost_eq(actual_0.y, expected_0.y, 0.1, "Bullet 0 velocity Y does not match expected")
+    
+    assert_almost_eq(actual_1.x, expected_1.x, 0.1, "Bullet 1 velocity X does not match expected")
+    assert_almost_eq(actual_1.y, expected_1.y, 0.1, "Bullet 1 velocity Y does not match expected")
+    
+    assert_almost_eq(actual_2.x, expected_2.x, 0.1, "Bullet 2 velocity X does not match expected")
+    assert_almost_eq(actual_2.y, expected_2.y, 0.1, "Bullet 2 velocity Y does not match expected")
+    
+    assert_almost_eq(actual_3.x, expected_3.x, 0.1, "Bullet 3 velocity X does not match expected")
+    assert_almost_eq(actual_3.y, expected_3.y, 0.1, "Bullet 3 velocity Y does not match expected")
+
 
 
     # Clean up
