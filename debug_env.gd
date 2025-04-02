@@ -4,9 +4,24 @@ extends Node2D
 
 
 func _ready() -> void:
-	var starting_point = Vector2(1, 0)
-	var degrees: int = 0
-	for i in range(16):
-		print("Rotate by ", 45*i, " degrees:")
-		print("Coordiante: ", starting_point.rotated((PI/4)*i))
-		print("")
+	var points = [
+		Vector2(1, 0),
+		Vector2(1, 1),
+		Vector2(0, 1),
+		Vector2(-1, 1),
+		Vector2(-1, 0),
+		Vector2(-1, -1),
+		Vector2(0, -1),
+		Vector2(1, -1),
+		]
+	
+	for point in points:
+		var calculated_angle = Vector2.ZERO.angle_to_point(point)
+		# Handle (2PI, 3/2PI)
+		if calculated_angle >= -PI and calculated_angle < 0:
+			calculated_angle += 2 * PI
+		#if calculated_angle >= -PI/2 and calculated_angle < 0:
+		#	calculated_angle =+ 
+		print("Point: ", point)
+		print("Angle to point: ", rad_to_deg(calculated_angle))
+	
