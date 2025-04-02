@@ -2,6 +2,12 @@ extends Node2D
 
 @export var __game_map: GameMap
 
+
+func _ready():
+	for deg in range(0, 360, 45):
+		print("Degree: ", deg)
+		print("Vector:", Vector2.from_angle(deg_to_rad(deg))) # Invert y-axis
+
 func _on_button_pressed():
 	__game_map.__creep_spawner.__total_wave_creeps_spawned = 0
 	__game_map.__creep_spawner.__creep_preload = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.RED_SPIDER]

@@ -265,7 +265,7 @@ func test_update_movement_towards_angle_south_east():
 	assert_eq(single_hit_bullet.position, Vector2.ZERO, "Bullet should start at (0, 0) after being added to the scene tree.")
 
 	# Update velocity and isometric speed towards target position.
-	single_hit_bullet.update_movement_towards_angle((3*PI)/2)
+	single_hit_bullet.update_movement_towards_angle(PI/2)
 
 	# Move the bullet towards the target position.
 	single_hit_bullet._handle_movement()
@@ -296,7 +296,7 @@ func test_update_movement_towards_angle_north_west():
 	assert_eq(single_hit_bullet.position, Vector2.ZERO, "Bullet should start at (0, 0) after being added to the scene tree.")
 
 	# Update velocity and isometric speed towards target position.
-	single_hit_bullet.update_movement_towards_angle(PI/2)
+	single_hit_bullet.update_movement_towards_angle(3*PI/2)
 
 	# Move the bullet towards the target position.
 	single_hit_bullet._handle_movement()

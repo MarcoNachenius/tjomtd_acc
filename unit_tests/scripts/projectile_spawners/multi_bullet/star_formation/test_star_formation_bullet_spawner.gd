@@ -30,7 +30,7 @@ func test_shb_launch_north_west_bullet_velocities():
     var dummy_target = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.DEMON].instantiate()
     # Place the target BELOW (positive Y).
     # Ensure the target is far enough away from the spawner to not be detected by the hurtbox.
-    dummy_target.position = Vector2(0, 1000)
+    dummy_target.position = Vector2(1000, 0)
     add_child_autofree(dummy_target)
     # Ensure creep does not move or process path finding logic
     dummy_target.stun(10)
@@ -57,7 +57,7 @@ func test_shb_launch_north_west_bullet_velocities():
 
     # Verify initial values
     assert_eq(bullet_spawner.position, Vector2.ZERO, "Bullet spawner should be at origin")
-    assert_eq(dummy_target.position, Vector2(0, 1000), "Dummy target should be at (0, 1000)")
+    assert_eq(dummy_target.position, Vector2(1000, 0), "Dummy target should be at (0, 1000)")
     assert_eq(bullet_spawner.__target, dummy_target, "Bullet spawner should have target set to dummy target")
     assert_eq(bullet_spawner.__hurtbox.__creeps_in_range, simulated_targets_in_range, "Hurtbox should have target in range")
 
@@ -78,9 +78,9 @@ func test_shb_launch_north_west_bullet_velocities():
             found_bullets.append(child)
 
     var expected_velocities = [
-    Vector2(1.0, 0.0),
-    Vector2(-1.0, 0.0),
+    Vector2(1.0, 0.0), # Velocity towards target
     Vector2(0.0, 1.0),
+    Vector2(-1.0, 0.0),
     Vector2(0.0, -1.0)
     ]
 
@@ -91,10 +91,6 @@ func test_shb_launch_north_west_bullet_velocities():
     var actual_velocities = []
     for bullet in found_bullets:
         actual_velocities.append(bullet.get_velocity())  # Assuming a get_velocity() method
-
-    # Sort both lists to avoid order mismatch issues
-    actual_velocities.sort()
-    expected_velocities.sort()
 
     # Extract the actual velocities
     var actual_0 = actual_velocities[0]
