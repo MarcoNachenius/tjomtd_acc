@@ -4,7 +4,26 @@ extends GutTest
 func before_each():
     await get_tree().process_frame  # Ensure previous nodes are fully freed.
 
-func test_shb_launch_north_west():
+func test_launch_angles():
+    # ==================
+    # CREATE BULLET SPAWNER
+    # ==================
+    var bullet_spawner = StarFormationBulletSpawner.new()
+    bullet_spawner.__bullets_per_launch = 4
+    add_child_autofree(bullet_spawner)
+
+    # Process frame which adds spawner to the scene
+    await get_tree().process_frame  
+
+    # Verify initial values
+    assert_eq(bullet_spawner.__launch_angles.size(), 4, "Launch angles should be empty before execution")
+
+    assert_almost_eq(bullet_spawner.__launch_angles[0], 0.0, 0.1, "Expected angle 0.0")
+    assert_almost_eq(bullet_spawner.__launch_angles[1], PI / 2, 0.1, "Expected angle PI / 2")
+    assert_almost_eq(bullet_spawner.__launch_angles[2], PI, 0.1, "Expected angle PI")
+    assert_almost_eq(bullet_spawner.__launch_angles[3], (3*PI) / 2, 0.1, "Expected angle (3*PI) / 2")
+
+func test_shb_launch_north_west_bullet_velocities():
     # ==================
     # CREATE DUMMY CREEP
     # ==================
@@ -101,8 +120,6 @@ func test_shb_launch_north_west():
     
     assert_almost_eq(actual_3.x, expected_3.x, 0.1, "Bullet 3 velocity X does not match expected")
     assert_almost_eq(actual_3.y, expected_3.y, 0.1, "Bullet 3 velocity Y does not match expected")
-
-
 
     # Clean up
     bullet_spawner.queue_free()

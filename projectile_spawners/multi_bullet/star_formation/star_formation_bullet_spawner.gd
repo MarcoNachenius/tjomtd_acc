@@ -34,7 +34,7 @@ func _launch_projectiles():
 		for i in range(1, __launch_angles.size()):
 			# Rotate the angles such that the first element is the first bullet's angle towards the target,
 			# and the rest are rotated around it equally spaced.
-			var bullet_launch_angle = __launch_angles[i] + first_bullet_angle
+			var bullet_launch_angle = __launch_angles[i] - first_bullet_angle
 			# Launch the bullet at the calculated angle
 			var new_bullet = load(ProjectileConstants.BULLET_PATHS[BULLET_PRELOAD]).instantiate()
 			new_bullet.set_speed(__bullet_speed)
