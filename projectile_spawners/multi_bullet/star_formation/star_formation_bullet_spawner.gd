@@ -29,7 +29,7 @@ func _launch_projectiles():
 		add_child(first_bullet)
 
 		# Retrieve the angle to the first bullet based on its velocity
-		var first_bullet_angle: float = Vector2.ZERO.angle_to(first_bullet.get_velocity())
+		var first_bullet_angle: float = Vector2.ZERO.angle_to_point(first_bullet.get_velocity())
 		
 		for i in range(1, __launch_angles.size()):
 			# Rotate the angles such that the first element is the first bullet's angle towards the target,
