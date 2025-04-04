@@ -45,8 +45,10 @@ func _ready():
 # ********
 # PRIVATES
 # ********
+
 ## Retrurns value in radians to global position of target creep (self.__target).
 func _angle_to_targeted_creep() -> float:
+	assert(__target, "No current target has been assigned")
 	var angle_to_creep = global_position.angle_to_point(__target.global_position)
 	if angle_to_creep >= -PI and angle_to_creep < 0:
 		angle_to_creep += 2 * PI
