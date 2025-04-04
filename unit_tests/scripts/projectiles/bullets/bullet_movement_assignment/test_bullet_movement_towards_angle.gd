@@ -101,6 +101,37 @@ func test_update_movement_towards_angle_south_west():
 	# Clean up
 	single_hit_bullet.queue_free()
 
+func test_update_movement_towards_angle_north_east():
+	# Create a new SingleHitBullet instance.
+	var single_hit_bullet = SingleHitBullet.new()
+	# Create test speed
+	var test_speed: int = 30
+	# Set the speed of the bullet.
+	single_hit_bullet.set_speed(test_speed)
+	# Set the position of the bullet.
+	single_hit_bullet.position = Vector2.ZERO
+	# Add the bullet to the scene tree.
+	add_child_autofree(single_hit_bullet)
+
+	# Ensure the bullet is at the correct starting position.
+	assert_eq(single_hit_bullet.position, Vector2.ZERO, "Bullet should start at (0, 0) after being added to the scene tree.")
+
+	# Update velocity and isometric speed towards target position.
+	single_hit_bullet.update_movement_towards_angle(0.0)
+
+	# Move the bullet towards the target position.
+	single_hit_bullet._handle_movement()
+
+	# Test results
+	assert_almost_eq(single_hit_bullet.position.x, float(test_speed), 0.01, "X-coordinate should remain be approximately -30 (moved LEFT by 30 units).")
+	assert_almost_eq(single_hit_bullet.position.y, 0.0, 0.01, "Y-coordinate should be remain 0.")
+	assert_almost_eq(single_hit_bullet.__isometric_speed, float(test_speed), 0.01, "Isometric speed should be near 30")
+	assert_almost_eq(single_hit_bullet.__velocity.x, 1.0, 0.01, "Velocity.x should be 1")
+	assert_almost_eq(single_hit_bullet.__velocity.y, 0.0, 0.01, "Velocity.y should be 0")
+
+	# Clean up
+	single_hit_bullet.queue_free()
+
 func test_update_movement_towards_angle_east():
 	# Create a new SingleHitBullet instance.
 	var single_hit_bullet = SingleHitBullet.new()
@@ -125,6 +156,31 @@ func test_update_movement_towards_angle_east():
 	# Test results
 	assert_almost_eq(single_hit_bullet.__velocity.x, 0.707, 0.01)
 	assert_almost_eq(single_hit_bullet.__velocity.y, 0.707, 0.01)
+
+func test_update_movement_towards_angle_west():
+	# Create a new SingleHitBullet instance.
+	var single_hit_bullet = SingleHitBullet.new()
+	# Create test speed
+	var test_speed: int = 30
+	# Set the speed of the bullet.
+	single_hit_bullet.set_speed(test_speed)
+	# Set the position of the bullet.
+	single_hit_bullet.position = Vector2.ZERO
+	# Add the bullet to the scene tree.
+	add_child_autofree(single_hit_bullet)
+
+	# Ensure the bullet is at the correct starting position.
+	assert_eq(single_hit_bullet.position, Vector2.ZERO, "Bullet should start at (0, 0) after being added to the scene tree.")
+
+	# Update velocity and isometric speed towards target position.
+	single_hit_bullet.update_movement_towards_angle(PI *  1.25)
+
+	# Move the bullet towards the target position.
+	single_hit_bullet._handle_movement()
+
+	# Test results
+	assert_almost_eq(single_hit_bullet.__velocity.x, -0.707, 0.01)
+	assert_almost_eq(single_hit_bullet.__velocity.y, -0.707, 0.01)
 
 	# Clean up
 	single_hit_bullet.queue_free()
@@ -153,6 +209,35 @@ func test_update_movement_towards_angle_south():
 	# Test results
 	assert_almost_eq(single_hit_bullet.__velocity.x, -0.707, 0.01)
 	assert_almost_eq(single_hit_bullet.__velocity.y, 0.707, 0.01)
+
+	# Clean up
+	single_hit_bullet.queue_free()
+
+
+func test_update_movement_towards_angle_north():
+	# Create a new SingleHitBullet instance.
+	var single_hit_bullet = SingleHitBullet.new()
+	# Create test speed
+	var test_speed: int = 30
+	# Set the speed of the bullet.
+	single_hit_bullet.set_speed(test_speed)
+	# Set the position of the bullet.
+	single_hit_bullet.position = Vector2.ZERO
+	# Add the bullet to the scene tree.
+	add_child_autofree(single_hit_bullet)
+
+	# Ensure the bullet is at the correct starting position.
+	assert_eq(single_hit_bullet.position, Vector2.ZERO, "Bullet should start at (0, 0) after being added to the scene tree.")
+
+	# Update velocity and isometric speed towards target position.
+	single_hit_bullet.update_movement_towards_angle(PI * 7/4)
+
+	# Move the bullet towards the target position.
+	single_hit_bullet._handle_movement()
+
+	# Test results
+	assert_almost_eq(single_hit_bullet.__velocity.x, 0.707, 0.01)
+	assert_almost_eq(single_hit_bullet.__velocity.y, -0.707, 0.01)
 
 	# Clean up
 	single_hit_bullet.queue_free()
