@@ -45,6 +45,13 @@ func _ready():
 # ********
 # PRIVATES
 # ********
+## Retrurns value in radians to global position of target creep (self.__target).
+func _angle_to_targeted_creep() -> float:
+	var angle_to_creep = global_position.angle_to_point(__target.global_position)
+	if angle_to_creep >= -PI and angle_to_creep < 0:
+		angle_to_creep += 2 * PI
+	return angle_to_creep
+
 func _create_hurtbox():
 	var new_hurtbox: ProjectileSpawnerHurtbox = ProjectileSpawnerConstants.HURTBOX_PRELOAD.instantiate()
 	add_child(new_hurtbox)
@@ -77,8 +84,8 @@ func _update_target_selection():
 	# Continue if current target it still in range
 	if __target and detectable_creeps.has(__target):
 		return
-    
-    # Target selection policy is not necessary if there is only one detectable creep in range
+	
+	# Target selection policy is not necessary if there is only one detectable creep in range
 	if detectable_creeps.size() == 1 or !__enforce_targeting_policy:
 		__target = detectable_creeps[0]
 		return
