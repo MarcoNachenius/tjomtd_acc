@@ -19,36 +19,24 @@ func _launch_projectiles():
 
 	# TARGETED formation
 	if __formation_policy == FormationPolicy.TARGETED:
-		# Set first bullet's target and add it to the scene
-		var first_bullet = load(ProjectileConstants.BULLET_PATHS[BULLET_PRELOAD]).instantiate()
-		first_bullet.set_speed(__bullet_speed)
-		first_bullet.set_damage(__bullet_damage)
-		# Set target after speed is set to ensure the bullet can calculate its velocity
-		# and isometric speed.
-		first_bullet.set_target(__target)
-		add_child(first_bullet)
-
-		# Retrieve the angle to the first bullet based on its velocity
-		var first_bullet_angle: float = global_position.angle_to_point(first_bullet.global_position)
-		# Express angle as positive value between 0 and 2PI
-		if first_bullet_angle >= -PI and first_bullet_angle < 0:
-			first_bullet += 2 * PI
-		
-		for i in range(1, __launch_angles.size()):
-			# Rotate the angles such that the first element is the first bullet's angle towards the target,
-			# and the rest are rotated around it equally spaced.
-			var bullet_launch_angle = __launch_angles[i] + first_bullet_angle
-			# Ensure provided angle is not larger than 2PI
-			while bullet_launch_angle >= 2 * PI:
-				bullet_launch_angle -= 2 * PI
-			# Launch the bullet at the calculated angle
-			var new_bullet = load(ProjectileConstants.BULLET_PATHS[BULLET_PRELOAD]).instantiate()
+		# Retreive targeted angle
+		var angle_to_target: float = _angle_to_targeted_creep()
+		# Create launch angles
+		var adjusted_launch_angles: Array[float] = __launch_angles
+		for i in range(adjusted_launch_angles.size()):
+			adjusted_launch_angles[i] += angle_to_target
+			# Ensure angle between target is between 0 and 2PI
+			if adjusted_launch_angles[i] >= 2 * PI:
+				adjusted_launch_angles[i] -= 2 * PI
+		# Launch bullets
+		var bullet_load = load(ProjectileConstants.BULLET_PATHS[ProjectileConstants.BulletsForSpawner.BLACK_MARBLE_LVL_1])
+		for angle in adjusted_launch_angles:
+			var new_bullet = bullet_load.instantiate()
 			new_bullet.set_speed(__bullet_speed)
 			new_bullet.set_damage(__bullet_damage)
 			add_child(new_bullet)
-			# Set angle of movement after speed is set to ensure the bullet can calculate its
-			# velocity and isometric speed.
-			new_bullet.update_movement_towards_angle(bullet_launch_angle)
+			new_bullet.update_movement_towards_angle(angle)
+			
 
 
 # ===========================
