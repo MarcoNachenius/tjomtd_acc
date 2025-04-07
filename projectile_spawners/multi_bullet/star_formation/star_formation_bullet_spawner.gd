@@ -19,10 +19,12 @@ func _launch_projectiles():
 
 	# TARGETED formation
 	if __formation_policy == FormationPolicy.TARGETED:
+		# Calculate velocity
+		var velocity_towards_target: Vector2 = (__target.global_position - global_position).normalized()
 		# Retreive targeted angle
-		var angle_to_target: float = _angle_to_targeted_creep()
+		var angle_to_target: float = Vector2(1, 0).angle_to(velocity_towards_target)
 		# Create launch angles
-		var adjusted_launch_angles: Array[float] = __launch_angles
+		var adjusted_launch_angles: Array[float] = __launch_angles.duplicate()
 		for i in range(adjusted_launch_angles.size()):
 			adjusted_launch_angles[i] += angle_to_target
 			# Ensure angle between target is between 0 and 2PI
