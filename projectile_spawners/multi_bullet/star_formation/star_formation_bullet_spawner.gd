@@ -16,28 +16,25 @@ enum FormationPolicy {
 
 func _launch_projectiles():
 	assert(__target, "No target for launch has been set")
-
+	var bullet_load = load(ProjectileConstants.BULLET_PATHS[ProjectileConstants.BulletsForSpawner.BLACK_MARBLE_LVL_1])
 	# TARGETED formation
 	if __formation_policy == FormationPolicy.TARGETED:
 		# Calculate velocity
 		var velocity_towards_target: Vector2 = (__target.global_position - global_position).normalized()
-		# Retreive targeted angle
+		# Calculate angle to targeted creep
 		var angle_to_target: float = Vector2(1, 0).angle_to(velocity_towards_target)
 		# Create launch angles
-		var adjusted_launch_angles: Array[float] = __launch_angles.duplicate()
-		for i in range(adjusted_launch_angles.size()):
-			adjusted_launch_angles[i] += angle_to_target
+		for i in range(__launch_angles.size()):
+			var adjusted_launch_angle: float = __launch_angles[i] + angle_to_target
 			# Ensure angle between target is between 0 and 2PI
-			if adjusted_launch_angles[i] >= 2 * PI:
-				adjusted_launch_angles[i] -= 2 * PI
-		# Launch bullets
-		var bullet_load = load(ProjectileConstants.BULLET_PATHS[ProjectileConstants.BulletsForSpawner.BLACK_MARBLE_LVL_1])
-		for angle in adjusted_launch_angles:
+			if adjusted_launch_angle >= 2 * PI:
+				adjusted_launch_angle -= 2 * PI
+			# Launch bullets
 			var new_bullet = bullet_load.instantiate()
 			new_bullet.set_speed(__bullet_speed)
 			new_bullet.set_damage(__bullet_damage)
 			add_child(new_bullet)
-			new_bullet.update_movement_towards_angle(angle)
+			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
 			
 
 
