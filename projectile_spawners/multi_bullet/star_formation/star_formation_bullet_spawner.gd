@@ -8,10 +8,13 @@ class_name StarFormationBulletSpawner
 @export var __formation_policy: FormationPolicy = FormationPolicy.TARGETED
 
 var __launch_angles: Array[float] = []
+# Only used when formation policy is set to static
+var __static_launch_angle: float
 
 enum FormationPolicy {
 	TARGETED,
 	RANDOM,
+	STATIC,
 }
 
 func _launch_projectiles():
@@ -27,15 +30,44 @@ func _launch_projectiles():
 		for i in range(__launch_angles.size()):
 			var adjusted_launch_angle: float = __launch_angles[i] + angle_to_target
 			# Ensure angle between target is between 0 and 2PI
-			if adjusted_launch_angle >= 2 * PI:
-				adjusted_launch_angle -= 2 * PI
+			if adjusted_launch_angle >= TAU:
+				adjusted_launch_angle -= TAU
 			# Launch bullets
 			var new_bullet = bullet_load.instantiate()
 			new_bullet.set_speed(__bullet_speed)
 			new_bullet.set_damage(__bullet_damage)
 			add_child(new_bullet)
 			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
-			
+		
+	if __formation_policy == FormationPolicy.RANDOM:
+		# Calculate angle to targeted creep
+		var angle_to_target: float = randf_range(0.0, TAU/__bullets_per_launch)
+		# Create launch angles
+		for i in range(__launch_angles.size()):
+			var adjusted_launch_angle: float = __launch_angles[i] + angle_to_target
+			# Ensure angle between target is between 0 and 2PI
+			if adjusted_launch_angle >= TAU:
+				adjusted_launch_angle -= TAU
+			# Launch bullets
+			var new_bullet = bullet_load.instantiate()
+			new_bullet.set_speed(__bullet_speed)
+			new_bullet.set_damage(__bullet_damage)
+			add_child(new_bullet)
+			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
+	
+	if __formation_policy == FormationPolicy.STATIC:
+		# Create launch angles
+		for i in range(__launch_angles.size()):
+			var adjusted_launch_angle: float = __launch_angles[i] + __static_launch_angle
+			# Ensure angle between target is between 0 and 2PI
+			if adjusted_launch_angle >= TAU:
+				adjusted_launch_angle -= TAU
+			# Launch bullets
+			var new_bullet = bullet_load.instantiate()
+			new_bullet.set_speed(__bullet_speed)
+			new_bullet.set_damage(__bullet_damage)
+			add_child(new_bullet)
+			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
 
 
 # ===========================
@@ -44,6 +76,9 @@ func _launch_projectiles():
 
 func _execute_extended_onready_commands():
 	# Create a new array which holds the angle of launch for each bullet
-	var angle_increment: float = (2*PI) / __bullets_per_launch
+	var angle_increment: float = (TAU) / __bullets_per_launch
 	for i in range(__bullets_per_launch):
 		__launch_angles.append(angle_increment * i)
+	# Create static angle if formation policy is set to static
+	if __formation_policy == FormationPolicy.STATIC:
+		__static_launch_angle = randf_range(0.0, TAU/__bullets_per_launch)
