@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://n4ktpkuyd58u"]
+
+[ext_resource type="Script" uid="uid://biljfygpuwex3" path="res://projectile_spawners/multi_missile/targeted/targeted_multi_missile_spawner.gd" id="1_nppnf"]
+
+[node name="TargetedMultiMissileSpawner" type="Node2D"]
+script = ExtResource("1_nppnf")
+metadata/_custom_type_script = "uid://kaif82mfoojg"

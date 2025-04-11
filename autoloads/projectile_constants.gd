@@ -30,10 +30,6 @@ enum RandomRicochetBullets {
 	BLACK_MARBLE_LVL_2,
 }
 
-var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
-	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
-}
-
 var SINGLE_HIT_BULLET_LOADS: Dictionary = {
 	SingleHitBullets.BLACK_MARBLE_LVL_1: load("res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn")
 }
@@ -70,6 +66,20 @@ enum TargetedRicochetMissiles{
 	TEST_TARGETED_RICOCHET_MISSILE,
 }
 
+enum MissilesForSpawner {
+	BISMUTH_LVL_1,
+	TEST_TARGETED_RICOCHET_MISSILE,
+}
+
 var TARGETED_RICOCHET_MISSILE_LOADS: Dictionary = {
 	TargetedRicochetMissiles.TEST_TARGETED_RICOCHET_MISSILE: load("res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn"),
+}
+
+var MISSILE_PATHS = {
+	MissilesForSpawner.BISMUTH_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
+	MissilesForSpawner.TEST_TARGETED_RICOCHET_MISSILE: "res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn",
+}
+
+var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
+	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
 }
