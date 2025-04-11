@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwxua3qrf4shi"]
+
+[ext_resource type="Script" uid="uid://blrqx3tw5ms2o" path="res://projectiles/missiles/multi_hit/targeted_ricochet/targeted_ricochet_missile.gd" id="1_wfwrd"]
+[ext_resource type="Texture2D" uid="uid://de7emkcoi2kss" path="res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/bullet_sprite.png" id="2_6cloh"]
+
+[node name="TestTargetedRicochetMissile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_wfwrd")
+MISSILE_SPRITE = NodePath("MissileSprite")
+__damage = 10
+__infinite_ricochets = true
+__ricochet_detection_radius = 500
+__hurtbox_radius = 10
+metadata/_custom_type_script = "uid://blrqx3tw5ms2o"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+texture = ExtResource("2_6cloh")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dehyqu42odi7w"]
-
-[ext_resource type="Script" uid="uid://da2h3gfp55xjn" path="res://projectile_spawners/single_missile/single_missile_spawner.gd" id="1_hhqyt"]
-
-[node name="SingleMissileSpawner" type="Node2D"]
-script = ExtResource("1_hhqyt")

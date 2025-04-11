@@ -10,6 +10,7 @@ enum ProjectileIDs {
 	BLACK_MARBLE_LVL_3,
 	BISMUTH_LVL_1,
 	TEST_RANDOM_RICOCHET_BULLET,
+	TEST_TARGETED_RICOCHET_MISSILE,
 }
 
 enum SingleHitBullets {
@@ -58,4 +59,17 @@ enum BulletsForSpawner {
 	BLACK_MARBLE_LVL_2,
 	BLACK_MARBLE_LVL_3,
 	TEST_RANDOM_RICOCHET_BULLET,
+}
+
+
+# ********
+# MISSILES
+# ********
+
+enum TargetedRicochetMissiles{
+	TEST_TARGETED_RICOCHET_MISSILE,
+}
+
+var TARGETED_RICOCHET_MISSILES: Dictionary = {
+	TargetedRicochetMissiles.TEST_TARGETED_RICOCHET_MISSILE: load("res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn"),
 }
