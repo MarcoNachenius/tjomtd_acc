@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://f6xc8mxifopb"]
+
+[ext_resource type="Script" uid="uid://6t7vdju0aysm" path="res://projectile_spawners/single_missile/mullti_hit/targeted_ricochet/targeted_ricochet_missile_spawner.gd" id="1_qwufw"]
+
+[node name="TargetedRicochetMissileSpawner" type="Node2D"]
+script = ExtResource("1_qwufw")
+metadata/_custom_type_script = "uid://kaif82mfoojg"

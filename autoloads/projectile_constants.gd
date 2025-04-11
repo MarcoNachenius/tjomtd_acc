@@ -70,6 +70,6 @@ enum TargetedRicochetMissiles{
 	TEST_TARGETED_RICOCHET_MISSILE,
 }
 
-var TARGETED_RICOCHET_MISSILES: Dictionary = {
+var TARGETED_RICOCHET_MISSILE_LOADS: Dictionary = {
 	TargetedRicochetMissiles.TEST_TARGETED_RICOCHET_MISSILE: load("res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn"),
 }

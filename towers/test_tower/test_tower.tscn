@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_f7x33"]
 [ext_resource type="Texture2D" uid="uid://cw2sqdlw1nq7j" path="res://towers/test_tower/tower_sprite.png" id="2_tagma"]
-[ext_resource type="Script" uid="uid://dp6ge5piuiiht" path="res://projectile_spawners/multi_bullet/star_formation/star_formation_bullet_spawner.gd" id="3_bdjfp"]
+[ext_resource type="Script" uid="uid://6t7vdju0aysm" path="res://projectile_spawners/single_missile/mullti_hit/targeted_ricochet/targeted_ricochet_missile_spawner.gd" id="3_bdjfp"]
 
 [node name="TestTower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
 script = ExtResource("1_f7x33")
@@ -16,11 +16,10 @@ z_as_relative = false
 y_sort_enabled = true
 texture = ExtResource("2_tagma")
 
-[node name="StarFormationBulletSpawner" type="Node2D" parent="."]
+[node name="TargetedRicochetMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("3_bdjfp")
-__bullet_damage = 1
-__bullet_speed = 80
-__formation_policy = 2
-__cooldown_duration = 0.3
+__missile_damage = 10
+__missile_speed = 30
+__cooldown_duration = 1.0
 __detection_range = 500
-metadata/_custom_type_script = "uid://dp6ge5piuiiht"
+metadata/_custom_type_script = "uid://6t7vdju0aysm"
