@@ -70,6 +70,11 @@ layout_mode = 2
 text = "Bismuth
 Level 1"
 
+[node name="LarimarLvl1" type="Button" parent="BuildTowers"]
+layout_mode = 2
+text = "Larimar
+Lvl 1"
+
 [node name="TestTower" type="Button" parent="BuildTowers"]
 layout_mode = 2
 text = "Test Tower"
@@ -123,6 +128,7 @@ Barricade"
 [connection signal="pressed" from="BuildTowers/BlackMarbleLvl2" to="." method="_on_black_marble_lvl_2_pressed"]
 [connection signal="pressed" from="BuildTowers/BlackMarbleLvl3" to="." method="_on_black_marble_lvl_3_pressed"]
 [connection signal="pressed" from="BuildTowers/BismuthLvl1" to="." method="_on_bismuth_lvl_1_button_pressed"]
+[connection signal="pressed" from="BuildTowers/LarimarLvl1" to="." method="_on_larimar_lvl_1_pressed"]
 [connection signal="pressed" from="BuildTowers/TestTower" to="." method="_on_test_tower_pressed"]
 [connection signal="pressed" from="MapCommands/StartNewWave" to="." method="_on_start_new_wave_button_pressed"]
 [connection signal="pressed" from="MapCommands/ShowPath" to="." method="_on_show_path_buttton_pressed"]

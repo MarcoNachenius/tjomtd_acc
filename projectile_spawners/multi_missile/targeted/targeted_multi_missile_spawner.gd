@@ -27,11 +27,12 @@ func _launch_projectiles():
         assert(new_missile != null, "Failed to instantiate missile")
         # set Target
         assert(__target, "No target provided")
+        # set Speed
+        new_missile.set_speed(__missile_speed)
+        # set Target
         new_missile.set_target(detectable_creep)
         # set Damage
         new_missile.set_damage(__missile_damage)
-        # set Speed
-        new_missile.set_speed(__missile_speed)
         # Add to parent
         add_child(new_missile)
         # Increment number of missiles launched

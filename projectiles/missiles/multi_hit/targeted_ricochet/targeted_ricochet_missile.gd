@@ -2,6 +2,11 @@ extends Projectile
 class_name TargetedRicochetMissile
 
 # EXPORTS
+## If marked as true, the missile will target creep if it is not currently
+## targeting a creep, and if a creep is within range of its interception hurtbox.
+## The interception hutbox will only be created on ready if this is set to true.
+@export var __allow_interception: bool = false
+@export var __interception_hurtbox_radius: int = 100
 @export var MISSILE_SPRITE: Sprite2D
 @export var __damage: int
 ## If set to true, the bullet will lose damage every time it hits a creep.
@@ -14,6 +19,7 @@ class_name TargetedRicochetMissile
 
 # LOCAL VARS
 var __curr_ricochets: int
+var __interception_hurtbox: ProjectileHurtbox
 var __last_damaged_creep: Creep
 var __ricochet_detection_hurtbox: ProjectileHurtbox
 

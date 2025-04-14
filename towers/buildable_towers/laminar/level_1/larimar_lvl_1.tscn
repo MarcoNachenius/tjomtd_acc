@@ -1,7 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmsutbyo3r408"]
+[gd_scene load_steps=4 format=3 uid="uid://cmsutbyo3r408"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_gmwqe"]
+[ext_resource type="Texture2D" uid="uid://4g12qj3c5xr2" path="res://towers/buildable_towers/laminar/level_1/tower_sprite.png" id="2_0idis"]
+[ext_resource type="Script" uid="uid://dp6ge5piuiiht" path="res://projectile_spawners/multi_bullet/star_formation/star_formation_bullet_spawner.gd" id="3_qstlq"]
 
-[node name="LarimarLvl1" type="Node2D"]
+[node name="LarimarLvl1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_gmwqe")
+TOWER_ID = 5
+TOWER_SPRITE = NodePath("TowerSprite")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_0idis")
+
+[node name="StarFormationBulletSpawner" type="Node2D" parent="."]
+script = ExtResource("3_qstlq")
+__bullet_damage = 10
+__bullet_speed = 30
+BULLET_ID = 3
+__formation_policy = 1
+__cooldown_duration = 1.0
+__detection_range = 500
+metadata/_custom_type_script = "uid://dp6ge5piuiiht"

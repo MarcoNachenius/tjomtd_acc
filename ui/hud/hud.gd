@@ -145,3 +145,10 @@ func _on_remove_barricade_pressed():
 	__game_map.remove_tower(__selected_tower)
 	TOWER_PROPERTIES_HBOX_CONTAINER.visible = false
 	BUILD_TOWERS_HBOX_CONTAINER.visible = true
+
+
+func _on_larimar_lvl_1_pressed():
+	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_1])
+	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.LARIMAR_LVL_1])
+	__game_map.set_state(__game_map.States.BUILD_MODE)
+	EXIT_BUILD_MODE_BUTTON.visible = true
