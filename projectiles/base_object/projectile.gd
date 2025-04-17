@@ -10,6 +10,12 @@ class_name Projectile
 @export var __stun_duration_seconds: float = 0.0
 ## Percentage chance(0-100) of stunning the creep.
 @export var __stun_probability_percentage: int = 0
+## If enabled, the projectile will assign a target to the projectile's hurtbox when it enters the area,
+## and the projectile does not have a target assigned.
+@export var __retargetable: bool = false
+## The radius of the retargetable area.
+@export var __retarget_radius: int
+
 
 # PRIVATE VARS
 var __isometric_speed: float
@@ -17,14 +23,17 @@ var __speed: int
 var __target: Creep
 var __velocity: Vector2
 var __hurtbox: ProjectileHurtbox
+var __retarget_hurtbox: RetargetHurtbox
 
 # ********
 # BUILTINS
 # ********
 func _ready():
 	_create_hurtbox()
-	# Only creates stun hurtbox if self.__can_stun export was set to true
+	# Only creates stun hurtbox if self.__can_stun export is set to true
 	_create_stun_hurtbox()
+	# Only creates retarget hurtbox if self.__retargetable export is set to true
+	_create_retarget_hurtbox()
 	_extended_onready()
 
 # *******
@@ -59,6 +68,8 @@ func update_movement_towards_angle(AngleInRadians: float):
 
 ## Updates the projectile's velocity and isometric speed towards the target.
 func update_movement_towards_assigned_target():
+	# This order of method calls is important because the projectile's isometric speed
+	# is calculated based on the projectile's velocity.
 	update_velocity_towards_target()
 	update_isometric_speed()
 
@@ -100,17 +111,36 @@ func _create_hurtbox():
 	__hurtbox = new_hurtbox
 	__hurtbox.area_entered.connect(_on_hurtbox_entered)
 
-## The stun hurbox's radius will be the equal to the projectile's hurtbox radius.
+## Creates the retarget hurtbox if the __retargetable export is set to true.
+func _create_retarget_hurtbox():
+	# Only create retarget hurtbox if self.__retargetable export is set to true
+	if !__retargetable:
+		return
+	
+	# Check if the retargetable radius is valid
+	assert(__retarget_radius > 0, "Retargetable radius must be greater than 0")
+
+	# Instantiate retarget hurtbox
+	var new_retarget_hurtbox: RetargetHurtbox = ProjectileConstants.RETARGET_HURTBOX_PRELOAD.instantiate()
+	add_child(new_retarget_hurtbox)
+	new_retarget_hurtbox.set_base_radius(__retarget_radius)
+	# Set retarget hurtbox
+	__retarget_hurtbox = new_retarget_hurtbox
+	# Connect retarget hurtbox area entered signal
+	__retarget_hurtbox.area_entered.connect(_on_retarget_hurtbox_entered)
+
+## Creates the stun hurtbox if the __can_stun export is set to true.
+## The stun hurtbox's radius will be equal to the projectile's hurtbox radius.
 func _create_stun_hurtbox():
-	# Only creates stun hurtbox if self.__can_stun export was set to true
+	# Only creates stun hurtbox if self.__can_stun export is set to true
 	if !__can_stun:
 		return
 	
 	# Instatiate stun hurtbox
 	var new_stun_hurtbox: ProjectileStunHurtbox = ProjectileConstants.STUN_HURTBOX_PRELOAD.instantiate()
+	add_child(new_stun_hurtbox)
 	new_stun_hurtbox.set_stun_duration_seconds(__stun_duration_seconds)
 	new_stun_hurtbox.set_stun_probability_percentage(__stun_probability_percentage)
-	add_child(new_stun_hurtbox)
 	# Set stun hurtbox radius equal to hurtbox radius
 	new_stun_hurtbox.set_base_radius(__hurtbox_radius)
 
@@ -124,3 +154,25 @@ func _extended_onready():
 
 func _on_hurtbox_entered(area):
 	pass
+
+
+func _on_retarget_hurtbox_entered(area):
+	# Ignore retargeting if current target is assigned, not being queued free and still detectable
+	if __target and is_instance_valid(__target) and __target.is_detectable():
+		return
+	
+	# Check if the area is a creep
+	if !area.get_parent() is Creep:
+		# If the area is not a creep, the dev should be notified because this is a bug.
+		# Only the retarget hurtbox should be able to detect creeps.
+		printerr("Retarget hurtbox entered area is not a creep")
+		return
+	
+	# Extract the creep from the area
+	var entered_creep: Creep = area.get_parent()
+	# Reassign target if it is detectable
+	if entered_creep.is_detectable():
+		__target = entered_creep
+		# This allows for bullets to retarget creeps.
+		update_movement_towards_assigned_target()
+
