@@ -21,7 +21,6 @@ func disable_selection_area():
 	assert(__selection_area, "No slection area has been created")
 	__selection_area.monitoring = false
 
-
 func enable_selection_area():
 	assert(__selection_area, "No slection area has been created")
 	__selection_area.monitoring = true
