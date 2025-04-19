@@ -1,14 +1,13 @@
 extends ProjectileSpawner
-class_name StarFormationBulletSpawner
+class_name StarSingleHitMissileSpawner
 
-@export var __bullet_damage: int
-@export var __bullet_speed: int
-@export var __bullets_per_launch: int = 3
-@export var BULLET_ID: ProjectileConstants.BulletsForSpawner
+@export var __missile_damage: int
+@export var __missile_speed: int
+@export var __missiles_per_launch: int = 3
+@export var MISSILE_ID: ProjectileConstants.SingleHitMissiles
 @export var __formation_policy: FormationPolicy = FormationPolicy.TARGETED
 
 # LOCALS
-var __bullet_load
 var __launch_angles: Array[float] = []
 # Only used when formation policy is set to static
 var __static_launch_angle: float
@@ -35,15 +34,16 @@ func _launch_projectiles():
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
 			# Launch bullets
-			var new_bullet = __bullet_load.instantiate()
-			new_bullet.set_speed(__bullet_speed)
-			new_bullet.set_damage(__bullet_damage)
-			add_child(new_bullet)
-			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
+			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			new_missile.set_speed(__missile_speed)
+			new_missile.set_damage(__missile_damage)
+			add_child(new_missile)
+			new_missile.update_movement_towards_angle(adjusted_launch_angle)
+			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
 		
 	if __formation_policy == FormationPolicy.RANDOM:
 		# Calculate angle to targeted creep
-		var angle_to_target: float = randf_range(0.0, TAU/__bullets_per_launch)
+		var angle_to_target: float = randf_range(0.0, TAU/__missiles_per_launch)
 		# Create launch angles
 		for i in range(__launch_angles.size()):
 			var adjusted_launch_angle: float = __launch_angles[i] + angle_to_target
@@ -51,12 +51,13 @@ func _launch_projectiles():
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
 			# Launch bullets
-			var new_bullet = __bullet_load.instantiate()
-			new_bullet.set_speed(__bullet_speed)
-			new_bullet.set_damage(__bullet_damage)
-			add_child(new_bullet)
-			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
-	
+			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			new_missile.set_speed(__missile_speed)
+			new_missile.set_damage(__missile_damage)
+			add_child(new_missile)
+			new_missile.update_movement_towards_angle(adjusted_launch_angle)
+			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
+
 	if __formation_policy == FormationPolicy.STATIC:
 		# Create launch angles
 		for i in range(__launch_angles.size()):
@@ -65,11 +66,13 @@ func _launch_projectiles():
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
 			# Launch bullets
-			var new_bullet = __bullet_load.instantiate()
-			new_bullet.set_speed(__bullet_speed)
-			new_bullet.set_damage(__bullet_damage)
-			add_child(new_bullet)
-			new_bullet.update_movement_towards_angle(adjusted_launch_angle)
+			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			new_missile.set_speed(__missile_speed)
+			new_missile.set_damage(__missile_damage)
+			add_child(new_missile)
+			new_missile.update_movement_towards_angle(adjusted_launch_angle)
+			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
+
 
 
 # ===========================
@@ -77,13 +80,10 @@ func _launch_projectiles():
 # ===========================
 
 func _execute_extended_onready_commands():
-	# Create instance of bullet
-	__bullet_load = load(ProjectileConstants.BULLET_PATHS[BULLET_ID])
-	
-	# Create a new array which holds the angle of launch for each bullet
-	var angle_increment: float = (TAU) / __bullets_per_launch
-	for i in range(__bullets_per_launch):
+	# Create a new array which holds the angle of launch for each missile
+	var angle_increment: float = (TAU) / __missiles_per_launch
+	for i in range(__missiles_per_launch):
 		__launch_angles.append(angle_increment * i)
 	# Create static angle if formation policy is set to static
 	if __formation_policy == FormationPolicy.STATIC:
-		__static_launch_angle = randf_range(0.0, TAU/__bullets_per_launch)
+		__static_launch_angle = randf_range(0.0, TAU/__missiles_per_launch)

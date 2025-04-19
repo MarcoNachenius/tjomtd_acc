@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://hspm6j4guxm"]
+
+[ext_resource type="Script" uid="uid://boqaewt7j6awl" path="res://projectile_spawners/multi_missile/star_formation/star_shm_spawner/star_single_hit_missile_spawner.gd" id="1_30jpj"]
+
+[node name="StarSingleHitMissileSpawner" type="Node2D"]
+script = ExtResource("1_30jpj")
+__missile_damage = 1
+__missile_speed = 20
+__cooldown_duration = 1.0
+__detection_range = 500
+metadata/_custom_type_script = "uid://kaif82mfoojg"
