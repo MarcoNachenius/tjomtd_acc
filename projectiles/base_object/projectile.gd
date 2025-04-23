@@ -176,3 +176,31 @@ func _on_retarget_hurtbox_entered(area):
 		# This allows for bullets to retarget creeps.
 		update_movement_towards_assigned_target()
 
+# *******
+# SETTERS
+# *******
+
+## Sets whether this projectile can stun on hit.
+## If enabled, a stun hurtbox will be created on ready using the projectile's hurtbox radius.
+func set_can_stun(enable_stun: bool) -> void:
+	__can_stun = enable_stun
+
+## Sets the duration of the stun effect in seconds.
+## This value is only used if stun is enabled.
+func set_stun_duration_seconds(duration_seconds: float) -> void:
+	__stun_duration_seconds = duration_seconds
+
+## Sets the percentage chance (0–100) that the projectile will stun a creep.
+## Values are clamped between 0 and 100.
+func set_stun_probability_percentage(stun_chance_percent: int) -> void:
+	__stun_probability_percentage = clamp(stun_chance_percent, 0, 100)
+
+## Sets whether the projectile can retarget if it has no current target
+## and enters an area with available targets.
+func set_retargetable(enable_retargeting: bool) -> void:
+	__retargetable = enable_retargeting
+
+## Sets the radius of the retargeting area in pixels.
+## Cannot be negative.
+func set_retarget_radius(retarget_area_radius: int) -> void:
+	__retarget_radius = max(retarget_area_radius, 0)

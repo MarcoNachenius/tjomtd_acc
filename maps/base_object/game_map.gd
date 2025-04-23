@@ -4,7 +4,7 @@ class_name GameMap
 # ========
 # PROBLEMS
 # ========
-# Following coords are getting duplicated in __path_impediments:
+# Following coords are getting duplicated in __path_impediments in the GemTD map:
 # [(0, 14), (23, 14), (22, 41), (71, 41), (71, 14), (46, 14), (46, 67), (85, 67)]
 
 
@@ -146,12 +146,15 @@ func can_add_single_point_impediment(mainGridPoints: Vector2i) -> bool:
 ## Determines if a tower can be placed at the specified placement grid point without blocking the path.
 func can_place_tower(placementGridPoint: Vector2i) -> bool:
 	var normal_grid_points: Array[Vector2i] = self.get_tower_impediment_points(placementGridPoint)
-
+	# Check for disqualified points
 	for point in normal_grid_points:
+		# Check if the points are within the valid width range of the map
 		if point.x < 0 or point.x > (MAP_WIDTH * 2) - 1:
 			return false
+		# Check if the points are within the valid height range of the map
 		if point.y < 0 or point.y > (MAP_HEIGHT * 2) - 1:
 			return false
+	# Check if the points are already solid (impediments)
 		if __path_impediments.has(point):
 			return false
 

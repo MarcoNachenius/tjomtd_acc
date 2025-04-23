@@ -7,6 +7,19 @@ class_name StarSingleHitMissileSpawner
 @export var MISSILE_ID: ProjectileConstants.SingleHitMissiles
 @export var __formation_policy: FormationPolicy = FormationPolicy.TARGETED
 
+## If set to true, a stun hurtbox will be created on ready.
+## The stun hurbox's radius will be the equal to the projectile's hurtbox radius.
+@export var __can_stun: bool = false
+## Duration of the stun in seconds.
+@export var __stun_duration_seconds: float = 0.0
+## Percentage chance(0-100) of stunning the creep.
+@export var __stun_probability_percentage: int = 0
+## If enabled, the projectile will assign a target to the projectile's hurtbox when it enters the area,
+## and the projectile does not have a target assigned.
+@export var __retargetable: bool = false
+## The radius of the retargetable area.
+@export var __retarget_radius: int
+
 # LOCALS
 var __launch_angles: Array[float] = []
 # Only used when formation policy is set to static
@@ -33,10 +46,26 @@ func _launch_projectiles():
 			# Ensure angle between target is between 0 and 2PI
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
-			# Launch bullets
+			# Instantiate missile
 			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			# Assign required properties
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
+			# Assign stun properties
+			new_missile.set_can_stun(__can_stun)
+			new_missile.set_stun_probability_percentage(__stun_probability_percentage)
+			new_missile.set_stun_duration_seconds(__stun_duration_seconds)
+            # Assign retarget properties
+			new_missile.set_retargetable(__retargetable)
+			new_missile.set_retarget_radius(__retarget_radius)
+
+			# Only assign target to first launched missile
+			if i == 0:
+				new_missile.set_target(__target)
+				# No movement update required if target is set
+				add_child(new_missile)
+				continue
+			# Manually create movement for missiles which do not have a target assigned
 			add_child(new_missile)
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
 			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
@@ -50,10 +79,19 @@ func _launch_projectiles():
 			# Ensure angle between target is between 0 and 2PI
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
-			# Launch bullets
+			# Instantiate missile
 			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			# Set values
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
+			# Assign stun properties
+			new_missile.set_can_stun(__can_stun)
+			new_missile.set_stun_probability_percentage(__stun_probability_percentage)
+			new_missile.set_stun_duration_seconds(__stun_duration_seconds)
+            # Assign retarget properties
+			new_missile.set_retargetable(__retargetable)
+			new_missile.set_retarget_radius(__retarget_radius)
+
 			add_child(new_missile)
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
 			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
@@ -65,10 +103,19 @@ func _launch_projectiles():
 			# Ensure angle between target is between 0 and 2PI
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
-			# Launch bullets
+			# Instantiate missile
 			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			# Set values
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
+			# Assign stun properties
+			new_missile.set_can_stun(__can_stun)
+			new_missile.set_stun_probability_percentage(__stun_probability_percentage)
+			new_missile.set_stun_duration_seconds(__stun_duration_seconds)
+            # Assign retarget properties
+			new_missile.set_retargetable(__retargetable)
+			new_missile.set_retarget_radius(__retarget_radius)
+
 			add_child(new_missile)
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
 			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)

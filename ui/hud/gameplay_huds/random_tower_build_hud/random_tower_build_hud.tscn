@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8u365aao1ox5"]
+
+[ext_resource type="Script" uid="uid://tlx4dpamwe4b" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.gd" id="1_kyn4q"]
+[ext_resource type="PackedScene" uid="uid://b17pbyn0wwd5" path="res://ui/components/button_containers/build_random_tower_hbox/build_random_tower_hbox.tscn" id="2_ntkvv"]
+
+[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_HBOX")]
+script = ExtResource("1_kyn4q")
+BUILD_RANDOM_TOWER_HBOX = NodePath("BuildRandomTowerHBox")
+
+[node name="BuildRandomTowerHBox" parent="." instance=ExtResource("2_ntkvv")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0

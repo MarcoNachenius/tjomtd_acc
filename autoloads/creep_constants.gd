@@ -1,7 +1,20 @@
 extends Node
 
+# INSTANCES
+# =========
+enum CreepIDs {
+    RED_SPIDER,
+    DEMON
+}
+
+var CreepPreloads: Dictionary = {
+    CreepIDs.RED_SPIDER: load("res://creeps/red_spider/red_spider.tscn"),
+    CreepIDs.DEMON: load("res://creeps/demon/demon.tscn")
+}
 
 
+# MOVEMENT
+# ========
 enum CompassDirections {
     EAST,
     WEST,
@@ -70,14 +83,6 @@ const CompassDirToStr: Dictionary = {
 }
 
 
-enum CreepIDs {
-    RED_SPIDER,
-    DEMON
-}
-
+# COMPONENTS
+# ==========
 var HITBOX_PRELOAD: PackedScene = load("res://creeps/components/hitbox/creep_hitbox.tscn")
-
-var CreepPreloads: Dictionary = {
-    CreepIDs.RED_SPIDER: load("res://creeps/red_spider/red_spider.tscn"),
-    CreepIDs.DEMON: load("res://creeps/demon/demon.tscn")
-}
