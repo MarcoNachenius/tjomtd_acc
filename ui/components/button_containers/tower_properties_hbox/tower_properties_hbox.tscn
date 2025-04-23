@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwy65rs7d01j4"]
+
+[ext_resource type="Script" uid="uid://dxvhugk33av3b" path="res://ui/components/button_containers/tower_properties_hbox/tower_properties_hbox.gd" id="1_gtwul"]
+
+[node name="TowerPropertiesHBox" type="HBoxContainer" node_paths=PackedStringArray("KEEP_TOWER_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gtwul")
+KEEP_TOWER_BUTTON = NodePath("KeepTowerButton")
+
+[node name="KeepTowerButton" type="Button" parent="."]
+layout_mode = 2
+text = "Keep
+Tower"

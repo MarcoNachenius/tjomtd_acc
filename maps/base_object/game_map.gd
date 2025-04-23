@@ -48,6 +48,7 @@ signal tower_selected(tower: Tower)
 var __astar_grid: AStarGrid2D
 var __build_tower_preload: PackedScene
 var __build_tower_cost: int
+var __barricades_on_map: Array[Tower]
 var creep_spawner: CreepSpawner
 var __curr_balance: int
 var __curr_path: Array[Vector2i]
@@ -69,6 +70,7 @@ var __total_points_earned: int
 var __total_waves_completed: int
 var __towers_on_map: Array[Tower]
 var __valid_build_position_surface_highlight: Sprite2D
+var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
 
 # ---------------
 # BUILTIN METHODS
@@ -81,6 +83,9 @@ func _ready():
 	__remaining_lives = GameConstants.STARTING_LIVES
 	__curr_balance = GameConstants.STARTING_BALANCE
 	__curr_state = States.NAVIGATION_MODE
+
+	# RANDOM TOWER GENERATOR
+	RANDOM_TOWER_GENERATOR = RandomTowerGenerator.new()
 
 	# TOWER PLACEMENT TILES
 	self._create_tower_placement_validity_tiles()
@@ -371,19 +376,6 @@ func _handle_tower_placement():
 	# This ensures the tower or highlight aligns with the tile grid.
 	var snap_to_grid_position = __placement_grid.map_to_local(placement_tile_position)
 	
-	# Check if the cost of the tower can be afforded.
-	if __build_tower_cost > __curr_balance:
-		__valid_build_position_surface_highlight.visible = false
-		__invalid_build_position_surface_highlight.visible = false
-		__insufficient_balance_surface_highlight.visible = true
-		__insufficient_balance_surface_highlight.position = snap_to_grid_position
-		if Input.is_action_just_released("select"):
-			__insufficient_balance_surface_highlight.visible = false
-		return
-	
-	# Hide the insufficient balance surface highlight if the cost is affordable.
-	__insufficient_balance_surface_highlight.visible = false
-
 	# Check if the tower can be placed at the current position.
 	var tower_placement_possible = self.can_place_tower(placement_tile_position)
 
@@ -476,6 +468,26 @@ func _update_current_path():
 
 	# Update path line
 	self.update_path_line()
+
+
+func convert_tower_to_barricade(tower: Tower):
+	assert(__towers_on_map.has(tower), "Tower not found in map")
+	var tower_placement_grid_coord: Vector2i = tower.get_placement_grid_coordinate()
+	var tower_global_position: Vector2 = tower.global_position
+
+	# Remove tower
+	__towers_on_map.erase(tower)
+	tower.queue_free()
+
+	# Place barricade
+	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
+	add_child(new_barricade)
+	# Assign same placement grid coordinate and global position as the tower
+	new_barricade.set_placement_grid_coordinate(tower_placement_grid_coord)
+	new_barricade.global_position = tower_global_position
+	# Add barricade to list
+	__barricades_on_map.append(new_barricade)
+
 
 # -------------------
 # GETTERS AND SETTERS
@@ -584,6 +596,8 @@ func place_tower(placementGridPoint: Vector2i):
 	new_tower.set_placement_grid_coordinate(placementGridPoint)
 	add_child(new_tower)
 	new_tower.position = __placement_grid.map_to_local(placementGridPoint)
+	# Have tower await selection
+	new_tower.switch_state(Tower.States.AWAITING_SELECTION)
 
 	# Create tower selection area
 	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
@@ -594,14 +608,15 @@ func place_tower(placementGridPoint: Vector2i):
 	new_tower.add_child(new_tower_selection_area)
 	new_tower.set_selection_area(new_tower_selection_area)
 
-	# Handle credit
-	__curr_balance -= new_tower.get_build_cost()
-	# Emit signal
+	# Emit signals
 	gained_credits.emit(__curr_balance)
-	# Add tower to list
-	__towers_on_map.append(new_tower)
-	# Emit signal
 	tower_placed.emit(new_tower)
+	# Add to appropriate tower/barricade list
+	if new_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
+		__barricades_on_map.append(new_tower)
+	else:
+		__towers_on_map.append(new_tower)
+	
 
 
 ## Creates a new instance of CreepSpawner and adds it as a child to the current node.

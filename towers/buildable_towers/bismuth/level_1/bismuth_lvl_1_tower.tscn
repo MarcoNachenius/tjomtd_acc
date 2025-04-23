@@ -10,7 +10,7 @@ z_index = 2
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_yqojx")
-TOWER_ID = 2
+TOWER_ID = 4
 TOWER_SPRITE = NodePath("TowerSprite")
 
 [node name="TowerSurface" parent="." instance=ExtResource("2_5ijpw")]

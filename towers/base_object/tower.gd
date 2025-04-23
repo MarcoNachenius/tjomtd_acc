@@ -1,7 +1,13 @@
 extends Node2D
 class_name Tower
 
+enum States {
+	AWAITING_SELECTION,
+	BUILT
+}
+
 var __build_cost: int
+var __curr_state: States
 var __selection_area: TowerSelectionArea
 var __placement_grid_coord: Vector2i
 var __upgrades_into: Array[TowerConstants.TowerIDs]
@@ -57,3 +63,18 @@ func set_upgrades_into_tower_ids(upgrades_into: Array[TowerConstants.TowerIDs]):
 
 func set_requires_towers(requires_towers: Array[TowerConstants.TowerIDs]):
 	__requires_towers = requires_towers
+
+func switch_state(state: States):
+	#assert(state in States, "Invalid state")
+	__curr_state = state
+
+	if state == States.AWAITING_SELECTION:
+		# Increase transparency of the tower sprite
+		TOWER_SPRITE.modulate.a = 0.5
+	
+	if state == States.BUILT:
+		# Remove transparency of the tower sprite
+		TOWER_SPRITE.modulate.a = 1.0
+
+func get_state() -> States:
+	return __curr_state
