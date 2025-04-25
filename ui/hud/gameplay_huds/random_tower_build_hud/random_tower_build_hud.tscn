@@ -1,36 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8u365aao1ox5"]
+[gd_scene load_steps=2 format=3 uid="uid://c8u365aao1ox5"]
 
 [ext_resource type="Script" uid="uid://tlx4dpamwe4b" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.gd" id="1_kyn4q"]
-[ext_resource type="PackedScene" uid="uid://b17pbyn0wwd5" path="res://ui/components/button_containers/build_random_tower_hbox/build_random_tower_hbox.tscn" id="2_ntkvv"]
-[ext_resource type="PackedScene" uid="uid://cwy65rs7d01j4" path="res://ui/components/button_containers/tower_properties_hbox/tower_properties_hbox.tscn" id="3_puoe6"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_HBOX", "TOWER_PROPERTIES_HBOX")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer"]
 script = ExtResource("1_kyn4q")
-BUILD_RANDOM_TOWER_HBOX = NodePath("BuildRandomTowerHBox")
-TOWER_PROPERTIES_HBOX = NodePath("TowerPropertiesHBox")
-
-[node name="BuildRandomTowerHBox" parent="." instance=ExtResource("2_ntkvv")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="TowerPropertiesHBox" parent="." instance=ExtResource("3_puoe6")]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -27.0
-offset_right = 0.0
-offset_bottom = 27.0
-grow_horizontal = 0
-grow_vertical = 2

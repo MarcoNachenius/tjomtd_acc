@@ -1,5 +1,5 @@
 extends HBoxContainer
-class_name TowerPropertiesHBox
+class_name TowerPropertiesContainer
 
 # EXPORTS
 @export var KEEP_TOWER_BUTTON: Button

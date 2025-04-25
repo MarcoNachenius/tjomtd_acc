@@ -1,9 +1,9 @@
 extends CanvasLayer
 
 
-@export var BUILD_RANDOM_TOWER_HBOX: BuildRandomTowerHBox
+@export var BUILD_RANDOM_TOWER_CONTAINER: BuildRandomTowerContainer
 @export var GAME_MAP: GameMap
-@export var TOWER_PROPERTIES_HBOX: TowerPropertiesHBox
+@export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
 
 var __selected_tower: Tower
 ## Number of towers that can be placed per turn
@@ -19,7 +19,7 @@ var __turn_towers: Array[Tower] = []
 func _ready():
 	_connect_all_component_signals()
 	# Hide tower properties hbox
-	TOWER_PROPERTIES_HBOX.visible = false
+	TOWER_PROPERTIES_CONTAINER.visible = false
 
 
 # ****************
@@ -37,8 +37,8 @@ func _connect_all_component_signals():
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_hbox_signals():
 	# Connect the button signals to the appropriate methods
-	BUILD_RANDOM_TOWER_HBOX.BUILD_RANDOM_TOWER_BUTTON.pressed.connect(_on_build_random_tower_button_pressed)
-	BUILD_RANDOM_TOWER_HBOX.EXIT_BUILD_MODE_BUTTON.pressed.connect(_on_exit_build_mode_button_pressed)
+	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.pressed.connect(_on_build_random_tower_button_pressed)
+	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.pressed.connect(_on_exit_build_mode_button_pressed)
 
 ## Connects signals for game map
 func _connect_game_map_signals():
@@ -52,7 +52,7 @@ func _connect_game_map_signals():
 	GAME_MAP.tower_placed.connect(_on_tower_placed)
 
 func _connect_tower_properties_hbox_signals():
-	TOWER_PROPERTIES_HBOX.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
+	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
 
 
 # ***************
@@ -64,11 +64,11 @@ func _connect_tower_properties_hbox_signals():
 ## Handle build random tower button pressed signal
 func _on_build_random_tower_button_pressed():
 	# Hide tower properties hbox
-	TOWER_PROPERTIES_HBOX.visible = false
+	TOWER_PROPERTIES_CONTAINER.visible = false
 	# Hide build tower button
-	BUILD_RANDOM_TOWER_HBOX.BUILD_RANDOM_TOWER_BUTTON.visible = false
+	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = false
 	# Show exit build mode button
-	BUILD_RANDOM_TOWER_HBOX.EXIT_BUILD_MODE_BUTTON.visible = true
+	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = true
 	# Switch to build mode
 	GAME_MAP.set_state(GAME_MAP.States.BUILD_MODE)
 	# Assign random towrer preload to the game map
@@ -77,9 +77,9 @@ func _on_build_random_tower_button_pressed():
 ## Handle the exit build mode button pressed signal
 func _on_exit_build_mode_button_pressed():
 	# Show build tower button
-	BUILD_RANDOM_TOWER_HBOX.BUILD_RANDOM_TOWER_BUTTON.visible = true
+	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = true
 	# Hide exit build mode button
-	BUILD_RANDOM_TOWER_HBOX.EXIT_BUILD_MODE_BUTTON.visible = false
+	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
 
@@ -106,10 +106,10 @@ func _on_wave_completed(total_waves_completed: int):
 
 func _on_tower_selected(tower: Tower):
 	__selected_tower = tower
-	TOWER_PROPERTIES_HBOX.visible = true
+	TOWER_PROPERTIES_CONTAINER.visible = true
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
-		TOWER_PROPERTIES_HBOX.KEEP_TOWER_BUTTON.visible = true
+		TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = true
 		return
 		
 
@@ -119,7 +119,7 @@ func _on_tower_placed(tower: Tower):
 	__turn_towers.append(tower)
 	# If the max number of towers has been placed, exit build mode.
 	if __current_turn_tower_count == __max_towers_per_turn:
-		BUILD_RANDOM_TOWER_HBOX.visible = false
+		BUILD_RANDOM_TOWER_CONTAINER.visible = false
 		GAME_MAP.clear_build_tower_values()
 		GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
 	
@@ -136,10 +136,10 @@ func _on_keep_tower_button_pressed():
 	assert(__turn_towers.has(__selected_tower), "Selected tower is not in the turn towers list")
 
 	# Hide keep tower button
-	TOWER_PROPERTIES_HBOX.KEEP_TOWER_BUTTON.visible = false
+	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
 
 	# Hide build random tower hbox
-	BUILD_RANDOM_TOWER_HBOX.visible = false
+	BUILD_RANDOM_TOWER_CONTAINER.visible = false
 
 	# Remove the selected tower from the turn towers list
 	__turn_towers.erase(__selected_tower)

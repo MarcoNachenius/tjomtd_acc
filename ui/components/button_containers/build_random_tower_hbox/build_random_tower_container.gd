@@ -1,5 +1,5 @@
 extends HBoxContainer
-class_name BuildRandomTowerHBox
+class_name BuildRandomTowerContainer
 
 @export var BUILD_RANDOM_TOWER_BUTTON: Button
 @export var EXIT_BUILD_MODE_BUTTON: Button
