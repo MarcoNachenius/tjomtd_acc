@@ -9,7 +9,7 @@ func before_each():
 ## creating a test object to run the rest of the tests in this file.
 func test_create_blank_map():
 	# ================================================================
-	#					 ** CREATE BLANK MAP **
+	#                     ** CREATE BLANK MAP **
 	# ================================================================
 	var test_map = GameMap.new()
 	# LINE_TD is used because it has no mandatory path stops
@@ -44,9 +44,10 @@ func test_create_blank_map():
 	# Clean up
 	test_map.queue_free()
 
+	
 func test_convert_tower_to_barricade():
 	# ================================================================
-	#					 ** CREATE BLANK MAP **
+	#                     ** CREATE BLANK MAP **
 	# ================================================================
 	var test_map = GameMap.new()
 	# LINE_TD is used because it has no mandatory path stops
@@ -99,4 +100,3 @@ func test_convert_tower_to_barricade():
 
 	# Clean up
 	test_map.queue_free()
-    

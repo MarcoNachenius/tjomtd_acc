@@ -63,6 +63,8 @@ func _connect_tower_properties_hbox_signals():
 # =============================================================================================================
 ## Handle build random tower button pressed signal
 func _on_build_random_tower_button_pressed():
+	# Hide tower properties hbox
+	TOWER_PROPERTIES_HBOX.visible = false
 	# Hide build tower button
 	BUILD_RANDOM_TOWER_HBOX.BUILD_RANDOM_TOWER_BUTTON.visible = false
 	# Show exit build mode button
@@ -79,7 +81,7 @@ func _on_exit_build_mode_button_pressed():
 	# Hide exit build mode button
 	BUILD_RANDOM_TOWER_HBOX.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Switch to navigation mode
-	GAME_MAP.set_state(GAME_MAP.States.NAVIGATION_MODE)
+	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
 
 #                                              | Game Map |
 # =============================================================================================================
@@ -109,18 +111,49 @@ func _on_tower_selected(tower: Tower):
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
 		TOWER_PROPERTIES_HBOX.KEEP_TOWER_BUTTON.visible = true
 		return
+		
 
 
 func _on_tower_placed(tower: Tower):
 	__current_turn_tower_count += 1
 	__turn_towers.append(tower)
-	# If the max number of towers has been placed, disable the build random tower button
+	# If the max number of towers has been placed, exit build mode.
 	if __current_turn_tower_count == __max_towers_per_turn:
 		BUILD_RANDOM_TOWER_HBOX.visible = false
-		
+		GAME_MAP.clear_build_tower_values()
+		GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
+	
+	# Avoid tower preload staying the same when a tower is placed, the max nummber of turn towers has
+	# not been reached and the game map is still in build mode.
+	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
+
 
 #                                        | Tower Properties HBox |
 # =============================================================================================================
 
 func _on_keep_tower_button_pressed():
-	pass
+	# Disqualifiers
+	assert(__turn_towers.has(__selected_tower), "Selected tower is not in the turn towers list")
+
+	# Hide keep tower button
+	TOWER_PROPERTIES_HBOX.KEEP_TOWER_BUTTON.visible = false
+
+	# Hide build random tower hbox
+	BUILD_RANDOM_TOWER_HBOX.visible = false
+
+	# Remove the selected tower from the turn towers list
+	__turn_towers.erase(__selected_tower)
+
+	# Switch the state of the selected tower to built
+	__selected_tower.switch_state(__selected_tower.States.BUILT)
+
+	# Convert rest of the turn towers to barricades
+	for tower in __turn_towers:
+		GAME_MAP.convert_tower_to_barricade(tower)
+	
+	# Switch the game map state to navigation mode
+	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
+
+	# Clear the turn values
+	__turn_towers.clear()
+	__current_turn_tower_count = 0

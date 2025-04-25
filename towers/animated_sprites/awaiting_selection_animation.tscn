@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bp4ptkguyqys4"]
+
+[ext_resource type="Texture2D" uid="uid://ivwh6lgftrhw" path="res://towers/animated_sprites/awaiting_selection_animation_rotated_and_scaled.png" id="1_ucqns"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_du2mm"]
+atlas = ExtResource("1_ucqns")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtnvv"]
+atlas = ExtResource("1_ucqns")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a27sf"]
+atlas = ExtResource("1_ucqns")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obrr7"]
+atlas = ExtResource("1_ucqns")
+region = Rect2(0, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi244"]
+atlas = ExtResource("1_ucqns")
+region = Rect2(256, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axux7"]
+atlas = ExtResource("1_ucqns")
+region = Rect2(512, 128, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6otj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_du2mm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtnvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a27sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obrr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi244")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axux7")
+}],
+"loop": true,
+"name": &"awaiting_selection",
+"speed": 15.0
+}]
+
+[node name="AwaitingSelectionAnimation" type="AnimatedSprite2D"]
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_x6otj")
+animation = &"awaiting_selection"

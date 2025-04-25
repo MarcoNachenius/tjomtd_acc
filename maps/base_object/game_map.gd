@@ -85,7 +85,7 @@ func _ready():
 	__curr_state = States.NAVIGATION_MODE
 
 	# RANDOM TOWER GENERATOR
-	RANDOM_TOWER_GENERATOR = RandomTowerGenerator.new()
+	_create_random_tower_generator()
 
 	# TOWER PLACEMENT TILES
 	self._create_tower_placement_validity_tiles()
@@ -266,6 +266,12 @@ func _create_placement_grid():
 	# Instantiate main tile grid as child of Map scene
 	add_child(new_tile_map)
 
+## Create a new instance of RandomTowerGenerator for generating random towers.
+func _create_random_tower_generator():
+	var new_generator = RandomTowerGenerator.new()
+	add_child(new_generator)
+	RANDOM_TOWER_GENERATOR = new_generator
+
 ## Creates red(invalid position) and green(valid position) surface areas
 ## that follow mouse during build mode.
 func _create_tower_placement_validity_tiles():
@@ -304,6 +310,9 @@ func switch_states(new_state: States):
 		__curr_state = States.BUILD_MODE
 	if new_state == States.NAVIGATION_MODE:
 		__curr_state = States.NAVIGATION_MODE
+		# Hide all build mode tiles
+		__valid_build_position_surface_highlight.visible = false
+		__invalid_build_position_surface_highlight.visible = false
 
 func update_path_line():
 	# Avoid errors on path line instantiation
@@ -716,7 +725,4 @@ func get_duplicates(arr: Array) -> Array:
 		if counts[item] > 1:
 			duplicates.append(item)
 	return duplicates
-
-
-
 

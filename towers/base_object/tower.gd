@@ -6,6 +6,8 @@ enum States {
 	BUILT
 }
 
+const AWAITING_SELECTION_ANIMATION_NAME: String = "awaiting_selection"
+
 var __build_cost: int
 var __curr_state: States
 var __selection_area: TowerSelectionArea
@@ -15,6 +17,8 @@ var __requires_towers: Array[TowerConstants.TowerIDs]
 
 @export var TOWER_ID: TowerConstants.TowerIDs
 @export var TOWER_SPRITE: Sprite2D
+@export var SURFACE_SPRITE: Sprite2D
+@export var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
 
 # BUILTINS
 func _ready():
@@ -71,10 +75,20 @@ func switch_state(state: States):
 	if state == States.AWAITING_SELECTION:
 		# Increase transparency of the tower sprite
 		TOWER_SPRITE.modulate.a = 0.5
+		# Hide tower surface
+		SURFACE_SPRITE.visible = false
+		# Show and play awaiting selection
+		AWAITING_SELECTION_ANIMATION.visible = true
+		AWAITING_SELECTION_ANIMATION.play(AWAITING_SELECTION_ANIMATION_NAME)
 	
 	if state == States.BUILT:
 		# Remove transparency of the tower sprite
 		TOWER_SPRITE.modulate.a = 1.0
+		# Show tower surface
+		SURFACE_SPRITE.visible = true
+		# Hide awaiting selection
+		AWAITING_SELECTION_ANIMATION.visible = false
+		AWAITING_SELECTION_ANIMATION.stop()
 
 func get_state() -> States:
 	return __curr_state
