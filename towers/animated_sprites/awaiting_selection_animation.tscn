@@ -56,3 +56,5 @@ animations = [{
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_x6otj")
 animation = &"awaiting_selection"
+frame = 1
+frame_progress = 0.959885

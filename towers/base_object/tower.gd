@@ -91,13 +91,15 @@ func switch_state(state: States):
 	__curr_state = state
 
 	if state == States.AWAITING_SELECTION:
-		# Increase transparency of the tower sprite
+		# Decrease transparency of the tower sprite
 		TOWER_SPRITE.modulate.a = 0.5
 		# Hide tower surface
 		SURFACE_SPRITE.visible = false
 		# Show and play awaiting selection
 		AWAITING_SELECTION_ANIMATION.visible = true
 		AWAITING_SELECTION_ANIMATION.play(AWAITING_SELECTION_ANIMATION_NAME)
+		# Decrease transparency of the awaiting selection animation
+		AWAITING_SELECTION_ANIMATION.modulate.a = 0.5
 	
 	if state == States.BUILT:
 		# Remove transparency of the tower sprite

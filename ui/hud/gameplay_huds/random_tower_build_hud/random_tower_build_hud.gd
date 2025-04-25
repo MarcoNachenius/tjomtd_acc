@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+class_name RandomTowerBuildHUD
 
 @export var BUILD_RANDOM_TOWER_CONTAINER: BuildRandomTowerContainer
 @export var GAME_MAP: GameMap
@@ -105,11 +105,20 @@ func _on_wave_completed(total_waves_completed: int):
 	#START_NEW_WAVE_BUTTON.visible = true
 
 func _on_tower_selected(tower: Tower):
+	# Reset transparency of previously selected tower sprite and awaiting selection animation
+	if __selected_tower and __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
+		# Decrease transparency of tower sprite and awaiting selection animation
+		__selected_tower.AWAITING_SELECTION_ANIMATION.modulate.a = 0.5
+		__selected_tower.TOWER_SPRITE.modulate.a = 0.5
 	__selected_tower = tower
 	TOWER_PROPERTIES_CONTAINER.visible = true
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
+		# Show keep tower button
 		TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = true
+		# Increase transparency of tower sprite and awaiting selection animation
+		tower.AWAITING_SELECTION_ANIMATION.modulate.a = 1.0
+		tower.TOWER_SPRITE.modulate.a = 1.0
 		return
 		
 
