@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpy2hm61yp3tb"]
+
+[ext_resource type="Script" uid="uid://b6ftmr51a6ksa" path="res://ui/components/button_containers/build_random_tower_container/build_random_tower_container.gd" id="1_08cnk"]
+
+[node name="BuildRandomTowerContainer" type="HBoxContainer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_BUTTON", "EXIT_BUILD_MODE_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_08cnk")
+BUILD_RANDOM_TOWER_BUTTON = NodePath("BuildRandomTower")
+EXIT_BUILD_MODE_BUTTON = NodePath("ExitBuildMode")
+metadata/_custom_type_script = "uid://b6ftmr51a6ksa"
+
+[node name="BuildRandomTower" type="Button" parent="."]
+layout_mode = 2
+text = "?"
+
+[node name="ExitBuildMode" type="Button" parent="."]
+layout_mode = 2
+text = "x"
