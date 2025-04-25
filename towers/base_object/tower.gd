@@ -17,14 +17,17 @@ var __requires_towers: Array[TowerConstants.TowerIDs]
 
 @export var TOWER_ID: TowerConstants.TowerIDs
 @export var TOWER_SPRITE: Sprite2D
-@export var SURFACE_SPRITE: Sprite2D
-@export var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
+var SURFACE_SPRITE: Sprite2D
+var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
 
 # BUILTINS
 func _ready():
 	__build_cost = TowerConstants.TowerPrices[TOWER_ID]
 	__upgrades_into = TowerConstants.UPGRADES_INTO[TOWER_ID]
 	__requires_towers = TowerConstants.REQUIRES_TOWERS[TOWER_ID]
+	# Instantiate child scenes
+	_create_surface_sprite()
+	_create_awaiting_selection_animation()
 
 # CUSTOM
 func disable_selection_area():
@@ -35,6 +38,21 @@ func enable_selection_area():
 	assert(__selection_area, "No slection area has been created")
 	__selection_area.monitoring = true
 
+# LOCALS
+func _create_surface_sprite():
+	var new_surface_sprite: Sprite2D = TowerConstants.TOWER_SURFACE_SPRITE_LOAD.instantiate()
+	SURFACE_SPRITE = new_surface_sprite
+	add_child(SURFACE_SPRITE)
+
+func _create_awaiting_selection_animation():
+	# Do not add animation for barricades
+	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
+		return
+	var new_awaiting_selection_animation: AnimatedSprite2D = TowerConstants.AWAITING_SELECTION_ANIMATION_LOAD.instantiate()
+	AWAITING_SELECTION_ANIMATION = new_awaiting_selection_animation
+	add_child(AWAITING_SELECTION_ANIMATION)
+	# Hide by default
+	AWAITING_SELECTION_ANIMATION.visible = false
 
 # GETTERS
 func get_build_cost() -> int:
@@ -92,3 +110,4 @@ func switch_state(state: States):
 
 func get_state() -> States:
 	return __curr_state
+

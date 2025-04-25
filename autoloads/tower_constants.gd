@@ -66,7 +66,10 @@ var REQUIRES_TOWERS: Dictionary = {
     TowerIDs.TEST_BUILD_TOWER: TEST_BUILD_TOWER_REQUIRES_TOWERS,
 }
 
+# LOADS
 var TOWER_SELECTION_AREA_PRELOAD: PackedScene = load("res://ui/components/tower_selection_area/tower_selection_area.tscn")
+var AWAITING_SELECTION_ANIMATION_LOAD: PackedScene = load("res://towers/animated_sprites/awaiting_selection_animation.tscn")
+var TOWER_SURFACE_SPRITE_LOAD: PackedScene = load("res://towers/sprites/tower_surface_sprite.tscn")
 
 
 # UPGRADES INTO
