@@ -13,6 +13,10 @@ var TOWER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
 }
 
+var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
+	TowerConstants.TowerIDs.TOMBSTONE_LVL_1: TOMBSTONE_BUTTON,
+}
+
 func _ready():
 	# Ensure all tower button exports have been assigned.
 	_validate_tower_button_exports()
@@ -29,11 +33,9 @@ func _connect_tower_button_signals():
 		button.pressed.connect(TOWER_BUTTON_CALLBACKS[button])
 
 
-
-
 #                                 | TOWER BUTTONS |
 # ====================================================================================================
 
-# TOMBSTONE
+## WIP
 func _on_tombstone_button_pressed():
 	pass

@@ -68,6 +68,7 @@ var __total_active_creeps: int
 var __total_active_wave_creeps: int
 var __total_points_earned: int
 var __total_waves_completed: int
+var __towers_awaiting_selection: Array[Tower]
 var __towers_on_map: Array[Tower]
 var __valid_build_position_surface_highlight: Sprite2D
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
@@ -502,6 +503,9 @@ func convert_tower_to_barricade(tower: Tower):
 # GETTERS AND SETTERS
 # -------------------
 
+func get_towers_on_map() -> Array[Tower]:
+	return __towers_on_map
+
 # __path_line_visible
 func show_path_line():
 	self.__path_line_visible = true
@@ -618,7 +622,6 @@ func place_tower(placementGridPoint: Vector2i):
 	new_tower.set_selection_area(new_tower_selection_area)
 
 	# Emit signals
-	gained_credits.emit(__curr_balance)
 	tower_placed.emit(new_tower)
 	# Add to appropriate tower/barricade list
 	if new_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE:

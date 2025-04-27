@@ -13,11 +13,14 @@ var __current_turn_tower_count = 0
 ## Coordinates of the towers that have been placed this turn
 var __turn_towers: Array[Tower] = []
 
+var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
+
 # *****************
 # INHERITED METHODS
 # *****************
 func _ready():
 	_connect_all_component_signals()
+	_create_tower_upgrade_manager()
 	# Hide tower properties hbox
 	TOWER_PROPERTIES_CONTAINER.visible = false
 
@@ -53,6 +56,15 @@ func _connect_game_map_signals():
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
+
+func _create_tower_upgrade_manager():
+	# Create a new instance of the tower upgrade manager
+	TOWER_UPGRADE_MANAGER = TowerUpgradeManager.new()
+	# Add the tower upgrade manager to the scene tree
+	add_child(TOWER_UPGRADE_MANAGER)
+	# Set the game map for the tower upgrade manager
+	TOWER_UPGRADE_MANAGER.set_game_map(GAME_MAP)
+
 
 
 # ***************

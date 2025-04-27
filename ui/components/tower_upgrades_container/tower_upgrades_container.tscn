@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://24wnsdvwnkv0"]
-
-[ext_resource type="Script" uid="uid://nkdpi8i71fo5" path="res://ui/components/tower_upgrades_container/tower_upgrades_container.gd" id="1_8dg2t"]
-
-[node name="TowerUpgradesContainer" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_8dg2t")
