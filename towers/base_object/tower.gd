@@ -13,7 +13,7 @@ var __curr_state: States
 var __selection_area: TowerSelectionArea
 var __placement_grid_coord: Vector2i
 var __upgrades_into: Array[TowerConstants.TowerIDs]
-var __requires_towers: Array[TowerConstants.TowerIDs]
+var __requires_towers: Dictionary[TowerConstants.TowerIDs, int]
 
 @export var TOWER_ID: TowerConstants.TowerIDs
 @export var TOWER_SPRITE: Sprite2D
@@ -65,7 +65,7 @@ func get_placement_grid_coordinate() -> Vector2i:
 func get_upgrades_into_tower_ids() -> Array[TowerConstants.TowerIDs]:
 	return __upgrades_into
 
-func get_requires_towers() -> Array[TowerConstants.TowerIDs]:
+func get_requires_towers() -> Dictionary[TowerConstants.TowerIDs, int]:
 	return __requires_towers
 
 # SETTERS
@@ -83,7 +83,7 @@ func set_placement_grid_coordinate(new_placement_grid_coord: Vector2i):
 func set_upgrades_into_tower_ids(upgrades_into: Array[TowerConstants.TowerIDs]):
 	__upgrades_into = upgrades_into
 
-func set_requires_towers(requires_towers: Array[TowerConstants.TowerIDs]):
+func set_requires_towers(requires_towers: Dictionary[TowerConstants.TowerIDs, int]):
 	__requires_towers = requires_towers
 
 func switch_state(state: States):

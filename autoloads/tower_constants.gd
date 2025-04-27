@@ -1,6 +1,5 @@
 extends Node
 
-
 enum TowerIDs {
     BARRICADE,
     BLACK_MARBLE_LVL_1,
@@ -8,6 +7,7 @@ enum TowerIDs {
     BLACK_MARBLE_LVL_3,
     BISMUTH_LVL_1,
     LARIMAR_LVL_1,
+    TOMBSTONE_LVL_1,
     TEST_BUILD_TOWER
 }
 
@@ -22,7 +22,7 @@ enum BuildTowerIDs {
 }
 
 enum UpgradeTowerIDs {
-    TEST_UPGRADE_TOWER,
+    TOMBSTONE_LVL_1 = TowerIDs.TOMBSTONE_LVL_1,
 }
 
 var BUILD_TOWER_PRELOADS: Dictionary = {
@@ -36,17 +36,18 @@ var BUILD_TOWER_PRELOADS: Dictionary = {
 }
 
 const TowerPrices: Dictionary = {
-    TowerIDs.BARRICADE: 10,
-    TowerIDs.BLACK_MARBLE_LVL_1: 20,
-    TowerIDs.BLACK_MARBLE_LVL_2: 40,
-    TowerIDs.BLACK_MARBLE_LVL_3: 70,
-    TowerIDs.BISMUTH_LVL_1: 30,
-    TowerIDs.LARIMAR_LVL_1: 50,
-    TowerIDs.TEST_BUILD_TOWER: 10,
+    TowerIDs.BARRICADE: 0,
+    TowerIDs.BLACK_MARBLE_LVL_1: 0,
+    TowerIDs.BLACK_MARBLE_LVL_2: 0,
+    TowerIDs.BLACK_MARBLE_LVL_3: 0,
+    TowerIDs.BISMUTH_LVL_1: 0,
+    TowerIDs.LARIMAR_LVL_1: 0,
+    TowerIDs.TEST_BUILD_TOWER: 0,
+    TowerIDs.TOMBSTONE_LVL_1: 50
 }
 
 
-var UPGRADES_INTO: Dictionary = {
+const UPGRADES_INTO: Dictionary = {
     TowerIDs.BARRICADE: BARRICADE_UPGRADES_INTO,
     TowerIDs.BLACK_MARBLE_LVL_1: BLACK_MARBLE_LVL_1_UPGRADES_INTO,
     TowerIDs.BLACK_MARBLE_LVL_2: BLACK_MARBLE_LVL_2_UPGRADES_INTO,
@@ -56,7 +57,7 @@ var UPGRADES_INTO: Dictionary = {
     TowerIDs.TEST_BUILD_TOWER: TEST_BUILD_TOWER_UPGRADES_INTO,
 }
 
-var REQUIRES_TOWERS: Dictionary = {
+const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.BARRICADE: BARRICADE_REQUIRES_TOWERS,
     TowerIDs.BLACK_MARBLE_LVL_1: BLACK_MARBLE_LVL_1_REQUIRES_TOWERS,
     TowerIDs.BLACK_MARBLE_LVL_2: BLACK_MARBLE_LVL_2_REQUIRES_TOWERS,
@@ -73,19 +74,24 @@ var TOWER_SURFACE_SPRITE_LOAD: PackedScene = load("res://towers/sprites/tower_su
 
 
 # UPGRADES INTO
-var BARRICADE_UPGRADES_INTO: Array[TowerIDs] = []
-var BLACK_MARBLE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
-var BLACK_MARBLE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
-var BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
-var BISMUTH_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
-var LARIMAR_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
-var TEST_BUILD_TOWER_UPGRADES_INTO: Array[TowerIDs] = []
+const BARRICADE_UPGRADES_INTO: Array[TowerIDs] = []
+const BLACK_MARBLE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const BLACK_MARBLE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
+const BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const BISMUTH_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const LARIMAR_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const TEST_BUILD_TOWER_UPGRADES_INTO: Array[TowerIDs] = []
 
 # REQUIRE TOWERS
-var BARRICADE_REQUIRES_TOWERS: Array[TowerIDs] = []
-var BLACK_MARBLE_LVL_1_REQUIRES_TOWERS: Array[TowerIDs] = []
-var BLACK_MARBLE_LVL_2_REQUIRES_TOWERS: Array[TowerIDs] = []
-var BLACK_MARBLE_LVL_3_REQUIRES_TOWERS: Array[TowerIDs] = []
-var BISMUTH_LVL_1_REQUIRES_TOWERS: Array[TowerIDs] = []
-var LARIMAR_LVL_1_REQUIRES_TOWERS: Array[TowerIDs] = []
-var TEST_BUILD_TOWER_REQUIRES_TOWERS: Array[TowerIDs] = []
+const BARRICADE_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const BLACK_MARBLE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const BLACK_MARBLE_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const BLACK_MARBLE_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const BISMUTH_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const LARIMAR_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const TOMBSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.BLACK_MARBLE_LVL_1: 1,
+    TowerIDs.BISMUTH_LVL_1: 1,
+    TowerIDs.LARIMAR_LVL_1: 1
+}
+const TEST_BUILD_TOWER_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
