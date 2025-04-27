@@ -4,6 +4,7 @@ class_name RandomTowerBuildHUD
 @export var BUILD_RANDOM_TOWER_CONTAINER: BuildRandomTowerContainer
 @export var GAME_MAP: GameMap
 @export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
+@export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
 
 var __selected_tower: Tower
 ## Number of towers that can be placed per turn
@@ -23,6 +24,8 @@ func _ready():
 	_create_tower_upgrade_manager()
 	# Hide tower properties hbox
 	TOWER_PROPERTIES_CONTAINER.visible = false
+	# Hide tower upgrades container
+	TOWER_UPGRADES_CONTAINER.visible = false
 
 
 # ****************
@@ -65,6 +68,20 @@ func _create_tower_upgrade_manager():
 	# Set the game map for the tower upgrade manager
 	TOWER_UPGRADE_MANAGER.set_game_map(GAME_MAP)
 
+## Enable visibility of multiple tower buttons.
+func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower]):
+	# Hide all tower buttons first
+	TOWER_PROPERTIES_CONTAINER.hide_all_tower_buttons()
+	# Capture selected tower id
+	var selected_tower_id: TowerConstants.TowerIDs = selectedTower.TOWER_ID
+	# Enable visibility of the towers that can be upgraded
+	for upgrade_tower_id in TowerConstants.UPGRADES_INTO[selected_tower_id]:
+		# Set visibility of the possible upgrade towers of the selected tower
+		var can_upgrade: bool = TOWER_UPGRADE_MANAGER.can_upgrade_to_tower(upgrade_tower_id, towerArray)
+		# Only enable visibility of the tower upgrade container if at least one tower can be upgraded
+		if can_upgrade:
+			TOWER_UPGRADES_CONTAINER.visible = true
+		TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = can_upgrade
 
 
 # ***************
@@ -111,10 +128,6 @@ func _on_life_lost(remaining_lives: int):
 
 func _on_wave_completed(total_waves_completed: int):
 	pass
-	#WAVES_COMPLETED_TEXT_LABEL.text = WAVES_COMPLETED_STR_PREFIX + str(total_waves_completed)
-	## Show start new wave button
-	#BUILD_TOWERS_HBOX_CONTAINER.visible = true
-	#START_NEW_WAVE_BUTTON.visible = true
 
 func _on_tower_selected(tower: Tower):
 	# Reset transparency of previously selected tower sprite and awaiting selection animation
@@ -122,8 +135,11 @@ func _on_tower_selected(tower: Tower):
 		# Decrease transparency of tower sprite and awaiting selection animation
 		__selected_tower.AWAITING_SELECTION_ANIMATION.modulate.a = 0.5
 		__selected_tower.TOWER_SPRITE.modulate.a = 0.5
+	
+	# Set new selected tower
 	__selected_tower = tower
 	TOWER_PROPERTIES_CONTAINER.visible = true
+	
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
 		# Show keep tower button
@@ -132,7 +148,9 @@ func _on_tower_selected(tower: Tower):
 		tower.AWAITING_SELECTION_ANIMATION.modulate.a = 1.0
 		tower.TOWER_SPRITE.modulate.a = 1.0
 		return
-		
+	
+	# Handle tower upgrade container visibility
+	_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
 
 
 func _on_tower_placed(tower: Tower):

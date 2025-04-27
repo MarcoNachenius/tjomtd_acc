@@ -26,11 +26,17 @@ func _validate_tower_button_exports():
 	assert(TOMBSTONE_BUTTON, "TOMBSTONE_BUTTON is not assigned in the inspector.")
 
 ## Connect all tower button signals to their respective callbacks.
-
 func _connect_tower_button_signals():
 	for button in ALL_TOWER_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(TOWER_BUTTON_CALLBACKS[button])
+
+## Disables the visibility of all tower buttons.
+func hide_all_tower_buttons():
+	for button in ALL_TOWER_BUTTONS:
+		button.visible = false
+
+
 
 
 #                                 | TOWER BUTTONS |
