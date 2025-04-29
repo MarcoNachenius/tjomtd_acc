@@ -689,7 +689,57 @@ func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
 	# Clear the list of towers awaiting selection
 	__towers_awaiting_selection.clear()
 
+## Called when a tower is selected for upgrade.
+## This method removes the selected tower from the list of towers on the map and prepares it for upgrade.
+## It also creates a new tower based on the provided upgrade tower ID and sets its position.
+func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	# Ensure the upgrade tower ID is valid
+	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
+	# Ensure the tower is in the list of towers on map
+	assert(__towers_on_map.has(selectedTower), "Tower not found in list of towers awaiting selection")
+	
+	# Capture the selected tower's placement grid coordinate and global position
+	var tower_placement_grid_coord: Vector2i = selectedTower.get_placement_grid_coordinate()
+	var tower_global_position: Vector2 = selectedTower.global_position
 
+	# Construct array of required tower IDs
+	var required_tower_ids: Array[TowerConstants.TowerIDs] = tower_count_dict_to_tower_id_array(TowerConstants.REQUIRES_TOWERS[upgradeTowerID])
+	# Create list that will hold the towers that will be removed from the towers on map list
+	var towers_to_remove: Array[Tower] = []
+
+	# Remove tower id from the towers on map list
+	required_tower_ids.erase(selectedTower.TOWER_ID)
+	# Remove the selected tower from the list of towers on the map
+	__towers_on_map.erase(selectedTower)
+	# Remove tower scene from map
+	selectedTower.queue_free()
+
+	# Iterate through the remaining required tower IDs
+	for tower_id in required_tower_ids.duplicate():
+		# End loop once all required tower IDs have been found
+		if required_tower_ids.is_empty():
+			break
+		for tower in __towers_on_map.duplicate():
+			# Check if the tower ID matches the required tower ID
+			if tower.TOWER_ID == tower_id:
+				# Add the tower to the list of towers to remove
+				towers_to_remove.append(tower)
+				# Remove the tower id from the required tower ids array
+				required_tower_ids.erase(tower_id)
+				break
+	
+	# Convert additional required towers to barricades
+	for tower in towers_to_remove:
+		convert_tower_to_barricade(tower)
+	
+	# Place the new upgrade tower
+	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
+	add_child(new_upgrade_tower)
+	# Set the upgrade tower's placement grid coordinate and global position
+	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
+	new_upgrade_tower.global_position = tower_global_position
+	# Add tower to the list of towers on the map
+	__towers_on_map.append(new_upgrade_tower)
 
 ## Called when an upgrade tower exists on the towers awaiting selection list.
 func keep_upgrade_tower_from_towers_awaiting_selection(towerAwaitingSelection: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
@@ -808,3 +858,13 @@ func get_duplicates(arr: Array) -> Array:
 		if counts[item] > 1:
 			duplicates.append(item)
 	return duplicates
+
+
+func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
+	var tower_id_array: Array[TowerConstants.TowerIDs] = []
+	# Iterate through the tower count dictionary
+	for tower_id in tower_count_dict.keys():
+		# Add the tower id to the array the number of times specified in the count
+		for i in range(tower_count_dict[tower_id]):
+			tower_id_array.append(tower_id)
+	return tower_id_array
