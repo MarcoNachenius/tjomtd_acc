@@ -683,7 +683,7 @@ func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
 	towerAwaitingSelection.switch_state(Tower.States.BUILT)
 
 	# Convert remaining towers awaiting selection to barricades
-	for tower in __towers_awaiting_selection:
+	for tower in __towers_awaiting_selection.duplicate():
 		# Convert the tower to a barricade
 		self.convert_tower_to_barricade(tower)
 	# Clear the list of towers awaiting selection
@@ -692,7 +692,9 @@ func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
 
 
 ## Called when an upgrade tower exists on the towers awaiting selection list.
-func keep_upgrade_tower_from_towers_awaiting_selection(towerAwaitingSelection: Tower, upgradeTowerID: TowerConstants.TowerIDs):
+func keep_upgrade_tower_from_towers_awaiting_selection(towerAwaitingSelection: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	# Ensure the upgrade tower ID is valid
+	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
 	# Ensure the tower is in the list of towers awaiting selection
 	assert(__towers_awaiting_selection.has(towerAwaitingSelection), "Tower not found in list of towers awaiting selection")
 	# Remove the tower from the list of towers awaiting selection
@@ -707,23 +709,23 @@ func keep_upgrade_tower_from_towers_awaiting_selection(towerAwaitingSelection: T
 	towerAwaitingSelection.queue_free()
 	
 	# Create new tower based on provided tower ID
-	var upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
-	add_child(upgrade_tower)
+	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
+	add_child(new_upgrade_tower)
 
 	# Set upgrade tower placement grid coordinate and global position
-	upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
-	upgrade_tower.global_position = tower_global_position
+	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
+	new_upgrade_tower.global_position = tower_global_position
 	
 	# Set the tower's state to built
-	upgrade_tower.switch_state(Tower.States.BUILT)
+	new_upgrade_tower.switch_state(Tower.States.BUILT)
 	
 	# Add the tower to the list of towers on the map
-	__towers_on_map.append(upgrade_tower)
+	__towers_on_map.append(new_upgrade_tower)
 
 	# Convert all towers awaiting selection to barricades
-	for tower in __towers_awaiting_selection:
+	for tower in __towers_awaiting_selection.duplicate():
 		# Convert the tower to a barricade
-		self.convert_tower_to_barricade(tower)
+		convert_tower_to_barricade(tower)
 	# Clear the list of towers awaiting selection
 	__towers_awaiting_selection.clear()
 
@@ -772,6 +774,15 @@ func _remove_tower_impediment_points(placementGridPoint: Vector2i):
 		__path_impediments.remove_at(__path_impediments.find(point))
 	# Update path 
 	self._update_current_path()
+
+
+func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
+
+	# Handle tower awaiting selection
+	if selectedTower.get_state() == Tower.States.AWAITING_SELECTION:
+		keep_upgrade_tower_from_towers_awaiting_selection(selectedTower, upgradeTowerID)
+		return
 
 # ************
 # TODO METHODS

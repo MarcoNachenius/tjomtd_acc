@@ -82,6 +82,7 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
 
+
 # ***************
 # SIGNAL HANDLERS
 # ***************
@@ -179,6 +180,9 @@ func _on_keep_tower_button_pressed():
 	# Hide build random tower hbox
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
 
+	# Move the selected tower to the towers on map list
+	# and convert the rest of the towers to barricades.
+	GAME_MAP.keep_built_tower_awaiting_selection(__selected_tower)
 	
 	# Switch the game map state to navigation mode
 	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://beax5lqhsxm70"]
+
+[ext_resource type="Texture2D" uid="uid://d5q487vpbgqx" path="res://towers/sprites/temporary_tower_sprite.png" id="1_4rckg"]
+
+[node name="TempTowerSprite" type="Sprite2D"]
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("1_4rckg")

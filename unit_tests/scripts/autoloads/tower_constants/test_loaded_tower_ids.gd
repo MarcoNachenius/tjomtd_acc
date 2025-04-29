@@ -3,6 +3,8 @@ extends GutTest
 func before_each():
     await get_tree().process_frame
 
+#                                                                    | BUILD TOWERS |
+# ===================================================================================================================================================================
 func test_barricade_tower_id():
     var barricade_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
     add_child_autofree(barricade_tower)
@@ -38,3 +40,9 @@ func test_larimar_lvl_1_tower_id():
     add_child_autofree(larimar_lvl_1_tower)
     assert_true(larimar_lvl_1_tower.TOWER_ID == TowerConstants.TowerIDs.LARIMAR_LVL_1, "Expected LARIMAR_LVL_1 tower ID to be LARIMAR_LVL_1")
     larimar_lvl_1_tower.queue_free()
+
+func test_tombstone_lvl_1_tower_id():
+    var tombstone_lvl_1_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[TowerConstants.TowerIDs.TOMBSTONE_LVL_1].instantiate()
+    add_child_autofree(tombstone_lvl_1_tower)
+    assert_true(tombstone_lvl_1_tower.TOWER_ID == TowerConstants.TowerIDs.TOMBSTONE_LVL_1, "Expected TOMBSTONE_LVL_1 tower ID to be TOMBSTONE_LVL_1")
+    tombstone_lvl_1_tower.queue_free()

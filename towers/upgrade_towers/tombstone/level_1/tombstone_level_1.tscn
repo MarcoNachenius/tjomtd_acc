@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cumcmgyi6crjk"]
+[gd_scene load_steps=3 format=3 uid="uid://cumcmgyi6crjk"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_aqv7f"]
+[ext_resource type="PackedScene" uid="uid://beax5lqhsxm70" path="res://towers/sprites/temp_tower_sprite.tscn" id="2_4tb67"]
 
 [node name="TombstoneLevel1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
 script = ExtResource("1_aqv7f")
 TOWER_ID = 6
-TOWER_SPRITE = NodePath("TowerSprite")
+TOWER_SPRITE = NodePath("TempTowerSprite")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
-[node name="TowerSprite" type="Sprite2D" parent="."]
+[node name="TempTowerSprite" parent="." instance=ExtResource("2_4tb67")]

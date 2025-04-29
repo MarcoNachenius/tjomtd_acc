@@ -103,3 +103,151 @@ func test_convert_tower_to_barricade():
 
 	# Clean up
 	test_map.queue_free()
+
+
+func test_keep_built_tower_from_towers_awaiting_selection():
+	# ================================================================
+	#                     ** CREATE BLANK MAP **
+	# ================================================================
+	var test_map = GameMap.new()
+	# LINE_TD is used because it has no mandatory path stops
+	test_map.MAP_ID = MapConstants.MapID.LINE_TD
+	# Set the map's size to 10x10
+	test_map.MAP_HEIGHT = 10
+	test_map.MAP_WIDTH = 10
+	# Ensure start and end points don't interfere with placement validity
+	test_map.__path_start_point = Vector2i(0, 0)
+	test_map.__path_end_point = Vector2i(0, 19)
+	# Create test tileset
+	var test_tileset = TileSet.new()
+	test_tileset.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+	test_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+	test_tileset.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_VERTICAL
+	test_tileset.tile_size = Vector2i(256, 128)
+	# Asssign the test tileset to the map
+	test_map.tile_set = test_tileset
+	# Add the test map to the scene
+	add_child_autofree(test_map)
+	# Process frame to create the map
+	await get_tree().process_frame
+	# ================================================================
+
+	# Create tower loads
+	var black_marble_lvl_1_preload: PackedScene = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1]
+	var black_marble_lvl_2_preload: PackedScene = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2]
+	var black_marble_lvl_3_preload: PackedScene = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3]
+	
+	# Create test tower placement grid coordinates
+	var tower_1_placement_grid_coord: Vector2i = Vector2i(10, 0)
+	var tower_2_placement_grid_coord: Vector2i = Vector2i(10, 2)
+	var tower_3_placement_grid_coord: Vector2i = Vector2i(10, 4)
+
+	# Place 3 towers
+	test_map.set_build_tower_preload(black_marble_lvl_1_preload)
+	test_map.place_tower(tower_1_placement_grid_coord)
+	test_map.set_build_tower_preload(black_marble_lvl_2_preload)
+	test_map.place_tower(tower_2_placement_grid_coord)
+	test_map.set_build_tower_preload(black_marble_lvl_3_preload)
+	test_map.place_tower(tower_3_placement_grid_coord)
+
+
+	# Ensure towers were properly added the correct list
+	assert_eq(len(test_map.__towers_awaiting_selection), 3)
+
+	# Simulate pressing the keep tower button
+	var tower_to_keep: Tower = test_map.__towers_awaiting_selection[1]
+
+	# Simulate keeping the tower
+	test_map.keep_built_tower_awaiting_selection(tower_to_keep)
+
+	# Ensure the tower is in the towers on map list
+	assert_eq(len(test_map.__towers_on_map), 1)
+	assert_eq(test_map.__towers_on_map[0].TOWER_ID, TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2)
+	# Ensure the selected tower's placement grid coordinates are the same as the original
+	assert_eq(tower_to_keep.get_placement_grid_coordinate(), tower_2_placement_grid_coord)
+
+
+	# Ensure the rest of the towers have been converted to barricades
+	assert_eq(len(test_map.__barricades_on_map), 2)
+	# Test barricade 1 placement grid coordinates
+	assert_eq(test_map.__barricades_on_map[0].get_placement_grid_coordinate(), tower_1_placement_grid_coord)
+	# Test barricade 2 placement grid coordinates
+	assert_eq(test_map.__barricades_on_map[1].get_placement_grid_coordinate(), tower_3_placement_grid_coord)
+
+	# Clean up
+	test_map.queue_free()
+	await get_tree().process_frame
+
+
+# TODO
+func test_keep_upgrade_tower_from_towers_awaiting_selection():
+	# ================================================================
+	#                     ** CREATE BLANK MAP **
+	# ================================================================
+	var test_map = GameMap.new()
+	# LINE_TD is used because it has no mandatory path stops
+	test_map.MAP_ID = MapConstants.MapID.LINE_TD
+	# Set the map's size to 10x10
+	test_map.MAP_HEIGHT = 10
+	test_map.MAP_WIDTH = 10
+	# Ensure start and end points don't interfere with placement validity
+	test_map.__path_start_point = Vector2i(0, 0)
+	test_map.__path_end_point = Vector2i(0, 19)
+	# Create test tileset
+	var test_tileset = TileSet.new()
+	test_tileset.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+	test_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+	test_tileset.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_VERTICAL
+	test_tileset.tile_size = Vector2i(256, 128)
+	# Asssign the test tileset to the map
+	test_map.tile_set = test_tileset
+	# Add the test map to the scene
+	add_child_autofree(test_map)
+	# Process frame to create the map
+	await get_tree().process_frame
+	# ================================================================
+
+	# Create tower loads
+	var black_marble_lvl_1_preload: PackedScene = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1]
+	var black_marble_lvl_2_preload: PackedScene = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2]
+	var black_marble_lvl_3_preload: PackedScene = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3]
+	
+	# Create test tower placement grid coordinates
+	var tower_1_placement_grid_coord: Vector2i = Vector2i(10, 0)
+	var tower_2_placement_grid_coord: Vector2i = Vector2i(10, 2)
+	var tower_3_placement_grid_coord: Vector2i = Vector2i(10, 4)
+
+	# Place 3 towers
+	test_map.set_build_tower_preload(black_marble_lvl_1_preload)
+	test_map.place_tower(tower_1_placement_grid_coord)
+	test_map.set_build_tower_preload(black_marble_lvl_2_preload)
+	test_map.place_tower(tower_2_placement_grid_coord)
+	test_map.set_build_tower_preload(black_marble_lvl_3_preload)
+	test_map.place_tower(tower_3_placement_grid_coord)
+
+
+	# Ensure towers were properly added the correct list
+	assert_eq(len(test_map.__towers_awaiting_selection), 3)
+
+	# Simulate pressing the keep tower button
+	var tower_to_keep: Tower = test_map.__towers_awaiting_selection[1]
+
+	# Simulate keeping the tower
+	test_map.keep_upgrade_tower_from_towers_awaiting_selection(tower_to_keep, TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+
+	# Ensure the tower is in the towers on map list
+	assert_eq(len(test_map.__towers_on_map), 1)
+	assert_eq(test_map.__towers_on_map[0].TOWER_ID, TowerConstants.TowerIDs.TOMBSTONE_LVL_1)
+	# Ensure the selected tower's placement grid coordinates are the same as the original
+	assert_eq(tower_to_keep.get_placement_grid_coordinate(), tower_2_placement_grid_coord)
+
+
+	# Ensure the rest of the towers have been converted to barricades
+	assert_eq(len(test_map.__barricades_on_map), 2)
+	# Test barricade 1 placement grid coordinates
+	assert_eq(test_map.__barricades_on_map[0].get_placement_grid_coordinate(), tower_1_placement_grid_coord)
+	# Test barricade 2 placement grid coordinates
+	assert_eq(test_map.__barricades_on_map[1].get_placement_grid_coordinate(), tower_3_placement_grid_coord)
+
+	# Clean up
+	test_map.queue_free()
