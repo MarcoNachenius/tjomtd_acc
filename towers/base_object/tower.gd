@@ -6,6 +6,12 @@ enum States {
 	BUILT
 }
 
+enum TowerOrigin {
+	BUILT,
+	UPGRADED,
+	BARRICADED,
+}
+
 const AWAITING_SELECTION_ANIMATION_NAME: String = "awaiting_selection"
 
 var __build_cost: int
@@ -87,7 +93,7 @@ func set_requires_towers(requires_towers: Dictionary[TowerConstants.TowerIDs, in
 	__requires_towers = requires_towers
 
 func switch_state(state: States):
-	#assert(state in States, "Invalid state")
+	assert(state in States.values(), "Invalid state")
 	__curr_state = state
 
 	if state == States.AWAITING_SELECTION:
@@ -102,7 +108,11 @@ func switch_state(state: States):
 		AWAITING_SELECTION_ANIMATION.modulate.a = 0.5
 	
 	if state == States.BUILT:
+		if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
+			return
 		# Remove transparency of the tower sprite
+		if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
+			TOWER_SPRITE.modulate.a = 1.0
 		TOWER_SPRITE.modulate.a = 1.0
 		# Show tower surface
 		SURFACE_SPRITE.visible = true
@@ -112,4 +122,3 @@ func switch_state(state: States):
 
 func get_state() -> States:
 	return __curr_state
-

@@ -479,19 +479,27 @@ func _update_current_path():
 	# Update path line
 	self.update_path_line()
 
-
+## Removes the tower from towers on map or towers awaiting selection.
 func convert_tower_to_barricade(tower: Tower):
-	assert(__towers_on_map.has(tower), "Tower not found in map")
+	# Ensure that the tower is in a list
+	assert(__towers_on_map.has(tower) or __towers_awaiting_selection.has(tower), "Tower not in __towers_on_map list")
 	var tower_placement_grid_coord: Vector2i = tower.get_placement_grid_coordinate()
 	var tower_global_position: Vector2 = tower.global_position
 
-	# Remove tower
-	__towers_on_map.erase(tower)
+	# EITHER remove tower from __towers_awaiting_selection
+	if __towers_awaiting_selection.has(tower):
+		__towers_awaiting_selection.erase(tower)
+	else: # OR remove tower from __towers_on_map
+		__towers_on_map.erase(tower)
+
+	# Remove tower scene from map
 	tower.queue_free()
 
 	# Place barricade
 	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
 	add_child(new_barricade)
+	# Set barricade state
+	new_barricade.switch_state(Tower.States.BUILT)
 	# Assign same placement grid coordinate and global position as the tower
 	new_barricade.set_placement_grid_coordinate(tower_placement_grid_coord)
 	new_barricade.global_position = tower_global_position
@@ -502,6 +510,8 @@ func convert_tower_to_barricade(tower: Tower):
 # -------------------
 # GETTERS AND SETTERS
 # -------------------
+func get_towers_awaiting_selection() -> Array[Tower]:
+	return __towers_awaiting_selection
 
 func get_towers_on_map() -> Array[Tower]:
 	return __towers_on_map
@@ -627,7 +637,7 @@ func place_tower(placementGridPoint: Vector2i):
 	if new_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
 		__barricades_on_map.append(new_tower)
 	else:
-		__towers_on_map.append(new_tower)
+		__towers_awaiting_selection.append(new_tower)
 	
 
 
@@ -660,11 +670,70 @@ func _create_projectile_boundary_area():
 	# Set the shape points
 	new_shape.points = [top_left_corner, top_right_corner, bottom_right_corner, bottom_left_corner]
 
+## Removes the tower from the list of towers awaiting selection and adds it to the list of towers on the map.
+## This method then moves the converts remaining towers awaiting selection (if any exist) to barricades.
+func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
+	# Ensure the tower is in the list of towers awaiting selection
+	assert(__towers_awaiting_selection.has(towerAwaitingSelection), "Tower not found in list of towers awaiting selection")
+	# Remove the tower from the list of towers awaiting selection
+	__towers_awaiting_selection.erase(towerAwaitingSelection)
+	# Add the tower to the list of towers on the map
+	__towers_on_map.append(towerAwaitingSelection)
+	# Set the tower's state to built
+	towerAwaitingSelection.switch_state(Tower.States.BUILT)
+
+	# Convert remaining towers awaiting selection to barricades
+	for tower in __towers_awaiting_selection:
+		# Convert the tower to a barricade
+		self.convert_tower_to_barricade(tower)
+	# Clear the list of towers awaiting selection
+	__towers_awaiting_selection.clear()
 
 
+
+## Called when an upgrade tower exists on the towers awaiting selection list.
+func keep_upgrade_tower_from_towers_awaiting_selection(towerAwaitingSelection: Tower, upgradeTowerID: TowerConstants.TowerIDs):
+	# Ensure the tower is in the list of towers awaiting selection
+	assert(__towers_awaiting_selection.has(towerAwaitingSelection), "Tower not found in list of towers awaiting selection")
+	# Remove the tower from the list of towers awaiting selection
+	__towers_awaiting_selection.erase(towerAwaitingSelection)
+
+	# Capture the tower's placement grid coordinate
+	var tower_placement_grid_coord: Vector2i = towerAwaitingSelection.get_placement_grid_coordinate()
+	# Capture the tower's global position
+	var tower_global_position: Vector2 = towerAwaitingSelection.global_position
+
+	# Remove towers from map scene
+	towerAwaitingSelection.queue_free()
+	
+	# Create new tower based on provided tower ID
+	var upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
+	add_child(upgrade_tower)
+
+	# Set upgrade tower placement grid coordinate and global position
+	upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
+	upgrade_tower.global_position = tower_global_position
+	
+	# Set the tower's state to built
+	upgrade_tower.switch_state(Tower.States.BUILT)
+	
+	# Add the tower to the list of towers on the map
+	__towers_on_map.append(upgrade_tower)
+
+	# Convert all towers awaiting selection to barricades
+	for tower in __towers_awaiting_selection:
+		# Convert the tower to a barricade
+		self.convert_tower_to_barricade(tower)
+	# Clear the list of towers awaiting selection
+	__towers_awaiting_selection.clear()
+
+## Called when a tower selection area is entered by the mouse.
+## This method sets the __hovering_over_tower variable to the tower that is being hovered over.
 func _on_tower_selection_area_mouse_entered(tower: Tower):
 	__hovering_over_tower = tower
 
+## Called when the mouse exits a tower selection area.
+## This method sets the __hovering_over_tower variable to null, indicating that no tower is currently being hovered over.
 func _on_tower_selection_area_mouse_exited():
 	__hovering_over_tower = null
 
@@ -728,4 +797,3 @@ func get_duplicates(arr: Array) -> Array:
 		if counts[item] > 1:
 			duplicates.append(item)
 	return duplicates
-

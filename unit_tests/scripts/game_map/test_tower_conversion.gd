@@ -74,6 +74,7 @@ func test_convert_tower_to_barricade():
 
 	# Ensure tower and barricade lists are empty
 	assert_eq(test_map.__towers_on_map, [])
+	assert_eq(test_map.__towers_awaiting_selection, [])
 	assert_eq(test_map.__barricades_on_map, [])
 
 	# Place non-barricade tower
@@ -82,20 +83,22 @@ func test_convert_tower_to_barricade():
 	test_map.place_tower(test_placement_grid_coord)
 
 	# Ensure tower was properly placed.
-	assert_eq(len(test_map.__towers_on_map), 1)
-	assert_true(test_map.__towers_on_map[0] is Tower)
-	var test_built_tower: Tower = test_map.__towers_on_map[0]
+	assert_eq(len(test_map.__towers_awaiting_selection), 1)
+	assert_true(test_map.__towers_awaiting_selection[0] is Tower)
+	var test_built_tower: Tower = test_map.__towers_awaiting_selection[0]
 	assert_eq(test_built_tower.TOWER_ID, TowerConstants.TowerIDs.BISMUTH_LVL_1)
 	assert_eq(test_map.__barricades_on_map, [])
+	assert_eq(test_map.__towers_on_map, [])
 
 	# Convert tower to barricade
 	test_map.convert_tower_to_barricade(test_built_tower)
 
 	# Ensure barricade is in list
+	assert_eq(test_map.__towers_on_map, [])
 	assert_eq(len(test_map.__barricades_on_map), 1)
 	assert_true(test_map.__barricades_on_map[0] is Tower)
 	var test_converted_barricade: Tower = test_map.__barricades_on_map[0]
-	assert_eq(test_map.__towers_on_map, [])
+	assert_eq(test_map.__towers_awaiting_selection, [])
 	assert_eq(test_converted_barricade.TOWER_ID, TowerConstants.TowerIDs.BARRICADE)
 
 	# Clean up

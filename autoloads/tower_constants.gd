@@ -25,7 +25,12 @@ enum UpgradeTowerIDs {
     TOMBSTONE_LVL_1 = TowerIDs.TOMBSTONE_LVL_1,
 }
 
-var BUILD_TOWER_PRELOADS: Dictionary = {
+var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
+    UpgradeTowerIDs.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_level_1.tscn")
+}
+
+
+var BUILD_TOWER_PRELOADS: Dictionary[BuildTowerIDs, PackedScene] = {
     BuildTowerIDs.BARRICADE: load("res://towers/barricade/tower_barricade.tscn"),
     BuildTowerIDs.BLACK_MARBLE_LVL_1: load("res://towers/buildable_towers/black_marble/level_1/black_marble_lvl_1.tscn"),
     BuildTowerIDs.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/black_marble_lvl_2.tscn"),

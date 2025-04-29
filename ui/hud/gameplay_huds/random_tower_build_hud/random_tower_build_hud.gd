@@ -11,8 +11,6 @@ var __selected_tower: Tower
 var __max_towers_per_turn = 5
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
-## Coordinates of the towers that have been placed this turn
-var __turn_towers: Array[Tower] = []
 
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 
@@ -71,7 +69,7 @@ func _create_tower_upgrade_manager():
 ## Enable visibility of multiple tower buttons.
 func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower]):
 	# Hide all tower buttons first
-	TOWER_PROPERTIES_CONTAINER.hide_all_tower_buttons()
+	TOWER_UPGRADES_CONTAINER.hide_all_tower_buttons()
 	# Capture selected tower id
 	var selected_tower_id: TowerConstants.TowerIDs = selectedTower.TOWER_ID
 	# Enable visibility of the towers that can be upgraded
@@ -81,7 +79,7 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 		# Only enable visibility of the tower upgrade container if at least one tower can be upgraded
 		if can_upgrade:
 			TOWER_UPGRADES_CONTAINER.visible = true
-		TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = can_upgrade
+			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
 
 # ***************
@@ -147,15 +145,18 @@ func _on_tower_selected(tower: Tower):
 		# Increase transparency of tower sprite and awaiting selection animation
 		tower.AWAITING_SELECTION_ANIMATION.modulate.a = 1.0
 		tower.TOWER_SPRITE.modulate.a = 1.0
+		# Show upgrade tower buttons based on towers awaiting selection
+		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_awaiting_selection())
 		return
 	
-	# Handle tower upgrade container visibility
-	_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
+	# Handle built tower selection
+	if __selected_tower.get_state() == Tower.States.BUILT:
+		# Handle tower upgrade container visibility
+		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
 
 
 func _on_tower_placed(tower: Tower):
 	__current_turn_tower_count += 1
-	__turn_towers.append(tower)
 	# If the max number of towers has been placed, exit build mode.
 	if __current_turn_tower_count == __max_towers_per_turn:
 		BUILD_RANDOM_TOWER_CONTAINER.visible = false
@@ -171,8 +172,6 @@ func _on_tower_placed(tower: Tower):
 # =============================================================================================================
 
 func _on_keep_tower_button_pressed():
-	# Disqualifiers
-	assert(__turn_towers.has(__selected_tower), "Selected tower is not in the turn towers list")
 
 	# Hide keep tower button
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
@@ -180,19 +179,8 @@ func _on_keep_tower_button_pressed():
 	# Hide build random tower hbox
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
 
-	# Remove the selected tower from the turn towers list
-	__turn_towers.erase(__selected_tower)
-
-	# Switch the state of the selected tower to built
-	__selected_tower.switch_state(__selected_tower.States.BUILT)
-
-	# Convert rest of the turn towers to barricades
-	for tower in __turn_towers:
-		GAME_MAP.convert_tower_to_barricade(tower)
 	
 	# Switch the game map state to navigation mode
 	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
 
-	# Clear the turn values
-	__turn_towers.clear()
 	__current_turn_tower_count = 0
