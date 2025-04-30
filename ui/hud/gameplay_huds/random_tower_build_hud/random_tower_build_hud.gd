@@ -1,17 +1,25 @@
 extends CanvasLayer
 class_name RandomTowerBuildHUD
 
+# EXPORTS
 @export var BUILD_RANDOM_TOWER_CONTAINER: BuildRandomTowerContainer
 @export var GAME_MAP: GameMap
 @export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
 
+
+@onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
+}
+
+# LOCALS
 var __selected_tower: Tower
 ## Number of towers that can be placed per turn
 var __max_towers_per_turn = 5
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
 
+# CONSTANTS
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 
 # *****************
@@ -32,17 +40,25 @@ func _ready():
 ## Connect signals from all components to relevant handler methods on ready.
 func _connect_all_component_signals():
 	# Build random tower hbox
-	_connect_build_random_tower_hbox_signals()
+	_connect_build_random_tower_component_signals()
 	# Game map
 	_connect_game_map_signals()
 	# Tower properties hbox
 	_connect_tower_properties_hbox_signals()
+	# Tower upgrades container
+	_connect_tower_upgrades_signals()
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
-func _connect_build_random_tower_hbox_signals():
+func _connect_build_random_tower_component_signals():
 	# Connect the button signals to the appropriate methods
 	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.pressed.connect(_on_build_random_tower_button_pressed)
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.pressed.connect(_on_exit_build_mode_button_pressed)
+
+func _connect_tower_upgrades_signals():
+	# Connect the button signals to the appropriate methods
+	for button in TOWER_UPGRADES_CONTAINER.ALL_TOWER_BUTTONS:
+		# Retrieve the callback function from the dictionary using the button as the key.
+		button.pressed.connect(TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
 
 ## Connects signals for game map
 func _connect_game_map_signals():
@@ -81,13 +97,26 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 			TOWER_UPGRADES_CONTAINER.visible = true
 			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
-
+func _handle_upgrade_from_towers_on_map(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	# Handle towers awaiting selection
+	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
+		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
+		# Switch the game map state to navigation mode
+		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+		return
+	
+	# Handle towers on map
+	if __selected_tower.get_state() == Tower.States.BUILT:
+		GAME_MAP.upgrade_from_towers_on_map(__selected_tower, upgradeTowerID)
+		# Switch the game map state to navigation mode
+		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+		return
 
 # ***************
 # SIGNAL HANDLERS
 # ***************
 #
-#                                        | Build Random Tower HBox |
+#                                        Build Random Tower Container |
 # =============================================================================================================
 ## Handle build random tower button pressed signal
 func _on_build_random_tower_button_pressed():
@@ -109,7 +138,7 @@ func _on_exit_build_mode_button_pressed():
 	# Hide exit build mode button
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Switch to navigation mode
-	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
+	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
 #                                              | Game Map |
 # =============================================================================================================
@@ -156,20 +185,20 @@ func _on_tower_selected(tower: Tower):
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
 
 
-func _on_tower_placed(tower: Tower):
+func _on_tower_placed(_tower: Tower):
 	__current_turn_tower_count += 1
 	# If the max number of towers has been placed, exit build mode.
 	if __current_turn_tower_count == __max_towers_per_turn:
 		BUILD_RANDOM_TOWER_CONTAINER.visible = false
 		GAME_MAP.clear_build_tower_values()
-		GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
+		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 	
 	# Avoid tower preload staying the same when a tower is placed, the max nummber of turn towers has
 	# not been reached and the game map is still in build mode.
 	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
 
 
-#                                        | Tower Properties HBox |
+#                                      | Tower Properties Container |
 # =============================================================================================================
 
 func _on_keep_tower_button_pressed():
@@ -185,6 +214,13 @@ func _on_keep_tower_button_pressed():
 	GAME_MAP.keep_built_tower_awaiting_selection(__selected_tower)
 	
 	# Switch the game map state to navigation mode
-	GAME_MAP.switch_states(GAME_MAP.States.NAVIGATION_MODE)
+	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
 	__current_turn_tower_count = 0
+
+
+#                                        | Upgrade Tower Container |
+# =============================================================================================================
+
+func _on_tombstone_button_pressed():
+	_handle_upgrade_from_towers_on_map(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)

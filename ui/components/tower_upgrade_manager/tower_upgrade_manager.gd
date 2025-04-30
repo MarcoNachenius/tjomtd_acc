@@ -49,12 +49,3 @@ func can_upgrade_to_tower(towerID: TowerConstants.TowerIDs, towerArray: Array[To
 	# If we made it here, all requirements have been met
 	return true
 
-
-func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
-	var tower_id_array: Array[TowerConstants.TowerIDs] = []
-	# Iterate through the tower count dictionary
-	for tower_id in tower_count_dict.keys():
-		# Add the tower id to the array the number of times specified in the count
-		for i in range(tower_count_dict[tower_id]):
-			tower_id_array.append(tower_id)
-	return tower_id_array

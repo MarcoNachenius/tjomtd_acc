@@ -123,29 +123,4 @@ func test_tower_count_dict_two_different_tower_types():
 	# Clean up upgrade manager
 	tower_upgrade_manager.queue_free()
 
-func test_tower_count_dict_to_tower_id_array():
-	# Create test tower count dictionary
-	var test_tower_count_dict: Dictionary[TowerConstants.TowerIDs, int] = {
-		TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1: 2,
-		TowerConstants.TowerIDs.BISMUTH_LVL_1: 1
-	}
 
-	# Create expected tower id array
-	var expected_tower_id_array: Array[TowerConstants.TowerIDs] = [
-		TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1,
-		TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1,
-		TowerConstants.TowerIDs.BISMUTH_LVL_1
-	]
-
-	# Create test instance of upgrade manager
-	var tower_upgrade_manager: TowerUpgradeManager = TowerUpgradeManager.new()
-	add_child_autofree(tower_upgrade_manager)
-
-	# Call the function to test
-	var calculated_tower_id_array: Array[TowerConstants.TowerIDs] = tower_upgrade_manager.tower_count_dict_to_tower_id_array(test_tower_count_dict)
-
-	# Check that the calculated tower id array is equal to the expected tower id array
-	assert_eq(calculated_tower_id_array, expected_tower_id_array, "Expected tower id array to be [BLACK_MARBLE_LVL_1, BLACK_MARBLE_LVL_1, BISMUTH_LVL_1]")
-
-	# Clean up upgrade manager
-	tower_upgrade_manager.queue_free()

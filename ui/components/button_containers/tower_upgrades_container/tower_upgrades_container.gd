@@ -9,31 +9,19 @@ class_name TowerUpgradesContainer
 	TOMBSTONE_BUTTON
 ]
 
-@onready var TOWER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
-	TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
-}
-
 @onready var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
 	TowerConstants.TowerIDs.TOMBSTONE_LVL_1: TOMBSTONE_BUTTON,
 }
-
-# PRIVATE METHODS
-# ===============
 
 func _ready():
 	# Ensure all tower button exports have been assigned.
 	_validate_tower_button_exports()
 
+# PRIVATE METHODS
+# ===============
 ## Ensures that all tower button exports have been assigned.
 func _validate_tower_button_exports():
 	assert(TOMBSTONE_BUTTON, "TOMBSTONE_BUTTON is not assigned in the inspector.")
-
-## Connect all tower button signals to their respective callbacks.
-func _connect_tower_button_signals():
-	for button in ALL_TOWER_BUTTONS:
-		# Retrieve the callback function from the dictionary using the button as the key.
-		button.pressed.connect(TOWER_BUTTON_CALLBACKS[button])
-
 
 # PUBLIC METHODS
 # ==============
@@ -42,12 +30,3 @@ func hide_all_tower_buttons():
 	for button in ALL_TOWER_BUTTONS:
 		button.visible = false
 
-
-
-
-#                                 | TOWER BUTTONS |
-# ====================================================================================================
-
-## WIP
-func _on_tombstone_button_pressed():
-	pass
