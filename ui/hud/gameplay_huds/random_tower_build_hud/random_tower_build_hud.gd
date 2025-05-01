@@ -6,11 +6,18 @@ class_name RandomTowerBuildHUD
 @export var GAME_MAP: GameMap
 @export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
+@export var AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 
-
+# CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
 }
+@onready var AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+	AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
+	AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
+}
+
+
 
 # LOCALS
 var __selected_tower: Tower
@@ -32,6 +39,8 @@ func _ready():
 	TOWER_PROPERTIES_CONTAINER.visible = false
 	# Hide tower upgrades container
 	TOWER_UPGRADES_CONTAINER.visible = false
+	# Hide awaiting selection upgrade towers container
+	AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.visible = false
 
 
 # ****************
@@ -47,6 +56,8 @@ func _connect_all_component_signals():
 	_connect_tower_properties_hbox_signals()
 	# Tower upgrades container
 	_connect_tower_upgrades_signals()
+	# Awaiting selection upgrade towers container
+	_connect_awaiting_selection_upgrade_towers_signals()
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_component_signals():
@@ -73,6 +84,11 @@ func _connect_game_map_signals():
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
+
+func _connect_awaiting_selection_upgrade_towers_signals():
+	for button in AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
+		# Retrieve the callback function from the dictionary using the button as the key.
+		button.pressed.connect(AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
 
 func _create_tower_upgrade_manager():
 	# Create a new instance of the tower upgrade manager
@@ -112,9 +128,9 @@ func _handle_upgrade_from_towers_on_map(upgradeTowerID: TowerConstants.UpgradeTo
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 		return
 
-# ***************
-# SIGNAL HANDLERS
-# ***************
+# ****************
+# SIGNAL CALLBACKS
+# ****************
 #
 #                                        Build Random Tower Container |
 # =============================================================================================================
@@ -224,3 +240,13 @@ func _on_keep_tower_button_pressed():
 
 func _on_tombstone_button_pressed():
 	_handle_upgrade_from_towers_on_map(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+
+
+#                                 | Awaiting Selection Upgrade Tower Container |
+# =============================================================================================================
+
+func _on_black_marble_level_2_button_pressed():
+	pass
+
+func _on_black_marble_level_3_button_pressed():
+	pass

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ldkukd2m1p5u"]
+
+[ext_resource type="Script" uid="uid://lfbebd88mhcq" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.gd" id="1_3sk7d"]
+
+[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3sk7d")
+BLACK_MARBLE_LEVEL_2_BUTTON = NodePath("BlackMarbleLvl2Button")
+BLACK_MARBLE_LEVEL_3_BUTTON = NodePath("BlackMarbleLvl3Button")
+
+[node name="BlackMarbleLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 2"
+
+[node name="BlackMarbleLvl3Button" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 3"

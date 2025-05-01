@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8u365aao1ox5"]
+[gd_scene load_steps=6 format=3 uid="uid://c8u365aao1ox5"]
 
 [ext_resource type="Script" uid="uid://tlx4dpamwe4b" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.gd" id="1_kyn4q"]
 [ext_resource type="PackedScene" uid="uid://cpy2hm61yp3tb" path="res://ui/components/button_containers/build_random_tower_container/build_random_tower_container.tscn" id="2_ntkvv"]
 [ext_resource type="PackedScene" uid="uid://cb2sqbhyw2ing" path="res://ui/components/button_containers/tower_properties_container/tower_properties_container.tscn" id="3_puoe6"]
 [ext_resource type="PackedScene" uid="uid://24wnsdvwnkv0" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.tscn" id="4_im64j"]
+[ext_resource type="PackedScene" uid="uid://ldkukd2m1p5u" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.tscn" id="5_x72he"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER")]
 script = ExtResource("1_kyn4q")
 BUILD_RANDOM_TOWER_CONTAINER = NodePath("BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")
 TOWER_UPGRADES_CONTAINER = NodePath("TowerCommands/TowerUpgradesContainer")
+AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeTowers")
 
 [node name="BuildRandomTowerContainer" parent="." instance=ExtResource("2_ntkvv")]
 anchors_preset = 6
@@ -40,4 +42,7 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="TowerUpgradesContainer" parent="TowerCommands" instance=ExtResource("4_im64j")]
+layout_mode = 2
+
+[node name="AwaitingSelectionUpgradeTowers" parent="TowerCommands" instance=ExtResource("5_x72he")]
 layout_mode = 2
