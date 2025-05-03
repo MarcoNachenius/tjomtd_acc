@@ -6,18 +6,19 @@ class_name RandomTowerBuildHUD
 @export var GAME_MAP: GameMap
 @export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
-@export var AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
+@export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
 }
-@onready var AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
-	AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
-	AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
+@onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
 }
 
-
+# CONSTANTS - Invariable components
+var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 
 # LOCALS
 var __selected_tower: Tower
@@ -26,8 +27,7 @@ var __max_towers_per_turn = 5
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
 
-# CONSTANTS
-var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
+
 
 # *****************
 # INHERITED METHODS
@@ -40,7 +40,7 @@ func _ready():
 	# Hide tower upgrades container
 	TOWER_UPGRADES_CONTAINER.visible = false
 	# Hide awaiting selection upgrade towers container
-	AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.visible = false
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 
 
 # ****************
@@ -86,9 +86,9 @@ func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
 
 func _connect_awaiting_selection_upgrade_towers_signals():
-	for button in AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
+	for button in AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
-		button.pressed.connect(AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
+		button.pressed.connect(AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
 
 func _create_tower_upgrade_manager():
 	# Create a new instance of the tower upgrade manager
@@ -113,7 +113,8 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 			TOWER_UPGRADES_CONTAINER.visible = true
 			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
-func _handle_upgrade_from_towers_on_map(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+## Handles visibility of viable upgrade buttons for the selected tower.
+func _handle_built_tower_upgrade_container_visibility(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
 		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
@@ -127,6 +128,17 @@ func _handle_upgrade_from_towers_on_map(upgradeTowerID: TowerConstants.UpgradeTo
 		# Switch the game map state to navigation mode
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 		return
+
+## INCOMPLETE
+## Handles visibility of viable upgrade buttons if the selected tower is awaiting selection.
+## Automatically ignores towers that are not awaiting selection.
+func _handle_compound_upgrade_for_towers_awaiting_selection():
+	# Ignore towers that are not awaiting selection
+	if __selected_tower.get_state() != Tower.States.AWAITING_SELECTION:
+		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+		return
+	
+	# Fetch possible compound upgrade tower IDs
 
 # ****************
 # SIGNAL CALLBACKS
@@ -199,6 +211,9 @@ func _on_tower_selected(tower: Tower):
 	if __selected_tower.get_state() == Tower.States.BUILT:
 		# Handle tower upgrade container visibility
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
+	
+	# Handle compound tower upgrades.
+	_handle_compound_upgrade_for_towers_awaiting_selection()
 
 
 func _on_tower_placed(_tower: Tower):
@@ -239,7 +254,7 @@ func _on_keep_tower_button_pressed():
 # =============================================================================================================
 
 func _on_tombstone_button_pressed():
-	_handle_upgrade_from_towers_on_map(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+	_handle_built_tower_upgrade_container_visibility(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
 
 
 #                                 | Awaiting Selection Upgrade Tower Container |

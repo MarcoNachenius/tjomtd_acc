@@ -71,7 +71,6 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.BISMUTH_LVL_1: BISMUTH_LVL_1_REQUIRES_TOWERS,
     TowerIDs.LARIMAR_LVL_1: LARIMAR_LVL_1_REQUIRES_TOWERS,
     TowerIDs.TOMBSTONE_LVL_1: TOMBSTONE_LVL_1_REQUIRES_TOWERS,
-    TowerIDs.TEST_BUILD_TOWER: TEST_BUILD_TOWER_REQUIRES_TOWERS,
 }
 
 # LOADS
@@ -102,4 +101,31 @@ const TOMBSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.BISMUTH_LVL_1: 1,
     TowerIDs.LARIMAR_LVL_1: 1
 }
-const TEST_BUILD_TOWER_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+
+
+#                             | AWAITING SELECTION UPGRADE |
+# ==========================================================================================
+## Find dict referrencing the amount of towers needed to place a compound upgrade tower
+const AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, Dictionary] = {
+    TowerIDs.BLACK_MARBLE_LVL_2: BLACK_MARBLE_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
+    TowerIDs.BLACK_MARBLE_LVL_3: BLACK_MARBLE_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS
+}
+
+## Find array referrencing compound upgrade towers to which a tower awaiting selection can upgrade.  
+const AWAITING_SELECTION_COMPOUND_UPGRADES_INTO: Dictionary[TowerIDs, Array] = {
+    TowerIDs.BLACK_MARBLE_LVL_1: [TowerIDs.BLACK_MARBLE_LVL_2, TowerIDs.BLACK_MARBLE_LVL_3],
+    TowerIDs.BLACK_MARBLE_LVL_2: [TowerIDs.BLACK_MARBLE_LVL_3],
+    TowerIDs.BISMUTH_LVL_1: [],
+    TowerIDs.LARIMAR_LVL_1: [],
+}
+
+# ************
+# BLACK MARBLE
+# ************
+const BLACK_MARBLE_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.BLACK_MARBLE_LVL_1: 2
+}
+const BLACK_MARBLE_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.BLACK_MARBLE_LVL_1: 3,
+    TowerIDs.BLACK_MARBLE_LVL_2: 2
+}

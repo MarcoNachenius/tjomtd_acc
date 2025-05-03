@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://24wnsdvwnkv0" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.tscn" id="4_im64j"]
 [ext_resource type="PackedScene" uid="uid://ldkukd2m1p5u" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.tscn" id="5_x72he"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER")]
 script = ExtResource("1_kyn4q")
 BUILD_RANDOM_TOWER_CONTAINER = NodePath("BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")
 TOWER_UPGRADES_CONTAINER = NodePath("TowerCommands/TowerUpgradesContainer")
-AWAITING_SELECTION_UPGRADE_TOWERS_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeTowers")
+AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeTowers")
 
 [node name="BuildRandomTowerContainer" parent="." instance=ExtResource("2_ntkvv")]
 anchors_preset = 6

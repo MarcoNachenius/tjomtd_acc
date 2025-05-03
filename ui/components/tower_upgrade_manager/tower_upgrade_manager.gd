@@ -49,3 +49,38 @@ func can_upgrade_to_tower(towerID: TowerConstants.TowerIDs, towerArray: Array[To
 	# If we made it here, all requirements have been met
 	return true
 
+## INCOMPLETE Returns an array of tower IDs that represent viable options for compound tower upgrades.
+func viable_compound_upgrade_tower_ids(selectedTowerID: TowerConstants.TowerIDs, awaitingSelectionTowerCount: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
+	# Ensure selected tower ID is valid
+	assert(TowerConstants.AWAITING_SELECTION_COMPOUND_UPGRADES_INTO.keys().has(selectedTowerID))
+	
+	# Create return value holder
+	var viable_tower_ids: Array[TowerConstants.TowerIDs] = []
+	
+	# Fetch candidates for compound tower upgrades
+	var compound_upgrade_candidates: Array = TowerConstants.AWAITING_SELECTION_COMPOUND_UPGRADES_INTO[selectedTowerID]
+
+	# Iterate through tower IDs into which the selection tower may upgrade 
+	for upgrades_into_tower_id in compound_upgrade_candidates:
+		# Fetch tower requirements for upgrade tower ID
+		var upgrade_tower_requirements: Dictionary[TowerConstants.TowerIDs, int] = TowerConstants.AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS[upgrades_into_tower_id]
+		
+		# Iterate through every tower type of required towers for compound upgrade
+		for required_tower_id in upgrade_tower_requirements.keys():
+			# Skip when required tower id is not present in towers awaiting selection
+			if !awaitingSelectionTowerCount.keys().has(required_tower_id):
+				continue
+			
+			# Fetch number of placed towers IDs awaiting selection
+			var num_of_placed_towers: int = awaitingSelectionTowerCount[required_tower_id]
+			# Fetch required number of towers IDs for upgrade
+			var required_num_of_towers: int = upgrade_tower_requirements[required_tower_id]
+
+			# Skip when there are not enough towers placed to qualify for compound upgrade
+			if num_of_placed_towers < required_num_of_towers:
+				continue
+			
+			# Assumes all requirements have been met such that the upgrade tower is a valid candidate
+			viable_tower_ids.append(upgrades_into_tower_id)
+	
+	return viable_tower_ids
