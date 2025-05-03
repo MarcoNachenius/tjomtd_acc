@@ -109,8 +109,8 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 			TOWER_UPGRADES_CONTAINER.visible = true
 			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
-## Handles visibility of viable upgrade buttons for the selected tower.
-func _handle_built_tower_upgrade_container_visibility(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	_hide_containers_on_tower_kept()
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
 		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
@@ -125,7 +125,12 @@ func _handle_built_tower_upgrade_container_visibility(upgradeTowerID: TowerConst
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 		return
 
-## INCOMPLETE
+func _handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
+	_hide_containers_on_tower_kept()
+	GAME_MAP.keep_compound_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
+	# Switch the game map state to navigation mode
+	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
 ## Handles visibility of viable upgrade buttons if the selected tower is awaiting selection.
 ## Automatically ignores towers that are not awaiting selection.
 func _handle_compound_upgrade_for_towers_awaiting_selection():
@@ -159,6 +164,15 @@ func _handle_compound_upgrade_for_towers_awaiting_selection():
 
 ## Controls the visibility of containers when the HUD is initiated
 func _handle_initial_container_visibility():
+	# Hide tower properties hbox
+	TOWER_PROPERTIES_CONTAINER.visible = false
+	# Hide tower upgrades container
+	TOWER_UPGRADES_CONTAINER.visible = false
+	# Hide awaiting selection upgrade towers container
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+
+## Ensures that all containers before a wave starts are properly hidden
+func _hide_containers_on_tower_kept():
 	# Hide tower properties hbox
 	TOWER_PROPERTIES_CONTAINER.visible = false
 	# Hide tower upgrades container
@@ -262,11 +276,7 @@ func _on_tower_placed(_tower: Tower):
 
 func _on_keep_tower_button_pressed():
 
-	# Hide keep tower button
-	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
-
-	# Hide build random tower hbox
-	BUILD_RANDOM_TOWER_CONTAINER.visible = false
+	_hide_containers_on_tower_kept()
 
 	# Move the selected tower to the towers on map list
 	# and convert the rest of the towers to barricades.
@@ -282,14 +292,14 @@ func _on_keep_tower_button_pressed():
 # =============================================================================================================
 
 func _on_tombstone_button_pressed():
-	_handle_built_tower_upgrade_container_visibility(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
 
 
 #                                 | Awaiting Selection Upgrade Tower Container |
 # =============================================================================================================
 
 func _on_black_marble_level_2_button_pressed():
-	pass
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2)
 
 func _on_black_marble_level_3_button_pressed():
-	pass
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3)

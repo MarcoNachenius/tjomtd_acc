@@ -742,24 +742,61 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 	__towers_on_map.append(new_upgrade_tower)
 
 ## Called when an upgrade tower exists on the towers awaiting selection list.
-func keep_upgrade_tower_from_towers_awaiting_selection(towerAwaitingSelection: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	# Ensure the upgrade tower ID is valid
 	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
 	# Ensure the tower is in the list of towers awaiting selection
-	assert(__towers_awaiting_selection.has(towerAwaitingSelection), "Tower not found in list of towers awaiting selection")
+	assert(__towers_awaiting_selection.has(selectedTower), "Tower not found in list of towers awaiting selection")
 	# Remove the tower from the list of towers awaiting selection
-	__towers_awaiting_selection.erase(towerAwaitingSelection)
+	__towers_awaiting_selection.erase(selectedTower)
 
 	# Capture the tower's placement grid coordinate
-	var tower_placement_grid_coord: Vector2i = towerAwaitingSelection.get_placement_grid_coordinate()
+	var tower_placement_grid_coord: Vector2i = selectedTower.get_placement_grid_coordinate()
 	# Capture the tower's global position
-	var tower_global_position: Vector2 = towerAwaitingSelection.global_position
+	var tower_global_position: Vector2 = selectedTower.global_position
 
 	# Remove towers from map scene
-	towerAwaitingSelection.queue_free()
+	selectedTower.queue_free()
 	
 	# Create new tower based on provided tower ID
 	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
+	add_child(new_upgrade_tower)
+
+	# Set upgrade tower placement grid coordinate and global position
+	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
+	new_upgrade_tower.global_position = tower_global_position
+	
+	# Set the tower's state to built
+	new_upgrade_tower.switch_state(Tower.States.BUILT)
+	
+	# Add the tower to the list of towers on the map
+	__towers_on_map.append(new_upgrade_tower)
+
+	# Convert all towers awaiting selection to barricades
+	for tower in __towers_awaiting_selection.duplicate():
+		# Convert the tower to a barricade
+		convert_tower_to_barricade(tower)
+	# Clear the list of towers awaiting selection
+	__towers_awaiting_selection.clear()
+
+
+## Called when a copound upgrade tower exists on the towers awaiting selection list.
+func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, compoundUpgradeTowerID: TowerConstants.TowerIDs):
+	# Ensure the tower is in the list of towers awaiting selection
+	assert(__towers_awaiting_selection.has(selectedTower), "Tower not found in list of towers awaiting selection")
+	# Remove the tower from the list of towers awaiting selection
+	__towers_awaiting_selection.erase(selectedTower)
+
+	# Capture the tower's placement grid coordinate
+	var tower_placement_grid_coord: Vector2i = selectedTower.get_placement_grid_coordinate()
+	# Capture the tower's global position
+	var tower_global_position: Vector2 = selectedTower.global_position
+
+	# Remove towers from map scene
+	selectedTower.queue_free()
+	
+	# Create new tower based on provided tower ID
+	var new_upgrade_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[compoundUpgradeTowerID].instantiate()
 	add_child(new_upgrade_tower)
 
 	# Set upgrade tower placement grid coordinate and global position
