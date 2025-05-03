@@ -8,7 +8,7 @@ var __built_tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]
 
 ## Returns a dictionary with the count of EVERY tower of the provided array, regardless of tower state.
 ## The key is the id of the tower, the value is the count.
-func _tower_count_dict(Towers: Array[Tower]) -> Dictionary[TowerConstants.TowerIDs, int]:
+func tower_count_dict(Towers: Array[Tower]) -> Dictionary[TowerConstants.TowerIDs, int]:
 	var count_dict: Dictionary[TowerConstants.TowerIDs, int] = {}
 	# Increment the count of a tower by 1 if it exists, or add new tower id and set it to 1 if it doesn't.
 	for tower in Towers:
@@ -25,7 +25,7 @@ func set_game_map(game_map: GameMap) -> void:
 ## Called when a tower is placed on the game map.
 func _on_game_map_tower_placed(_tower: Tower) -> void:
 	# Update built tower count dictionary
-	__built_tower_count_dict = _tower_count_dict(GAME_MAP.get_towers_on_map())
+	__built_tower_count_dict = tower_count_dict(GAME_MAP.get_towers_on_map())
 
 # PUBLIC METHODS
 
@@ -33,17 +33,17 @@ func _on_game_map_tower_placed(_tower: Tower) -> void:
 ## the provided array of towers. Does not consider the state of the towers.
 func can_upgrade_to_tower(towerID: TowerConstants.TowerIDs, towerArray: Array[Tower]) -> bool:
 	# Create a dictionary of the count of each tower in the array
-	var tower_count_dict: Dictionary[TowerConstants.TowerIDs, int] = _tower_count_dict(towerArray)
+	var tower_count: Dictionary[TowerConstants.TowerIDs, int] = tower_count_dict(towerArray)
 	# Get dictionary of the required towers to upgrade
 	var requires_towers_dict: Dictionary[TowerConstants.TowerIDs, int] = TowerConstants.REQUIRES_TOWERS[towerID]
 
 	# Iterate through requires towers dictionary
 	for required_tower_id in requires_towers_dict.keys():
 		# Return false if the required tower is not in the tower count dictionary
-		if !tower_count_dict.has(required_tower_id):
+		if !tower_count.has(required_tower_id):
 			return false
 		# Return false if the required tower count is less than the required amount in the requires towers dictionary
-		if tower_count_dict[required_tower_id] < requires_towers_dict[required_tower_id]:
+		if tower_count[required_tower_id] < requires_towers_dict[required_tower_id]:
 			return false
 
 	# If we made it here, all requirements have been met

@@ -10,7 +10,7 @@ const COLLISION_SHAPE_PRECISION: int = 16
 # ==============
 const STARTING_LIVES: int = 20
 const STARTING_BALANCE: int = 0
-
+const MAX_PLACEABLE_TOWERS_PER_TURN = 5
 
 # CAMERA
 # ======

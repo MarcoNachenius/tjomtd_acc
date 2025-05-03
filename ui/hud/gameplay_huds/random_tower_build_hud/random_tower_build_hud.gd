@@ -23,24 +23,20 @@ var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 # LOCALS
 var __selected_tower: Tower
 ## Number of towers that can be placed per turn
-var __max_towers_per_turn = 5
+var __max_towers_per_turn = GameConstants.MAX_PLACEABLE_TOWERS_PER_TURN
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
-
-
 
 # *****************
 # INHERITED METHODS
 # *****************
 func _ready():
+	# SIGNALS
 	_connect_all_component_signals()
+	# TOWER UPGRADE MANAGER
 	_create_tower_upgrade_manager()
-	# Hide tower properties hbox
-	TOWER_PROPERTIES_CONTAINER.visible = false
-	# Hide tower upgrades container
-	TOWER_UPGRADES_CONTAINER.visible = false
-	# Hide awaiting selection upgrade towers container
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+	# CONTAINER VISIBILITY
+	_handle_initial_container_visibility()
 
 
 # ****************
@@ -57,7 +53,7 @@ func _connect_all_component_signals():
 	# Tower upgrades container
 	_connect_tower_upgrades_signals()
 	# Awaiting selection upgrade towers container
-	_connect_awaiting_selection_upgrade_towers_signals()
+	_connect_awaiting_selection_compound_upgrade_towers_signals()
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_component_signals():
@@ -85,7 +81,7 @@ func _connect_game_map_signals():
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
 
-func _connect_awaiting_selection_upgrade_towers_signals():
+func _connect_awaiting_selection_compound_upgrade_towers_signals():
 	for button in AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
@@ -138,7 +134,37 @@ func _handle_compound_upgrade_for_towers_awaiting_selection():
 		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 		return
 	
-	# Fetch possible compound upgrade tower IDs
+	# Create selected tower id
+	var selected_tower_id: TowerConstants.TowerIDs = __selected_tower.TOWER_ID
+
+	# Create count dict for towers awaiting selection
+	var awaiting_selection_tower_count: Dictionary[TowerConstants.TowerIDs, int] = TOWER_UPGRADE_MANAGER.tower_count_dict(GAME_MAP.get_towers_awaiting_selection())
+
+	# Create list viable compound upgrade tower IDs
+	var viable_compound_upgrade_tower_ids: Array[TowerConstants.TowerIDs] = TOWER_UPGRADE_MANAGER.viable_compound_upgrade_tower_ids(selected_tower_id, awaiting_selection_tower_count)
+
+	# Handle situation where ther are no vaible compound upgrade towers
+	if viable_compound_upgrade_tower_ids.is_empty():
+		# Hide compound tower upgrade container
+		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+		return
+	
+	# Ensure blank compound upgrades container is visible before its button visibility is handled
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = true
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.hide_all_buttons()
+
+	# Show tower buttons corresponding to viable compound upgrade tower IDs
+	for viable_tower_id in viable_compound_upgrade_tower_ids:
+		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.TOWER_ID_TO_BUTTON_DICT[viable_tower_id].visible = true
+
+## Controls the visibility of containers when the HUD is initiated
+func _handle_initial_container_visibility():
+	# Hide tower properties hbox
+	TOWER_PROPERTIES_CONTAINER.visible = false
+	# Hide tower upgrades container
+	TOWER_UPGRADES_CONTAINER.visible = false
+	# Hide awaiting selection upgrade towers container
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 
 # ****************
 # SIGNAL CALLBACKS
@@ -205,6 +231,8 @@ func _on_tower_selected(tower: Tower):
 		tower.TOWER_SPRITE.modulate.a = 1.0
 		# Show upgrade tower buttons based on towers awaiting selection
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_awaiting_selection())
+		# Handle compound tower upgrades.
+		_handle_compound_upgrade_for_towers_awaiting_selection()
 		return
 	
 	# Handle built tower selection

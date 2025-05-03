@@ -12,7 +12,7 @@ func test_tower_count_dict_empty():
 	var towers_array: Array[Tower] = []
 
 	# Call the function to test
-	var count_dict: Dictionary = tower_upgrade_manager._tower_count_dict(towers_array)
+	var count_dict: Dictionary = tower_upgrade_manager.tower_count_dict(towers_array)
 
 	# Check that the count dictionary is empty
 	assert_true(count_dict.size() == 0)
@@ -38,7 +38,7 @@ func test_tower_count_dict_single_tower():
 	var towers_array: Array[Tower] = [black_marble_lvl_1]
 
 	# Call the function to test
-	var count_dict: Dictionary = tower_upgrade_manager._tower_count_dict(towers_array)
+	var count_dict: Dictionary = tower_upgrade_manager.tower_count_dict(towers_array)
 
 	# Create expected dictionary
 	var expected_dict: Dictionary = {
@@ -69,7 +69,7 @@ func test_tower_count_dict_two_of_same_tower_type():
 	var towers_array: Array[Tower] = [black_marble_lvl_1, black_marble_lvl_1]
 
 	# Call the function to test
-	var count_dict: Dictionary = tower_upgrade_manager._tower_count_dict(towers_array)
+	var count_dict: Dictionary = tower_upgrade_manager.tower_count_dict(towers_array)
 
 	# Create expected dictionary
 	var expected_dict: Dictionary = {
@@ -106,7 +106,7 @@ func test_tower_count_dict_two_different_tower_types():
 	var towers_array: Array[Tower] = [black_marble_lvl_1, bismuth_lvl_1]
 
 	# Call the function to test
-	var count_dict: Dictionary = tower_upgrade_manager._tower_count_dict(towers_array)
+	var count_dict: Dictionary = tower_upgrade_manager.tower_count_dict(towers_array)
 
 	# Create expected dictionary
 	var expected_dict: Dictionary = {

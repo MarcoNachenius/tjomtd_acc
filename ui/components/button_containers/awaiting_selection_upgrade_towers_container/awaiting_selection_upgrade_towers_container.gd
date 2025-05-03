@@ -11,6 +11,11 @@ class_name AwaitingSelectionUpgradeTowersContainer
     BLACK_MARBLE_LEVEL_3_BUTTON,
 ]
 
+@onready var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2: BLACK_MARBLE_LEVEL_2_BUTTON,
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3: BLACK_MARBLE_LEVEL_3_BUTTON
+}
+
 # PUBLIC METHODS
 func hide_all_buttons():
     for button in ALL_BUTTONS:
