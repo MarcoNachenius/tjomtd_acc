@@ -541,19 +541,28 @@ func convert_tower_to_barricade(tower: Tower):
 	else: # OR remove tower from __towers_on_map
 		__towers_on_map.erase(tower)
 
+	# Remove tower from placement grid coord dict for towers
+	_remove_tower_from_placement_grid_coords_dict(tower, __placement_grid_coords_for_towers)
+
 	# Remove tower scene from map
 	tower.queue_free()
 
 	# Place barricade
 	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
 	add_child(new_barricade)
-	# Set barricade state
+
+	# Ensure barricades do not appear as towers awaiting selection
 	new_barricade.switch_state(Tower.States.BUILT)
+
 	# Assign same placement grid coordinate and global position as the tower
 	new_barricade.set_placement_grid_coordinate(tower_placement_grid_coord)
 	new_barricade.global_position = tower_global_position
-	# Add barricade to list
+
+	# Add barricade to list of those on map
 	__barricades_on_map.append(new_barricade)
+
+	# Add barricade placement coords 
+	_add_tower_to_placement_grid_coords_dict(new_barricade, __placement_grid_coords_for_barricades)
 
 
 # -------------------

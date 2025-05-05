@@ -306,6 +306,11 @@ func test_upgrade_from_towers_on_map():
 	test_map.__towers_on_map.append(bismuth_lvl_1)
 	test_map.__towers_on_map.append(larimar_lvl_1)
 
+	# Add mock tower impediments to the map dict
+	test_map._add_tower_to_placement_grid_coords_dict(black_marble_lvl_1, test_map.__placement_grid_coords_for_towers)
+	test_map._add_tower_to_placement_grid_coords_dict(bismuth_lvl_1, test_map.__placement_grid_coords_for_towers)
+	test_map._add_tower_to_placement_grid_coords_dict(larimar_lvl_1, test_map.__placement_grid_coords_for_towers)
+
 	# Simulate selecting larimar tower
 	var test_selected_tower: Tower = larimar_lvl_1
 
