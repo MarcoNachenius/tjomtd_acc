@@ -848,6 +848,9 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 	# Clear the list of towers awaiting selection
 	__towers_awaiting_selection.clear()
 
+	# Update the placement grid coordinates reference for the new tower
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
+
 
 ## Called when a copound upgrade tower exists on the towers awaiting selection list.
 func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, compoundUpgradeTowerID: TowerConstants.TowerIDs):
@@ -884,6 +887,9 @@ func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: T
 		convert_tower_to_barricade(tower)
 	# Clear the list of towers awaiting selection
 	__towers_awaiting_selection.clear()
+
+	# Update the placement grid coordinates reference for the new tower
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
 
 ## Called when a tower selection area is entered by the mouse.
 ## This method sets the __hovering_over_tower variable to the tower that is being hovered over.
