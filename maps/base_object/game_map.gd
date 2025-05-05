@@ -799,11 +799,16 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 	# Place the new upgrade tower
 	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
 	add_child(new_upgrade_tower)
+	
 	# Set the upgrade tower's placement grid coordinate and global position
 	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
 	new_upgrade_tower.global_position = tower_global_position
+	
 	# Add tower to the list of towers on the map
 	__towers_on_map.append(new_upgrade_tower)
+
+	# Update the placement grid coordinates reference for the new tower
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
 
 ## Called when an upgrade tower exists on the towers awaiting selection list.
 func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
