@@ -4,9 +4,6 @@ class_name TowerSelectionArea
 var __collision_shape: CollisionShape2D
 var __referenced_tower: Tower
 
-signal selection_area_entered(tower: Tower)
-signal selection_area_exited()
-
 # ================
 # BUILT-IN METHODS
 # ================
@@ -54,13 +51,3 @@ func get_collision_shape() -> CollisionShape2D:
 ## Sets the tower which this area will reference when selected. 
 func set_referenced_tower(referenced_tower: Tower) -> void:
 	__referenced_tower = referenced_tower
-
-
-
-func _on_mouse_entered():
-	assert(self.get_parent() is Tower, "No tower assigned as parent")
-	selection_area_entered.emit(self.get_parent())
-
-func _on_mouse_exited():
-	assert(self.get_parent() is Tower, "No tower assigned as parent")
-	selection_area_exited.emit()

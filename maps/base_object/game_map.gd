@@ -1,14 +1,7 @@
 extends TileMapLayer
 class_name GameMap
 
-# ========
-# PROBLEMS
-# ========
-# Following coords are getting duplicated in __path_impediments in the GemTD map:
-# [(0, 14), (23, 14), (22, 41), (71, 41), (71, 14), (46, 14), (46, 67), (85, 67)]
-
-
-
+# ENUMS
 enum ImpedimentPlacementTypes {
 	SINGLE_POINT,
 	TOWER
@@ -20,7 +13,9 @@ enum States {
 	NAVIGATION_MODE
 }
 
+# SIGNALS
 signal camera_moved(distance: Vector2)
+signal empty_space_selected
 signal gained_credits(remaining_balance: int)
 signal gained_life(remaining_lives: int)
 signal lost_credits(remaining_balance: int)
@@ -29,7 +24,7 @@ signal completed_wave(total_waves_completed: int)
 signal tower_placed(tower: Tower)
 signal tower_selected(tower: Tower)
 
-
+# EXPORTS
 ## Enable path jumping on astar grid
 @export var ENABLE_ASTAR_PATH_JUMPING: bool = true
 ## Map ID
@@ -53,7 +48,6 @@ var creep_spawner: CreepSpawner
 var __curr_balance: int
 var __curr_path: Array[Vector2i]
 var __curr_state: States
-var __hovering_over_tower: Tower
 var __impediment_placement_type: ImpedimentPlacementTypes = ImpedimentPlacementTypes.TOWER
 var __insufficient_balance_surface_highlight: Sprite2D
 var __invalid_build_position_surface_highlight: Sprite2D
@@ -403,6 +397,36 @@ func get_tower_impediment_points(placementGridPoint: Vector2i) -> Array[Vector2i
 	# Return the array of grid points to the caller.
 	return normal_grid_points
 
+## Returns true if the a tower exists at the provided global position.
+func tower_exists_at_global_position(globalPosition: Vector2) -> bool:
+	# Convert the global position to the local coordinate space of the placement grid.
+	var placement_grid_coord: Vector2i = __placement_grid.local_to_map(to_local(globalPosition))
+
+	# Check if the placement grid coordinate is a key in the placement grid coordinates for towers dictionary.
+	if __placement_grid_coords_for_towers.has(placement_grid_coord):
+		return true
+
+	# Check if the placement grid coordinate is a key in the placement grid coordinates for barricades dictionary.
+	if __placement_grid_coords_for_barricades.has(placement_grid_coord):
+		return true
+
+	return false
+
+## Returns tower to which the provided global position belongs.
+## This method should be called only when tower_exists_at_global_position() returns true.
+func get_tower_from_global_position(globalPosition: Vector2) -> Tower:
+	# Convert the global position to the local coordinate space of the placement grid.
+	var placement_grid_coord: Vector2i = __placement_grid.local_to_map(to_local(globalPosition))
+
+	# Check if the placement grid coordinate is a key in the placement grid coordinates for towers dictionary.
+	if __placement_grid_coords_for_towers.has(placement_grid_coord):
+		return __placement_grid_coords_for_towers[placement_grid_coord]
+
+	# Check if the placement grid coordinate is a key in the placement grid coordinates for barricades dictionary.
+	if __placement_grid_coords_for_barricades.has(placement_grid_coord):
+		return __placement_grid_coords_for_barricades[placement_grid_coord]
+
+	return null
 
 
 ## Governs validity surface hightlights and impediment placements on map
@@ -633,10 +657,6 @@ func _on_creep_spawned(creep: Creep):
 
 
 
-# ***********
-# WIP METHODS
-# ***********
-
 func get_map_tile_impediment_points(mapTileCoordinates: Vector2i) -> Array[Vector2i]:
 	var top_left_main_grid_point: Vector2i = mapTileCoordinates * 2
 	var top_right_main_grid_point: Vector2i = top_left_main_grid_point + Vector2i(1, 0)
@@ -688,9 +708,6 @@ func place_tower(placementGridPoint: Vector2i):
 	# Create tower selection area
 	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
 	new_tower_selection_area.set_referenced_tower(new_tower)
-	# Connect signal
-	new_tower_selection_area.selection_area_entered.connect(_on_tower_selection_area_mouse_entered)
-	new_tower_selection_area.selection_area_exited.connect(_on_tower_selection_area_mouse_exited)
 	new_tower.add_child(new_tower_selection_area)
 	new_tower.set_selection_area(new_tower_selection_area)
 
@@ -891,23 +908,13 @@ func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: T
 	# Update the placement grid coordinates reference for the new tower
 	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
 
-## Called when a tower selection area is entered by the mouse.
-## This method sets the __hovering_over_tower variable to the tower that is being hovered over.
-func _on_tower_selection_area_mouse_entered(tower: Tower):
-	__hovering_over_tower = tower
-
-## Called when the mouse exits a tower selection area.
-## This method sets the __hovering_over_tower variable to null, indicating that no tower is currently being hovered over.
-func _on_tower_selection_area_mouse_exited():
-	__hovering_over_tower = null
-
-
 func _handle_navigation_mode():
 	if Input.is_action_just_pressed("select"):
 		# Start tracking mouse position
 		__mouse_position = get_global_mouse_position()
-		if __hovering_over_tower:
-			tower_selected.emit(__hovering_over_tower)
+		# Signal tower being selected if mouse points to a tower
+		if tower_exists_at_global_position(__mouse_position):
+			tower_selected.emit(get_tower_from_global_position(__mouse_position))
 		return
 	# Handle camera movement
 	if !Input.is_action_just_pressed("select") and Input.is_action_pressed("select"):
@@ -946,10 +953,7 @@ func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeT
 		keep_upgrade_tower_from_towers_awaiting_selection(selectedTower, upgradeTowerID)
 		return
 
-# ************
-# TODO METHODS
-# ************
-
+# TODO
 func handle_single_point_impediment_placement():
 	pass
 

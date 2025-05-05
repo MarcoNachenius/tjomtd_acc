@@ -251,6 +251,8 @@ func _on_tower_selected(tower: Tower):
 	
 	# Handle built tower selection
 	if __selected_tower.get_state() == Tower.States.BUILT:
+		# Hide keep tower button
+		TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
 		# Handle tower upgrade container visibility
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
 	
