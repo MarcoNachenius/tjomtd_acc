@@ -63,6 +63,8 @@ var __mouse_position: Vector2
 var __path_impediments: Array[Vector2i]
 var __path_line: Line2D
 var __placement_grid: TileMapLayer
+var __placement_grid_coords_for_towers: Dictionary[Vector2i, Tower]
+var __placement_grid_coords_for_barricades: Dictionary[Vector2i, Tower]
 var __remaining_lives: int
 var __total_active_creeps: int
 var __total_active_wave_creeps: int
@@ -136,6 +138,53 @@ func add_test_tower_sprite(placementGridTile: Vector2i):
 	add_child(path_tile)
 	path_tile.position = __placement_grid.map_to_local(placementGridTile)
 	path_tile.modulate = Color(0.0, 0.0, 0.0, 1.0)  # RGBA for solid blue
+
+## Adds placement grid points as keys with provided tower as value. 
+func _add_tower_to_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
+	# Get list of all current impediment points 
+	var list_of_curr_impediment_points: Array[Vector2i] = placementGridCoordDict.keys()
+	# Get list of tower impediment points
+	var tower_impediment_points: Array[Vector2i] = get_tower_impediment_points(tower.get_placement_grid_coordinate())
+	
+	# Insert new values into grid coords for towers
+	for new_placement_coord in tower_impediment_points:
+		# Ensure coordinate is not already a key in coord dict
+		assert(!list_of_curr_impediment_points.has(new_placement_coord))
+		# New value to dict
+		placementGridCoordDict[new_placement_coord] = tower
+
+
+## Replaces the values of placement grid coordinates for a tower in the placement grid coords for towers 
+func _replace_tower_in_placement_grid_coords_dict(oldTower: Tower, newTower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
+	# Verify that the old tower's placement grid coordinate is equal to the new tower's placement grid coordinate
+	assert(oldTower.get_placement_grid_coordinate() == newTower.get_placement_grid_coordinate(), "Old and new tower placement grid coordinates do not match")
+
+	# Get list of all current impediment points 
+	var list_of_curr_impediment_points: Array[Vector2i] = placementGridCoordDict.keys()
+	# Get list of tower impediment points
+	var tower_impediment_points: Array[Vector2i] = get_tower_impediment_points(oldTower.get_placement_grid_coordinate())
+	
+	# Replace values in grid coords dict for towers
+	for new_placement_coord in tower_impediment_points:
+		# Ensure coordinate is present in dict
+		assert(list_of_curr_impediment_points.has(new_placement_coord), "Coordinate not in placement grid coord dict")
+		# Replace values such that placement coord refers to new tower
+		placementGridCoordDict[new_placement_coord] = newTower
+
+
+## Adds placement grid points as keys with provided tower as value. 
+func _remove_tower_from_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
+	# Get list of all current impediment points 
+	var list_of_curr_impediment_points: Array[Vector2i] = placementGridCoordDict.keys()
+	# Get list of tower impediment points
+	var tower_impediment_points: Array[Vector2i] = get_tower_impediment_points(tower.get_placement_grid_coordinate())
+	
+	# Remove keys from placement coord dict
+	for new_placement_coord in tower_impediment_points:
+		# Ensure coordinate is a key in coord dict
+		assert(list_of_curr_impediment_points.has(new_placement_coord))
+		# Remove coordinate from dict
+		placementGridCoordDict.erase(new_placement_coord)
 
 ## Check if adding a new solid point blocks the path.
 ## Do not use in for loop, rather use can_add_multiple_impediments()
@@ -614,13 +663,18 @@ func _set_map_tile_impediments():
 func place_tower(placementGridPoint: Vector2i):
 	# Place tower impediment points
 	place_tower_impediment_points(placementGridPoint)
-	# Create new tower
+	
+	# Create new tower instance
 	var new_tower: Tower = __build_tower_preload.instantiate()
 	new_tower.set_placement_grid_coordinate(placementGridPoint)
 	add_child(new_tower)
 	new_tower.position = __placement_grid.map_to_local(placementGridPoint)
-	# Have tower await selection
+	
+	# Ensure tower is awaiting selection
 	new_tower.switch_state(Tower.States.AWAITING_SELECTION)
+
+	# Update tower placement grid dict
+	_add_tower_to_placement_grid_coords_dict(new_tower, __placement_grid_coords_for_towers)
 
 	# Create tower selection area
 	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
@@ -726,6 +780,7 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 				towers_to_remove.append(tower)
 				# Remove the tower id from the required tower ids array
 				required_tower_ids.erase(tower_id)
+				# Ensure only one tower can removed from the list of towers on map on each iteration
 				break
 	
 	# Convert additional required towers to barricades
@@ -878,23 +933,6 @@ func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeT
 func handle_single_point_impediment_placement():
 	pass
 
-
-# **********
-# DEGBUGGING
-# **********
-
-# Returns an Array of items that appear more than once.
-# Each item appears only once in the returned array.
-func get_duplicates(arr: Array) -> Array:
-	var counts := {}  # Dictionary to track how many times each item appears.
-	for item in arr:
-		counts[item] = (counts.get(item, 0) + 1)
-
-	var duplicates := []
-	for item in counts.keys():
-		if counts[item] > 1:
-			duplicates.append(item)
-	return duplicates
 
 
 func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
