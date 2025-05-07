@@ -964,7 +964,7 @@ __points_for_death = 10
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = ExtResource("2_8hl8q")
-animation = &"move_e"
+animation = &"move_se"
 
 [node name="IdleAnimations" type="AnimatedSprite2D" parent="."]
 visible = false

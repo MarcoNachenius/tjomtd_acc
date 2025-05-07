@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy7dn6t3feh80"]
+
+[ext_resource type="Script" uid="uid://cnaeu8rncganq" path="res://unit_tests/scenes/debug_button_containers/start_wave.gd" id="1_5hcfy"]
+
+[node name="StartWave" type="HBoxContainer" node_paths=PackedStringArray("START_NEW_WAVE_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5hcfy")
+START_NEW_WAVE_BUTTON = NodePath("StartNewWave")
+
+[node name="StartNewWave" type="Button" parent="."]
+layout_mode = 2
+text = "Start New Wave"

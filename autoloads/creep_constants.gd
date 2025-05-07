@@ -4,12 +4,14 @@ extends Node
 # =========
 enum CreepIDs {
     RED_SPIDER,
-    DEMON
+    DEMON,
+    CENTIPEDE
 }
 
 var CreepPreloads: Dictionary = {
     CreepIDs.RED_SPIDER: load("res://creeps/red_spider/red_spider.tscn"),
-    CreepIDs.DEMON: load("res://creeps/demon/demon.tscn")
+    CreepIDs.DEMON: load("res://creeps/demon/demon.tscn"),
+    CreepIDs.CENTIPEDE: load("res://creeps/centipede/centipede.tscn")
 }
 
 
