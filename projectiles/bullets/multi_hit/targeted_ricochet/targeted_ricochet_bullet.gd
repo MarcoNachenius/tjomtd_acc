@@ -22,8 +22,6 @@ func _process(delta):
 
 
 func _handle_movement():
-	assert(__velocity, "No velocity provided")
-	assert(__speed, "No speed provided")
 	position += __velocity * __isometric_speed
 
 ## Alters the direction of the bullet to new target in range of richochet hurtbox,
