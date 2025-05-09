@@ -15,7 +15,13 @@ class_name Projectile
 @export var __retargetable: bool = false
 ## The radius of the retargetable area.
 @export var __retarget_radius: int
-
+## If true, an aoe hurtbox will be created on ready 
+## which allows for area of effect damage infliction
+@export var __aoe_enabled: bool
+## The radius of aoe damage infliction for projectile.
+@export var __aoe_detection_radius: int
+## The amount of damage that gets inflicted when triggered
+@export var __aoe_damage_amount: int
 
 # PRIVATE VARS
 var __isometric_speed: float
@@ -24,6 +30,7 @@ var __target: Creep
 var __velocity: Vector2
 var __hurtbox: ProjectileHurtbox
 var __retarget_hurtbox: RetargetHurtbox
+var __aoe_damage_hurtbox: ProjectileHurtbox
 
 # ********
 # BUILTINS
@@ -34,6 +41,9 @@ func _ready():
 	_create_stun_hurtbox()
 	# Only creates retarget hurtbox if self.__retargetable export is set to true
 	_create_retarget_hurtbox()
+	# Only creates AOE hurtbox if self.__aoe_enabled export is set to true
+	_create_aoe_hurtbox()
+	# Handle additional logic during _ready() method for subclasses
 	_extended_onready()
 
 # *******
@@ -104,6 +114,22 @@ func _calculated_isometric_speed() -> float:
 	var direction_angle = global_position.angle_to_point(__target.global_position)
 	return (0.5 * abs(cos(direction_angle)) + 0.5) * __speed
 
+## Creates the AOE hurtbox if the __aoe_enabled export is set to true.
+func _create_aoe_hurtbox():
+	# Only creates AOE hurtbox if self.__aoe_enabled export is set to true
+	if !__aoe_enabled:
+		return
+	
+	# Check if the AOE radius is valid
+	assert(__aoe_detection_radius > 0, "AOE detection radius must be greater than 0")
+
+	# Instantiate AOE hurtbox
+	var new_aoe_hurtbox: ProjectileHurtbox = ProjectileConstants.HURTBOX_PRELOAD.instantiate()
+	add_child(new_aoe_hurtbox)
+	new_aoe_hurtbox.set_base_radius(__aoe_detection_radius)
+	# Set AOE hurtbox
+	__aoe_damage_hurtbox = new_aoe_hurtbox
+
 func _create_hurtbox():
 	var new_hurtbox: ProjectileHurtbox = ProjectileConstants.HURTBOX_PRELOAD.instantiate()
 	add_child(new_hurtbox)
@@ -144,9 +170,37 @@ func _create_stun_hurtbox():
 	# Set stun hurtbox radius equal to hurtbox radius
 	new_stun_hurtbox.set_base_radius(__hurtbox_radius)
 
-## Abstract method. Handles commands that follow the creation of the projectile's hitbox on ready.
+## # Handle additional logic during _ready() method for subclasses
 func _extended_onready():
 	pass
+
+## Does nothing if AOE is disabled. 
+func _handle_aoe_damage_infliction():
+	# Do nothing if AOE is disabled
+	if !__aoe_enabled:
+		return
+
+	# Check if the AOE damage amount is valid
+	assert(__aoe_damage_amount > 0, "AOE damage amount must be greater than 0")
+	
+	# Check if the AOE hurtbox is valid
+	assert(__aoe_damage_hurtbox, "AOE hurtbox not created")
+	
+	# Inflict AOE damage to all creeps in the AOE hurtbox
+	_inflict_aoe_damage()
+
+## Inflicts AOE damage to all creeps in the AOE hurtbox.
+## This method is called when the projectile inflicts damage to a creep.
+func _inflict_aoe_damage():
+	# Check if the AOE damage amount is valid
+	assert(__aoe_damage_amount > 0, "AOE damage amount must be greater than 0")
+	
+	# Inflict damage to all creeps in the AOE hurtbox
+	for creep in __aoe_damage_hurtbox.get_detectable_creeps_in_range():
+		# Inflict damage to the creep
+		creep.take_damage(__aoe_damage_amount)
+
+
 
 # *******
 # SIGNALS

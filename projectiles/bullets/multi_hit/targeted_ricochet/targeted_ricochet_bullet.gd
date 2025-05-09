@@ -88,7 +88,13 @@ func _extended_onready():
 
 ## Inflicts damage to the specified creep and handles ricochet logic.
 func _inflict_damange(creep: Creep):
+	# Inflict damage on the creep
 	creep.take_damage(__damage)
+
+	# Handle AOE damage if enabled
+	_handle_aoe_damage_infliction()
+
+	# Handle ricochets
 	__curr_ricochets += 1
 	# Destroy the bullet if it has reached the maximum ricochets
 	# If infinite ricochets are enabled, the bullet will not be destroyed

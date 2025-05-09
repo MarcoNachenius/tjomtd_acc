@@ -54,8 +54,12 @@ func _extended_onready():
 func _inflict_damange(creep: Creep):
 	# Handle damage infliction
 	creep.take_damage(__damage)
-	__curr_ricochets += 1
 
+	# Handle AOE damage if enabled
+	_handle_aoe_damage_infliction()
+
+	# Handle ricochet
+	__curr_ricochets += 1
 	# Destroy bullet if it has reached maximum ricochets
 	if !__infinite_ricochets and __curr_ricochets >= __total_ricochets:
 		queue_free()

@@ -12,8 +12,6 @@ func _process(delta):
 
 ## Handles bullet movement in the isometric space
 func _handle_movement():
-	#assert(__velocity, "No velocity provided")  # Ensure velocity is set before movement
-	assert(__speed, "No speed provided")  # Ensure speed is set before movement
 	position += __velocity * __isometric_speed
 
 ## Inflicts damage to a target and removes the bullet from the scene
@@ -22,6 +20,8 @@ func _handle_movement():
 # ensuring it only affects a single target upon impact.
 func _inflict_damange(creep: Creep):
 	creep.take_damage(__damage)
+	# Handle AOE damage if enabled
+	_handle_aoe_damage_infliction()
 	queue_free()  # Destroy the bullet after dealing damage
 
 ## Detects when the bullet's hurtbox enters another area
