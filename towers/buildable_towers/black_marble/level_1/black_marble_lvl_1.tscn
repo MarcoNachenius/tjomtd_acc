@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b2fxg0x24mltw" path="res://towers/buildable_towers/black_marble/level_1/tower_sprite_without_surface.png" id="2_fgkmm"]
 [ext_resource type="Script" uid="uid://bsxteh17ub0se" path="res://projectile_spawners/single_bullet/single_hit/single_hit_single_bullet_spawner.gd" id="5_skkas"]
 
-[node name="BlackMarbleLvl1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
+[node name="BlackMarbleLvl1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
 editor_description = "Fires single-hit bullets one at a time."
 z_index = 2
 z_as_relative = false
@@ -12,7 +12,7 @@ y_sort_enabled = true
 script = ExtResource("1_wliup")
 TOWER_ID = 1
 TOWER_SPRITE = NodePath("TowerSprite")
-TOWER_DISPLAY_RANGE = 300
+PRIMARY_PROJECTILE_SPAWNER = NodePath("SingleHitSingleBulletSpawner")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 z_index = 1

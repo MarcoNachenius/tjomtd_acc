@@ -95,3 +95,15 @@ func _on_hurtbox_entered(area):
 
 func set_damage(amount: int):
 	__damage = amount
+
+func set_damage_degredation_enabled(value: bool) -> void:
+	__damage_degredation_enabled = value
+
+func set_damage_degredation_rate(value: int) -> void:
+	__damage_degredation_rate = value
+
+func set_infinite_ricochets(value: bool) -> void:
+	__infinite_ricochets = value
+
+func set_total_ricochets(value: int) -> void:
+	__total_ricochets = value

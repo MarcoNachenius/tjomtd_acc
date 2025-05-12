@@ -135,3 +135,18 @@ func _on_ricochet_detection_hurtbox_exited(area):
 
 func set_damage(amount: int):
 	__damage = amount
+
+func set_damage_degredation_enabled(value: bool) -> void:
+	__damage_degredation_enabled = value
+
+func set_damage_degredation_rate(value: int) -> void:
+	__damage_degredation_rate = value
+
+func set_infinite_ricochets(value: bool) -> void:
+	__infinite_ricochets = value
+
+func set_ricochet_detection_radius(value: int) -> void:
+	__ricochet_detection_radius = value
+
+func set_total_ricochets(value: int) -> void:
+	__total_ricochets = value

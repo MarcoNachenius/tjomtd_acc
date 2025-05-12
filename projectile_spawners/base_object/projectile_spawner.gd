@@ -18,8 +18,6 @@ enum TargetingPolicies {
 ## Range in pixels
 @export var __detection_range: int
 @export var __enforce_targeting_policy: bool
-## Intented for continuous 
-@export var __start_launch_on_ready: bool
 @export var __targeting_policy: TargetingPolicies
 
 # LOCALS
@@ -36,9 +34,6 @@ func _ready():
 	self._create_hurtbox()
 	# COOLDOWN TIMER
 	self._create_cooldown_timer()
-	# CONTINUOUS LAUNCH
-	if __start_launch_on_ready:
-		_launch_projectiles()
 	__launch_cooled_down = true
 	_execute_extended_onready_commands()
 
@@ -202,12 +197,9 @@ func _target_least_health_creep(detectableCreeps: Array[Creep]):
 	__target = least_health_creep
 
 
-
-
-# ***********
-# WIP METHODS
-# ***********
-
-# ************
-# TODO METHODS
-# ************
+# *******
+# GETTERS
+# *******
+## Retrurns the range of the projectile spawner in pixels.
+func get_detection_range() -> int:
+	return __detection_range

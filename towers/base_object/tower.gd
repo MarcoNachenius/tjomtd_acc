@@ -16,6 +16,7 @@ const AWAITING_SELECTION_ANIMATION_NAME: String = "awaiting_selection"
 
 var __build_cost: int
 var __curr_state: States
+var __curr_display_range: int
 var __selection_area: TowerSelectionArea
 var __placement_grid_coord: Vector2i
 var __upgrades_into: Array[TowerConstants.TowerIDs]
@@ -23,7 +24,10 @@ var __requires_towers: Dictionary[TowerConstants.TowerIDs, int]
 
 @export var TOWER_ID: TowerConstants.TowerIDs
 @export var TOWER_SPRITE: Sprite2D
-@export var TOWER_DISPLAY_RANGE: int 
+@export var USE_CUSTOM_TOWER_DISPLAY_RANGE: bool 
+@export var CUSTOM_TOWER_DISPLAY_RANGE: int 
+@export var PRIMARY_PROJECTILE_SPAWNER: ProjectileSpawner
+
 
 var SURFACE_SPRITE: Sprite2D
 var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
@@ -70,14 +74,23 @@ func _create_range_display_shape():
 	# Barricades do not have any range
 	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
 		return
-	assert(TOWER_DISPLAY_RANGE, "No tower display range provided")
-	var new_display_shape: RangeDisplayShape = RangeDisplayShape.new(TOWER_DISPLAY_RANGE)
+	# Handle size creation based on the projectile spawner range
+	if !USE_CUSTOM_TOWER_DISPLAY_RANGE:
+		__curr_display_range = PRIMARY_PROJECTILE_SPAWNER.get_detection_range()
+	
+	# Handle size creation based on custom range
+	if USE_CUSTOM_TOWER_DISPLAY_RANGE:
+		__curr_display_range = CUSTOM_TOWER_DISPLAY_RANGE
+	
+	# Create the range display shape
+	var new_display_shape: RangeDisplayShape = RangeDisplayShape.new(CUSTOM_TOWER_DISPLAY_RANGE)
 	add_child(new_display_shape)
 	RANGE_DISPLAY_SHAPE = new_display_shape
 	RANGE_DISPLAY_SHAPE.y_sort_enabled = true
 	RANGE_DISPLAY_SHAPE.z_as_relative = false
 	RANGE_DISPLAY_SHAPE.z_index = 1
 	RANGE_DISPLAY_SHAPE.visible = false
+
 
 # GETTERS
 func get_build_cost() -> int:
