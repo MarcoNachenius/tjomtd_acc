@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3ewhmgjb2shc"
-path="res://.godot/imported/bm_lvl_3_bullet_sprite.png-e5e2ddb5b891584048255822054f14e7.ctex"
+uid="uid://dy4lquqdf2low"
+path="res://.godot/imported/sunstone_lvl_1_bullet_sprite.png-ef78c467bd643cfac062aa8d6f1b245c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://towers/buildable_towers/black_marble/level_3/bm_lvl_3_bullet_sprite.png"
-dest_files=["res://.godot/imported/bm_lvl_3_bullet_sprite.png-e5e2ddb5b891584048255822054f14e7.ctex"]
+source_file="res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet_sprite.png"
+dest_files=["res://.godot/imported/sunstone_lvl_1_bullet_sprite.png-ef78c467bd643cfac062aa8d6f1b245c.ctex"]
 
 [params]
 

@@ -11,13 +11,13 @@ enum ProjectileIDs {
 	BLACK_MARBLE_LVL_3,
 	BISMUTH_LVL_1,
 	LARIMAR_LVL_1,
-	TEST_RANDOM_RICOCHET_BULLET,
-	TEST_TARGETED_RICOCHET_MISSILE,
+	SUNSTONE_LVL_1,
 }
 
 enum SingleHitBullets {
 	BLACK_MARBLE_LVL_1,
 	LARIMAR_LVL_1,
+	SUNSTONE_LVL_1,
 }
 
 enum SingleHitMissiles {
@@ -38,12 +38,13 @@ enum BulletsForSpawner {
 	BLACK_MARBLE_LVL_2,
 	BLACK_MARBLE_LVL_3,
 	LARIMAR_LVL_1,
-	TEST_RANDOM_RICOCHET_BULLET,
+	SUNSTONE_LVL_1,
 }
 
 var SINGLE_HIT_BULLET_LOADS: Dictionary = {
 	SingleHitBullets.BLACK_MARBLE_LVL_1: load("res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn"),
 	SingleHitBullets.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn"),
+	SingleHitBullets.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn"),
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
@@ -60,7 +61,7 @@ var BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.BLACK_MARBLE_LVL_2: "res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_3: "res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn",
 	BulletsForSpawner.LARIMAR_LVL_1: "res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn",
-	BulletsForSpawner.TEST_RANDOM_RICOCHET_BULLET: "res://projectiles/bullets/multi_hit/random_ricochet/test_bullet/test_rrb.tscn",
+	BulletsForSpawner.SUNSTONE_LVL_1: "res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn",
 }
 
 

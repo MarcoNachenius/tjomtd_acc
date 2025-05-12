@@ -713,13 +713,9 @@ func place_tower(placementGridPoint: Vector2i):
 
 	# Emit signals
 	tower_placed.emit(new_tower)
-	# Add to appropriate tower/barricade list
-	if new_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
-		__barricades_on_map.append(new_tower)
-	else:
-		__towers_awaiting_selection.append(new_tower)
-	
 
+	# Add to list of towers awaiting selection
+	__towers_awaiting_selection.append(new_tower)
 
 ## Creates a new instance of CreepSpawner and adds it as a child to the current node.
 ## The CreepSpawner does not require positional information, as it will handled by the creep when spawned.

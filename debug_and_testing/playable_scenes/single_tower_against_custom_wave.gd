@@ -5,9 +5,6 @@ extends Node2D
 @export var TOWER_PLACEMENT_COORD: Vector2i
 
 func _ready():
-	var test_display_shape: RangeDisplayShape = RangeDisplayShape.new(400)
-	add_child(test_display_shape)
-	# Simulate tower being placed and kept on map
 	_place_single_tower()
 	GAME_MAP.creep_spawner.initiate_new_wave()
 
@@ -32,10 +29,10 @@ func _place_single_tower():
 
 	# Emit signals
 	GAME_MAP.tower_placed.emit(new_tower)
-	# Add to appropriate tower/barricade list
+	# Add to appropriate barricade list
 	if new_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
 		GAME_MAP.__barricades_on_map.append(new_tower)
-	else:
+	else: # OR ddd to appropriate towers awaiting slection list
 		GAME_MAP.__towers_awaiting_selection.append(new_tower)
 	
 	# Switch state 

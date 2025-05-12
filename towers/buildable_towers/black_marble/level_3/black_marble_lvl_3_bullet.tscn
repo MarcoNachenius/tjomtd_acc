@@ -1,15 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqigiir2s4qh7"]
 
 [ext_resource type="Script" uid="uid://dymbynlgky77q" path="res://projectiles/bullets/multi_hit/targeted_ricochet/targeted_ricochet_bullet.gd" id="1_rji8m"]
-[ext_resource type="Texture2D" uid="uid://c3ewhmgjb2shc" path="res://towers/buildable_towers/black_marble/level_3/bm_lvl_3_bullet_sprite.png" id="2_77skr"]
+[ext_resource type="Texture2D" uid="uid://d0h2kch2u0lsb" path="res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.png" id="2_rji8m"]
 
 [node name="BlackMarbleLvl3Bullet" type="Node2D"]
 z_index = 4
 y_sort_enabled = true
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_rji8m")
 __ricochet_detection_radius = 300
 metadata/_custom_type_script = "uid://dymbynlgky77q"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BulletSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("2_77skr")
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_rji8m")

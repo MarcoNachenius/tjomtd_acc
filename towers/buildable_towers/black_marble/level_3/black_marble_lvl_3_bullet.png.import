@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csqmltj68gkex"
-path="res://.godot/imported/bm_lvl_3_tower_sprite.png-cfde9366412ab3ff43c5c118d53f3780.ctex"
+uid="uid://d0h2kch2u0lsb"
+path="res://.godot/imported/black_marble_lvl_3_bullet.png-5fa4aa00cd084f5588bafcd89dc3b22a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://towers/buildable_towers/black_marble/level_3/bm_lvl_3_tower_sprite.png"
-dest_files=["res://.godot/imported/bm_lvl_3_tower_sprite.png-cfde9366412ab3ff43c5c118d53f3780.ctex"]
+source_file="res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.png"
+dest_files=["res://.godot/imported/black_marble_lvl_3_bullet.png-5fa4aa00cd084f5588bafcd89dc3b22a.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_gmwqe"]
 [ext_resource type="Texture2D" uid="uid://0glrrck0wtin" path="res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_tower_sprite.png" id="2_qstlq"]
-[ext_resource type="Script" uid="uid://dp6ge5piuiiht" path="res://projectile_spawners/multi_bullet/star_formation/star_formation_bullet_spawner.gd" id="3_qstlq"]
+[ext_resource type="Script" uid="uid://bsxteh17ub0se" path="res://projectile_spawners/single_bullet/single_hit/single_hit_single_bullet_spawner.gd" id="3_qstlq"]
 
 [node name="LarimarLvl1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
 z_index = 2
@@ -11,7 +11,7 @@ y_sort_enabled = true
 script = ExtResource("1_gmwqe")
 TOWER_ID = 11
 TOWER_SPRITE = NodePath("TowerSprite")
-PRIMARY_PROJECTILE_SPAWNER = NodePath("StarFormationBulletSpawner")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("SingleHitSingleBulletSpawner")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
@@ -21,12 +21,9 @@ position = Vector2(2, -25)
 scale = Vector2(0.764659, 0.62369)
 texture = ExtResource("2_qstlq")
 
-[node name="StarFormationBulletSpawner" type="Node2D" parent="."]
+[node name="SingleHitSingleBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("3_qstlq")
 __bullet_damage = 10
-__bullet_speed = 30
-BULLET_ID = 3
-__formation_policy = 1
-__cooldown_duration = 1.0
-__detection_range = 500
-metadata/_custom_type_script = "uid://dp6ge5piuiiht"
+__bullet_speed = 10
+BULLET_PRELOAD = 1
+metadata/_custom_type_script = "uid://bsxteh17ub0se"
