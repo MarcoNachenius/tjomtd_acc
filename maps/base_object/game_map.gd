@@ -761,6 +761,9 @@ func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
 	__towers_on_map.append(towerAwaitingSelection)
 	# Set the tower's state to built
 	towerAwaitingSelection.switch_state(Tower.States.BUILT)
+	
+	# Reselect tower to update hud containers
+	tower_selected.emit(towerAwaitingSelection)
 
 	# Convert remaining towers awaiting selection to barricades
 	for tower in __towers_awaiting_selection.duplicate():
@@ -825,7 +828,10 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 	__towers_on_map.append(new_upgrade_tower)
 
 	# Update the placement grid coordinates reference for the new tower
-	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers)
+
+	# Reselect tower to update hud containers
+	tower_selected.emit(new_upgrade_tower)
 
 ## Called when an upgrade tower exists on the towers awaiting selection list.
 func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
@@ -866,7 +872,10 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 	__towers_awaiting_selection.clear()
 
 	# Update the placement grid coordinates reference for the new tower
-	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers)
+
+	# Reselect tower to update hud containers
+	tower_selected.emit(new_upgrade_tower)
 
 
 ## Called when a copound upgrade tower exists on the towers awaiting selection list.
@@ -906,7 +915,10 @@ func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: T
 	__towers_awaiting_selection.clear()
 
 	# Update the placement grid coordinates reference for the new tower
-	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers) 
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers)
+	
+	# Reselect tower to update hud containers
+	tower_selected.emit(new_upgrade_tower)
 
 func _handle_navigation_mode():
 	if Input.is_action_just_pressed("select"):

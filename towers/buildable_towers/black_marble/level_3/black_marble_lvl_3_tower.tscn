@@ -5,12 +5,12 @@
 [ext_resource type="Script" uid="uid://bc7cfloxni2io" path="res://projectile_spawners/single_bullet/multi_hit/targeted_ricochet_bullet/targeted_ricochet_bullet_spawner.gd" id="3_xbbsa"]
 
 [node name="BlackMarbleLvl3Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
-z_index = 1
-z_as_relative = false
+z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_w253w")
 TOWER_ID = 3
 TOWER_SPRITE = NodePath("TowerSprite")
+TOWER_DISPLAY_RANGE = 300
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TargetedRicochetBulletSpawner" type="Node2D" parent="."]

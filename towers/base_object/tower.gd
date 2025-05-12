@@ -23,8 +23,11 @@ var __requires_towers: Dictionary[TowerConstants.TowerIDs, int]
 
 @export var TOWER_ID: TowerConstants.TowerIDs
 @export var TOWER_SPRITE: Sprite2D
+@export var TOWER_DISPLAY_RANGE: int 
+
 var SURFACE_SPRITE: Sprite2D
 var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
+var RANGE_DISPLAY_SHAPE: RangeDisplayShape
 
 # BUILTINS
 func _ready():
@@ -34,6 +37,7 @@ func _ready():
 	# Instantiate child scenes
 	_create_surface_sprite()
 	_create_awaiting_selection_animation()
+	_create_range_display_shape()
 
 # CUSTOM
 func disable_selection_area():
@@ -59,6 +63,21 @@ func _create_awaiting_selection_animation():
 	add_child(AWAITING_SELECTION_ANIMATION)
 	# Hide by default
 	AWAITING_SELECTION_ANIMATION.visible = false
+
+## Creates circle indicating range whenever tower is selected.
+## Does not create range shape if tower is a barricade
+func _create_range_display_shape():
+	# Barricades do not have any range
+	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
+		return
+	assert(TOWER_DISPLAY_RANGE, "No tower display range provided")
+	var new_display_shape: RangeDisplayShape = RangeDisplayShape.new(TOWER_DISPLAY_RANGE)
+	add_child(new_display_shape)
+	RANGE_DISPLAY_SHAPE = new_display_shape
+	RANGE_DISPLAY_SHAPE.y_sort_enabled = true
+	RANGE_DISPLAY_SHAPE.z_as_relative = false
+	RANGE_DISPLAY_SHAPE.z_index = 1
+	RANGE_DISPLAY_SHAPE.visible = false
 
 # GETTERS
 func get_build_cost() -> int:

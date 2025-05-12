@@ -4,8 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c3ewhmgjb2shc" path="res://towers/buildable_towers/black_marble/level_3/bm_lvl_3_bullet_sprite.png" id="2_77skr"]
 
 [node name="BlackMarbleLvl3Bullet" type="Node2D"]
-z_index = 2
-z_as_relative = false
+z_index = 4
 y_sort_enabled = true
 script = ExtResource("1_rji8m")
 __ricochet_detection_radius = 300

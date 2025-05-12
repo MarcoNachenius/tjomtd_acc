@@ -12,6 +12,7 @@ y_sort_enabled = true
 script = ExtResource("1_wliup")
 TOWER_ID = 1
 TOWER_SPRITE = NodePath("TowerSprite")
+TOWER_DISPLAY_RANGE = 300
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 z_index = 1

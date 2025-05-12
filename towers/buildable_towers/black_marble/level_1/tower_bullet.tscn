@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dquxlhbsyhddp" path="res://towers/buildable_towers/black_marble/level_1/bullet_sprite.png" id="2_oo3jc"]
 
 [node name="TowerBullet" type="Node2D"]
-z_index = 2
+z_index = 4
 y_sort_enabled = true
 script = ExtResource("1_4g67r")
 

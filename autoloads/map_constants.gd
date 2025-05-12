@@ -5,27 +5,31 @@ const MAP_TILE_HEIGHT: int = 128
 
 enum MapID {
     LINE_TD,
-    GEM_TD
+    GEM_TD,
+    BLANK_MAP
 }
 
+# BLANK MAP
+const BLANK_MAP_MANDATORY_WAYPOINTS: Array[Vector2i] = []
+const BLANK_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = []
+
+# LINE TD
 const LINE_TD_MANDATORY_WAYPOINTS: Array[Vector2i] = []
 const LINE_TD_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = []
 
 ## Does not include start or end points
 const MandatoryWaypoints = {
     MapID.LINE_TD: LINE_TD_MANDATORY_WAYPOINTS,
-    MapID.GEM_TD: GEM_TD_MANDATORY_WAYPOINTS
+    MapID.GEM_TD: GEM_TD_MANDATORY_WAYPOINTS,
+    MapID.BLANK_MAP: BLANK_MAP_MANDATORY_WAYPOINTS,
 }
 
 const MapTileImpediments = {
     MapID.LINE_TD: LINE_TD_MAP_TILE_IMPEDIMENTS,
-    MapID.GEM_TD: GEM_TD_MAP_TILE_IMPEDIMENTS
+    MapID.GEM_TD: GEM_TD_MAP_TILE_IMPEDIMENTS,
+    MapID.BLANK_MAP: BLANK_MAP_TILE_IMPEDIMENTS,
 }
 
-const MapScenePreloads = {
-    MapID.LINE_TD: "",
-    MapID.GEM_TD: ""
-}
 
 var PROJECTILE_BOUNDARY_AREA_PRELOAD: PackedScene = load("res://maps/components/projectile_boundary_area/projectile_boundary_area.tscn")
 

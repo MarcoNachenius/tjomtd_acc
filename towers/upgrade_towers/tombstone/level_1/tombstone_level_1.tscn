@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://og3pr5sylcmb" path="res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_tower_sprite.png" id="3_ho0d8"]
 
 [node name="TombstoneLevel1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
-z_index = 2
+z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_aqv7f")
 TOWER_ID = 6
 TOWER_SPRITE = NodePath("TowerSprite")
+TOWER_DISPLAY_RANGE = 300
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSprite" type="Sprite2D" parent="."]

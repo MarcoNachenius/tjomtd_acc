@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwhrpgp6e6scw"]
+
+[ext_resource type="Script" uid="uid://e333wsgn3jta" path="res://debug_and_testing/playable_scenes/single_tower_against_custom_wave.gd" id="1_hpmdq"]
+[ext_resource type="PackedScene" uid="uid://d07g821r2wgbo" path="res://debug_and_testing/debug_maps/10x10_blank_map.tscn" id="2_kt3m4"]
+[ext_resource type="Script" uid="uid://wadk3qruggns" path="res://game/components/camera/map_camera.gd" id="3_prpal"]
+
+[node name="SingleTowerAgainstCreep" type="Node2D" node_paths=PackedStringArray("GAME_MAP")]
+script = ExtResource("1_hpmdq")
+GAME_MAP = NodePath("GameMap")
+TOWER_ID = 1
+TOWER_PLACEMENT_COORD = Vector2i(10, 10)
+
+[node name="GameMap" parent="." instance=ExtResource("2_kt3m4")]
+
+[node name="MapCamera" type="Camera2D" parent="." node_paths=PackedStringArray("__game_map")]
+position = Vector2(380, 641)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("3_prpal")
+__game_map = NodePath("../GameMap")
+metadata/_custom_type_script = "uid://wadk3qruggns"

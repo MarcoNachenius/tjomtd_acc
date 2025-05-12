@@ -40,6 +40,17 @@ var BUILD_TOWER_PRELOADS: Dictionary[BuildTowerIDs, PackedScene] = {
     BuildTowerIDs.TEST_BUILD_TOWER: load("res://towers/test_tower/test_tower.tscn")
 }
 
+var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
+    TowerIDs.BARRICADE: load("res://towers/barricade/tower_barricade.tscn"),
+    TowerIDs.BLACK_MARBLE_LVL_1: load("res://towers/buildable_towers/black_marble/level_1/black_marble_lvl_1.tscn"),
+    TowerIDs.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/black_marble_lvl_2.tscn"),
+    TowerIDs.BLACK_MARBLE_LVL_3: load("res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_tower.tscn"),
+    TowerIDs.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_tower.tscn"),
+    TowerIDs.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1.tscn"),
+    TowerIDs.TEST_BUILD_TOWER: load("res://towers/test_tower/test_tower.tscn"),
+    TowerIDs.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_level_1.tscn")
+}
+
 const TowerPrices: Dictionary = {
     TowerIDs.BARRICADE: 0,
     TowerIDs.BLACK_MARBLE_LVL_1: 0,

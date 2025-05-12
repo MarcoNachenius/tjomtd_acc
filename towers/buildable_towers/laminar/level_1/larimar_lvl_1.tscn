@@ -11,6 +11,7 @@ y_sort_enabled = true
 script = ExtResource("1_gmwqe")
 TOWER_ID = 5
 TOWER_SPRITE = NodePath("TowerSprite")
+TOWER_DISPLAY_RANGE = 500
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSprite" type="Sprite2D" parent="."]

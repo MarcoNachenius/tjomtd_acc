@@ -232,8 +232,19 @@ func _on_tower_selected(tower: Tower):
 		__selected_tower.AWAITING_SELECTION_ANIMATION.modulate.a = 0.5
 		__selected_tower.TOWER_SPRITE.modulate.a = 0.5
 	
+	# Hide range display shape for previously selected tower,
+	# provided it is not a barricade
+	if __selected_tower and __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
+		__selected_tower.RANGE_DISPLAY_SHAPE. visible = false
+
 	# Set new selected tower
 	__selected_tower = tower
+
+	# Show range display shape of newly selected tower if it is not a barricade
+	if __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
+		__selected_tower.RANGE_DISPLAY_SHAPE.visible = true
+
+	# Ensure properties container is visible 
 	TOWER_PROPERTIES_CONTAINER.visible = true
 	
 	# Handle towers awaiting selection

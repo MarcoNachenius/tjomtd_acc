@@ -4,8 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cmjxh8lgm4pw2" path="res://towers/buildable_towers/laminar/level_1/bullet_sprite.png" id="2_6fm33"]
 
 [node name="larimar_lvl_1_bullet" type="Node2D"]
-z_index = 2
-z_as_relative = false
+z_index = 4
 y_sort_enabled = true
 script = ExtResource("1_xplnd")
 __damage = 10
