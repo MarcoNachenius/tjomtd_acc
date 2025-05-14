@@ -15,6 +15,9 @@ class_name RandomTowerBuildHUD
 @onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_2_BUTTON: _on_sunstone_level_2_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_3_BUTTON: _on_sunstone_level_3_button_pressed,
+	
 }
 
 # CONSTANTS - Invariable components
@@ -323,9 +326,18 @@ func _on_tombstone_button_pressed():
 
 #                                 | Awaiting Selection Upgrade Tower Container |
 # =============================================================================================================
-
+# BLACK MARBLE
+# ------------
 func _on_black_marble_level_2_button_pressed():
 	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2)
 
 func _on_black_marble_level_3_button_pressed():
 	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3)
+
+# SUNSTONE
+# --------
+func _on_sunstone_level_2_button_pressed():
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_2)
+
+func _on_sunstone_level_3_button_pressed():
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_3)
