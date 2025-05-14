@@ -83,7 +83,7 @@ func _create_range_display_shape():
 		__curr_display_range = CUSTOM_TOWER_DISPLAY_RANGE
 	
 	# Create the range display shape
-	var new_display_shape: RangeDisplayShape = RangeDisplayShape.new(CUSTOM_TOWER_DISPLAY_RANGE)
+	var new_display_shape: RangeDisplayShape = RangeDisplayShape.new(__curr_display_range)
 	add_child(new_display_shape)
 	RANGE_DISPLAY_SHAPE = new_display_shape
 	RANGE_DISPLAY_SHAPE.y_sort_enabled = true

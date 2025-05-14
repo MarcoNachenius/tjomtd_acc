@@ -26,4 +26,5 @@ script = ExtResource("3_qstlq")
 __bullet_damage = 10
 __bullet_speed = 10
 BULLET_PRELOAD = 1
+__detection_range = 300
 metadata/_custom_type_script = "uid://bsxteh17ub0se"
