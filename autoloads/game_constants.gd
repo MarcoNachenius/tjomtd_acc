@@ -29,3 +29,9 @@ enum HudTypes {
 var HUD_LOADS: Dictionary = {
     HudTypes.RANDOM_TOWER_BUILD: load("res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.tscn")
 }
+
+# GAMEPLAY SETTINGS
+# =================
+## Controlls the max number of slow effects that can be active at the same time
+## at any time on a creep. 
+const MAX_SIMULTANEOUS_SLOW_EFFECTS = 2

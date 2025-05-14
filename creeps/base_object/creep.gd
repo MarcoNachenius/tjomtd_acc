@@ -36,6 +36,8 @@ var __stun_timer: Timer
 var __total_distance_travelled: float
 var __total_path_points: int
 
+
+
 # ********
 # BUILTINS
 # ********
@@ -179,6 +181,8 @@ func set_starting_health(health: int) -> void:
 	__starting_health = health
 	__curr_health = health
 
+## Sets the starting speed for the creep.
+## Also assigns current speed to the same value.
 func set_starting_speed(speed: int) -> void:
 	__starting_speed = speed
 	__curr_speed = speed

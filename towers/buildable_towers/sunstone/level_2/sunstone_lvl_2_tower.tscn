@@ -13,10 +13,11 @@ metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="StarFormationBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("2_hy3jw")
-__bullet_damage = 10
+__bullet_damage = 5
 __bullet_speed = 20
 __bullets_per_launch = 2
 BULLET_ID = 5
+__cooldown_duration = 0.7
 __detection_range = 200
 metadata/_custom_type_script = "uid://dp6ge5piuiiht"
 

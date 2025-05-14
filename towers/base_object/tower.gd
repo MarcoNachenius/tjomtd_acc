@@ -36,7 +36,9 @@ var RANGE_DISPLAY_SHAPE: RangeDisplayShape
 # BUILTINS
 func _ready():
 	__build_cost = TowerConstants.TowerPrices[TOWER_ID]
+	assert(TowerConstants.UPGRADES_INTO.has(TOWER_ID), "Missing upgrades into for tower. Assign value in TowerConstants.UPGRADES_INTO")
 	__upgrades_into = TowerConstants.UPGRADES_INTO[TOWER_ID]
+	assert(TowerConstants.REQUIRES_TOWERS.has(TOWER_ID), "Missing requires towers for tower. Assign value in TowerConstants.REQUIRES_TOWERS")
 	__requires_towers = TowerConstants.REQUIRES_TOWERS[TOWER_ID]
 	# Instantiate child scenes
 	_create_surface_sprite()
@@ -76,10 +78,15 @@ func _create_range_display_shape():
 		return
 	# Handle size creation based on the projectile spawner range
 	if !USE_CUSTOM_TOWER_DISPLAY_RANGE:
+		assert(PRIMARY_PROJECTILE_SPAWNER, "No projectile spawner has been assigned")
+		assert(PRIMARY_PROJECTILE_SPAWNER.get_detection_range(), "No range has been assigned to projectile spawner")
+		# Get the range from the projectile spawner
 		__curr_display_range = PRIMARY_PROJECTILE_SPAWNER.get_detection_range()
 	
 	# Handle size creation based on custom range
 	if USE_CUSTOM_TOWER_DISPLAY_RANGE:
+		assert(CUSTOM_TOWER_DISPLAY_RANGE, "No custom range has been assigned")
+		# Get the range from the custom range
 		__curr_display_range = CUSTOM_TOWER_DISPLAY_RANGE
 	
 	# Create the range display shape
