@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3sm7dfmrvbw8"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_p8fie"]
+[ext_resource type="PackedScene" uid="uid://bjancdx67lk7e" path="res://towers/base_object/templates/tower_sprite_termplate.tscn" id="2_m6fp4"]
+[ext_resource type="Texture2D" uid="uid://bqv1ygu10xbjg" path="res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_tower_sprite.png" id="3_8jlm0"]
+[ext_resource type="Script" uid="uid://dp6ge5piuiiht" path="res://projectile_spawners/multi_bullet/star_formation/star_formation_bullet_spawner.gd" id="4_8jlm0"]
+
+[node name="SunstoneLvl3Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 3
+y_sort_enabled = true
+script = ExtResource("1_p8fie")
+TOWER_ID = 18
+TOWER_SPRITE = NodePath("TowerSpriteTermplate")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("StarFormationBulletSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSpriteTermplate" parent="." instance=ExtResource("2_m6fp4")]
+position = Vector2(1, -33)
+scale = Vector2(0.76, 0.68)
+texture = ExtResource("3_8jlm0")
+
+[node name="StarFormationBulletSpawner" type="Node2D" parent="."]
+script = ExtResource("4_8jlm0")
+__bullet_damage = 10
+__bullet_speed = 10
+BULLET_ID = 6
+__cooldown_duration = 0.5
+__detection_range = 300
+metadata/_custom_type_script = "uid://dp6ge5piuiiht"

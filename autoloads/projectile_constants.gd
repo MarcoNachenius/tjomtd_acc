@@ -21,6 +21,7 @@ enum ProjectileIDs {
 	LARIMAR_LVL_1,
 	SUNSTONE_LVL_1,
 	SUNSTONE_LVL_2,
+	SUNSTONE_LVL_3,
 }
 
 # ******************************************************************************************************************
@@ -31,6 +32,7 @@ enum SingleHitBullets {
 	LARIMAR_LVL_1,
 	SUNSTONE_LVL_1,
 	SUNSTONE_LVL_2,
+	SUNSTONE_LVL_3,
 }
 
 enum SingleHitMissiles {
@@ -53,6 +55,7 @@ enum BulletsForSpawner {
 	LARIMAR_LVL_1,
 	SUNSTONE_LVL_1,
 	SUNSTONE_LVL_2,
+	SUNSTONE_LVL_3,
 }
 
 
@@ -77,6 +80,7 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary = {
 	SingleHitBullets.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_2: load("res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn"),
+	SingleHitBullets.SUNSTONE_LVL_3: load("res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn"),
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
@@ -88,13 +92,14 @@ var RANDOM_RICOCHET_BULLET_LOADS: Dictionary = {
 	RandomRicochetBullets.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn"),
 }
 
-var BULLET_PATHS: Dictionary = {
+const BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.BLACK_MARBLE_LVL_1: "res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_2: "res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_3: "res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn",
 	BulletsForSpawner.LARIMAR_LVL_1: "res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_1: "res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_2: "res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn",
+	BulletsForSpawner.SUNSTONE_LVL_3: "res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn",
 }
 
 

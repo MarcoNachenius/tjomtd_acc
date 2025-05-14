@@ -12,5 +12,5 @@ metadata/_custom_type_script = "uid://jrge5wn50vuj"
 
 [node name="BulletSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
-scale = Vector2(0.48, 0.24)
+scale = Vector2(0.4, 0.2)
 texture = ExtResource("2_1vqjy")

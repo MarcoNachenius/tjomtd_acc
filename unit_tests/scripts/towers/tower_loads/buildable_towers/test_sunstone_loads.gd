@@ -15,3 +15,9 @@ func test_sunstone_lvl_2_tower_id():
 	add_child_autofree(sunstone_lvl_2_tower)
 	assert_true(sunstone_lvl_2_tower.TOWER_ID == TowerConstants.TowerIDs.SUNSTONE_LVL_2, "Expected SUNSTONE_LVL_2 tower ID to be SUNSTONE_LVL_2")
 	sunstone_lvl_2_tower.queue_free()
+
+func test_sunstone_lvl_3_tower_id():
+	var sunstone_lvl_3_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.SUNSTONE_LVL_3].instantiate()
+	add_child_autofree(sunstone_lvl_3_tower)
+	assert_true(sunstone_lvl_3_tower.TOWER_ID == TowerConstants.TowerIDs.SUNSTONE_LVL_3, "Expected SUNSTONE_LVL_3 tower ID to be SUNSTONE_LVL_3")
+	sunstone_lvl_3_tower.queue_free()
