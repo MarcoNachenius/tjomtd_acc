@@ -1,9 +1,17 @@
 extends Node
 
+
+# ******************************************************************************************************************
+#                                            PROJECTILE COMPONENT LOADS
+# ******************************************************************************************************************
 var HURTBOX_PRELOAD: PackedScene = load("res://projectiles/components/hurtbox/projectile_hurtbox.tscn")
 var STUN_HURTBOX_PRELOAD: PackedScene = load("res://projectiles/components/stun_hurtbox/projectile_stun_hurtbox.tscn")
 var RETARGET_HURTBOX_PRELOAD: PackedScene = load("res://projectiles/components/retarget_hurtbox/retarget_hurtbox.tscn")
 
+
+# ******************************************************************************************************************
+#                                                 PROJECTILE ENUMS
+# ******************************************************************************************************************
 enum ProjectileIDs {
 	TEST_SINGLE_HIT_BULLET,
 	BLACK_MARBLE_LVL_1,
@@ -12,12 +20,17 @@ enum ProjectileIDs {
 	BISMUTH_LVL_1,
 	LARIMAR_LVL_1,
 	SUNSTONE_LVL_1,
+	SUNSTONE_LVL_2,
 }
 
+# ******************************************************************************************************************
+#                                                    BULLET ENUMS
+# ******************************************************************************************************************
 enum SingleHitBullets {
 	BLACK_MARBLE_LVL_1,
 	LARIMAR_LVL_1,
 	SUNSTONE_LVL_1,
+	SUNSTONE_LVL_2,
 }
 
 enum SingleHitMissiles {
@@ -39,12 +52,31 @@ enum BulletsForSpawner {
 	BLACK_MARBLE_LVL_3,
 	LARIMAR_LVL_1,
 	SUNSTONE_LVL_1,
+	SUNSTONE_LVL_2,
 }
 
+
+# ******************************************************************************************************************
+#                                             MISSILES ENUMS
+# ******************************************************************************************************************
+enum TargetedRicochetMissiles{
+	TEST_TARGETED_RICOCHET_MISSILE,
+}
+
+enum MissilesForSpawner {
+	BISMUTH_LVL_1,
+	TEST_TARGETED_RICOCHET_MISSILE,
+}
+
+
+# ******************************************************************************************************************
+#                                               BULLET VARS
+# ******************************************************************************************************************
 var SINGLE_HIT_BULLET_LOADS: Dictionary = {
 	SingleHitBullets.BLACK_MARBLE_LVL_1: load("res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn"),
 	SingleHitBullets.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn"),
+	SingleHitBullets.SUNSTONE_LVL_2: load("res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn"),
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
@@ -62,22 +94,13 @@ var BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.BLACK_MARBLE_LVL_3: "res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn",
 	BulletsForSpawner.LARIMAR_LVL_1: "res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_1: "res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn",
+	BulletsForSpawner.SUNSTONE_LVL_2: "res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn",
 }
 
 
-# ********
-# MISSILES
-# ********
-
-enum TargetedRicochetMissiles{
-	TEST_TARGETED_RICOCHET_MISSILE,
-}
-
-enum MissilesForSpawner {
-	BISMUTH_LVL_1,
-	TEST_TARGETED_RICOCHET_MISSILE,
-}
-
+# ******************************************************************************************************************
+#                                              MISSILE VARS
+# ******************************************************************************************************************
 var TARGETED_RICOCHET_MISSILE_LOADS: Dictionary = {
 	TargetedRicochetMissiles.TEST_TARGETED_RICOCHET_MISSILE: load("res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn"),
 }
