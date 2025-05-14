@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4jhbqh0qirnh"]
+
+[ext_resource type="Script" uid="uid://jrge5wn50vuj" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_4cdf3"]
+[ext_resource type="Texture2D" uid="uid://cjdjoq702nit0" path="res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet_sprite.png" id="2_1vqjy"]
+
+[node name="SunstoneLvl2Bullet" type="Node2D"]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_4cdf3")
+metadata/_custom_type_script = "uid://jrge5wn50vuj"
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_1vqjy")

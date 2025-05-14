@@ -3,6 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cw2sqdlw1nq7j" path="res://towers/test_tower/tower_sprite.png" id="1_rul4s"]
 
 [node name="TowerSpriteTermplate" type="Sprite2D"]
-z_index = 4
+z_index = 1
 y_sort_enabled = true
 texture = ExtResource("1_rul4s")
