@@ -41,6 +41,8 @@ func _handle_movement():
 ## Inflicts damage to the specified creep and handles ricochet logic.
 func _inflict_damange(creep: Creep):
 	creep.take_damage(__damage)
+	# Signal that creep has been hit
+	creep_hit.emit(creep)
 
 	# Handle AOE damage if enabled
 	_handle_aoe_damage_infliction()

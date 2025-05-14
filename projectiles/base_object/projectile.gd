@@ -2,6 +2,7 @@ extends Node2D
 class_name Projectile
 
 # EXPORT VARS
+# ===========
 @export var __hurtbox_radius: int = 5
 ## If set to true, a stun hurtbox will be created on ready.
 ## The stun hurbox's radius will be the equal to the projectile's hurtbox radius.
@@ -24,6 +25,7 @@ class_name Projectile
 @export var __aoe_damage_amount: int
 
 # PRIVATE VARS
+# =============
 var __isometric_speed: float
 var __speed: int
 var __target: Creep
@@ -31,6 +33,11 @@ var __velocity: Vector2
 var __hurtbox: ProjectileHurtbox
 var __retarget_hurtbox: RetargetHurtbox
 var __aoe_damage_hurtbox: ProjectileHurtbox
+
+# SIGNALS
+# =======
+
+signal creep_hit(creep: Creep)
 
 # ********
 # BUILTINS

@@ -19,6 +19,8 @@ func _handle_movement():
 ## Self destructs after dealing damage
 func _inflict_damange(creep: Creep):
 	creep.take_damage(__damage)
+	# Signal that creep has been hit
+	creep_hit.emit(creep)
 	# Handle AOE damage if enabled
 	_handle_aoe_damage_infliction()
 	queue_free()

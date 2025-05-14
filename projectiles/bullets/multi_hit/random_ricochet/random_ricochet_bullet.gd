@@ -52,8 +52,12 @@ func _extended_onready():
 
 ## Inflicts damage to specified creep and handles ricochet logic.
 func _inflict_damange(creep: Creep):
+
 	# Handle damage infliction
 	creep.take_damage(__damage)
+
+	# Signal that creep has been hit
+	creep_hit.emit(creep)
 
 	# Handle AOE damage if enabled
 	_handle_aoe_damage_infliction()
