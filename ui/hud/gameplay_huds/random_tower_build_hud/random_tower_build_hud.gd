@@ -223,7 +223,20 @@ func _on_life_lost(remaining_lives: int):
 	pass
 
 func _on_wave_completed(total_waves_completed: int):
-	pass
+	# Enable build mode for map
+	GAME_MAP.set_state(GAME_MAP.States.BUILD_MODE)
+	# Update tower count
+	__current_turn_tower_count = 0
+	# Hide tower properties hbox
+	TOWER_PROPERTIES_CONTAINER.visible = false
+	# Hide tower upgrades container
+	TOWER_UPGRADES_CONTAINER.visible = false
+	# Show build tower container
+	BUILD_RANDOM_TOWER_CONTAINER.visible = true
+	# Show build random tower button
+	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = true
+	# Hide exit build mode button
+	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 
 func _on_tower_selected(tower: Tower):
 	# Reset transparency of previously selected tower sprite and awaiting selection animation

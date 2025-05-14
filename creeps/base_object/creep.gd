@@ -15,6 +15,7 @@ signal end_of_path_reached(creep: Creep)
 @export var MOVEMENT_ANIMATIONS: AnimatedSprite2D
 @export var __points_for_death: int
 
+
 var __curr_compass_direction: CreepConstants.CompassDirections
 var __curr_health: int
 var __curr_path_point: int
@@ -26,6 +27,7 @@ var __detectable: bool
 var __distance_to_next_point: float
 var __hitbox: CreepHitbox
 var __is_wave_creep: bool
+var __num_of_active_stun_effects: int
 var __path_compass_directions: Array[CreepConstants.CompassDirections]
 var __path_points: Array[Vector2i]
 var __path_velocities: Array[Vector2]
@@ -202,7 +204,7 @@ func set_path_points(points: Array[Vector2i]) -> void:
 	_create_path_compass_directions()
 	_create_path_velocities()
 	_initiate_path_values()
-	
+
 	# Set penultimate point reached to true if there are no intermediate points
 	# between the start and the end of the path.
 	if __total_path_points == 1:
@@ -325,10 +327,19 @@ func stun(duration: float):
 		__stun_timer.wait_time = duration
 		__stun_timer.start()
 		_switch_state(States.IDLE)
+		# Increase number of active stun effects
+		__num_of_active_stun_effects += 1
 		return
+	
+	# Do nothing if number of active stun effects is already at its maximum
+	if __num_of_active_stun_effects == GameConstants.MAX_SIMULTANEOUS_STUN_EFFECTS:
+		return
+
 	# Extend the remaining time by adding the new duration
 	__stun_timer.wait_time = __stun_timer.time_left + duration
 	__stun_timer.start()  # Restart the timer with the new wait time
+	# Increase number of active stun effects
+	__num_of_active_stun_effects += 1
 
 ## Reduces the creep's health by the specified amount.
 ## If the creep's health drops to or below 0, switches the creep's state to DYING.
@@ -349,6 +360,8 @@ func _handle_idle():
 	# Check if the stun timer has expired
 	if __stun_timer.is_stopped():
 		_switch_state(States.MOVING)
+		# Reset number of active stun effects
+		__num_of_active_stun_effects = 0
 		return
 	# Play idle animation
 	IDLE_ANIMATIONS.play(CreepConstants.CompassDirToIdleAnimations[__curr_compass_direction])

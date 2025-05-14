@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8ri5x5sub3wm"]
 
 [ext_resource type="Script" uid="uid://jrge5wn50vuj" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_xplnd"]
-[ext_resource type="Texture2D" uid="uid://cmjxh8lgm4pw2" path="res://towers/buildable_towers/laminar/level_1/bullet_sprite.png" id="2_6fm33"]
+[ext_resource type="Texture2D" uid="uid://utxx5kx4xsad" path="res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet_sprite.png" id="2_xplnd"]
 
 [node name="larimar_lvl_1_bullet" type="Node2D"]
 z_index = 4
@@ -11,4 +11,5 @@ __damage = 10
 metadata/_custom_type_script = "uid://jrge5wn50vuj"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_6fm33")
+scale = Vector2(0.36, 0.18)
+texture = ExtResource("2_xplnd")

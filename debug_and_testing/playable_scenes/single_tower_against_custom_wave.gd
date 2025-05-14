@@ -38,3 +38,4 @@ func _place_single_tower():
 	# Switch state 
 	new_tower.switch_state(Tower.States.BUILT)
 	
+	new_tower.RANGE_DISPLAY_SHAPE.visible = true

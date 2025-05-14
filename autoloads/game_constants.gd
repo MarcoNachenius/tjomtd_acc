@@ -35,3 +35,6 @@ var HUD_LOADS: Dictionary = {
 ## Controlls the max number of slow effects that can be active at the same time
 ## at any time on a creep. 
 const MAX_SIMULTANEOUS_SLOW_EFFECTS = 2
+## Controlls the max number of stun effects that can be active at the same time
+## at any time on a creep. 
+const MAX_SIMULTANEOUS_STUN_EFFECTS = 2
