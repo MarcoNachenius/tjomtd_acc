@@ -202,6 +202,11 @@ func set_path_points(points: Array[Vector2i]) -> void:
 	_create_path_compass_directions()
 	_create_path_velocities()
 	_initiate_path_values()
+	
+	# Set penultimate point reached to true if there are no intermediate points
+	# between the start and the end of the path.
+	if __total_path_points == 1:
+		__penultimate_point_reached = true
 
 
 ## Initializes the path-related values for the creep.

@@ -5,7 +5,7 @@ extends HBoxContainer
 
 
 func _ready():
-    START_NEW_WAVE_BUTTON.pressed.connect(_on_start_new_wave_button_pressed)
+	START_NEW_WAVE_BUTTON.pressed.connect(_on_start_new_wave_button_pressed)
 
 func _on_start_new_wave_button_pressed():
-    GAME_MAP.creep_spawner.initiate_new_wave()
+	GAME_MAP.creep_spawner.initiate_new_wave()
