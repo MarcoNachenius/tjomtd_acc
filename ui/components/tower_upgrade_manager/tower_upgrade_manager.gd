@@ -63,6 +63,8 @@ func viable_compound_upgrade_tower_ids(selectedTowerID: TowerConstants.TowerIDs,
 	# Iterate through tower IDs into which the selection tower may upgrade 
 	for upgrades_into_tower_id in compound_upgrade_candidates:
 		# Fetch tower requirements for upgrade tower ID
+		assert(TowerConstants.AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS.has(upgrades_into_tower_id),
+			"Tower has no compound upgrades assigned. See TowerConstants.AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS")
 		var upgrade_tower_requirements: Dictionary[TowerConstants.TowerIDs, int] = TowerConstants.AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS[upgrades_into_tower_id]
 		
 		# Iterate through every tower type of required towers for compound upgrade
