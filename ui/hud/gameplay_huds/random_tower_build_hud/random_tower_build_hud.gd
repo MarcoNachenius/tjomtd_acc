@@ -7,17 +7,24 @@ class_name RandomTowerBuildHUD
 @export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
 @export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
+@export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
 
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
 }
+
 @onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_2_BUTTON: _on_sunstone_level_2_button_pressed,
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_3_BUTTON: _on_sunstone_level_3_button_pressed,
 	
+}
+
+@onready var PATH_LINE_VISIBILITY_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON: _on_show_path_button_pressed,
+	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON: _on_hide_path_button_pressed
 }
 
 # CONSTANTS - Invariable components
@@ -48,7 +55,7 @@ func _ready():
 ## Connect signals from all components to relevant handler methods on ready.
 func _connect_all_component_signals():
 	# Build random tower hbox
-	_connect_build_random_tower_component_signals()
+	_connect_build_random_tower_container_signals()
 	# Game map
 	_connect_game_map_signals()
 	# Tower properties hbox
@@ -56,13 +63,19 @@ func _connect_all_component_signals():
 	# Tower upgrades container
 	_connect_tower_upgrades_signals()
 	# Awaiting selection upgrade towers container
-	_connect_awaiting_selection_compound_upgrade_towers_signals()
+	_connect_awaiting_selection_upgrade_towers_container_signals()
+	# Path visibility container
+	_connect_path_visibility_container_signals()
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
-func _connect_build_random_tower_component_signals():
+func _connect_build_random_tower_container_signals():
 	# Connect the button signals to the appropriate methods
 	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.pressed.connect(_on_build_random_tower_button_pressed)
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.pressed.connect(_on_exit_build_mode_button_pressed)
+
+func _connect_path_visibility_container_signals():
+	for button in PATH_LINE_VISIBILITY_CONTAINER.ALL_BUTTONS:
+		button.pressed.connect(PATH_LINE_VISIBILITY_CONTAINER_BUTTON_CALLBACKS[button])
 
 func _connect_tower_upgrades_signals():
 	# Connect the button signals to the appropriate methods
@@ -84,7 +97,7 @@ func _connect_game_map_signals():
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
 
-func _connect_awaiting_selection_compound_upgrade_towers_signals():
+func _connect_awaiting_selection_upgrade_towers_container_signals():
 	for button in AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
@@ -173,6 +186,10 @@ func _handle_initial_container_visibility():
 	TOWER_UPGRADES_CONTAINER.visible = false
 	# Hide awaiting selection upgrade towers container
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+	# Enable show path button visibility
+	PATH_LINE_VISIBILITY_CONTAINER.visible = true
+	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON.visible = false
+	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON.visible = true
 
 ## Ensures that all containers before a wave starts are properly hidden
 func _hide_containers_on_tower_kept():
@@ -187,7 +204,19 @@ func _hide_containers_on_tower_kept():
 # SIGNAL CALLBACKS
 # ****************
 #
-#                                        Build Random Tower Container |
+#                                       | Path Line Visibility Container |
+# =============================================================================================================
+func _on_show_path_button_pressed():
+	GAME_MAP.show_path_line()
+	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON.visible = false
+	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON.visible = true
+
+func _on_hide_path_button_pressed():
+	GAME_MAP.hide_path_line()
+	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON.visible = true
+	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON.visible = false
+
+#                                       | Build Random Tower Container |
 # =============================================================================================================
 ## Handle build random tower button pressed signal
 func _on_build_random_tower_button_pressed():

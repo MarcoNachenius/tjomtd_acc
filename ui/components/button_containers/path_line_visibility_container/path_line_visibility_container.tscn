@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8jv68io5tjec"]
+
+[ext_resource type="Script" uid="uid://bu1oddefbx00" path="res://ui/components/button_containers/path_line_visibility_container/path_line_visibility_container.gd" id="1_iep57"]
+
+[node name="PathLineVisibilityContainer" type="HBoxContainer" node_paths=PackedStringArray("SHOW_PATH_BUTTON", "HIDE_PATH_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_iep57")
+SHOW_PATH_BUTTON = NodePath("ShowPathButton")
+HIDE_PATH_BUTTON = NodePath("HidePathButton")
+
+[node name="ShowPathButton" type="Button" parent="."]
+layout_mode = 2
+text = "Show Path"
+
+[node name="HidePathButton" type="Button" parent="."]
+layout_mode = 2
+text = "Hide Path"
