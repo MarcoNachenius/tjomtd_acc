@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj8a3lpih7uij"]
+
+[ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_qufji"]
+[ext_resource type="Texture2D" uid="uid://chojcatvimd5w" path="res://towers/buildable_towers/laminar/level_2/larimar_lvl_2_missile_sprite.png" id="2_o3ou1"]
+
+[node name="LarimarLvl2Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_qufji")
+__damage = 10
+MISSILE_SPRITE = NodePath("MissileSprite")
+__hurtbox_radius = 10
+__can_slow = true
+__slow_duration_seconds = 1.0
+__slow_speed_reduction_percentage = 20
+metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("2_o3ou1")

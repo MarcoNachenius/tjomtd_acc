@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq4n0ho6yxfba"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_43w8x"]
+[ext_resource type="PackedScene" uid="uid://bjancdx67lk7e" path="res://towers/base_object/templates/tower_sprite_termplate.tscn" id="2_vw2vm"]
+[ext_resource type="Texture2D" uid="uid://dxlqids8rgd13" path="res://towers/buildable_towers/laminar/level_2/larimar_lvl_2_tower_sprite.png" id="3_yf0k0"]
+[ext_resource type="Script" uid="uid://da2h3gfp55xjn" path="res://projectile_spawners/single_missile/single_hit/single_missile_spawner.gd" id="4_xlh5l"]
+
+[node name="LarimarLvl2" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_43w8x")
+TOWER_ID = 12
+TOWER_SPRITE = NodePath("TowerSpriteTermplate")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("SingleMissileSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSpriteTermplate" parent="." instance=ExtResource("2_vw2vm")]
+position = Vector2(0, -14)
+scale = Vector2(0.92, 0.92)
+texture = ExtResource("3_yf0k0")
+
+[node name="SingleMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("4_xlh5l")
+MISSILE_PRELOAD = 1
+__missile_damage = 10
+__missile_speed = 20
+__cooldown_duration = 1.0
+__detection_range = 300
+metadata/_custom_type_script = "uid://da2h3gfp55xjn"

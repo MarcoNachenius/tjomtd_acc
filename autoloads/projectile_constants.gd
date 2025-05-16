@@ -22,6 +22,7 @@ enum ProjectileIDs {
 	SUNSTONE_LVL_1,
 	SUNSTONE_LVL_2,
 	SUNSTONE_LVL_3,
+	LARIMAR_LVL_2,
 }
 
 # ******************************************************************************************************************
@@ -36,7 +37,8 @@ enum SingleHitBullets {
 }
 
 enum SingleHitMissiles {
-	BISMUTH_LVL_1
+	BISMUTH_LVL_1,
+	LARIMAR_LVL_2,
 }
 
 enum TargetedRicochetBullets {
@@ -116,5 +118,6 @@ var MISSILE_PATHS = {
 }
 
 var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
-	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
+	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn"),
+	SingleHitMissiles.LARIMAR_LVL_2: load("res://towers/buildable_towers/laminar/level_2/larimar_lvl_2_missile.tscn")
 }

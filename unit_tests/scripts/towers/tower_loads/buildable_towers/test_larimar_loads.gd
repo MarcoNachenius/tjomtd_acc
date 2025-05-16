@@ -9,3 +9,9 @@ func test_larimar_lvl_1_tower_id():
 	add_child_autofree(larimar_lvl_1_tower)
 	assert_true(larimar_lvl_1_tower.TOWER_ID == TowerConstants.TowerIDs.LARIMAR_LVL_1, "Expected LARIMAR_LVL_1 tower ID to be LARIMAR_LVL_1")
 	larimar_lvl_1_tower.queue_free()
+
+func test_larimar_lvl_2_tower_id():
+	var larimar_lvl_2_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.LARIMAR_LVL_2].instantiate()
+	add_child_autofree(larimar_lvl_2_tower)
+	assert_true(larimar_lvl_2_tower.TOWER_ID == TowerConstants.TowerIDs.LARIMAR_LVL_2, "Expected LARIMAR_LVL_2 tower ID to be LARIMAR_LVL_1")
+	larimar_lvl_2_tower.queue_free()
