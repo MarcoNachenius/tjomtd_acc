@@ -28,6 +28,7 @@ var __distance_to_next_point: float
 var __hitbox: CreepHitbox
 var __is_wave_creep: bool
 var __num_of_active_stun_effects: int
+var __num_of_active_slow_effects: int
 var __path_compass_directions: Array[CreepConstants.CompassDirections]
 var __path_points: Array[Vector2i]
 var __path_velocities: Array[Vector2]
@@ -366,8 +367,58 @@ func _handle_idle():
 	# Play idle animation
 	IDLE_ANIMATIONS.play(CreepConstants.CompassDirToIdleAnimations[__curr_compass_direction])
 
+func slow(percentage: int, durationInSeconds: float):
+	# Do nothing if new slow effect goes beyond cap of simultaneous slows at a time
+	if __num_of_active_slow_effects >= GameConstants.MAX_SIMULTANEOUS_SLOW_EFFECTS:
+		return
+	
+	# Calculate speed amount from provided percentage
+	var speed_to_reduce: int = __starting_speed * percentage/100
+
+	# Do nothing if intended slow effect will stop movement of creep
+	if __curr_speed - speed_to_reduce < 1:
+		return
+
+	# Increase number of active slow effects
+	__num_of_active_slow_effects += 1
+
+	# Create Slowtimer instance
+	var new_slow_timer = SlowTimer.new()
+	add_child(new_slow_timer)
+	
+	# Ensure timer stops after timeout
+	new_slow_timer.one_shot = true
+
+	# Connect timer signal
+	new_slow_timer.slow_timer_stopped.connect(_on_slow_timer_stopped)
+
+	# Set duration of slow effect
+	new_slow_timer.wait_time = durationInSeconds
+
+	# Have slow timer store the amount of speed points it has claimed from the creep
+	new_slow_timer.set_speed_points_claimed(speed_to_reduce)
+
+	# Slow down creep
+	__curr_speed -= speed_to_reduce
+
+	# Start slow timer
+	new_slow_timer.start()
 
 
+func _on_slow_timer_stopped(slowTimer: SlowTimer):
+	# Handle dying creep
+	if __curr_state == States.DYING:
+		slowTimer.queue_free()
+		return
+	
+	# Restore speed
+	__curr_speed += slowTimer.get_speed_points_claimed()
+
+	# Decrease number of active slow effects
+	__num_of_active_slow_effects -= 1
+
+	# Remove timer from scene
+	slowTimer.queue_free()
 
 
 
