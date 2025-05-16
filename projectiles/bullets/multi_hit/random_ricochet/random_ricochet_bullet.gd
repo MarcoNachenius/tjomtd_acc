@@ -62,6 +62,9 @@ func _inflict_damange(creep: Creep):
 	# Handle AOE damage if enabled
 	_handle_aoe_damage_infliction()
 
+	# Handle slow infliction
+	_handle_slow_infliction(creep)
+
 	# Handle ricochet
 	__curr_ricochets += 1
 	# Destroy bullet if it has reached maximum ricochets

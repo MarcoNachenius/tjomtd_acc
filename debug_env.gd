@@ -4,4 +4,4 @@ extends Node2D
 
 
 func _ready() -> void:
-    print(__game_map.__mandatory_waypoints)
+	print(__game_map.__mandatory_waypoints)

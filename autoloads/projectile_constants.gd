@@ -75,7 +75,7 @@ enum MissilesForSpawner {
 # ******************************************************************************************************************
 #                                               BULLET VARS
 # ******************************************************************************************************************
-var SINGLE_HIT_BULLET_LOADS: Dictionary = {
+var SINGLE_HIT_BULLET_LOADS: Dictionary[SingleHitBullets, PackedScene] = {
 	SingleHitBullets.BLACK_MARBLE_LVL_1: load("res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn"),
 	SingleHitBullets.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn"),

@@ -11,6 +11,12 @@ class_name Projectile
 @export var __stun_duration_seconds: float = 0.0
 ## Percentage chance(0-100) of stunning the creep.
 @export var __stun_probability_percentage: int = 0
+## If true, projectile will be able to slow creep
+@export var __can_slow: bool
+## Duration of slow effect in seconds
+@export var __slow_duration_seconds: float = 0.0
+## Percentage of speed reduction for creep when inflicted
+@export var __slow_speed_reduction_percentage: int
 ## If enabled, the projectile will assign a target to the projectile's hurtbox when it enters the area,
 ## and the projectile does not have a target assigned.
 @export var __retargetable: bool = false
@@ -207,7 +213,19 @@ func _inflict_aoe_damage():
 		# Inflict damage to the creep
 		creep.take_damage(__aoe_damage_amount)
 
+## Does nothing if projectile cannot inflict slow (i.e. __can_slow = false)
+func _handle_slow_infliction(inflictedCreep: Creep):
+	# Do nothing if projectile does not inflict slow
+	if !__can_slow:
+		return
+	
+	# Ensure slow specifiers have been provided
+	assert(__slow_duration_seconds, "No slow duration provided")
+	assert(__slow_speed_reduction_percentage, "No slow reduction percentage provided")
 
+	# Inflict slow
+	# This method already checks for creep state, speed reduction cap and max stackability of slow effects
+	inflictedCreep.slow(__slow_speed_reduction_percentage, __slow_duration_seconds)
 
 # *******
 # SIGNALS
@@ -265,3 +283,27 @@ func set_retargetable(enable_retargeting: bool) -> void:
 ## Cannot be negative.
 func set_retarget_radius(retarget_area_radius: int) -> void:
 	__retarget_radius = max(retarget_area_radius, 0)
+
+
+# Getter and Setter for __can_slow
+func get_can_slow() -> bool:
+	return __can_slow
+
+func set_can_slow(value: bool) -> void:
+	__can_slow = value
+
+
+# Getter and Setter for __slow_duration_seconds
+func get_slow_duration_seconds() -> float:
+	return __slow_duration_seconds
+
+func set_slow_duration_seconds(value: float) -> void:
+	__slow_duration_seconds = value
+
+
+# Getter and Setter for __slow_speed_reduction_percentage
+func get_slow_speed_reduction_percentage() -> int:
+	return __slow_speed_reduction_percentage
+
+func set_slow_speed_reduction_percentage(value: int) -> void:
+	__slow_speed_reduction_percentage = value
