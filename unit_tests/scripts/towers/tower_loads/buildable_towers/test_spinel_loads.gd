@@ -9,3 +9,9 @@ func test_spinel_lvl_1_tower_id():
 	add_child_autofree(spinel_lvl_1_tower)
 	assert_true(spinel_lvl_1_tower.TOWER_ID == TowerConstants.TowerIDs.SPINEL_LVL_1, "Expected SPINEL_LVL_1 tower ID to be SPINEL_LVL_1")
 	spinel_lvl_1_tower.queue_free()
+
+func test_spinel_lvl_2_tower_id():
+	var spinel_lvl_2_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.SPINEL_LVL_2].instantiate()
+	add_child_autofree(spinel_lvl_2_tower)
+	assert_true(spinel_lvl_2_tower.TOWER_ID == TowerConstants.TowerIDs.SPINEL_LVL_2, "Expected SPINEL_LVL_2 tower ID to be SPINEL_LVL_1")
+	spinel_lvl_2_tower.queue_free()
