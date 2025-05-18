@@ -962,10 +962,9 @@ MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 __points_for_death = 10
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
-visible = false
 y_sort_enabled = true
 sprite_frames = ExtResource("2_8hl8q")
-animation = &"move_se"
+animation = &"move_nw"
 
 [node name="IdleAnimations" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -973,6 +972,7 @@ sprite_frames = ExtResource("3_nnilb")
 animation = &"idle_w"
 
 [node name="DeathAnimations" type="AnimatedSprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_j6nho")
 animation = &"death_w"

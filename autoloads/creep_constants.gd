@@ -6,14 +6,16 @@ enum CreepIDs {
     RED_SPIDER,
     DEMON,
     CENTIPEDE,
-    BLUE_SPIDER
+    BLUE_SPIDER,
+    HUMAN
 }
 
 var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
     CreepIDs.RED_SPIDER: load("res://creeps/red_spider/red_spider.tscn"),
     CreepIDs.DEMON: load("res://creeps/demon/demon.tscn"),
     CreepIDs.CENTIPEDE: load("res://creeps/centipede/centipede.tscn"),
-    CreepIDs.BLUE_SPIDER: load("res://creeps/blue_spider/blue_spider.tscn")
+    CreepIDs.BLUE_SPIDER: load("res://creeps/blue_spider/blue_spider.tscn"),
+    CreepIDs.HUMAN: load("res://creeps/human/human.tscn")
 }
 
 

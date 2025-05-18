@@ -6,6 +6,7 @@ extends  GutTest
 # - Demon
 # - Red Spider
 # - Blue Spider
+# - Human
 
 func before_each():
     await get_tree().process_frame
@@ -78,6 +79,24 @@ func test_blue_spider_death_animations():
     assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_sw"), "Red Spider creep has 'death_sw animation'")
     assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_w"), "Red Spider creep has 'death_w animation'")
     assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_nw"), "Red Spider creep has 'death_nw animation'")
+
+    # Clean up
+    dummy_creep.queue_free()
+
+func test_human_death_animations():
+    # Create dummy creep
+    var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.HUMAN].instantiate()
+    add_child_autofree(dummy_creep)
+    dummy_creep.stun(10)
+
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_n"), "Human creep has 'death_n animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_ne"), "Human creep has 'death_ne animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_e"), "Human creep has 'death_e animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_se"), "Human creep has 'death_se animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_s"), "Human creep has 'death_s animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_sw"), "Human creep has 'death_sw animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_w"), "Human creep has 'death_w animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_nw"), "Human creep has 'death_nw animation'")
 
     # Clean up
     dummy_creep.queue_free()

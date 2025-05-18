@@ -6,6 +6,7 @@ extends  GutTest
 # - Demon
 # - Red Spider
 # - Blue Spider
+# - Human
 
 func before_each():
     await get_tree().process_frame
@@ -78,6 +79,24 @@ func test_blue_spider_idle_animations():
     assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_sw"), "Red Spider creep has 'idle_sw animation'")
     assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_w"), "Red Spider creep has 'idle_w animation'")
     assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_nw"), "Red Spider creep has 'idle_nw animation'")
+
+    # Clean up
+    dummy_creep.queue_free()
+
+func test_human_idle_animations():
+    # Create dummy creep
+    var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.HUMAN].instantiate()
+    add_child_autofree(dummy_creep)
+    dummy_creep.stun(10)
+
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_n"), "Human creep has 'idle_n animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_ne"), "Human creep has 'idle_ne animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_e"), "Human creep has 'idle_e animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_se"), "Human creep has 'idle_se animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_s"), "Human creep has 'idle_s animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_sw"), "Human creep has 'idle_sw animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_w"), "Human creep has 'idle_w animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_nw"), "Human creep has 'idle_nw animation'")
 
     # Clean up
     dummy_creep.queue_free()
