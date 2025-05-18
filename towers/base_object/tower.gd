@@ -35,6 +35,7 @@ var RANGE_DISPLAY_SHAPE: RangeDisplayShape
 
 # BUILTINS
 func _ready():
+	assert(TowerConstants.TowerPrices.has(TOWER_ID), "No tower price provided in TowerConstants.TowerPrices")
 	__build_cost = TowerConstants.TowerPrices[TOWER_ID]
 	assert(TowerConstants.UPGRADES_INTO.has(TOWER_ID), "Missing upgrades into for tower. Assign value in TowerConstants.UPGRADES_INTO")
 	__upgrades_into = TowerConstants.UPGRADES_INTO[TOWER_ID]

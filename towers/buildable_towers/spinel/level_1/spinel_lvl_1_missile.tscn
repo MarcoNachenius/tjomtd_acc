@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbj4i1rroci03"]
+
+[ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_k5loq"]
+[ext_resource type="Texture2D" uid="uid://cgr2vnk6g26qm" path="res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile_sprite.png" id="2_5v3nb"]
+
+[node name="SpinelLvl1Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_k5loq")
+MISSILE_SPRITE = NodePath("MissileSprite")
+__aoe_enabled = true
+__aoe_detection_radius = 200
+__aoe_damage_amount = 10
+metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_5v3nb")

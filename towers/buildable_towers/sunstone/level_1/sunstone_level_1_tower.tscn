@@ -16,8 +16,8 @@ PRIMARY_PROJECTILE_SPAWNER = NodePath("StarFormationBulletSpawner")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSpriteTermplate" parent="." instance=ExtResource("2_uihkf")]
-position = Vector2(0, -40)
-scale = Vector2(1, 0.936508)
+position = Vector2(0, -33)
+scale = Vector2(0.926894, 0.788044)
 texture = ExtResource("3_043wa")
 
 [node name="StarFormationBulletSpawner" type="Node2D" parent="."]
