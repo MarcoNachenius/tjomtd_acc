@@ -577,7 +577,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_e",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -630,7 +630,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_n",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -683,7 +683,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_ne",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -736,7 +736,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_nw",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -789,7 +789,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_s",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -842,7 +842,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_se",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -895,7 +895,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_sw",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -948,7 +948,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_w",
-"speed": 10.0
+"speed": 15.0
 }]
 
 [node name="RedSpider" type="Node2D" node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS")]
@@ -962,6 +962,7 @@ MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 __points_for_death = 10
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 sprite_frames = ExtResource("2_8hl8q")
 animation = &"move_se"
@@ -972,7 +973,6 @@ sprite_frames = ExtResource("3_nnilb")
 animation = &"idle_w"
 
 [node name="DeathAnimations" type="AnimatedSprite2D" parent="."]
-visible = false
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_j6nho")
 animation = &"death_w"
