@@ -226,7 +226,7 @@ const AWAITING_SELECTION_COMPOUND_UPGRADES_INTO: Dictionary[TowerIDs, Array] = {
     TowerIDs.BISMUTH_LVL_3: [],
     TowerIDs.BISMUTH_LVL_4: [],
     TowerIDs.BISMUTH_LVL_5: [],
-    TowerIDs.LARIMAR_LVL_1: [],
+    TowerIDs.LARIMAR_LVL_1: [TowerIDs.LARIMAR_LVL_2],
     TowerIDs.LARIMAR_LVL_2: [],
     TowerIDs.LARIMAR_LVL_3: [],
     TowerIDs.LARIMAR_LVL_4: [],

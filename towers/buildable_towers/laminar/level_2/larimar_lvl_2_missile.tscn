@@ -18,5 +18,5 @@ metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
 
 [node name="MissileSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
-scale = Vector2(0.72, 0.72)
+scale = Vector2(0.48, 0.48)
 texture = ExtResource("2_o3ou1")

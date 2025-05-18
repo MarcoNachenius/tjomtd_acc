@@ -7,6 +7,7 @@ class_name AwaitingSelectionUpgradeTowersContainer
 @export var SUNSTONE_LEVEL_2_BUTTON: Button
 @export var SUNSTONE_LEVEL_3_BUTTON: Button
 @export var SPINEL_LEVEL_2_BUTTON: Button
+@export var LARIMAR_LEVEL_2_BUTTON: Button
 
 
 # CONSTANTS
@@ -16,6 +17,7 @@ class_name AwaitingSelectionUpgradeTowersContainer
     SUNSTONE_LEVEL_2_BUTTON,
     SUNSTONE_LEVEL_3_BUTTON,
     SPINEL_LEVEL_2_BUTTON,
+    LARIMAR_LEVEL_2_BUTTON
 ]
 
 @onready var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
@@ -24,6 +26,7 @@ class_name AwaitingSelectionUpgradeTowersContainer
     TowerConstants.TowerIDs.SUNSTONE_LVL_2: SUNSTONE_LEVEL_2_BUTTON,
     TowerConstants.TowerIDs.SUNSTONE_LVL_3: SUNSTONE_LEVEL_3_BUTTON,
     TowerConstants.TowerIDs.SPINEL_LVL_2: SPINEL_LEVEL_2_BUTTON,
+    TowerConstants.TowerIDs.LARIMAR_LVL_2: LARIMAR_LEVEL_2_BUTTON,
     
 }
 

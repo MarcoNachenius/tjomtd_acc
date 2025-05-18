@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lfbebd88mhcq" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.gd" id="1_3sk7d"]
 
-[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON", "SUNSTONE_LEVEL_2_BUTTON", "SUNSTONE_LEVEL_3_BUTTON", "SPINEL_LEVEL_2_BUTTON")]
+[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON", "SUNSTONE_LEVEL_2_BUTTON", "SUNSTONE_LEVEL_3_BUTTON", "SPINEL_LEVEL_2_BUTTON", "LARIMAR_LEVEL_2_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_3sk7d")
@@ -11,6 +11,7 @@ BLACK_MARBLE_LEVEL_3_BUTTON = NodePath("BlackMarbleLvl3Button")
 SUNSTONE_LEVEL_2_BUTTON = NodePath("SunstoneLvl2Button")
 SUNSTONE_LEVEL_3_BUTTON = NodePath("SunstoneLvl3Button")
 SPINEL_LEVEL_2_BUTTON = NodePath("SpinelLvl2Button")
+LARIMAR_LEVEL_2_BUTTON = NodePath("LarimarLvl2Button")
 
 [node name="BlackMarbleLvl2Button" type="Button" parent="."]
 layout_mode = 2
@@ -35,4 +36,9 @@ Level 3"
 [node name="SpinelLvl2Button" type="Button" parent="."]
 layout_mode = 2
 text = "Spinel
+Level 2"
+
+[node name="LarimarLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Larimar
 Level 2"
