@@ -8,6 +8,7 @@ class_name RandomTowerBuildHUD
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
 @export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 @export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
+@export var START_NEW_WAVE_BUTTON: Button
 
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -72,6 +73,11 @@ func _connect_all_component_signals():
 	_connect_awaiting_selection_upgrade_towers_container_signals()
 	# Path visibility container
 	_connect_path_visibility_container_signals()
+	
+	# Hud buttons
+	assert(START_NEW_WAVE_BUTTON, "No start new wave button assigned")
+	START_NEW_WAVE_BUTTON.pressed.connect(_on_start_new_wave_button_pressed)
+	START_NEW_WAVE_BUTTON.visible = false
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_container_signals():
@@ -149,6 +155,8 @@ func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs)
 
 func _handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
 	_hide_containers_on_tower_kept()
+	# Give player option to start new wave
+	START_NEW_WAVE_BUTTON.visible = true
 	GAME_MAP.keep_compound_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
 	# Switch the game map state to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
@@ -205,11 +213,22 @@ func _hide_containers_on_tower_kept():
 	TOWER_UPGRADES_CONTAINER.visible = false
 	# Hide awaiting selection upgrade towers container
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+	# Hide build tower properties
+	BUILD_RANDOM_TOWER_CONTAINER.visible = false
 
 # ****************
 # SIGNAL CALLBACKS
 # ****************
 #
+#                                            | Hud Buttons |
+# =============================================================================================================
+func _on_start_new_wave_button_pressed():
+	GAME_MAP.creep_spawner.initiate_new_wave()
+	# Hide exit build mode button
+	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
+	# Switch to navigation mode
+	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
 #                                       | Path Line Visibility Container |
 # =============================================================================================================
 func _on_show_path_button_pressed():
@@ -261,8 +280,6 @@ func _on_life_lost(remaining_lives: int):
 	pass
 
 func _on_wave_completed(total_waves_completed: int):
-	# Enable build mode for map
-	GAME_MAP.set_state(GAME_MAP.States.BUILD_MODE)
 	# Update tower count
 	__current_turn_tower_count = 0
 	# Hide tower properties hbox
@@ -275,6 +292,8 @@ func _on_wave_completed(total_waves_completed: int):
 	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = true
 	# Hide exit build mode button
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
+	# Hide start new wave button
+	START_NEW_WAVE_BUTTON.visible = false
 
 func _on_tower_selected(tower: Tower):
 	# Reset transparency of previously selected tower sprite and awaiting selection animation
@@ -348,6 +367,9 @@ func _on_keep_tower_button_pressed():
 	
 	# Switch the game map state to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
+	# Allow player to start new wave
+	START_NEW_WAVE_BUTTON.visible = true
 
 	__current_turn_tower_count = 0
 
