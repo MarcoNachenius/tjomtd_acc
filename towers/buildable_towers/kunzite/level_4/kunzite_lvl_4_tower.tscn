@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqet2qfdfrxrh"]
+[gd_scene load_steps=4 format=3 uid="uid://dqet2qfdfrxrh"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_xbtfw"]
 [ext_resource type="Texture2D" uid="uid://qocfrbwwwxm7" path="res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_tower_sprite.png" id="2_hjyfg"]
+[ext_resource type="Script" uid="uid://delcsxbwgnxf0" path="res://projectile_spawners/multi_bullet/targeted/multi_target_single_hit_bullet_spawner/multi_target_single_hit_bullet_spawner.gd" id="3_hjyfg"]
 
-[node name="KunziteLvl4Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
+[node name="KunziteLvl4Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
 z_index = 2
 y_sort_enabled = true
 script = ExtResource("1_xbtfw")
 TOWER_ID = 31
 TOWER_SPRITE = NodePath("TowerSprite")
-USE_CUSTOM_TOWER_DISPLAY_RANGE = true
-CUSTOM_TOWER_DISPLAY_RANGE = 30
+PRIMARY_PROJECTILE_SPAWNER = NodePath("MultiTargetSingleHitSingleBulletSpawner")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
@@ -19,3 +19,13 @@ y_sort_enabled = true
 position = Vector2(0, -43)
 scale = Vector2(0.88, 0.5984)
 texture = ExtResource("2_hjyfg")
+
+[node name="MultiTargetSingleHitSingleBulletSpawner" type="Node2D" parent="."]
+script = ExtResource("3_hjyfg")
+__bullets_per_launch = 4
+__bullet_damage = 10
+__bullet_speed = 30
+BULLET_PRELOAD = 6
+__cooldown_duration = 1.0
+__detection_range = 400
+metadata/_custom_type_script = "uid://delcsxbwgnxf0"

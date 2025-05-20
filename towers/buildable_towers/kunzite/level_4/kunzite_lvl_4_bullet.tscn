@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuvux0okxoddh"]
+
+[ext_resource type="Script" uid="uid://jrge5wn50vuj" path="res://projectiles/bullets/single_hit/base_object/single_hit_bullet.gd" id="1_li8in"]
+[ext_resource type="Texture2D" uid="uid://f5h670lu6k58" path="res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet_sprite.png" id="2_gbud2"]
+
+[node name="KunziteLvl4Bullet" type="Node2D"]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_li8in")
+metadata/_custom_type_script = "uid://jrge5wn50vuj"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.44, 0.22)
+texture = ExtResource("2_gbud2")

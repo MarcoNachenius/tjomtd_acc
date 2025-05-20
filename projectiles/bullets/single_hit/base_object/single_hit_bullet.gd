@@ -19,6 +19,7 @@ func _handle_movement():
 # The bullet will apply its damage to the creep and then self-destruct,
 # ensuring it only affects a single target upon impact.
 func _inflict_damange(creep: Creep):
+	# Ensure bullet is not placed at position beyond creep when hit
 	creep.take_damage(__damage)
 	# Signal that creep has been hit
 	creep_hit.emit(creep)

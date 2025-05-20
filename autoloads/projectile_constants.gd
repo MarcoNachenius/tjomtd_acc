@@ -25,7 +25,10 @@ enum ProjectileIDs {
 	LARIMAR_LVL_2,
 	SPINEL_LVL_1,
 	SPINEL_LVL_2,
-	KUNZITE_LVL_1
+	KUNZITE_LVL_1,
+	KUNZITE_LVL_2,
+	KUNZITE_LVL_3,
+	KUNZITE_LVL_4
 }
 
 # ******************************************************************************************************************
@@ -37,6 +40,8 @@ enum SingleHitBullets {
 	SUNSTONE_LVL_1,
 	SUNSTONE_LVL_2,
 	SUNSTONE_LVL_3,
+	KUNZITE_LVL_2,
+	KUNZITE_LVL_4
 }
 
 enum TargetedRicochetBullets {
@@ -56,6 +61,8 @@ enum BulletsForSpawner {
 	SUNSTONE_LVL_1,
 	SUNSTONE_LVL_2,
 	SUNSTONE_LVL_3,
+	KUNZITE_LVL_2,
+	KUNZITE_LVL_4
 }
 
 
@@ -67,7 +74,8 @@ enum SingleHitMissiles {
 	LARIMAR_LVL_2,
 	SPINEL_LVL_1,
 	SPINEL_LVL_2,
-	KUNZITE_LVL_1
+	KUNZITE_LVL_1,
+	KUNZITE_LVL_3
 }
 
 enum TargetedRicochetMissiles{
@@ -79,7 +87,8 @@ enum MissilesForSpawner {
 	TEST_TARGETED_RICOCHET_MISSILE,
 	SPINEL_LVL_1,
 	SPINEL_LVL_2,
-	KUNZITE_LVL_1
+	KUNZITE_LVL_1,
+	KUNZITE_LVL_3
 }
 
 
@@ -92,6 +101,8 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary[SingleHitBullets, PackedScene] = {
 	SingleHitBullets.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_2: load("res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_3: load("res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn"),
+	SingleHitBullets.KUNZITE_LVL_2: load("res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn"),
+	SingleHitBullets.KUNZITE_LVL_4: load("res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn")
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
@@ -111,6 +122,8 @@ const BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.SUNSTONE_LVL_1: "res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_2: "res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_3: "res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn",
+	BulletsForSpawner.KUNZITE_LVL_2: "res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn",
+	BulletsForSpawner.KUNZITE_LVL_4: "res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn"
 }
 
 
@@ -126,7 +139,8 @@ var MISSILE_PATHS = {
 	MissilesForSpawner.TEST_TARGETED_RICOCHET_MISSILE: "res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_1: "res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_2: "res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn",
-	MissilesForSpawner.KUNZITE_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn"
+	MissilesForSpawner.KUNZITE_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
+	MissilesForSpawner.KUNZITE_LVL_3: "res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn"
 }
 
 var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
@@ -134,5 +148,6 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
 	SingleHitMissiles.LARIMAR_LVL_2: load("res://towers/buildable_towers/laminar/level_2/larimar_lvl_2_missile.tscn"),
 	SingleHitMissiles.SPINEL_LVL_1: load("res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn"),
 	SingleHitMissiles.SPINEL_LVL_2: load("res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn"),
-	SingleHitMissiles.KUNZITE_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
+	SingleHitMissiles.KUNZITE_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn"),
+	SingleHitMissiles.KUNZITE_LVL_3: load("res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn")
 }

@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://doqwcoomeqvn6"]
+[gd_scene load_steps=4 format=3 uid="uid://doqwcoomeqvn6"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_wkgyu"]
 [ext_resource type="Texture2D" uid="uid://dwr3bfvnollpo" path="res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_tower_sprite.png" id="2_mc3gx"]
+[ext_resource type="Script" uid="uid://biljfygpuwex3" path="res://projectile_spawners/multi_missile/targeted/targeted_multi_missile_spawner.gd" id="3_mc3gx"]
 
-[node name="KunziteLvl3Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
+[node name="KunziteLvl3Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
 script = ExtResource("1_wkgyu")
 TOWER_ID = 30
 TOWER_SPRITE = NodePath("TowerSpriteTermplate")
-USE_CUSTOM_TOWER_DISPLAY_RANGE = true
-CUSTOM_TOWER_DISPLAY_RANGE = 50
+PRIMARY_PROJECTILE_SPAWNER = NodePath("TargetedMultiMissileSpawner")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSpriteTermplate" type="Sprite2D" parent="."]
@@ -17,3 +17,12 @@ y_sort_enabled = true
 position = Vector2(0, -27)
 scale = Vector2(0.8, 0.585882)
 texture = ExtResource("2_mc3gx")
+
+[node name="TargetedMultiMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_mc3gx")
+__missile_damage = 10
+__missile_speed = 30
+MISSILE_ID = 5
+__cooldown_duration = 0.5
+__detection_range = 400
+metadata/_custom_type_script = "uid://biljfygpuwex3"
