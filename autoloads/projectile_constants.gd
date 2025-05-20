@@ -28,7 +28,8 @@ enum ProjectileIDs {
 	KUNZITE_LVL_1,
 	KUNZITE_LVL_2,
 	KUNZITE_LVL_3,
-	KUNZITE_LVL_4
+	KUNZITE_LVL_4,
+	KUNZITE_LVL_5
 }
 
 # ******************************************************************************************************************
@@ -41,7 +42,7 @@ enum SingleHitBullets {
 	SUNSTONE_LVL_2,
 	SUNSTONE_LVL_3,
 	KUNZITE_LVL_2,
-	KUNZITE_LVL_4
+	KUNZITE_LVL_4,
 }
 
 enum TargetedRicochetBullets {
@@ -75,7 +76,8 @@ enum SingleHitMissiles {
 	SPINEL_LVL_1,
 	SPINEL_LVL_2,
 	KUNZITE_LVL_1,
-	KUNZITE_LVL_3
+	KUNZITE_LVL_3,
+	KUNZITE_LVL_5
 }
 
 enum TargetedRicochetMissiles{
@@ -88,7 +90,8 @@ enum MissilesForSpawner {
 	SPINEL_LVL_1,
 	SPINEL_LVL_2,
 	KUNZITE_LVL_1,
-	KUNZITE_LVL_3
+	KUNZITE_LVL_3,
+	KUNZITE_LVL_5
 }
 
 
@@ -140,7 +143,8 @@ var MISSILE_PATHS = {
 	MissilesForSpawner.SPINEL_LVL_1: "res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_2: "res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn",
 	MissilesForSpawner.KUNZITE_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
-	MissilesForSpawner.KUNZITE_LVL_3: "res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn"
+	MissilesForSpawner.KUNZITE_LVL_3: "res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn",
+	MissilesForSpawner.KUNZITE_LVL_5: "res://towers/buildable_towers/kunzite/level_5/kunzute_lvl_5_missile.tscn"
 }
 
 var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
@@ -149,5 +153,6 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
 	SingleHitMissiles.SPINEL_LVL_1: load("res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn"),
 	SingleHitMissiles.SPINEL_LVL_2: load("res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn"),
 	SingleHitMissiles.KUNZITE_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn"),
-	SingleHitMissiles.KUNZITE_LVL_3: load("res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn")
+	SingleHitMissiles.KUNZITE_LVL_3: load("res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn"),
+	SingleHitMissiles.KUNZITE_LVL_5: load("res://towers/buildable_towers/kunzite/level_5/kunzute_lvl_5_missile.tscn")
 }

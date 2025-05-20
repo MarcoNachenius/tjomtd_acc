@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://em5w7o2pfrgn"]
+
+[ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_hjspg"]
+[ext_resource type="Texture2D" uid="uid://d0k02ietkjuce" path="res://towers/buildable_towers/kunzite/level_5/kunzite_lvl_5_missile_sprite.png" id="2_ynky5"]
+
+[node name="KunzuteLvl5Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_hjspg")
+MISSILE_SPRITE = NodePath("MissileSprite")
+metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.438803, 0.219401)
+texture = ExtResource("2_ynky5")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://clkfbfnnvt06p"]
+[gd_scene load_steps=4 format=3 uid="uid://clkfbfnnvt06p"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_epnxf"]
 [ext_resource type="Texture2D" uid="uid://brygn18g8qfcw" path="res://towers/buildable_towers/kunzite/level_5/kunzite_lvl_5_tower_sprite.png" id="2_fsxrw"]
+[ext_resource type="Script" uid="uid://biljfygpuwex3" path="res://projectile_spawners/multi_missile/targeted/targeted_multi_missile_spawner.gd" id="3_fsxrw"]
 
 [node name="KunziteLvl5Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
 z_index = 2
@@ -19,3 +20,14 @@ y_sort_enabled = true
 position = Vector2(-2, -51)
 scale = Vector2(1, 0.765882)
 texture = ExtResource("2_fsxrw")
+
+[node name="TargetedMultiMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_fsxrw")
+__missile_damage = 10
+__missile_speed = 30
+__infinite_missiles_per_launch = true
+__missiles_per_launch = 0
+MISSILE_ID = 6
+__cooldown_duration = 1.0
+__detection_range = 400
+metadata/_custom_type_script = "uid://biljfygpuwex3"

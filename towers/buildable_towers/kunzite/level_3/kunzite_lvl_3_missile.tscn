@@ -7,6 +7,7 @@
 z_index = 4
 z_as_relative = false
 y_sort_enabled = true
+scale = Vector2(1, 0.5)
 script = ExtResource("1_anjnl")
 MISSILE_SPRITE = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
