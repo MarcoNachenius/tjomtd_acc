@@ -281,10 +281,10 @@ const AWAITING_SELECTION_COMPOUND_UPGRADES_INTO: Dictionary[TowerIDs, Array] = {
     TowerIDs.SUNSTONE_LVL_5: [],
     TowerIDs.SPINEL_LVL_1: [TowerIDs.SPINEL_LVL_2],
     TowerIDs.SPINEL_LVL_2: [],
-    TowerIDs.KUNZITE_LVL_1: [],
-    TowerIDs.KUNZITE_LVL_2: [],
-    TowerIDs.KUNZITE_LVL_3: [],
-    TowerIDs.KUNZITE_LVL_4: [],
+    TowerIDs.KUNZITE_LVL_1: [TowerIDs.KUNZITE_LVL_2, TowerIDs.KUNZITE_LVL_3, TowerIDs.KUNZITE_LVL_4, TowerIDs.KUNZITE_LVL_5],
+    TowerIDs.KUNZITE_LVL_2: [TowerIDs.KUNZITE_LVL_3, TowerIDs.KUNZITE_LVL_4, TowerIDs.KUNZITE_LVL_5],
+    TowerIDs.KUNZITE_LVL_3: [TowerIDs.KUNZITE_LVL_4, TowerIDs.KUNZITE_LVL_5],
+    TowerIDs.KUNZITE_LVL_4: [TowerIDs.KUNZITE_LVL_5],
     TowerIDs.KUNZITE_LVL_5: [],
 }
 

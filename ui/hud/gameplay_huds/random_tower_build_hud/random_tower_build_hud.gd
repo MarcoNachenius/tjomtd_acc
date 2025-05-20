@@ -21,6 +21,10 @@ class_name RandomTowerBuildHUD
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_3_BUTTON: _on_sunstone_level_3_button_pressed,
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SPINEL_LEVEL_2_BUTTON: _on_spinel_level_2_button_pressed,
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.LARIMAR_LEVEL_2_BUTTON: _on_larimar_level_2_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_2_BUTTON: _on_kunzite_level_2_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_3_BUTTON: _on_kunzite_level_3_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_4_BUTTON: _on_kunzite_level_4_button_pressed,
+	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_5_BUTTON: _on_kunzite_level_5_button_pressed,
 	
 }
 
@@ -382,3 +386,17 @@ func _on_spinel_level_2_button_pressed():
 # ------
 func _on_larimar_level_2_button_pressed():
 	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_2)
+
+# KUNZITE
+# ------
+func _on_kunzite_level_2_button_pressed():
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_2)
+
+func _on_kunzite_level_3_button_pressed():
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_3)
+
+func _on_kunzite_level_4_button_pressed():
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_4)
+
+func _on_kunzite_level_5_button_pressed():
+	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_5)
