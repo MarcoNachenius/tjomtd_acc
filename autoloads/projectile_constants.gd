@@ -24,7 +24,8 @@ enum ProjectileIDs {
 	SUNSTONE_LVL_3,
 	LARIMAR_LVL_2,
 	SPINEL_LVL_1,
-	SPINEL_LVL_2
+	SPINEL_LVL_2,
+	KUNZITE_LVL_1
 }
 
 # ******************************************************************************************************************
@@ -65,7 +66,8 @@ enum SingleHitMissiles {
 	BISMUTH_LVL_1,
 	LARIMAR_LVL_2,
 	SPINEL_LVL_1,
-	SPINEL_LVL_2
+	SPINEL_LVL_2,
+	KUNZITE_LVL_1
 }
 
 enum TargetedRicochetMissiles{
@@ -76,7 +78,8 @@ enum MissilesForSpawner {
 	BISMUTH_LVL_1,
 	TEST_TARGETED_RICOCHET_MISSILE,
 	SPINEL_LVL_1,
-	SPINEL_LVL_2
+	SPINEL_LVL_2,
+	KUNZITE_LVL_1
 }
 
 
@@ -122,12 +125,14 @@ var MISSILE_PATHS = {
 	MissilesForSpawner.BISMUTH_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
 	MissilesForSpawner.TEST_TARGETED_RICOCHET_MISSILE: "res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_1: "res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn",
-	MissilesForSpawner.SPINEL_LVL_2: "res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn"
+	MissilesForSpawner.SPINEL_LVL_2: "res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn",
+	MissilesForSpawner.KUNZITE_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn"
 }
 
 var SINGLE_HIT_MISSILE_LOADS: Dictionary = {
 	SingleHitMissiles.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn"),
 	SingleHitMissiles.LARIMAR_LVL_2: load("res://towers/buildable_towers/laminar/level_2/larimar_lvl_2_missile.tscn"),
 	SingleHitMissiles.SPINEL_LVL_1: load("res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn"),
-	SingleHitMissiles.SPINEL_LVL_2: load("res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn")
+	SingleHitMissiles.SPINEL_LVL_2: load("res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn"),
+	SingleHitMissiles.KUNZITE_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn")
 }

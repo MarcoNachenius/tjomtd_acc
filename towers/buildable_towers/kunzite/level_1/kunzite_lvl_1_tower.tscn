@@ -22,8 +22,10 @@ texture = ExtResource("2_pyqux")
 
 [node name="TargetedMultiMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("3_pyqux")
-__missile_damage = 10
+__missile_damage = 4
 __missile_speed = 30
-__cooldown_duration = 1.5
+__missiles_per_launch = 2
+MISSILE_ID = 4
+__cooldown_duration = 1.0
 __detection_range = 300
 metadata/_custom_type_script = "uid://biljfygpuwex3"

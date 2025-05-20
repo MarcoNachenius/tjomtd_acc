@@ -40,13 +40,23 @@ var LEVEL_1_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_1],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_1],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_1],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_1],
 ]
 
 # LEVEL 2 BUILDABLE TOWER PRELOADS
 var LEVEL_2_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
+	# Previous level towers
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_1],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_1],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_1],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_1],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_1],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_1],
+	# New towers
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_2],
-	
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_2],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_2],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_2],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_2],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_2],
 ]

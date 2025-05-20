@@ -307,3 +307,15 @@ func get_slow_speed_reduction_percentage() -> int:
 
 func set_slow_speed_reduction_percentage(value: int) -> void:
 	__slow_speed_reduction_percentage = value
+
+# ─────────── AOE setters ───────────
+func set_aoe_enabled(enabled: bool) -> void:
+	__aoe_enabled = enabled
+
+func set_aoe_detection_radius(radius: int) -> void:
+	# Don’t let the radius go negative.
+	__aoe_detection_radius = max(radius, 0)
+
+func set_aoe_damage_amount(amount: int) -> void:
+	# Clamp to zero or above so damage is never negative.
+	__aoe_damage_amount = max(amount, 0)
