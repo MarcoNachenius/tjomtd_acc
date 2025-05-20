@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://mqcsor44pyb1"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_v4mrw"]
+[ext_resource type="Texture2D" uid="uid://byync1pwnypn2" path="res://towers/buildable_towers/kunzite/level_1/kunzite_lvl_1_tower_sprite.png" id="2_pyqux"]
+[ext_resource type="Script" uid="uid://biljfygpuwex3" path="res://projectile_spawners/multi_missile/targeted/targeted_multi_missile_spawner.gd" id="3_pyqux"]
+
+[node name="KunziteLvl1Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_v4mrw")
+TOWER_ID = 28
+TOWER_SPRITE = NodePath("Sprite2D")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("TargetedMultiMissileSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -37)
+scale = Vector2(0.763507, 0.523508)
+texture = ExtResource("2_pyqux")
+
+[node name="TargetedMultiMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_pyqux")
+__missile_damage = 10
+__missile_speed = 30
+__cooldown_duration = 1.5
+__detection_range = 300
+metadata/_custom_type_script = "uid://biljfygpuwex3"

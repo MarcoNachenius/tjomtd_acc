@@ -108,11 +108,6 @@ func _on_bismuth_lvl_1_button_pressed():
 	__game_map.set_state(__game_map.States.BUILD_MODE)
 	EXIT_BUILD_MODE_BUTTON.visible = true
 
-func _on_test_tower_pressed():
-	__game_map.set_build_tower_preload(TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.TEST_BUILD_TOWER])
-	__game_map.set_build_tower_cost(TowerConstants.TowerPrices[TowerConstants.TowerIDs.TEST_BUILD_TOWER])
-	__game_map.set_state(__game_map.States.BUILD_MODE)
-	EXIT_BUILD_MODE_BUTTON.visible = true
 
 # ==========================
 # GAME NAVIGATION PROPERTIES

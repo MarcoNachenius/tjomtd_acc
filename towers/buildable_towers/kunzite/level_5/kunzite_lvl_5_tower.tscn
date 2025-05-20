@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://clkfbfnnvt06p"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_epnxf"]
+[ext_resource type="Texture2D" uid="uid://brygn18g8qfcw" path="res://towers/buildable_towers/kunzite/level_5/kunzite_lvl_5_tower_sprite.png" id="2_fsxrw"]
+
+[node name="KunziteLvl5Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_epnxf")
+TOWER_ID = 32
+TOWER_SPRITE = NodePath("SpriteTermplate")
+USE_CUSTOM_TOWER_DISPLAY_RANGE = true
+CUSTOM_TOWER_DISPLAY_RANGE = 30
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="SpriteTermplate" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-2, -51)
+scale = Vector2(1, 0.765882)
+texture = ExtResource("2_fsxrw")
