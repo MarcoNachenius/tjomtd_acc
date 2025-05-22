@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3ip48f1k42il"]
+
+[ext_resource type="Script" uid="uid://dok5kuf6fxf0g" path="res://ui/components/text_containers/game_stats_container/game_stats_contianer.gd" id="1_7or2r"]
+
+[node name="GameStatsContianer" type="VBoxContainer" node_paths=PackedStringArray("CURR_BALANCE_AMOUNT_LABEL", "REMAINING_LIVES_AMOUNT_LABEL", "WAVES_COMPLETED_AMOUNT_LABEL", "CURR_BUILD_LEVEL_AMOUNT_LABEL")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7or2r")
+CURR_BALANCE_AMOUNT_LABEL = NodePath("CurrBalanceAmount")
+REMAINING_LIVES_AMOUNT_LABEL = NodePath("RemainingLivesAmount")
+WAVES_COMPLETED_AMOUNT_LABEL = NodePath("WavesCompletedAmount")
+CURR_BUILD_LEVEL_AMOUNT_LABEL = NodePath("CurrBuildLevelAmount")
+
+[node name="CurrBalanceHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Current Balance: "
+fit_content = true
+autowrap_mode = 0
+
+[node name="CurrBalanceAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RemainingLivesHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Remaining Lives:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RemainingLivesAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CurrBuildLevelHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Build Level:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CurrBuildLevelAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="WavesCompletedHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Waves Completed:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="WavesCompletedAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0

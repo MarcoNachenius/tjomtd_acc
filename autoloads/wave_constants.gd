@@ -5,7 +5,8 @@ enum WaveProperties {
 	CREEP_SPEED,
 	CREEP_HEALTH,
 	WAVE_SIZE,
-	SPAWN_COOLDOWN_TIME
+	SPAWN_COOLDOWN_TIME,
+	POINTS_FOR_DEATH
 }
 
 const WAVE_1: Dictionary = {
@@ -13,7 +14,8 @@ const WAVE_1: Dictionary = {
 	WaveProperties.CREEP_SPEED: 8,
 	WaveProperties.CREEP_HEALTH: 100,
 	WaveProperties.WAVE_SIZE: 5,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 0.5
+	WaveProperties.SPAWN_COOLDOWN_TIME: 0.5,
+	WaveProperties.POINTS_FOR_DEATH: 1
 }
 
 const WAVE_2: Dictionary = {
@@ -21,7 +23,8 @@ const WAVE_2: Dictionary = {
 	WaveProperties.CREEP_SPEED: 15,
 	WaveProperties.CREEP_HEALTH: 12,
 	WaveProperties.WAVE_SIZE: 10,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 1.3
+	WaveProperties.SPAWN_COOLDOWN_TIME: 1.3,
+	WaveProperties.POINTS_FOR_DEATH: 1
 }
 
 const WAVE_3: Dictionary = {
@@ -29,7 +32,8 @@ const WAVE_3: Dictionary = {
 	WaveProperties.CREEP_SPEED: 8,
 	WaveProperties.CREEP_HEALTH: 10,
 	WaveProperties.WAVE_SIZE: 3,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0
+	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0,
+	WaveProperties.POINTS_FOR_DEATH: 1
 }
 
 const WAVE_4: Dictionary = {
@@ -37,7 +41,8 @@ const WAVE_4: Dictionary = {
 	WaveProperties.CREEP_SPEED: 8,
 	WaveProperties.CREEP_HEALTH: 10,
 	WaveProperties.WAVE_SIZE: 3,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0
+	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0,
+	WaveProperties.POINTS_FOR_DEATH: 1
 }
 
 const WAVE_5: Dictionary = {
@@ -45,7 +50,8 @@ const WAVE_5: Dictionary = {
 	WaveProperties.CREEP_SPEED: 8,
 	WaveProperties.CREEP_HEALTH: 10,
 	WaveProperties.WAVE_SIZE: 3,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0
+	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0,
+	WaveProperties.POINTS_FOR_DEATH: 1
 }
 
 const WAVES = [

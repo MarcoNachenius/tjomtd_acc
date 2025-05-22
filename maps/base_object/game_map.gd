@@ -620,6 +620,8 @@ func set_build_tower_preload(new_preload: PackedScene):
 func set_build_tower_cost(new_cost: int):
 	__build_tower_cost = new_cost
 
+func get_curr_balance() -> int:
+	return __curr_balance
 
 # **************
 # SIGNAL METHODS

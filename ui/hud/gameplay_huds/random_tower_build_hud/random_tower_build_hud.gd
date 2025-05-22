@@ -2,12 +2,16 @@ extends CanvasLayer
 class_name RandomTowerBuildHUD
 
 # EXPORTS
+# =======
+# HBox/VBox Containers
+@export var GAME_STATS_CONTAINER: GameStatsContainer
 @export var BUILD_RANDOM_TOWER_CONTAINER: BuildRandomTowerContainer
 @export var GAME_MAP: GameMap
 @export var TOWER_PROPERTIES_CONTAINER: TowerPropertiesContainer
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
 @export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 @export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
+# Standalone Buttons
 @export var START_NEW_WAVE_BUTTON: Button
 @export var UPGRADE_BUILD_LEVEL_BUTTON: Button
 
@@ -55,6 +59,8 @@ func _ready():
 	_create_tower_upgrade_manager()
 	# CONTAINER VISIBILITY
 	_handle_initial_container_visibility()
+	# Assign starting values to game stats container
+	_initialise_all_game_stats()
 
 
 # ****************
@@ -219,6 +225,12 @@ func _hide_containers_on_tower_kept():
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 	# Hide build tower properties
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
+
+## Pulls all current values from map and reassigns them in game stats container.
+func _initialise_all_game_stats():
+	GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(GameConstants.STARTING_BALANCE)
+	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(GameConstants.STARTING_LIVES)
+	GAME_STATS_CONTAINER.CURR_BUILD_LEVEL_AMOUNT_LABEL.text = str(1)
 
 # ****************
 # SIGNAL CALLBACKS

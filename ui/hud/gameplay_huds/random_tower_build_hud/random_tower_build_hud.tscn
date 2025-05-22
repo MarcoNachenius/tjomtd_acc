@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8u365aao1ox5"]
+[gd_scene load_steps=8 format=3 uid="uid://c8u365aao1ox5"]
 
 [ext_resource type="Script" uid="uid://tlx4dpamwe4b" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.gd" id="1_kyn4q"]
 [ext_resource type="PackedScene" uid="uid://cpy2hm61yp3tb" path="res://ui/components/button_containers/build_random_tower_container/build_random_tower_container.tscn" id="2_ntkvv"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://24wnsdvwnkv0" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.tscn" id="4_im64j"]
 [ext_resource type="PackedScene" uid="uid://b8jv68io5tjec" path="res://ui/components/button_containers/path_line_visibility_container/path_line_visibility_container.tscn" id="5_saysw"]
 [ext_resource type="PackedScene" uid="uid://ldkukd2m1p5u" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.tscn" id="5_x72he"]
+[ext_resource type="PackedScene" uid="uid://d3ip48f1k42il" path="res://ui/components/text_containers/game_stats_container/game_stats_contianer.tscn" id="7_jg8ij"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON")]
 script = ExtResource("1_kyn4q")
+GAME_STATS_CONTAINER = NodePath("GameStatsContianer")
 BUILD_RANDOM_TOWER_CONTAINER = NodePath("MapCommands/BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")
 TOWER_UPGRADES_CONTAINER = NodePath("TowerCommands/TowerUpgradesContainer")
@@ -68,3 +70,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Upgrade Build Level
 Cost: 20"
+
+[node name="GameStatsContianer" parent="." instance=ExtResource("7_jg8ij")]
+offset_right = 153.0
+offset_bottom = 212.0
+size_flags_horizontal = 0
