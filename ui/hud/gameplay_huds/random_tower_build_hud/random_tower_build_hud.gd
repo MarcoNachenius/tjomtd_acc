@@ -270,9 +270,23 @@ func _on_start_new_wave_button_pressed():
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
 func _on_upgrade_build_level_button_pressed():
+	# Do nothing if player cannot afford level upgrade
+	if GAME_MAP.get_curr_balance() < GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost():
+		return
+	
+	# Subtract upgrade cost from current balance
+	GAME_MAP.subtract_funds(GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost())
+	
+	# Update tower generator
 	GAME_MAP.RANDOM_TOWER_GENERATOR.upgrade_level()
+
+	# Update upgrade build tower button text
 	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost()) + ")"
 
+	# Update display of current build level
+	GAME_STATS_CONTAINER.CURR_BUILD_LEVEL_AMOUNT_LABEL.text = str(GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_level())
+
+	
 
 #                                       | Path Line Visibility Container |
 # =============================================================================================================

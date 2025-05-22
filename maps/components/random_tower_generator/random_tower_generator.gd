@@ -78,3 +78,6 @@ const LEVEL_UPGRADE_PRICES: Array[int] = [
 
 func get_curr_upgrade_cost() -> int:
 	return __curr_upgrade_cost
+
+func get_curr_level() -> int:
+	return __curr_level

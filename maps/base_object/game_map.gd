@@ -69,9 +69,9 @@ var __towers_on_map: Array[Tower]
 var __valid_build_position_surface_highlight: Sprite2D
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
 
-# ---------------
-# BUILTIN METHODS
-# ---------------
+# -----------------
+# INHERITED METHODS
+# -----------------
 func _ready():
 	__total_points_earned = 0
 	__total_waves_completed = 0
@@ -110,7 +110,6 @@ func _ready():
 	self._create_projectile_boundary_area()
 
 
-
 func _unhandled_input(event):
 	# Handle build mode
 	if __curr_state == States.BUILD_MODE:
@@ -120,7 +119,7 @@ func _unhandled_input(event):
 
 
 # --------------
-# CUSTOM METHODS
+# PUBLIC METHODS
 # --------------
 func add_test_single_point_path_impediment_sprite(mainGridTile: Vector2i):
 	var path_tile = MapConstants.SINGLE_POINT_IMPEDIMENT_RED_SURFACE.instantiate()
@@ -132,6 +131,10 @@ func add_test_tower_sprite(placementGridTile: Vector2i):
 	add_child(path_tile)
 	path_tile.position = __placement_grid.map_to_local(placementGridTile)
 	path_tile.modulate = Color(0.0, 0.0, 0.0, 1.0)  # RGBA for solid blue
+
+# ---------------
+# PRIVATE METHODS
+# ---------------
 
 ## Adds placement grid points as keys with provided tower as value. 
 func _add_tower_to_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
@@ -589,6 +592,29 @@ func convert_tower_to_barricade(tower: Tower):
 	_add_tower_to_placement_grid_coords_dict(new_barricade, __placement_grid_coords_for_barricades)
 
 
+func remove_barricade(barricade: Tower):
+	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
+	# Remove placement points
+	_remove_tower_impediment_points(barricade.get_placement_grid_coordinate())
+	# Remove from barricade dict
+	_remove_tower_from_placement_grid_coords_dict(barricade, __placement_grid_coords_for_barricades)
+	# Remove from barricade list
+	assert(__barricades_on_map.has(barricade), "Barricade not found in __barricades_on_map")
+	__barricades_on_map.erase(barricade)
+	# Remove from scene
+	barricade.queue_free()
+
+
+func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
+	var tower_id_array: Array[TowerConstants.TowerIDs] = []
+	# Iterate through the tower count dictionary
+	for tower_id in tower_count_dict.keys():
+		# Add the tower id to the array the number of times specified in the count
+		for i in range(tower_count_dict[tower_id]):
+			tower_id_array.append(tower_id)
+	return tower_id_array
+
+
 # -------------------
 # GETTERS AND SETTERS
 # -------------------
@@ -966,29 +992,11 @@ func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeT
 		keep_upgrade_tower_from_towers_awaiting_selection(selectedTower, upgradeTowerID)
 		return
 
+func subtract_funds(amount: int):
+	__curr_balance -= amount
+	balance_altered.emit(__curr_balance)
+
 # TODO
 func handle_single_point_impediment_placement():
 	pass
 
-func remove_barricade(barricade: Tower):
-	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
-	# Remove placement points
-	_remove_tower_impediment_points(barricade.get_placement_grid_coordinate())
-	# Remove from barricade dict
-	_remove_tower_from_placement_grid_coords_dict(barricade, __placement_grid_coords_for_barricades)
-	# Remove from barricade list
-	assert(__barricades_on_map.has(barricade), "Barricade not found in __barricades_on_map")
-	__barricades_on_map.erase(barricade)
-	# Remove from scene
-	barricade.queue_free()
-
-
-
-func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
-	var tower_id_array: Array[TowerConstants.TowerIDs] = []
-	# Iterate through the tower count dictionary
-	for tower_id in tower_count_dict.keys():
-		# Add the tower id to the array the number of times specified in the count
-		for i in range(tower_count_dict[tower_id]):
-			tower_id_array.append(tower_id)
-	return tower_id_array
