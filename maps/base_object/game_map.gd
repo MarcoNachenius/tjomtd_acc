@@ -176,7 +176,7 @@ func _remove_tower_from_placement_grid_coords_dict(tower: Tower, placementGridCo
 	# Remove keys from placement coord dict
 	for new_placement_coord in tower_impediment_points:
 		# Ensure coordinate is a key in coord dict
-		assert(list_of_curr_impediment_points.has(new_placement_coord))
+		assert(list_of_curr_impediment_points.has(new_placement_coord), "Impediment coordinate not containedd in placement grid dict")
 		# Remove coordinate from dict
 		placementGridCoordDict.erase(new_placement_coord)
 
@@ -969,6 +969,18 @@ func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeT
 # TODO
 func handle_single_point_impediment_placement():
 	pass
+
+func remove_barricade(barricade: Tower):
+	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
+	# Remove placement points
+	_remove_tower_impediment_points(barricade.get_placement_grid_coordinate())
+	# Remove from barricade dict
+	_remove_tower_from_placement_grid_coords_dict(barricade, __placement_grid_coords_for_barricades)
+	# Remove from barricade list
+	assert(__barricades_on_map.has(barricade), "Barricade not found in __barricades_on_map")
+	__barricades_on_map.erase(barricade)
+	# Remove from scene
+	barricade.queue_free()
 
 
 

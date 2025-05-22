@@ -324,6 +324,12 @@ func _on_exit_build_mode_button_pressed():
 func _on_remove_barricade_button_pressed():
 	assert(__selected_tower, "No tower/barricade is currently selected")
 	assert(__selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Selected tower is not a barricade")
+	# Remove barricade from map
+	GAME_MAP.remove_barricade(__selected_tower)
+	# Deselect tower
+	__selected_tower = null
+	# Hide remove barricade button
+	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
 
 
 #                                              | Game Map |

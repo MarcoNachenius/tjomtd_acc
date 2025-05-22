@@ -123,3 +123,6 @@ func wave_initiation_in_progress() -> bool:
 # Setter for __game_map
 func set_game_map(game_map: GameMap) -> void:
 	__game_map = game_map
+
+func get_wave_number() -> int:
+	return __wave_number
