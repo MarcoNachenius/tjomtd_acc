@@ -11,6 +11,7 @@ class_name RandomTowerBuildHUD
 @export var TOWER_UPGRADES_CONTAINER: TowerUpgradesContainer
 @export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 @export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
+@export var TOWER_RANGE_VISIBILITY_CONTAINER: TowerRangeVisibilityContainer
 # Standalone Buttons
 @export var START_NEW_WAVE_BUTTON: Button
 @export var UPGRADE_BUILD_LEVEL_BUTTON: Button
@@ -48,6 +49,8 @@ var __selected_tower: Tower
 var __max_towers_per_turn = GameConstants.MAX_PLACEABLE_TOWERS_PER_TURN
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
+## Tracks if player wants tower range to be displayed when selected
+@onready var __show_selected_tower_range: bool = true
 
 # *****************
 # INHERITED METHODS
@@ -80,7 +83,8 @@ func _connect_all_component_signals():
 	_connect_awaiting_selection_upgrade_towers_container_signals()
 	# Path visibility container
 	_connect_path_visibility_container_signals()
-	
+	# Tower range visibility container
+	_connnect_tower_range_visibility_container_signals()
 	# Standalone Hud buttons
 	_connect_standalone_buttons_signals()
 
@@ -99,6 +103,12 @@ func _connect_tower_upgrades_signals():
 	for button in TOWER_UPGRADES_CONTAINER.ALL_TOWER_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
+
+func _connnect_tower_range_visibility_container_signals():
+	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.pressed.connect(_on_show_tower_range_button_pressed)
+	TOWER_RANGE_VISIBILITY_CONTAINER.HIDE_TOWER_RANGE_BUTTON.pressed.connect(_on_hide_tower_range_button_pressed)
+	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.visible = false
+
 
 ## Connects signals for game map
 func _connect_game_map_signals():
@@ -243,7 +253,7 @@ func _initialise_all_game_stats():
 # SIGNAL CALLBACKS
 # ****************
 #
-#                                            | Hud Buttons |
+#                                            | Standalone Buttons |
 # =============================================================================================================
 func _on_start_new_wave_button_pressed():
 	GAME_MAP.creep_spawner.initiate_new_wave()
@@ -266,6 +276,24 @@ func _on_hide_path_button_pressed():
 	GAME_MAP.hide_path_line()
 	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON.visible = true
 	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON.visible = false
+
+#                                       | Tower Range Visibility Container |
+# =============================================================================================================
+func _on_show_tower_range_button_pressed():
+	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.visible = false
+	TOWER_RANGE_VISIBILITY_CONTAINER.HIDE_TOWER_RANGE_BUTTON.visible = true
+	__show_selected_tower_range = true
+	# Show range display of selected tower
+	if __selected_tower:
+		__selected_tower.RANGE_DISPLAY_SHAPE.visible = true
+
+func _on_hide_tower_range_button_pressed():
+	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.visible = true
+	TOWER_RANGE_VISIBILITY_CONTAINER.HIDE_TOWER_RANGE_BUTTON.visible = false
+	__show_selected_tower_range = false
+	# Hide range display of selected tower
+	if __selected_tower:
+		__selected_tower.RANGE_DISPLAY_SHAPE.visible = false
 
 #                                       | Build Random Tower Container |
 # =============================================================================================================

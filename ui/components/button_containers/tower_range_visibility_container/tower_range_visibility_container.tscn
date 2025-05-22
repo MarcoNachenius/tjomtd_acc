@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://djnhreo88oyik"]
+
+[ext_resource type="Script" uid="uid://nsy8rwq5eyeb" path="res://ui/components/button_containers/tower_range_visibility_container/tower_range_visibility_container.gd" id="1_4fw3r"]
+
+[node name="TowerRangeVisibilityContainer" type="HBoxContainer" node_paths=PackedStringArray("SHOW_TOWER_RANGE_BUTTON", "HIDE_TOWER_RANGE_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4fw3r")
+SHOW_TOWER_RANGE_BUTTON = NodePath("ShowTowerRangeButton")
+HIDE_TOWER_RANGE_BUTTON = NodePath("HideTowerRangeButton")
+
+[node name="ShowTowerRangeButton" type="Button" parent="."]
+layout_mode = 2
+text = "Show Tower Range"
+
+[node name="HideTowerRangeButton" type="Button" parent="."]
+visible = false
+layout_mode = 2
+text = "Hide Tower Range"
