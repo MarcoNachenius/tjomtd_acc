@@ -16,7 +16,7 @@ enum States {
 # SIGNALS
 signal camera_moved(distance: Vector2)
 signal empty_space_selected
-signal gained_credits(remaining_balance: int)
+signal balance_altered(remaining_balance: int)
 signal gained_life(remaining_lives: int)
 signal lost_credits(remaining_balance: int)
 signal lost_life(remaining_lives: int)
@@ -623,6 +623,9 @@ func set_build_tower_cost(new_cost: int):
 func get_curr_balance() -> int:
 	return __curr_balance
 
+func get_total_waves_completed() -> int:
+	return __total_waves_completed
+
 # **************
 # SIGNAL METHODS
 # **************
@@ -643,7 +646,7 @@ func _on_creep_death(creep: Creep):
 	var creep_points: int = creep.get_points_for_death()
 	__curr_balance += creep_points
 	__total_points_earned += creep_points
-	gained_credits.emit(__curr_balance)
+	balance_altered.emit(__curr_balance)
 	
 	if !creep.get_is_wave_creep():
 		return

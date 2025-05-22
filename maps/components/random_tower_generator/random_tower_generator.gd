@@ -7,6 +7,7 @@ const MAX_LEVEL: int = 30
 # LOCALS
 var __curr_buildable_tower_preloads: Array[PackedScene] = []
 var __curr_level: int = 0
+var __curr_upgrade_cost: int = 0
 
 func _ready():
 	upgrade_level()
@@ -28,6 +29,7 @@ func upgrade_level() -> void:
 	match __curr_level: # Match is used because nested arrays are not supported.
 		1:
 			__curr_buildable_tower_preloads = LEVEL_1_BUILDABLE_TOWER_PRELOADS
+			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
 		2:
 			__curr_buildable_tower_preloads = LEVEL_2_BUILDABLE_TOWER_PRELOADS
 
@@ -59,4 +61,13 @@ var LEVEL_2_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_2],
 	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_2],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_2],
+]
+
+const LEVEL_UPGRADE_PRICES: Array[int] = [
+	0, # Initialisation value
+	10, # Level 1
+	10, # Level 2
+	10, # Level 3
+	10, # Level 4
+	10, # Level 5
 ]

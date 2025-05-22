@@ -82,12 +82,7 @@ func _connect_all_component_signals():
 	_connect_path_visibility_container_signals()
 	
 	# Standalone Hud buttons
-	assert(START_NEW_WAVE_BUTTON, "No start new wave button assigned")
-	START_NEW_WAVE_BUTTON.pressed.connect(_on_start_new_wave_button_pressed)
-	START_NEW_WAVE_BUTTON.visible = false
-	assert(UPGRADE_BUILD_LEVEL_BUTTON, "No upgrade build level button assigned")
-	UPGRADE_BUILD_LEVEL_BUTTON.pressed.connect(_on_upgrade_build_level_button_pressed)
-	UPGRADE_BUILD_LEVEL_BUTTON.visible = true
+	_connect_standalone_buttons_signals()
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_container_signals():
@@ -108,7 +103,7 @@ func _connect_tower_upgrades_signals():
 ## Connects signals for game map
 func _connect_game_map_signals():
 	# Connect the game map signals to the appropriate methods
-	GAME_MAP.gained_credits.connect(_on_credits_gained)
+	GAME_MAP.balance_altered.connect(_on_balance_altered)
 	GAME_MAP.lost_credits.connect(_on_credits_lost)
 	GAME_MAP.gained_life.connect(_on_life_gained)
 	GAME_MAP.lost_life.connect(_on_life_lost)
@@ -123,6 +118,18 @@ func _connect_awaiting_selection_upgrade_towers_container_signals():
 	for button in AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
+
+## Connects pressed signals to callables for buttons on the hud that are not part of containers.
+func _connect_standalone_buttons_signals():
+	# Start New Wave Button
+	assert(START_NEW_WAVE_BUTTON, "No start new wave button assigned")
+	START_NEW_WAVE_BUTTON.pressed.connect(_on_start_new_wave_button_pressed)
+	START_NEW_WAVE_BUTTON.visible = false
+
+	# Upgrade Build Level Button
+	assert(UPGRADE_BUILD_LEVEL_BUTTON, "No upgrade build level button assigned")
+	UPGRADE_BUILD_LEVEL_BUTTON.pressed.connect(_on_upgrade_build_level_button_pressed)
+	UPGRADE_BUILD_LEVEL_BUTTON.visible = true
 
 func _create_tower_upgrade_manager():
 	# Create a new instance of the tower upgrade manager
@@ -286,8 +293,8 @@ func _on_exit_build_mode_button_pressed():
 
 #                                              | Game Map |
 # =============================================================================================================
-func _on_credits_gained(remaining_balance: int):
-	pass
+func _on_balance_altered(curr_balance: int):
+	GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(curr_balance)
 
 func _on_credits_lost(remaining_balance: int):
 	pass
@@ -296,7 +303,7 @@ func _on_life_gained(remaining_lives: int):
 	pass
 
 func _on_life_lost(remaining_lives: int):
-	pass
+	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(remaining_lives)
 
 func _on_wave_completed(total_waves_completed: int):
 	# Update tower count
@@ -313,6 +320,8 @@ func _on_wave_completed(total_waves_completed: int):
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Hide start new wave button
 	START_NEW_WAVE_BUTTON.visible = false
+	# Update game stats display
+	GAME_STATS_CONTAINER.WAVES_COMPLETED_AMOUNT_LABEL.text = str(GAME_MAP.get_total_waves_completed())
 
 func _on_tower_selected(tower: Tower):
 	# Reset transparency of previously selected tower sprite and awaiting selection animation
