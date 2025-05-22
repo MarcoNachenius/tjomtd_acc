@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8u365aao1ox5"]
+[gd_scene load_steps=10 format=3 uid="uid://c8u365aao1ox5"]
 
 [ext_resource type="Script" uid="uid://tlx4dpamwe4b" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.gd" id="1_kyn4q"]
 [ext_resource type="PackedScene" uid="uid://cpy2hm61yp3tb" path="res://ui/components/button_containers/build_random_tower_container/build_random_tower_container.tscn" id="2_ntkvv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ldkukd2m1p5u" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.tscn" id="5_x72he"]
 [ext_resource type="PackedScene" uid="uid://djnhreo88oyik" path="res://ui/components/button_containers/tower_range_visibility_container/tower_range_visibility_container.tscn" id="7_2ld34"]
 [ext_resource type="PackedScene" uid="uid://d3ip48f1k42il" path="res://ui/components/text_containers/game_stats_container/game_stats_contianer.tscn" id="7_jg8ij"]
+[ext_resource type="PackedScene" uid="uid://d18hp1umtvwps" path="res://debug_and_testing/debug_buttons/exit_game_button.tscn" id="9_gouwm"]
 
 [node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON")]
 script = ExtResource("1_kyn4q")
@@ -90,3 +91,12 @@ size_flags_horizontal = 0
 [node name="PathLineVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("5_saysw")]
 layout_mode = 2
 size_flags_horizontal = 0
+
+[node name="Button" parent="." instance=ExtResource("9_gouwm")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -87.0
+offset_right = 0.0
+offset_bottom = 31.0
+grow_horizontal = 0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d18hp1umtvwps"]
+
+[ext_resource type="Script" uid="uid://xs1fbgu6qvb" path="res://debug_and_testing/debug_buttons/exit_game_button.gd" id="1_lpi4h"]
+
+[node name="Button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Exit Game"
+script = ExtResource("1_lpi4h")

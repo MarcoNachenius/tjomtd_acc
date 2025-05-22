@@ -9,7 +9,7 @@ class_name TowerRangeVisibilityContainer
 func _ready() -> void:
     # Show range button
     assert(SHOW_TOWER_RANGE_BUTTON, "Show tower range button not assigned in container as export var")
-    SHOW_TOWER_RANGE_BUTTON.visible = true
+    SHOW_TOWER_RANGE_BUTTON.visible = false
 
     # Hide range button
     assert(HIDE_TOWER_RANGE_BUTTON, "Hide tower range button not assigned in container as export var")
