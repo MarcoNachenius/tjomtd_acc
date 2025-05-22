@@ -123,6 +123,7 @@ func _connect_game_map_signals():
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
+	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.pressed.connect(_on_remove_barricade_button_pressed)
 
 func _connect_awaiting_selection_upgrade_towers_container_signals():
 	for button in AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
@@ -283,16 +284,16 @@ func _on_show_tower_range_button_pressed():
 	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.visible = false
 	TOWER_RANGE_VISIBILITY_CONTAINER.HIDE_TOWER_RANGE_BUTTON.visible = true
 	__show_selected_tower_range = true
-	# Show range display of selected tower
-	if __selected_tower:
+	# Show range display of selected tower, provided it is not a barricade
+	if __selected_tower and __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
 		__selected_tower.RANGE_DISPLAY_SHAPE.visible = true
 
 func _on_hide_tower_range_button_pressed():
 	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.visible = true
 	TOWER_RANGE_VISIBILITY_CONTAINER.HIDE_TOWER_RANGE_BUTTON.visible = false
 	__show_selected_tower_range = false
-	# Hide range display of selected tower
-	if __selected_tower:
+	# Hide range display of selected tower, provided it is not a barricade
+	if __selected_tower and __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
 		__selected_tower.RANGE_DISPLAY_SHAPE.visible = false
 
 #                                       | Build Random Tower Container |
@@ -318,6 +319,12 @@ func _on_exit_build_mode_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
+## Handle remove barricade button pressed
+func _on_remove_barricade_button_pressed():
+	assert(__selected_tower, "No tower/barricade is currently selected")
+	assert(__selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Selected tower is not a barricade")
+
 
 #                                              | Game Map |
 # =============================================================================================================
@@ -361,14 +368,19 @@ func _on_tower_selected(tower: Tower):
 	# Hide range display shape for previously selected tower,
 	# provided it is not a barricade
 	if __selected_tower and __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
-		__selected_tower.RANGE_DISPLAY_SHAPE. visible = false
+		__selected_tower.RANGE_DISPLAY_SHAPE.visible = false
 
-	# Set new selected tower
+	# Set newly selected tower
 	__selected_tower = tower
 
-	# Show range display shape of newly selected tower if it is not a barricade
-	if __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
+	# Handle range display of newly selected tower
+	if __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE and __show_selected_tower_range:
 		__selected_tower.RANGE_DISPLAY_SHAPE.visible = true
+	
+	# Allow ability for player to remove barricade once wave has been completed
+	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
+	if __selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE and !GAME_MAP.creep_spawner.wave_initiation_in_progress():
+		TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = true
 
 	# Ensure properties container is visible 
 	TOWER_PROPERTIES_CONTAINER.visible = true

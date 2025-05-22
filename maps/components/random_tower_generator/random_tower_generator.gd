@@ -71,3 +71,9 @@ const LEVEL_UPGRADE_PRICES: Array[int] = [
 	10, # Level 4
 	10, # Level 5
 ]
+
+# GETTERS
+# =======
+
+func get_curr_upgrade_cost() -> int:
+	return __curr_upgrade_cost

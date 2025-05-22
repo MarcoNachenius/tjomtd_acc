@@ -43,26 +43,31 @@ text = "Spinel
 Level 2"
 
 [node name="LarimarLvl2Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Larimar
 Level 2"
 
 [node name="KunziteLvl2Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Kunzite
 Level 2"
 
 [node name="KunziteLvl3Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Kunzite
 Level 3"
 
 [node name="KunziteLvl4Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Kunzite
 Level 4"
 
 [node name="KunziteLvl5Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Kunzite
 Level 5"
