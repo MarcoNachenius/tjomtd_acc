@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xs1fbgu6qvb" path="res://debug_and_testing/debug_buttons/exit_game_button.gd" id="1_lpi4h"]
 
-[node name="Button" type="Button"]
+[node name="ExitGameButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Exit Game"

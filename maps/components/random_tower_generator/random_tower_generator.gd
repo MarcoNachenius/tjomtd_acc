@@ -32,6 +32,7 @@ func upgrade_level() -> void:
 			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
 		2:
 			__curr_buildable_tower_preloads = LEVEL_2_BUILDABLE_TOWER_PRELOADS
+			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
 
 
 
@@ -66,10 +67,10 @@ var LEVEL_2_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
 const LEVEL_UPGRADE_PRICES: Array[int] = [
 	0, # Initialisation value
 	10, # Level 1
-	10, # Level 2
-	10, # Level 3
-	10, # Level 4
-	10, # Level 5
+	20, # Level 2
+	30, # Level 3
+	40, # Level 4
+	50, # Level 5
 ]
 
 # GETTERS

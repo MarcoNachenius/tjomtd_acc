@@ -40,8 +40,11 @@ class_name RandomTowerBuildHUD
 	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON: _on_hide_path_button_pressed
 }
 
+const UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX: String = "Upgrade Build Level ("
+
 # CONSTANTS - Invariable components
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
+
 
 # LOCALS
 var __selected_tower: Tower
@@ -64,6 +67,9 @@ func _ready():
 	_handle_initial_container_visibility()
 	# Assign starting values to game stats container
 	_initialise_all_game_stats()
+	
+	# Assign display amount of upgrade build level container
+	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.LEVEL_UPGRADE_PRICES[1]) + ")"
 
 
 # ****************
@@ -265,6 +271,8 @@ func _on_start_new_wave_button_pressed():
 
 func _on_upgrade_build_level_button_pressed():
 	GAME_MAP.RANDOM_TOWER_GENERATOR.upgrade_level()
+	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost()) + ")"
+
 
 #                                       | Path Line Visibility Container |
 # =============================================================================================================
