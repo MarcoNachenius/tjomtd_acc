@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b8jv68io5tjec" path="res://ui/components/button_containers/path_line_visibility_container/path_line_visibility_container.tscn" id="5_saysw"]
 [ext_resource type="PackedScene" uid="uid://ldkukd2m1p5u" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.tscn" id="5_x72he"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON")]
 script = ExtResource("1_kyn4q")
 BUILD_RANDOM_TOWER_CONTAINER = NodePath("MapCommands/BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")
@@ -15,6 +15,7 @@ TOWER_UPGRADES_CONTAINER = NodePath("TowerCommands/TowerUpgradesContainer")
 AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeTowers")
 PATH_LINE_VISIBILITY_CONTAINER = NodePath("MapCommands/PathLineVisibilityContainer")
 START_NEW_WAVE_BUTTON = NodePath("MapCommands/StartNewWaveButton")
+UPGRADE_BUILD_LEVEL_BUTTON = NodePath("MapCommands/Upgrade Tower Probability")
 
 [node name="TowerCommands" type="HBoxContainer" parent="."]
 anchors_preset = 7
@@ -61,3 +62,9 @@ size_flags_horizontal = 8
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Start New Wave"
+
+[node name="Upgrade Tower Probability" type="Button" parent="MapCommands"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Upgrade Build Level
+Cost: 20"

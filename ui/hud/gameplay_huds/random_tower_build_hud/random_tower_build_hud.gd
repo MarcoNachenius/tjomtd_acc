@@ -9,6 +9,7 @@ class_name RandomTowerBuildHUD
 @export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 @export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
 @export var START_NEW_WAVE_BUTTON: Button
+@export var UPGRADE_BUILD_LEVEL_BUTTON: Button
 
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -74,10 +75,13 @@ func _connect_all_component_signals():
 	# Path visibility container
 	_connect_path_visibility_container_signals()
 	
-	# Hud buttons
+	# Standalone Hud buttons
 	assert(START_NEW_WAVE_BUTTON, "No start new wave button assigned")
 	START_NEW_WAVE_BUTTON.pressed.connect(_on_start_new_wave_button_pressed)
 	START_NEW_WAVE_BUTTON.visible = false
+	assert(UPGRADE_BUILD_LEVEL_BUTTON, "No upgrade build level button assigned")
+	UPGRADE_BUILD_LEVEL_BUTTON.pressed.connect(_on_upgrade_build_level_button_pressed)
+	UPGRADE_BUILD_LEVEL_BUTTON.visible = true
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_container_signals():
@@ -228,6 +232,9 @@ func _on_start_new_wave_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
+func _on_upgrade_build_level_button_pressed():
+	GAME_MAP.RANDOM_TOWER_GENERATOR.upgrade_level()
 
 #                                       | Path Line Visibility Container |
 # =============================================================================================================
