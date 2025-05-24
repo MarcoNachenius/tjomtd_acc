@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://tyeg0227c3e0"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_aaa4k"]
+[ext_resource type="Texture2D" uid="uid://cphguyi0oaiji" path="res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_tower_sprite.png" id="2_qyc74"]
+[ext_resource type="Script" uid="uid://boqaewt7j6awl" path="res://projectile_spawners/multi_missile/star_formation/star_shm_spawner/star_single_hit_missile_spawner.gd" id="3_qyc74"]
+
+[node name="BismuthLvl4Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 3
+y_sort_enabled = true
+script = ExtResource("1_aaa4k")
+TOWER_ID = 9
+TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("StarSingleHitMissileSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1, 0.76)
+texture = ExtResource("2_qyc74")
+
+[node name="StarSingleHitMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_qyc74")
+__missile_damage = 30
+__missile_speed = 15
+__missiles_per_launch = 2
+MISSILE_ID = 8
+__can_stun = true
+__stun_duration_seconds = 1.5
+__stun_probability_percentage = 30
+__cooldown_duration = 1.0
+__detection_range = 500
+metadata/_custom_type_script = "uid://boqaewt7j6awl"

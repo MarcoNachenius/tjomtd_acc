@@ -55,7 +55,7 @@ func _launch_projectiles():
 			new_missile.set_can_stun(__can_stun)
 			new_missile.set_stun_probability_percentage(__stun_probability_percentage)
 			new_missile.set_stun_duration_seconds(__stun_duration_seconds)
-            # Assign retarget properties
+			# Assign retarget properties
 			new_missile.set_retargetable(__retargetable)
 			new_missile.set_retarget_radius(__retarget_radius)
 
@@ -88,7 +88,7 @@ func _launch_projectiles():
 			new_missile.set_can_stun(__can_stun)
 			new_missile.set_stun_probability_percentage(__stun_probability_percentage)
 			new_missile.set_stun_duration_seconds(__stun_duration_seconds)
-            # Assign retarget properties
+			# Assign retarget properties
 			new_missile.set_retargetable(__retargetable)
 			new_missile.set_retarget_radius(__retarget_radius)
 
@@ -112,7 +112,7 @@ func _launch_projectiles():
 			new_missile.set_can_stun(__can_stun)
 			new_missile.set_stun_probability_percentage(__stun_probability_percentage)
 			new_missile.set_stun_duration_seconds(__stun_duration_seconds)
-            # Assign retarget properties
+			# Assign retarget properties
 			new_missile.set_retargetable(__retargetable)
 			new_missile.set_retarget_radius(__retarget_radius)
 

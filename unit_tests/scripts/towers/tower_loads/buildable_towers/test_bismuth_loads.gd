@@ -21,3 +21,15 @@ func test_bismuth_lvl_3_tower_id():
 	add_child_autofree(bismuth_lvl_3_tower)
 	assert_true(bismuth_lvl_3_tower.TOWER_ID == TowerConstants.TowerIDs.BISMUTH_LVL_3, "Expected BISMUTH_LVL_3 tower ID to be BISMUTH_LVL_3")
 	bismuth_lvl_3_tower.queue_free()
+
+func test_bismuth_lvl_4_tower_id():
+	var bismuth_lvl_4_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BISMUTH_LVL_4].instantiate()
+	add_child_autofree(bismuth_lvl_4_tower)
+	assert_true(bismuth_lvl_4_tower.TOWER_ID == TowerConstants.TowerIDs.BISMUTH_LVL_4, "Expected BISMUTH_LVL_4 tower ID to be BISMUTH_LVL_4")
+	bismuth_lvl_4_tower.queue_free()
+
+func test_bismuth_lvl_5_tower_id():
+	var bismuth_lvl_5_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BISMUTH_LVL_5].instantiate()
+	add_child_autofree(bismuth_lvl_5_tower)
+	assert_true(bismuth_lvl_5_tower.TOWER_ID == TowerConstants.TowerIDs.BISMUTH_LVL_5, "Expected BISMUTH_LVL_5 tower ID to be BISMUTH_LVL_5")
+	bismuth_lvl_5_tower.queue_free()

@@ -90,6 +90,8 @@ var BUILD_TOWER_PRELOADS: Dictionary[BuildTowerIDs, PackedScene] = {
     BuildTowerIDs.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_tower.tscn"),
     BuildTowerIDs.BISMUTH_LVL_2: load("res://towers/buildable_towers/bismuth/level_2/bismuth_lvl_2_tower.tscn"),
     BuildTowerIDs.BISMUTH_LVL_3: load("res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_tower.tscn"),
+    BuildTowerIDs.BISMUTH_LVL_4: load("res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_tower.tscn"),
+    BuildTowerIDs.BISMUTH_LVL_5: load("res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_tower.tscn"),
     BuildTowerIDs.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1.tscn"),
     BuildTowerIDs.LARIMAR_LVL_2: load("res://towers/buildable_towers/laminar/level_2/larimar_lvl_2.tscn"),
     BuildTowerIDs.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_level_1_tower.tscn"),
@@ -112,6 +114,8 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
     TowerIDs.BISMUTH_LVL_1: load("res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_tower.tscn"),
     TowerIDs.BISMUTH_LVL_2: load("res://towers/buildable_towers/bismuth/level_2/bismuth_lvl_2_tower.tscn"),
     TowerIDs.BISMUTH_LVL_3: load("res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_tower.tscn"),
+    TowerIDs.BISMUTH_LVL_4: load("res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_tower.tscn"),
+    TowerIDs.BISMUTH_LVL_5: load("res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_tower.tscn"),
     TowerIDs.LARIMAR_LVL_1: load("res://towers/buildable_towers/laminar/level_1/larimar_lvl_1.tscn"),
     TowerIDs.LARIMAR_LVL_2: load("res://towers/buildable_towers/laminar/level_2/larimar_lvl_2.tscn"),
     TowerIDs.SUNSTONE_LVL_1: load("res://towers/buildable_towers/sunstone/level_1/sunstone_level_1_tower.tscn"),
@@ -163,6 +167,8 @@ const UPGRADES_INTO: Dictionary = {
     TowerIDs.BISMUTH_LVL_1: BISMUTH_LVL_1_UPGRADES_INTO,
     TowerIDs.BISMUTH_LVL_2: BISMUTH_LVL_2_UPGRADES_INTO,
     TowerIDs.BISMUTH_LVL_3: BISMUTH_LVL_3_UPGRADES_INTO,
+    TowerIDs.BISMUTH_LVL_4: BISMUTH_LVL_4_UPGRADES_INTO,
+    TowerIDs.BISMUTH_LVL_5: BISMUTH_LVL_5_UPGRADES_INTO,
     TowerIDs.LARIMAR_LVL_1: LARIMAR_LVL_1_UPGRADES_INTO,
     TowerIDs.LARIMAR_LVL_2: LARIMAR_LVL_2_UPGRADES_INTO,
     TowerIDs.SUNSTONE_LVL_1: SUNSTONE_LVL_1_UPGRADES_INTO,
@@ -186,6 +192,8 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.BISMUTH_LVL_1: BISMUTH_LVL_1_REQUIRES_TOWERS,
     TowerIDs.BISMUTH_LVL_2: BISMUTH_LVL_2_REQUIRES_TOWERS,
     TowerIDs.BISMUTH_LVL_3: BISMUTH_LVL_3_REQUIRES_TOWERS,
+    TowerIDs.BISMUTH_LVL_4: BISMUTH_LVL_4_REQUIRES_TOWERS,
+    TowerIDs.BISMUTH_LVL_5: BISMUTH_LVL_5_REQUIRES_TOWERS,
     TowerIDs.LARIMAR_LVL_1: LARIMAR_LVL_1_REQUIRES_TOWERS,
     TowerIDs.LARIMAR_LVL_2: LARIMAR_LVL_2_REQUIRES_TOWERS,
     TowerIDs.SUNSTONE_LVL_1: SUNSTONE_LVL_1_REQUIRES_TOWERS,
@@ -215,6 +223,8 @@ const BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const BISMUTH_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
 const BISMUTH_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const BISMUTH_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const BISMUTH_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
+const BISMUTH_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const LARIMAR_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
 const LARIMAR_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const SUNSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
@@ -237,6 +247,8 @@ const BLACK_MARBLE_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const BISMUTH_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const BISMUTH_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const BISMUTH_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const BISMUTH_LVL_4_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const BISMUTH_LVL_5_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const LARIMAR_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const LARIMAR_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const SUNSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
@@ -264,6 +276,8 @@ const AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, Dic
     TowerIDs.BLACK_MARBLE_LVL_3: BLACK_MARBLE_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.BISMUTH_LVL_2: BISMUTH_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.BISMUTH_LVL_3: BISMUTH_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
+    TowerIDs.BISMUTH_LVL_4: BISMUTH_LVL_4_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
+    TowerIDs.BISMUTH_LVL_5: BISMUTH_LVL_5_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.SUNSTONE_LVL_2: SUNSTONE_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.SUNSTONE_LVL_3: SUNSTONE_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.LARIMAR_LVL_2: LARIMAR_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
@@ -328,12 +342,26 @@ const BISMUTH_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary
     TowerIDs.BISMUTH_LVL_2: 2
 }
 
+const BISMUTH_LVL_4_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.BISMUTH_LVL_1: 4,
+    TowerIDs.BISMUTH_LVL_2: 3,
+    TowerIDs.BISMUTH_LVL_3: 2,
+}
+
+const BISMUTH_LVL_5_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.BISMUTH_LVL_1: 5,
+    TowerIDs.BISMUTH_LVL_2: 4,
+    TowerIDs.BISMUTH_LVL_3: 3,
+    TowerIDs.BISMUTH_LVL_4: 2,
+}
+
 # ********
 # SUNSTONE
 # ********
 const SUNSTONE_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
     TowerIDs.SUNSTONE_LVL_1: 2,
 }
+
 const SUNSTONE_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
     TowerIDs.SUNSTONE_LVL_1: 3,
     TowerIDs.SUNSTONE_LVL_2: 2
