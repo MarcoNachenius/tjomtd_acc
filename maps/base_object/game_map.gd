@@ -15,10 +15,7 @@ enum States {
 
 # SIGNALS
 signal camera_moved(distance: Vector2)
-signal empty_space_selected
 signal balance_altered(remaining_balance: int)
-signal gained_life(remaining_lives: int)
-signal lost_credits(remaining_balance: int)
 signal lost_life(remaining_lives: int)
 signal completed_wave(total_waves_completed: int)
 signal tower_placed(tower: Tower)
