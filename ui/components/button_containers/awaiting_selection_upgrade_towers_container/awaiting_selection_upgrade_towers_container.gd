@@ -12,6 +12,10 @@ class_name AwaitingSelectionUpgradeTowersContainer
 @export var KUNZITE_LEVEL_3_BUTTON: Button
 @export var KUNZITE_LEVEL_4_BUTTON: Button
 @export var KUNZITE_LEVEL_5_BUTTON: Button
+@export var BISMUTH_LEVEL_2_BUTTON: Button
+@export var BISMUTH_LEVEL_3_BUTTON: Button
+@export var BISMUTH_LEVEL_4_BUTTON: Button
+@export var BISMUTH_LEVEL_5_BUTTON: Button
 
 # CONSTANTS
 @onready var ALL_BUTTONS: Array[Button] = [
@@ -24,7 +28,11 @@ class_name AwaitingSelectionUpgradeTowersContainer
     KUNZITE_LEVEL_2_BUTTON,
     KUNZITE_LEVEL_3_BUTTON,
     KUNZITE_LEVEL_4_BUTTON,
-    KUNZITE_LEVEL_5_BUTTON
+    KUNZITE_LEVEL_5_BUTTON,
+    BISMUTH_LEVEL_2_BUTTON,
+    BISMUTH_LEVEL_3_BUTTON,
+    BISMUTH_LEVEL_4_BUTTON,
+    BISMUTH_LEVEL_5_BUTTON,
 
 ]
 
@@ -39,7 +47,10 @@ class_name AwaitingSelectionUpgradeTowersContainer
     TowerConstants.TowerIDs.KUNZITE_LVL_3: KUNZITE_LEVEL_3_BUTTON,
     TowerConstants.TowerIDs.KUNZITE_LVL_4: KUNZITE_LEVEL_4_BUTTON,
     TowerConstants.TowerIDs.KUNZITE_LVL_5: KUNZITE_LEVEL_5_BUTTON,
-    
+    TowerConstants.TowerIDs.BISMUTH_LVL_2: BISMUTH_LEVEL_2_BUTTON,
+    TowerConstants.TowerIDs.BISMUTH_LVL_3: BISMUTH_LEVEL_3_BUTTON,
+    TowerConstants.TowerIDs.BISMUTH_LVL_4: BISMUTH_LEVEL_4_BUTTON,
+    TowerConstants.TowerIDs.BISMUTH_LVL_5: BISMUTH_LEVEL_5_BUTTON,
 }
 
 # PUBLIC METHODS

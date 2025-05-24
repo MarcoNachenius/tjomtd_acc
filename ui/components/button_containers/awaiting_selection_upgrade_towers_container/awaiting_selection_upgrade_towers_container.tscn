@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lfbebd88mhcq" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.gd" id="1_3sk7d"]
 
-[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON", "SUNSTONE_LEVEL_2_BUTTON", "SUNSTONE_LEVEL_3_BUTTON", "SPINEL_LEVEL_2_BUTTON", "LARIMAR_LEVEL_2_BUTTON", "KUNZITE_LEVEL_2_BUTTON", "KUNZITE_LEVEL_3_BUTTON", "KUNZITE_LEVEL_4_BUTTON", "KUNZITE_LEVEL_5_BUTTON")]
+[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON", "SUNSTONE_LEVEL_2_BUTTON", "SUNSTONE_LEVEL_3_BUTTON", "SPINEL_LEVEL_2_BUTTON", "LARIMAR_LEVEL_2_BUTTON", "KUNZITE_LEVEL_2_BUTTON", "KUNZITE_LEVEL_3_BUTTON", "KUNZITE_LEVEL_4_BUTTON", "KUNZITE_LEVEL_5_BUTTON", "BISMUTH_LEVEL_2_BUTTON", "BISMUTH_LEVEL_3_BUTTON", "BISMUTH_LEVEL_4_BUTTON", "BISMUTH_LEVEL_5_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_3sk7d")
@@ -16,6 +16,10 @@ KUNZITE_LEVEL_2_BUTTON = NodePath("KunziteLvl2Button")
 KUNZITE_LEVEL_3_BUTTON = NodePath("KunziteLvl3Button")
 KUNZITE_LEVEL_4_BUTTON = NodePath("KunziteLvl4Button")
 KUNZITE_LEVEL_5_BUTTON = NodePath("KunziteLvl5Button")
+BISMUTH_LEVEL_2_BUTTON = NodePath("BismuthLvl2Button")
+BISMUTH_LEVEL_3_BUTTON = NodePath("BismuthLvl3Button")
+BISMUTH_LEVEL_4_BUTTON = NodePath("BismuthLvl4Button")
+BISMUTH_LEVEL_5_BUTTON = NodePath("BismuthLvl5Button")
 
 [node name="BlackMarbleLvl2Button" type="Button" parent="."]
 layout_mode = 2
@@ -70,4 +74,24 @@ Level 4"
 visible = false
 layout_mode = 2
 text = "Kunzite
+Level 5"
+
+[node name="BismuthLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 2"
+
+[node name="BismuthLvl3Button" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 3"
+
+[node name="BismuthLvl4Button" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 4"
+
+[node name="BismuthLvl5Button" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
 Level 5"
