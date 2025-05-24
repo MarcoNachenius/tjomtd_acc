@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_6geh7"]
 [ext_resource type="Texture2D" uid="uid://chggj44q3iylw" path="res://towers/buildable_towers/bismuth/level_2/bismuth_lvl_2_missile_sprite.png" id="2_b3jj7"]
 
-[node name="BismuthLvl2Missile" type="Node2D"]
+[node name="BismuthLvl2Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
 z_index = 4
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_6geh7")
+MISSILE_SPRITE = NodePath("MissileSprite")
 __can_stun = true
 __stun_duration_seconds = 0.5
 __stun_probability_percentage = 15
