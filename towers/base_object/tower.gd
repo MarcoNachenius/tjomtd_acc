@@ -12,8 +12,16 @@ enum TowerOrigin {
 	BARRICADED,
 }
 
+# ORDERING CONTSTANTS
+const TOWER_Z_INDEX: int = 2
+const TOWER_Z_AS_RELATIVE: bool = true
+const TOWER_SPRITE_Z_INDEX: int = 0
+const TOWER_SPRITE_Z_AS_RELATIVE: bool = true
+
+# ANIMATION CONSTANTS
 const AWAITING_SELECTION_ANIMATION_NAME: String = "awaiting_selection"
 
+# PRIVATE VARS
 var __build_cost: int
 var __curr_state: States
 var __curr_display_range: int
@@ -22,13 +30,14 @@ var __placement_grid_coord: Vector2i
 var __upgrades_into: Array[TowerConstants.TowerIDs]
 var __requires_towers: Dictionary[TowerConstants.TowerIDs, int]
 
+# EXPORT VARS
 @export var TOWER_ID: TowerConstants.TowerIDs
 @export var TOWER_SPRITE: Sprite2D
 @export var USE_CUSTOM_TOWER_DISPLAY_RANGE: bool 
 @export var CUSTOM_TOWER_DISPLAY_RANGE: int 
 @export var PRIMARY_PROJECTILE_SPAWNER: ProjectileSpawner
 
-
+# GENERATED CHILD SCENES
 var SURFACE_SPRITE: Sprite2D
 var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
 var RANGE_DISPLAY_SHAPE: RangeDisplayShape
@@ -45,8 +54,11 @@ func _ready():
 	_create_surface_sprite()
 	_create_awaiting_selection_animation()
 	_create_range_display_shape()
+	# Set up z index and z as relative values
+	_handle_ordering()
 
-# CUSTOM
+# PUBLIC METHODS
+# ==============
 func disable_selection_area():
 	assert(__selection_area, "No slection area has been created")
 	__selection_area.monitoring = false
@@ -55,7 +67,8 @@ func enable_selection_area():
 	assert(__selection_area, "No slection area has been created")
 	__selection_area.monitoring = true
 
-# LOCALS
+# PRIVATE METHODS
+# ===============
 func _create_surface_sprite():
 	var new_surface_sprite: Sprite2D = TowerConstants.TOWER_SURFACE_SPRITE_LOAD.instantiate()
 	SURFACE_SPRITE = new_surface_sprite
@@ -99,8 +112,22 @@ func _create_range_display_shape():
 	RANGE_DISPLAY_SHAPE.z_index = 1
 	RANGE_DISPLAY_SHAPE.visible = false
 
+## Avoid human error and ensure that tower and its sprite are always ordered correctly
+func _handle_ordering():
+	# Handle scene root ordering
+	y_sort_enabled = true
+	z_as_relative = TOWER_Z_AS_RELATIVE
+	z_index = TOWER_Z_INDEX
+	
+	# Handle tower sprite ordering
+	if TOWER_ID != TowerConstants.TowerIDs.BARRICADE: # Barricades do not have tower sprites
+		TOWER_SPRITE.y_sort_enabled = true
+		TOWER_SPRITE.z_as_relative = TOWER_SPRITE_Z_AS_RELATIVE
+		TOWER_SPRITE.z_index = TOWER_SPRITE_Z_INDEX 
+
 
 # GETTERS
+# =======
 func get_build_cost() -> int:
 	return __build_cost
 
