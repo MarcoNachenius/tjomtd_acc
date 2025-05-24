@@ -28,15 +28,14 @@ func upgrade_level() -> void:
 	# Update current buildable tower preloads list
 	match __curr_level: # Match is used because nested arrays are not supported.
 		1:
-			__curr_buildable_tower_preloads = LEVEL_1_BUILDABLE_TOWER_PRELOADS
+			__curr_buildable_tower_preloads.append_array(LEVEL_1_BUILDABLE_TOWER_PRELOADS)
 			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
 		2:
-			__curr_buildable_tower_preloads = LEVEL_2_BUILDABLE_TOWER_PRELOADS
+			__curr_buildable_tower_preloads.append_array(LEVEL_2_BUILDABLE_TOWER_PRELOADS)
 			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
 
 
 
-# LEVEL 1 BUILDABLE TOWER PRELOADS
 var LEVEL_1_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_1],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_1],
@@ -46,26 +45,44 @@ var LEVEL_1_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_1],
 ]
 
-# LEVEL 2 BUILDABLE TOWER PRELOADS
 var LEVEL_2_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
-	# Previous level towers
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_1],
-	# New towers
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_2],
-	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_2],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_2],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_2],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_2],
 	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_2],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_2],
 ]
 
+var LEVEL_3_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_3],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_3],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_3],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_3],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_3],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_3],
+]
+
+var LEVEL_4_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_4],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_4],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_4],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_4],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_4],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_4],
+]
+
+var LEVEL_5_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_5],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_5],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_5],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_5],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_5],
+	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_5],
+]
+
 const LEVEL_UPGRADE_PRICES: Array[int] = [
-	0, # Initialisation value
+	0,
 	10, # Level 1
 	20, # Level 2
 	30, # Level 3
