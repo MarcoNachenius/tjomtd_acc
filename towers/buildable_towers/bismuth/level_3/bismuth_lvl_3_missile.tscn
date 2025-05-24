@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://irboj2mayxlu"]
+
+[ext_resource type="Script" uid="uid://blrqx3tw5ms2o" path="res://projectiles/missiles/multi_hit/targeted_ricochet/targeted_ricochet_missile.gd" id="1_7a7dc"]
+[ext_resource type="Texture2D" uid="uid://dpqfue5vugl5b" path="res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_missile_sprite.png" id="2_p0jrq"]
+
+[node name="BismuthLvl3Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_7a7dc")
+MISSILE_SPRITE = NodePath("MissileSprite")
+metadata/_custom_type_script = "uid://blrqx3tw5ms2o"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.71147, 0.355735)
+texture = ExtResource("2_p0jrq")

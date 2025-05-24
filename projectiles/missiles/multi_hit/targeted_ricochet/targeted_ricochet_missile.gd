@@ -5,13 +5,11 @@ class_name TargetedRicochetMissile
 ## If marked as true, the missile will target creep if it is not currently
 ## targeting a creep, and if a creep is within range of its interception hurtbox.
 ## The interception hutbox will only be created on ready if this is set to true.
-@export var __allow_interception: bool = false
-@export var __interception_hurtbox_radius: int = 100
 @export var MISSILE_SPRITE: Sprite2D
 @export var __damage: int
-## If set to true, the bullet will lose damage every time it hits a creep.
+## If set to true, the missile will lose damage every time it hits a creep.
 @export var __damage_degredation_enabled: bool = false
-## The rate at which the bullet loses damage after hitting a creep.
+## The rate at which the missile loses damage after hitting a creep.
 @export var __damage_degredation_rate: int
 @export var __infinite_ricochets: bool = false
 @export var __ricochet_detection_radius: int = 100
@@ -19,7 +17,6 @@ class_name TargetedRicochetMissile
 
 # LOCAL VARS
 var __curr_ricochets: int
-var __interception_hurtbox: ProjectileHurtbox
 var __last_damaged_creep: Creep
 var __ricochet_detection_hurtbox: ProjectileHurtbox
 
@@ -52,19 +49,19 @@ func _inflict_damange(creep: Creep):
 	
 	# Handle ricochet
 	__curr_ricochets += 1
-	# Destroy the bullet if it has reached the maximum ricochets
-	# If infinite ricochets are enabled, the bullet will not be destroyed
+	# Destroy the missile if it has reached the maximum ricochets
+	# If infinite ricochets are enabled, the missile will not be destroyed
 	if !__infinite_ricochets and __curr_ricochets == __total_ricochets:
 		queue_free()
 		return
 
 	# Handle damage degredation
 	if __damage_degredation_enabled:
-		# Destroy the bullet if it has no more damage after hitting a creep
+		# Destroy the missile if it has no more damage after hitting a creep
 		if __damage - __damage_degredation_rate <= 0:
 			queue_free()
 			return
-		# Reduce the damage of the bullet
+		# Reduce the damage of the missile
 		__damage -= __damage_degredation_rate
 
 	# Handle ricochet
@@ -77,6 +74,21 @@ func _inflict_damange(creep: Creep):
 
 func set_damage(amount: int):
 	__damage = amount
+
+func set_damage_degredation_enabled(value: bool) -> void:
+	__damage_degredation_enabled = value
+
+func set_damage_degredation_rate(value: int) -> void:
+	__damage_degredation_rate = value
+
+func set_infinite_ricochets(value: bool) -> void:
+	__infinite_ricochets = value
+
+func set_ricochet_detection_radius(value: int) -> void:
+	__ricochet_detection_radius = value
+
+func set_total_ricochets(value: int) -> void:
+	__total_ricochets = value
 
 # *******
 # WIP

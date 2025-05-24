@@ -1,6 +1,12 @@
 extends Node2D
 class_name Projectile
 
+# CONSTANTS
+# =========
+const PROJECTILE_Z_INDEX: int = 4
+const PROJECTILE_Z_AS_RELATIVE: bool = false
+
+
 # EXPORT VARS
 # ===========
 @export var __hurtbox_radius: int = 5
@@ -42,7 +48,6 @@ var __aoe_damage_hurtbox: ProjectileHurtbox
 
 # SIGNALS
 # =======
-
 signal creep_hit(creep: Creep)
 
 # ********
@@ -58,6 +63,8 @@ func _ready():
 	_create_aoe_hurtbox()
 	# Handle additional logic during _ready() method for subclasses
 	_extended_onready()
+	# Ensure human errors are avoided and ordering of prijectiles remains consistent
+	_handle_ordering()
 
 # *******
 # PUBLICS
@@ -123,6 +130,11 @@ func update_velocity_towards_target():
 # ********
 # PRIVATES
 # ********
+func _handle_ordering():
+	y_sort_enabled = true
+	z_as_relative = PROJECTILE_Z_AS_RELATIVE
+	z_index = PROJECTILE_Z_INDEX
+
 func _calculated_isometric_speed() -> float:
 	var direction_angle = global_position.angle_to_point(__target.global_position)
 	return (0.5 * abs(cos(direction_angle)) + 0.5) * __speed

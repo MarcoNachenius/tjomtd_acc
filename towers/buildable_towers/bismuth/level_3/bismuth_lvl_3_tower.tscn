@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccydjngh4fuj0"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_87cqe"]
+[ext_resource type="Texture2D" uid="uid://bhwwtkj0n4y7e" path="res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_tower_sprite.png" id="2_dh3pk"]
+[ext_resource type="Script" uid="uid://6t7vdju0aysm" path="res://projectile_spawners/single_missile/mullti_hit/targeted_ricochet/targeted_ricochet_missile_spawner.gd" id="3_dh3pk"]
+
+[node name="BismuthLvl3Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 3
+y_sort_enabled = true
+script = ExtResource("1_87cqe")
+TOWER_ID = 8
+TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("TargetedRicochetMissileSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -18)
+scale = Vector2(1, 0.719999)
+texture = ExtResource("2_dh3pk")
+
+[node name="TargetedRicochetMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_dh3pk")
+__missile_damage = 60
+__missile_speed = 40
+MISSILE_LOAD = 1
+__damage_degredation_enabled = true
+__damage_degredation_rate = 10
+__ricochet_detection_radius = 200
+__total_ricochets = 2
+__cooldown_duration = 1.5
+__detection_range = 500
+metadata/_custom_type_script = "uid://6t7vdju0aysm"
