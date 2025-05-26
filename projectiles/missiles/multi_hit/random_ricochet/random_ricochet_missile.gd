@@ -36,7 +36,6 @@ func _handle_movement():
 ## This method also avoids ping-ponging between same two targets when there is 
 ## more than one viable ricochet target in range that is not last hit creep.
 func _handle_ricochet():
-    print("Handling Ricochet")
     # Gererate random x and y values between -10 and 10
     var random_x_coordinate = randi_range(-10, 10)
     var random_y_coordinate = randi_range(-10, 10)
