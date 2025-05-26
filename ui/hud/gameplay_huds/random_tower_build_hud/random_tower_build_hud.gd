@@ -124,8 +124,6 @@ func _connnect_tower_range_visibility_container_signals():
 func _connect_game_map_signals():
 	# Connect the game map signals to the appropriate methods
 	GAME_MAP.balance_altered.connect(_on_balance_altered)
-	GAME_MAP.lost_credits.connect(_on_credits_lost)
-	GAME_MAP.gained_life.connect(_on_life_gained)
 	GAME_MAP.lost_life.connect(_on_life_lost)
 	GAME_MAP.completed_wave.connect(_on_wave_completed)
 	GAME_MAP.tower_selected.connect(_on_tower_selected)
