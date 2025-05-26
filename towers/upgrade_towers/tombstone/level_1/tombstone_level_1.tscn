@@ -24,7 +24,6 @@ texture = ExtResource("3_ho0d8")
 script = ExtResource("3_iueqh")
 __missile_damage = 10
 __missile_speed = 30
-__total_ricochets = 1
 __cooldown_duration = 1.0
 __detection_range = 400
 metadata/_custom_type_script = "uid://ccsf5wjetkq1g"
