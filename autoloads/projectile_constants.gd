@@ -35,6 +35,8 @@ enum ProjectileIDs {
 	BISMUTH_LVL_4,
 	BISMUTH_LVL_5,
 	TOMBSTONE_LVL_1,
+	BLACK_MARBLE_LVL_4,
+	BLACK_MARBLE_LVL_5
 }
 
 # ******************************************************************************************************************
@@ -52,11 +54,13 @@ enum SingleHitBullets {
 
 enum TargetedRicochetBullets {
 	BLACK_MARBLE_LVL_3,
+	BLACK_MARBLE_LVL_5
 }
 
 enum RandomRicochetBullets {
 	TEST_RANDOM_RICOCHET_BULLET,
 	BLACK_MARBLE_LVL_2,
+	BLACK_MARBLE_LVL_4
 }
 
 enum BulletsForSpawner {
@@ -68,7 +72,9 @@ enum BulletsForSpawner {
 	SUNSTONE_LVL_2,
 	SUNSTONE_LVL_3,
 	KUNZITE_LVL_2,
-	KUNZITE_LVL_4
+	KUNZITE_LVL_4,
+	BLACK_MARBLE_LVL_4,
+	BLACK_MARBLE_LVL_5
 }
 
 
@@ -126,25 +132,30 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary[SingleHitBullets, PackedScene] = {
 	SingleHitBullets.KUNZITE_LVL_4: load("res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn")
 }
 
-var TARGETED_RICOCHET_BULLET_LOADS: Dictionary = {
+var TARGETED_RICOCHET_BULLET_LOADS: Dictionary[TargetedRicochetBullets, PackedScene] = {
 	TargetedRicochetBullets.BLACK_MARBLE_LVL_3: load("res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn"),
+	TargetedRicochetBullets.BLACK_MARBLE_LVL_5: load("res://towers/buildable_towers/black_marble/level_5/black_marble_lvl_5_bullet.tscn")
 }
 
-var RANDOM_RICOCHET_BULLET_LOADS: Dictionary = {
+var RANDOM_RICOCHET_BULLET_LOADS: Dictionary[RandomRicochetBullets, PackedScene] = {
 	RandomRicochetBullets.TEST_RANDOM_RICOCHET_BULLET: load("res://projectiles/bullets/multi_hit/random_ricochet/test_bullet/test_rrb.tscn"),
 	RandomRicochetBullets.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn"),
+	RandomRicochetBullets.BLACK_MARBLE_LVL_4: load("res://towers/buildable_towers/black_marble/level_4/black_marble_lvl_4_bullet.tscn")
 }
 
 const BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.BLACK_MARBLE_LVL_1: "res://towers/buildable_towers/black_marble/level_1/tower_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_2: "res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn",
 	BulletsForSpawner.BLACK_MARBLE_LVL_3: "res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn",
+	BulletsForSpawner.BLACK_MARBLE_LVL_4: "res://towers/buildable_towers/black_marble/level_4/black_marble_lvl_4_bullet.tscn",
+	BulletsForSpawner.BLACK_MARBLE_LVL_5: "res://towers/buildable_towers/black_marble/level_5/black_marble_lvl_5_bullet.tscn",
 	BulletsForSpawner.LARIMAR_LVL_1: "res://towers/buildable_towers/laminar/level_1/larimar_lvl_1_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_1: "res://towers/buildable_towers/sunstone/level_1/sunstone_lvl_1_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_2: "res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn",
 	BulletsForSpawner.SUNSTONE_LVL_3: "res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn",
 	BulletsForSpawner.KUNZITE_LVL_2: "res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn",
-	BulletsForSpawner.KUNZITE_LVL_4: "res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn"
+	BulletsForSpawner.KUNZITE_LVL_4: "res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn",
+	
 }
 
 

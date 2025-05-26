@@ -20,3 +20,15 @@ func test_black_marble_lvl_3_tower_id():
 	add_child_autofree(black_marble_lvl_3_tower)
 	assert_true(black_marble_lvl_3_tower.TOWER_ID == TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3, "Expected BLACK_MARBLE_LVL_3 tower ID to be BLACK_MARBLE_LVL_3")
 	black_marble_lvl_3_tower.queue_free()
+
+func test_black_marble_lvl_4_tower_id():
+	var black_marble_lvl_4_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_4].instantiate()
+	add_child_autofree(black_marble_lvl_4_tower)
+	assert_true(black_marble_lvl_4_tower.TOWER_ID == TowerConstants.TowerIDs.BLACK_MARBLE_LVL_4, "Expected BLACK_MARBLE_LVL_4 tower ID to be BLACK_MARBLE_LVL_4")
+	black_marble_lvl_4_tower.queue_free()
+
+func test_black_marble_lvl_5_tower_id():
+	var black_marble_lvl_5_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_5].instantiate()
+	add_child_autofree(black_marble_lvl_5_tower)
+	assert_true(black_marble_lvl_5_tower.TOWER_ID == TowerConstants.TowerIDs.BLACK_MARBLE_LVL_5, "Expected BLACK_MARBLE_LVL_5 tower ID to be BLACK_MARBLE_LVL_5")
+	black_marble_lvl_5_tower.queue_free()

@@ -23,6 +23,7 @@ texture = ExtResource("3_6l07g")
 script = ExtResource("4_85b51")
 __bullet_damage = 20
 __bullet_speed = 10
+__total_ricochets = 1
 BULLET_PRELOAD = 1
 __cooldown_duration = 1.0
 __detection_range = 300

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo425cjy86n5i"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_lr8lv"]
+[ext_resource type="Texture2D" uid="uid://cyx1te4k1n44s" path="res://towers/buildable_towers/black_marble/level_4/black_marble_lvl_4_tower_sprite.png" id="2_6jv6l"]
+[ext_resource type="Script" uid="uid://ciswnqnqe0n4u" path="res://projectile_spawners/single_bullet/multi_hit/random_ricochet_bullet/random_ricochet_bullet_ps.gd" id="3_6jv6l"]
+
+[node name="BlackMarbleLvl4Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 3
+y_sort_enabled = true
+script = ExtResource("1_lr8lv")
+TOWER_ID = 4
+TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("RandomRicochetBulletSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -37)
+scale = Vector2(1, 0.76)
+texture = ExtResource("2_6jv6l")
+
+[node name="RandomRicochetBulletSpawner" type="Node2D" parent="."]
+script = ExtResource("3_6jv6l")
+__bullet_damage = 20
+__bullet_speed = 25
+BULLET_PRELOAD = 2
+__cooldown_duration = 0.2
+__detection_range = 250
+metadata/_custom_type_script = "uid://ciswnqnqe0n4u"

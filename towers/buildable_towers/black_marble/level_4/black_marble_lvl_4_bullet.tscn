@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmadw7ad4lfa7"]
+
+[ext_resource type="Script" uid="uid://2jlk7ijvr8cd" path="res://projectiles/bullets/multi_hit/random_ricochet/random_ricochet_bullet.gd" id="1_e8iil"]
+[ext_resource type="Texture2D" uid="uid://5p4e7i3lpxld" path="res://towers/buildable_towers/black_marble/level_4/black_marble_lvl_4_bullet_sprite.png" id="2_7yyxe"]
+
+[node name="BlackMarbleLvl4Bullet" type="Node2D"]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_e8iil")
+metadata/_custom_type_script = "uid://2jlk7ijvr8cd"
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.640002, 0.320001)
+texture = ExtResource("2_7yyxe")

@@ -22,7 +22,7 @@ __damage_degredation_rate = 10
 __ricochet_detection_radius = 200
 __total_ricochets = 2
 __cooldown_duration = 1.0
-__detection_range = 300
+__detection_range = 350
 metadata/_custom_type_script = "uid://bc7cfloxni2io"
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
