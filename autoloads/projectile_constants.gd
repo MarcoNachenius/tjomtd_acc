@@ -34,6 +34,7 @@ enum ProjectileIDs {
 	BISMUTH_LVL_3,
 	BISMUTH_LVL_4,
 	BISMUTH_LVL_5,
+	TOMBSTONE_LVL_1,
 }
 
 # ******************************************************************************************************************
@@ -92,6 +93,10 @@ enum TargetedRicochetMissiles{
 	BISMUTH_LVL_3
 }
 
+enum RandomRicochetMissiles {
+	TOMBSTONE_LVL_1
+}
+
 enum MissilesForSpawner {
 	BISMUTH_LVL_1,
 	TEST_TARGETED_RICOCHET_MISSILE,
@@ -103,7 +108,8 @@ enum MissilesForSpawner {
 	BISMUTH_LVL_2,
 	BISMUTH_LVL_3,
 	BISMUTH_LVL_4,
-	BISMUTH_LVL_5
+	BISMUTH_LVL_5,
+	TOMBSTONE_LVL_1
 }
 
 
@@ -150,7 +156,11 @@ var TARGETED_RICOCHET_MISSILE_LOADS: Dictionary = {
 	TargetedRicochetMissiles.BISMUTH_LVL_3: load("res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_missile.tscn")
 }
 
-var MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
+var RANDOM_RICOCHET_MISSILE_LOADS: Dictionary[RandomRicochetMissiles, PackedScene] = {
+	RandomRicochetMissiles.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn")
+}
+
+const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.BISMUTH_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
 	MissilesForSpawner.TEST_TARGETED_RICOCHET_MISSILE: "res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_1: "res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn",
@@ -161,7 +171,8 @@ var MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.BISMUTH_LVL_2: "res://towers/buildable_towers/bismuth/level_2/bismuth_lvl_2_missile.tscn",
 	MissilesForSpawner.BISMUTH_LVL_3: "res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_missile.tscn",
 	MissilesForSpawner.BISMUTH_LVL_4: "res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_missile.tscn",
-	MissilesForSpawner.BISMUTH_LVL_5: "res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn"
+	MissilesForSpawner.BISMUTH_LVL_5: "res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn",
+	MissilesForSpawner.TOMBSTONE_LVL_1: "res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn"
 	
 }
 

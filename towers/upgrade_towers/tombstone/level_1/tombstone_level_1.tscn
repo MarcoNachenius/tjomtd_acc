@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cumcmgyi6crjk"]
+[gd_scene load_steps=4 format=3 uid="uid://cumcmgyi6crjk"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_aqv7f"]
 [ext_resource type="Texture2D" uid="uid://og3pr5sylcmb" path="res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_tower_sprite.png" id="3_ho0d8"]
+[ext_resource type="Script" uid="uid://ccsf5wjetkq1g" path="res://projectile_spawners/single_missile/mullti_hit/random_ricochet/random_ricochet_projectile_spawner.gd" id="3_iueqh"]
 
 [node name="TombstoneLevel1" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
 z_index = 3
@@ -19,3 +20,12 @@ y_sort_enabled = true
 position = Vector2(0, -50)
 scale = Vector2(0.743009, 0.743009)
 texture = ExtResource("3_ho0d8")
+
+[node name="RandomRicochetMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_iueqh")
+__missile_damage = 10
+__missile_speed = 30
+__total_ricochets = 1
+__cooldown_duration = 1.0
+__detection_range = 400
+metadata/_custom_type_script = "uid://ccsf5wjetkq1g"

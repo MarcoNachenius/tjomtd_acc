@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://xdgl76btqg4e"]
+
+[ext_resource type="Script" uid="uid://c06wq6oyjdg5a" path="res://projectiles/missiles/multi_hit/random_ricochet/random_ricochet_missile.gd" id="1_q8rle"]
+[ext_resource type="Texture2D" uid="uid://bopiapena4j8r" path="res://towers/upgrade_towers/tombstone/level_1/tomstone_lvl_1_missile_sprite.png" id="2_nupx5"]
+
+[node name="TombstoneLvl1Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+y_sort_enabled = true
+script = ExtResource("1_q8rle")
+MISSILE_SPRITE = NodePath("MissileSprite")
+metadata/_custom_type_script = "uid://c06wq6oyjdg5a"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.72, 0.36)
+texture = ExtResource("2_nupx5")
