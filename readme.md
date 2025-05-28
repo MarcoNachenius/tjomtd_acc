@@ -25,7 +25,7 @@ To get the game up and running, follow these simple steps:
 - **Maze Building**: Each round, you're given 5 random towers to choose from, and you get to decide where to place each one as long as it does not block the creeps' path completely.
 - **Tower Selection**: Choose one tower to place; the other four become barricades.
 - **Barricades**: Only barricades can be removed, not placed towers. Towers can be upgraded and may become barricades at a later stage.
-- **Creep Pathing**:
+- **Creep Pathing**: Creeps will navigate the shortest path from the start to the end point. Some maps may have intermediate checkpoints that creeps must pass.
 
 
 ## Controls and Gameplay
