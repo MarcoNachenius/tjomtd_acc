@@ -37,11 +37,12 @@ signal tower_selected(tower: Tower)
 ## Main grid coodrinate.
 @export var __path_start_point: Vector2i
 
+# PRIVATE VARS
+# ============
 var __astar_grid: AStarGrid2D
 var __build_tower_preload: PackedScene
 var __build_tower_cost: int
 var __barricades_on_map: Array[Tower]
-var CREEP_SPAWNER: CreepSpawner
 var __curr_balance: int
 var __curr_path: Array[Vector2i]
 var __curr_state: States
@@ -64,6 +65,10 @@ var __total_waves_completed: int
 var __towers_awaiting_selection: Array[Tower]
 var __towers_on_map: Array[Tower]
 var __valid_build_position_surface_highlight: Sprite2D
+
+# INVARIABLE COMPONENTS
+# =====================
+var CREEP_SPAWNER: CreepSpawner
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
 
 # -----------------
