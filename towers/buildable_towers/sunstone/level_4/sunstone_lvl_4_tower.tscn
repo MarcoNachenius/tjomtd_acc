@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://md3etolut11n"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_nyx47"]
+[ext_resource type="Texture2D" uid="uid://c6bkj68tetvli" path="res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_tower_sprite.png" id="2_3ts3q"]
+[ext_resource type="Script" uid="uid://boqaewt7j6awl" path="res://projectile_spawners/multi_missile/star_formation/star_shm_spawner/star_single_hit_missile_spawner.gd" id="3_vk2n5"]
+
+[node name="SunstoneLvl4Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 3
+y_sort_enabled = true
+script = ExtResource("1_nyx47")
+TOWER_ID = 19
+TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("StarSingleHitMissileSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -38)
+scale = Vector2(0.744444, 0.744444)
+texture = ExtResource("2_3ts3q")
+
+[node name="StarSingleHitMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_vk2n5")
+__missile_damage = 30
+__missile_speed = 20
+__retargetable = true
+__retarget_radius = 100
+__cooldown_duration = 0.8
+__detection_range = 300
+metadata/_custom_type_script = "uid://boqaewt7j6awl"

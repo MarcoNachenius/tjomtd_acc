@@ -1,10 +1,10 @@
 extends ProjectileSpawner
-class_name StarSingleHitMissileSpawner
+class_name StarRandomRicochetMissileSpawner
 
 @export var __missile_damage: int
 @export var __missile_speed: int
 @export var __missiles_per_launch: int = 3
-@export var MISSILE_ID: ProjectileConstants.SingleHitMissiles
+@export var MISSILE_ID: ProjectileConstants.RandomRicochetMissiles
 @export var __formation_policy: FormationPolicy = FormationPolicy.TARGETED
 
 @export var __can_stun: bool = false
@@ -30,6 +30,13 @@ class_name StarSingleHitMissileSpawner
 @export var __aoe_detection_radius: int
 ## The amount of damage that gets inflicted when triggered
 @export var __aoe_damage_amount: int
+## If true, damage will decrease after every hit
+@export var __damage_degredation_enabled: bool = false
+## Rate at which missile loses damage after hitting a creep.
+@export var __damage_degredation_rate: int
+@export var __infinite_ricochets: bool = false
+@export var __total_ricochets: int = 2
+
 # LOCALS
 var __launch_angles: Array[float] = []
 # Only used when formation policy is set to static
@@ -57,7 +64,7 @@ func _launch_projectiles():
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
 			# Instantiate missile
-			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			var new_missile: RandomRicochetMissile = ProjectileConstants.RANDOM_RICOCHET_MISSILE_LOADS[MISSILE_ID].instantiate()
 			# Assign required properties
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
@@ -76,6 +83,12 @@ func _launch_projectiles():
 			new_missile.set_aoe_enabled(__aoe_enabled)
 			new_missile.set_aoe_detection_radius(__aoe_detection_radius)
 			new_missile.set_aoe_damage_amount(__aoe_damage_amount)
+			# Assign damage degradation properties
+			new_missile.set_damage_degredation_enabled(__damage_degredation_enabled)
+			new_missile.set_damage_degredation_rate(__damage_degredation_rate)
+			# Assign infinite ricochets properties
+			new_missile.set_infinite_ricochets(__infinite_ricochets)
+			new_missile.set_total_ricochets(__total_ricochets)
 
 			# Only assign target to first launched missile
 			if i == 0:
@@ -98,7 +111,7 @@ func _launch_projectiles():
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
 			# Instantiate missile
-			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			var new_missile: RandomRicochetMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
 			# Set values
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
@@ -122,7 +135,7 @@ func _launch_projectiles():
 			if adjusted_launch_angle >= TAU:
 				adjusted_launch_angle -= TAU
 			# Instantiate missile
-			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
+			var new_missile: RandomRicochetMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
 			# Set values
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
