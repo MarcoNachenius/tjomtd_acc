@@ -22,8 +22,6 @@ signal tower_placed(tower: Tower)
 signal tower_selected(tower: Tower)
 
 # EXPORTS
-## Enable path jumping on astar grid
-@export var ENABLE_ASTAR_PATH_JUMPING: bool = true
 ## Map ID
 @export var MAP_ID: MapConstants.MapID
 ## Number of map tiles
@@ -261,7 +259,7 @@ func _create_astar_grid():
 	# Enable path jumping for the grid if the feature is configured.
 	# This setting allows units to "jump" over specific obstacles as defined
 	# by the pathfinding logic, enhancing pathing flexibility.
-	__astar_grid.jumping_enabled = ENABLE_ASTAR_PATH_JUMPING
+	__astar_grid.jumping_enabled = true
 
 	# Commit the grid configuration to apply the changes.
 	__astar_grid.update()
