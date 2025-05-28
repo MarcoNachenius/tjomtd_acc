@@ -99,7 +99,7 @@ func _launch_projectiles():
 				adjusted_launch_angle -= TAU
 			# Instantiate missile
 			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
-			# Set values
+			# Assign required properties
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
 			# Assign stun properties
@@ -109,6 +109,14 @@ func _launch_projectiles():
 			# Assign retarget properties
 			new_missile.set_retargetable(__retargetable)
 			new_missile.set_retarget_radius(__retarget_radius)
+			# Assign slow properties
+			new_missile.set_can_slow(__can_slow)
+			new_missile.set_slow_duration_seconds(__slow_duration_seconds)
+			new_missile.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
+			# Assign aoe properties
+			new_missile.set_aoe_enabled(__aoe_enabled)
+			new_missile.set_aoe_detection_radius(__aoe_detection_radius)
+			new_missile.set_aoe_damage_amount(__aoe_damage_amount)
 
 			add_child(new_missile)
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
@@ -123,7 +131,7 @@ func _launch_projectiles():
 				adjusted_launch_angle -= TAU
 			# Instantiate missile
 			var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_ID].instantiate()
-			# Set values
+			# Assign required properties
 			new_missile.set_speed(__missile_speed)
 			new_missile.set_damage(__missile_damage)
 			# Assign stun properties
@@ -133,6 +141,14 @@ func _launch_projectiles():
 			# Assign retarget properties
 			new_missile.set_retargetable(__retargetable)
 			new_missile.set_retarget_radius(__retarget_radius)
+			# Assign slow properties
+			new_missile.set_can_slow(__can_slow)
+			new_missile.set_slow_duration_seconds(__slow_duration_seconds)
+			new_missile.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
+			# Assign aoe properties
+			new_missile.set_aoe_enabled(__aoe_enabled)
+			new_missile.set_aoe_detection_radius(__aoe_detection_radius)
+			new_missile.set_aoe_damage_amount(__aoe_damage_amount)
 
 			add_child(new_missile)
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
