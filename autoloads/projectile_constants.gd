@@ -104,7 +104,7 @@ enum TargetedRicochetMissiles{
 
 enum RandomRicochetMissiles {
 	TOMBSTONE_LVL_1,
-	SUNSTONE_LVL_4
+	SUNSTONE_LVL_5
 }
 
 enum MissilesForSpawner {
@@ -120,7 +120,8 @@ enum MissilesForSpawner {
 	BISMUTH_LVL_4,
 	BISMUTH_LVL_5,
 	TOMBSTONE_LVL_1,
-	SUNSTONE_LVL_4
+	SUNSTONE_LVL_4,
+	SUNSTONE_LVL_5
 }
 
 
@@ -173,7 +174,8 @@ var TARGETED_RICOCHET_MISSILE_LOADS: Dictionary = {
 }
 
 var RANDOM_RICOCHET_MISSILE_LOADS: Dictionary[RandomRicochetMissiles, PackedScene] = {
-	RandomRicochetMissiles.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn")
+	RandomRicochetMissiles.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn"),
+	RandomRicochetMissiles.SUNSTONE_LVL_5: load("res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn"),
 }
 
 const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
@@ -189,7 +191,8 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.BISMUTH_LVL_4: "res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_missile.tscn",
 	MissilesForSpawner.BISMUTH_LVL_5: "res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn",
 	MissilesForSpawner.TOMBSTONE_LVL_1: "res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn",
-	MissilesForSpawner.SUNSTONE_LVL_4: "res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn"
+	MissilesForSpawner.SUNSTONE_LVL_4: "res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn",
+	MissilesForSpawner.SUNSTONE_LVL_5: "res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn"
 	
 }
 

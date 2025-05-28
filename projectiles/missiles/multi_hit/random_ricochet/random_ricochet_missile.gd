@@ -36,6 +36,8 @@ func _handle_movement():
 ## This method also avoids ping-ponging between same two targets when there is 
 ## more than one viable ricochet target in range that is not last hit creep.
 func _handle_ricochet():
+    # Handle ricochet
+    __curr_ricochets += 1
     # Gererate random x and y values between -10 and 10
     var random_x_coordinate = randi_range(-10, 10)
     var random_y_coordinate = randi_range(-10, 10)
@@ -82,8 +84,6 @@ func _inflict_damange(creep: Creep):
     # Handle slow infliction
     _handle_slow_infliction(creep)
 
-    # Handle ricochet
-    __curr_ricochets += 1
     # Destroy missile if it has reached maximum ricochets
     if !__infinite_ricochets and __curr_ricochets >= __total_ricochets:
         queue_free()

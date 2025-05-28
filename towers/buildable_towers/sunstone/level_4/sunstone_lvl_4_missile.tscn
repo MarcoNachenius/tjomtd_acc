@@ -4,11 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://d4ovq3x3qbh8" path="res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile_sprite.png" id="2_w503k"]
 
 [node name="SunstoneLvl4Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_hb2om")
 MISSILE_SPRITE = NodePath("MissileSprite")
 metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
 
 [node name="MissileSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
-scale = Vector2(1, 0.5)
+scale = Vector2(0.724994, 0.362497)
 texture = ExtResource("2_w503k")
