@@ -19,6 +19,7 @@ class_name RandomTowerBuildHUD
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
+	TOWER_UPGRADES_CONTAINER.SAM_SITE_BUTTON: _on_sam_site_button_pressed
 }
 
 @onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -481,6 +482,9 @@ func _on_keep_tower_button_pressed():
 
 func _on_tombstone_button_pressed():
 	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+
+func _on_sam_site_button_pressed():
+	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_1)
 
 
 #                                 | Awaiting Selection Upgrade Tower Container |

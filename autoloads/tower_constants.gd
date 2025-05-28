@@ -36,7 +36,8 @@ enum TowerIDs {
     KUNZITE_LVL_3,
     KUNZITE_LVL_4,
     KUNZITE_LVL_5,
-    
+    SAM_SITE_LVL_1,
+    SAM_SITE_LVL_2,    
 }
 
 enum BuildTowerIDs {
@@ -75,10 +76,14 @@ enum BuildTowerIDs {
 
 enum UpgradeTowerIDs {
     TOMBSTONE_LVL_1 = TowerIDs.TOMBSTONE_LVL_1,
+    TOMBSTONE_LVL_2 = TowerIDs.TOMBSTONE_LVL_2,
+    SAM_SITE_LVL_1 = TowerIDs.SAM_SITE_LVL_1,
+    SAM_SITE_LVL_2 = TowerIDs.SAM_SITE_LVL_2,
 }
 
 var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
-    UpgradeTowerIDs.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_level_1.tscn")
+    UpgradeTowerIDs.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_level_1.tscn"),
+    UpgradeTowerIDs.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_tower.tscn")
 }
 
 
@@ -137,6 +142,8 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
     TowerIDs.KUNZITE_LVL_3: load("res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_tower.tscn"),
     TowerIDs.KUNZITE_LVL_4: load("res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_tower.tscn"),
     TowerIDs.KUNZITE_LVL_5: load("res://towers/buildable_towers/kunzite/level_5/kunzite_lvl_5_tower.tscn"),
+    TowerIDs.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_tower.tscn")
+
 }
 
 const TowerPrices: Dictionary = {
@@ -165,7 +172,10 @@ const TowerPrices: Dictionary = {
     TowerIDs.KUNZITE_LVL_5: 0,
     TowerIDs.SPINEL_LVL_1: 0,
     TowerIDs.SPINEL_LVL_2: 0,
-    TowerIDs.TOMBSTONE_LVL_1: 50
+    TowerIDs.TOMBSTONE_LVL_1: 0,
+    TowerIDs.TOMBSTONE_LVL_2: 50,
+    TowerIDs.SAM_SITE_LVL_1: 0,
+    TowerIDs.SAM_SITE_LVL_2: 50
 }
 
 
@@ -196,6 +206,8 @@ const UPGRADES_INTO: Dictionary = {
     TowerIDs.KUNZITE_LVL_3: KUNZITE_LVL_3_UPGRADES_INTO,
     TowerIDs.KUNZITE_LVL_4: KUNZITE_LVL_4_UPGRADES_INTO,
     TowerIDs.KUNZITE_LVL_5: KUNZITE_LVL_5_UPGRADES_INTO,
+    TowerIDs.SAM_SITE_LVL_1: SAM_SITE_LVL_1_UPGRADES_INTO,
+
 }
 
 const REQUIRES_TOWERS: Dictionary = {
@@ -225,6 +237,7 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.KUNZITE_LVL_3: KUNZITE_LVL_3_REQUIRES_TOWERS,
     TowerIDs.KUNZITE_LVL_4: KUNZITE_LVL_4_REQUIRES_TOWERS,
     TowerIDs.KUNZITE_LVL_5: KUNZITE_LVL_5_REQUIRES_TOWERS,
+    TowerIDs.SAM_SITE_LVL_1: SAM_SITE_LVL_1_REQUIRES_TOWERS,
 }
 
 # COMPONENT LOADS
@@ -247,19 +260,20 @@ const BISMUTH_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const BISMUTH_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const LARIMAR_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
 const LARIMAR_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
-const SUNSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const SUNSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
 const SUNSTONE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const SUNSTONE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const SUNSTONE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const SUNSTONE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
-const KUNZITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const KUNZITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
 const KUNZITE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
-const SPINEL_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const SPINEL_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
 const SPINEL_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const TOMBSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const SAM_SITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
 
 # REQUIRE TOWERS
 const BARRICADE_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
@@ -292,7 +306,11 @@ const TOMBSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.BISMUTH_LVL_1: 1,
     TowerIDs.LARIMAR_LVL_1: 1
 }
-
+const SAM_SITE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.KUNZITE_LVL_1: 1,
+    TowerIDs.SUNSTONE_LVL_1: 1,
+    TowerIDs.SPINEL_LVL_1: 1
+}
 
 #                             | AWAITING SELECTION UPGRADE |
 # ==========================================================================================

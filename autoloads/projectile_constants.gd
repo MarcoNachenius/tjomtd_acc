@@ -39,6 +39,7 @@ enum ProjectileIDs {
 	BLACK_MARBLE_LVL_5,
 	SUNSTONE_LVL_4,
 	SUNSTONE_LVL_5,
+	SAM_SITE_LVL_1
 }
 
 # ******************************************************************************************************************
@@ -94,7 +95,8 @@ enum SingleHitMissiles {
 	BISMUTH_LVL_2,
 	BISMUTH_LVL_4,
 	BISMUTH_LVL_5,
-	SUNSTONE_LVL_4
+	SUNSTONE_LVL_4,
+	SAM_SITE_LVL_1
 }
 
 enum TargetedRicochetMissiles{
@@ -121,7 +123,8 @@ enum MissilesForSpawner {
 	BISMUTH_LVL_5,
 	TOMBSTONE_LVL_1,
 	SUNSTONE_LVL_4,
-	SUNSTONE_LVL_5
+	SUNSTONE_LVL_5,
+	SAM_SITE_LVL_1
 }
 
 
@@ -192,7 +195,8 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.BISMUTH_LVL_5: "res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn",
 	MissilesForSpawner.TOMBSTONE_LVL_1: "res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn",
 	MissilesForSpawner.SUNSTONE_LVL_4: "res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn",
-	MissilesForSpawner.SUNSTONE_LVL_5: "res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn"
+	MissilesForSpawner.SUNSTONE_LVL_5: "res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn",
+	MissilesForSpawner.SAM_SITE_LVL_1: "res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn"
 	
 }
 
@@ -207,5 +211,6 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary[SingleHitMissiles, PackedScene] = {
 	SingleHitMissiles.BISMUTH_LVL_2: load("res://towers/buildable_towers/bismuth/level_2/bismuth_lvl_2_missile.tscn"),
 	SingleHitMissiles.BISMUTH_LVL_4: load("res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_missile.tscn"),
 	SingleHitMissiles.BISMUTH_LVL_5: load("res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn"),
-	SingleHitMissiles.SUNSTONE_LVL_4: load("res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn")
+	SingleHitMissiles.SUNSTONE_LVL_4: load("res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn"),
+	SingleHitMissiles.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn")
 }

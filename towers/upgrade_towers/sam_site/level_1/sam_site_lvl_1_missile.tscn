@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://pxjvdp824q1u"]
+
+[ext_resource type="Script" uid="uid://b7ut4y4uuyqlk" path="res://projectiles/missiles/single_hit/single_hit_missile/single_hit_missile.gd" id="1_8sm7y"]
+[ext_resource type="Texture2D" uid="uid://l4dequalmpfq" path="res://towers/upgrade_towers/sam_site/level_1/sam_site_missile_lvl_1_missile_sprite.png" id="2_8sn8p"]
+
+[node name="SamSiteLvl1Missile" type="Node2D" node_paths=PackedStringArray("MISSILE_SPRITE")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_8sm7y")
+MISSILE_SPRITE = NodePath("MissileSprite")
+metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.759999, 0.38)
+texture = ExtResource("2_8sn8p")
