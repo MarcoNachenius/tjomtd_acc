@@ -55,6 +55,11 @@ offset_bottom = 33.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[node name="Upgrade Tower Probability" type="Button" parent="MapCommands"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Upgrade Build Level (0)"
+
 [node name="BuildRandomTowerContainer" parent="MapCommands" instance=ExtResource("2_ntkvv")]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -63,11 +68,6 @@ size_flags_horizontal = 8
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Start New Wave"
-
-[node name="Upgrade Tower Probability" type="Button" parent="MapCommands"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Upgrade Build Level (0)"
 
 [node name="GameStatsContianer" parent="." instance=ExtResource("7_jg8ij")]
 offset_right = 153.0
