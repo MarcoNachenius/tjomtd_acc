@@ -26,3 +26,19 @@ To get the game up and running, follow these simple steps:
 - **Tower Selection**: Choose one tower to place; the other four become barricades.
 - **Barricades**: Only barricades can be removed, not placed towers. Towers can be upgraded and may become barricades at a later stage.
 - **Creep Pathing**:
+
+
+## Controls and Gameplay
+
+### Navigation Mode
+- **Entering Navigation Mode**: You are in navigation mode when the game starts, when a wave ends, or when you press the "Exit Build Mode" button.
+- **Panning the Map**: While in navigation mode, hold down the left mouse button and drag to move the map in the desired direction.
+- **Zooming**: Use the scroll wheel to zoom in and out of the map.
+
+### Build Mode
+- **Entering Build Mode**: Press the "Build Random Tower" button to enter build mode.
+- **Placing Towers**:
+  - While in build mode, hold down the left mouse button to preview the tower placement area on the map.
+  - The preview will show the surface of the tower with a color highlight:
+    - If the surface highlight is **green**, the position is valid and will not block the creeps' path. Releasing the left mouse button will place the tower.
+    - If the surface highlight is **red**, the position is invalid, meaning it would block the path, extend beyond map boundaries, or occupy mandatory waypoints. Releasing the left mouse button will not place the tower in this case.
