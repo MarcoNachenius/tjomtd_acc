@@ -18,7 +18,7 @@ To get the game up and running, follow these simple steps:
    - Select the `project.godot` file to import the project.
 
 4. **Run the Game**:
-   - After importing, just press the Play button. The demo scene is already set as the main scene, so you’ll jump right into the action!
+   - After importing, just press the Play button or press F5. The demo scene is already set as the main scene, so you’ll jump right into the action!
 
 ## Game Rules
 
