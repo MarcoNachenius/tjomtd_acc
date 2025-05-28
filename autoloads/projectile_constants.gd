@@ -36,7 +36,9 @@ enum ProjectileIDs {
 	BISMUTH_LVL_5,
 	TOMBSTONE_LVL_1,
 	BLACK_MARBLE_LVL_4,
-	BLACK_MARBLE_LVL_5
+	BLACK_MARBLE_LVL_5,
+	SUNSTONE_LVL_4,
+	SUNSTONE_LVL_5,
 }
 
 # ******************************************************************************************************************
@@ -91,7 +93,8 @@ enum SingleHitMissiles {
 	KUNZITE_LVL_5,
 	BISMUTH_LVL_2,
 	BISMUTH_LVL_4,
-	BISMUTH_LVL_5
+	BISMUTH_LVL_5,
+	SUNSTONE_LVL_4
 }
 
 enum TargetedRicochetMissiles{
@@ -100,7 +103,8 @@ enum TargetedRicochetMissiles{
 }
 
 enum RandomRicochetMissiles {
-	TOMBSTONE_LVL_1
+	TOMBSTONE_LVL_1,
+	SUNSTONE_LVL_4
 }
 
 enum MissilesForSpawner {
@@ -115,7 +119,8 @@ enum MissilesForSpawner {
 	BISMUTH_LVL_3,
 	BISMUTH_LVL_4,
 	BISMUTH_LVL_5,
-	TOMBSTONE_LVL_1
+	TOMBSTONE_LVL_1,
+	SUNSTONE_LVL_4
 }
 
 
@@ -183,7 +188,8 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.BISMUTH_LVL_3: "res://towers/buildable_towers/bismuth/level_3/bismuth_lvl_3_missile.tscn",
 	MissilesForSpawner.BISMUTH_LVL_4: "res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_missile.tscn",
 	MissilesForSpawner.BISMUTH_LVL_5: "res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn",
-	MissilesForSpawner.TOMBSTONE_LVL_1: "res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn"
+	MissilesForSpawner.TOMBSTONE_LVL_1: "res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn",
+	MissilesForSpawner.SUNSTONE_LVL_4: "res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn"
 	
 }
 
@@ -197,5 +203,6 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary[SingleHitMissiles, PackedScene] = {
 	SingleHitMissiles.KUNZITE_LVL_5: load("res://towers/buildable_towers/kunzite/level_5/kunzute_lvl_5_missile.tscn"),
 	SingleHitMissiles.BISMUTH_LVL_2: load("res://towers/buildable_towers/bismuth/level_2/bismuth_lvl_2_missile.tscn"),
 	SingleHitMissiles.BISMUTH_LVL_4: load("res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_missile.tscn"),
-	SingleHitMissiles.BISMUTH_LVL_5: load("res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn")
+	SingleHitMissiles.BISMUTH_LVL_5: load("res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn"),
+	SingleHitMissiles.SUNSTONE_LVL_4: load("res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn")
 }

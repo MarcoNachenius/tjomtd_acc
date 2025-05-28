@@ -24,6 +24,7 @@ texture = ExtResource("2_3ts3q")
 script = ExtResource("3_vk2n5")
 __missile_damage = 30
 __missile_speed = 20
+MISSILE_ID = 10
 __retargetable = true
 __retarget_radius = 100
 __cooldown_duration = 0.8

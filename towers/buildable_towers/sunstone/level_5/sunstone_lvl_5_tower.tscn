@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://3llbwn20ln61"]
+[gd_scene load_steps=4 format=3 uid="uid://3llbwn20ln61"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_ij0jf"]
 [ext_resource type="Texture2D" uid="uid://yyc45tqgf1df" path="res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_tower_sprite.png" id="2_ldelc"]
+[ext_resource type="Script" uid="uid://ddq0kbj4ojdx1" path="res://projectile_spawners/multi_missile/star_formation/star_rrm_spawner/star_random_ricochet_missile_spawner.gd" id="3_oh4be"]
 
-[node name="SunstoneLvl5Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE")]
+[node name="SunstoneLvl5Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
 z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_ij0jf")
 TOWER_ID = 20
 TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("StarRandomRicochetMissileSpawner")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
@@ -17,3 +19,9 @@ y_sort_enabled = true
 position = Vector2(3, -40)
 scale = Vector2(0.807606, 0.727606)
 texture = ExtResource("2_ldelc")
+
+[node name="StarRandomRicochetMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_oh4be")
+__cooldown_duration = 1.0
+__detection_range = 400
+metadata/_custom_type_script = "uid://ddq0kbj4ojdx1"

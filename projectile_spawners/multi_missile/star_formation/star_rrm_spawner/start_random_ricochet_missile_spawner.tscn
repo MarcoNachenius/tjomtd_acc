@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn2xexn5osx0u"]
-
-[ext_resource type="Script" uid="uid://ddq0kbj4ojdx1" path="res://projectile_spawners/multi_missile/star_formation/star_rrm_spawner/start_random_ricochet_missile_spawner.gd" id="1_rfo84"]
-
-[node name="StartRandomRicochetMissileSpawner" type="Node2D"]
-script = ExtResource("1_rfo84")
-metadata/_custom_type_script = "uid://kaif82mfoojg"
