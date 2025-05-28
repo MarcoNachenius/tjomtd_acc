@@ -185,6 +185,8 @@ func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs)
 		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
 		# Switch the game map state to navigation mode
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+		# Give player option to start new wave
+		START_NEW_WAVE_BUTTON.visible = true
 		return
 	
 	# Handle towers on map
