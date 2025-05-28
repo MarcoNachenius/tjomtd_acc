@@ -24,6 +24,10 @@ ProjectileSpawnerConstants="*res://autoloads/projectile_spawner_constants.gd"
 TowerConstants="*res://autoloads/tower_constants.gd"
 WaveConstants="*res://autoloads/wave_constants.gd"
 
+[display]
+
+window/size/mode=3
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
