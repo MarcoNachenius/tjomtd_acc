@@ -7,6 +7,7 @@ extends  GutTest
 # - Red Spider
 # - Blue Spider
 # - Human
+# - Pumpkin
 
 
 func before_each():
@@ -88,6 +89,24 @@ func test_blue_spider_movement_animations():
 func test_human_movement_animations():
     # Create dummy creep
     var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.HUMAN].instantiate()
+    add_child_autofree(dummy_creep)
+    dummy_creep.stun(10)
+
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_n"), "Human creep has 'move_n animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_ne"), "Human creep has 'move_ne animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_e"), "Human creep has 'move_e animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_se"), "Human creep has 'move_se animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_s"), "Human creep has 'move_s animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_sw"), "Human creep has 'move_sw animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_w"), "Human creep has 'move_w animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_nw"), "Human creep has 'move_nw animation'")
+
+    # Clean up
+    dummy_creep.queue_free()
+
+func test_pumpkin_movement_animations():
+    # Create dummy creep
+    var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.PUMPKIN].instantiate()
     add_child_autofree(dummy_creep)
     dummy_creep.stun(10)
 
