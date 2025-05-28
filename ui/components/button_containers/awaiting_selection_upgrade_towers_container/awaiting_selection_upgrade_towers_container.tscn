@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lfbebd88mhcq" path="res://ui/components/button_containers/awaiting_selection_upgrade_towers_container/awaiting_selection_upgrade_towers_container.gd" id="1_3sk7d"]
 
-[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON", "BLACK_MARBLE_LEVEL_4_BUTTON", "BLACK_MARBLE_LEVEL_5_BUTTON", "SUNSTONE_LEVEL_2_BUTTON", "SUNSTONE_LEVEL_3_BUTTON", "SPINEL_LEVEL_2_BUTTON", "LARIMAR_LEVEL_2_BUTTON", "KUNZITE_LEVEL_2_BUTTON", "KUNZITE_LEVEL_3_BUTTON", "KUNZITE_LEVEL_4_BUTTON", "KUNZITE_LEVEL_5_BUTTON", "BISMUTH_LEVEL_2_BUTTON", "BISMUTH_LEVEL_3_BUTTON", "BISMUTH_LEVEL_4_BUTTON", "BISMUTH_LEVEL_5_BUTTON")]
+[node name="AwaitingSelectionUpgradeTowers" type="HBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LEVEL_2_BUTTON", "BLACK_MARBLE_LEVEL_3_BUTTON", "BLACK_MARBLE_LEVEL_4_BUTTON", "BLACK_MARBLE_LEVEL_5_BUTTON", "SUNSTONE_LEVEL_2_BUTTON", "SUNSTONE_LEVEL_3_BUTTON", "SUNSTONE_LEVEL_4_BUTTON", "SUNSTONE_LEVEL_5_BUTTON", "SPINEL_LEVEL_2_BUTTON", "LARIMAR_LEVEL_2_BUTTON", "KUNZITE_LEVEL_2_BUTTON", "KUNZITE_LEVEL_3_BUTTON", "KUNZITE_LEVEL_4_BUTTON", "KUNZITE_LEVEL_5_BUTTON", "BISMUTH_LEVEL_2_BUTTON", "BISMUTH_LEVEL_3_BUTTON", "BISMUTH_LEVEL_4_BUTTON", "BISMUTH_LEVEL_5_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_3sk7d")
@@ -12,6 +12,8 @@ BLACK_MARBLE_LEVEL_4_BUTTON = NodePath("BlackMarbleLvl4Button")
 BLACK_MARBLE_LEVEL_5_BUTTON = NodePath("BlackMarbleLvl5Button")
 SUNSTONE_LEVEL_2_BUTTON = NodePath("SunstoneLvl2Button")
 SUNSTONE_LEVEL_3_BUTTON = NodePath("SunstoneLvl3Button")
+SUNSTONE_LEVEL_4_BUTTON = NodePath("SunstoneLvl4Button")
+SUNSTONE_LEVEL_5_BUTTON = NodePath("SunstoneLvl5Button")
 SPINEL_LEVEL_2_BUTTON = NodePath("SpinelLvl2Button")
 LARIMAR_LEVEL_2_BUTTON = NodePath("LarimarLvl2Button")
 KUNZITE_LEVEL_2_BUTTON = NodePath("KunziteLvl2Button")
@@ -52,10 +54,19 @@ text = "Sunstone
 Level 2"
 
 [node name="SunstoneLvl3Button" type="Button" parent="."]
-visible = false
 layout_mode = 2
 text = "Sunstone
 Level 3"
+
+[node name="SunstoneLvl4Button" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 4"
+
+[node name="SunstoneLvl5Button" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 5"
 
 [node name="SpinelLvl2Button" type="Button" parent="."]
 layout_mode = 2
