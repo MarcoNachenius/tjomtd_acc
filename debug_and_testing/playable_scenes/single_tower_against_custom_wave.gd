@@ -6,7 +6,7 @@ extends Node2D
 
 func _ready():
 	_place_single_tower()
-	GAME_MAP.creep_spawner.initiate_new_wave()
+	GAME_MAP.CREEP_SPAWNER.initiate_new_wave()
 
 func _place_single_tower():
 	# Place tower impediment points

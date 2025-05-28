@@ -41,7 +41,7 @@ var __astar_grid: AStarGrid2D
 var __build_tower_preload: PackedScene
 var __build_tower_cost: int
 var __barricades_on_map: Array[Tower]
-var creep_spawner: CreepSpawner
+var CREEP_SPAWNER: CreepSpawner
 var __curr_balance: int
 var __curr_path: Array[Vector2i]
 var __curr_state: States
@@ -661,7 +661,7 @@ func _on_creep_end_of_path_reached(creep: Creep):
 	if !creep.get_is_wave_creep():
 		return
 	__total_active_wave_creeps -= 1
-	if __total_active_wave_creeps == 0 and !creep_spawner.wave_initiation_in_progress():
+	if __total_active_wave_creeps == 0 and !CREEP_SPAWNER.wave_initiation_in_progress():
 		__total_waves_completed += 1
 		completed_wave.emit(__total_waves_completed)
 
@@ -674,7 +674,7 @@ func _on_creep_death(creep: Creep):
 	if !creep.get_is_wave_creep():
 		return
 	__total_active_wave_creeps -= 1
-	if __total_active_wave_creeps == 0 and !creep_spawner.wave_initiation_in_progress():
+	if __total_active_wave_creeps == 0 and !CREEP_SPAWNER.wave_initiation_in_progress():
 		__total_waves_completed += 1
 		completed_wave.emit(__total_waves_completed)
 
@@ -750,10 +750,10 @@ func place_tower(placementGridPoint: Vector2i):
 func _create_creep_spawner():
 	var new_creep_spawner: CreepSpawner = CreepSpawner.new()
 	add_child(new_creep_spawner)
-	creep_spawner = new_creep_spawner
-	creep_spawner.set_game_map(self)
+	CREEP_SPAWNER = new_creep_spawner
+	CREEP_SPAWNER.set_game_map(self)
 	# Connect signal
-	creep_spawner.creep_spawned.connect(_on_creep_spawned)
+	CREEP_SPAWNER.creep_spawned.connect(_on_creep_spawned)
 
 func _create_projectile_boundary_area():
 	var new_area = MapConstants.PROJECTILE_BOUNDARY_AREA_PRELOAD.instantiate() as ProjectileBoundaryArea
