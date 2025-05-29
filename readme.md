@@ -16,7 +16,6 @@ To get the game up and running, follow these simple steps:
    - Open Godot.
    - Select "Import Existing Project".
    - Navigate into the directory where you downloaded the project, which contains the `project.godot` file.
-   - Select the `project.godot` file to import the project.
 
 4. **Run the Game**:
    - After importing, just press the Play button or press F5. The demo scene is already set as the main scene, so you’ll jump right into the action!
