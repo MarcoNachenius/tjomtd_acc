@@ -14,7 +14,7 @@ To get the game up and running, follow these simple steps:
 
 3. **Import the Project**:
    - Open Godot. When prompted, select "Import Existing Project" instead of "Create New Project."
-   - Navigate (or "cd") into the directory where you downloaded the project, which contains the `project.godot` file.
+   - Navigate into the directory where you downloaded the project, which contains the `project.godot` file.
    - Select the `project.godot` file to import the project.
 
 4. **Run the Game**:
