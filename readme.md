@@ -13,7 +13,8 @@ To get the game up and running, follow these simple steps:
 2. **Install Godot**: Download the latest version of the Godot Engine from the official website: https://godotengine.org/download
 
 3. **Import the Project**:
-   - Open Godot. When prompted, select "Import Existing Project" instead of "Create New Project."
+   - Open Godot.
+   - Select "Import Existing Project".
    - Navigate into the directory where you downloaded the project, which contains the `project.godot` file.
    - Select the `project.godot` file to import the project.
 
