@@ -54,16 +54,19 @@ text = "Sunstone
 Level 2"
 
 [node name="SunstoneLvl3Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Sunstone
 Level 3"
 
 [node name="SunstoneLvl4Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Sunstone
 Level 4"
 
 [node name="SunstoneLvl5Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Sunstone
 Level 5"
