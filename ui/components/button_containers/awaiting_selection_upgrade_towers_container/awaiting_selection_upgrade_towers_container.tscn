@@ -87,17 +87,17 @@ Level 2"
 [node name="LarimarLvl3Button" type="Button" parent="."]
 layout_mode = 2
 text = "Larimar
-Level 2"
+Level 3"
 
 [node name="LarimarLvl4Button" type="Button" parent="."]
 layout_mode = 2
 text = "Larimar
-Level 2"
+Level 4"
 
 [node name="LarimarLvl5Button" type="Button" parent="."]
 layout_mode = 2
 text = "Larimar
-Level 2"
+Level 5"
 
 [node name="KunziteLvl2Button" type="Button" parent="."]
 layout_mode = 2

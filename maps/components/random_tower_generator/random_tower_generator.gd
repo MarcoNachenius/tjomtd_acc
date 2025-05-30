@@ -37,12 +37,12 @@ func upgrade_level() -> void:
 
 
 var LEVEL_1_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_1],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BLACK_MARBLE_LVL_1],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.BISMUTH_LVL_1],
 	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.LARIMAR_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_1],
-	TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_1],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SUNSTONE_LVL_1],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.SPINEL_LVL_1],
+	#TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.BuildTowerIDs.KUNZITE_LVL_1],
 ]
 
 var LEVEL_2_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
