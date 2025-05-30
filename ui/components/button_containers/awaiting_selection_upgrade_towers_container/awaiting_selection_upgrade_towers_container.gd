@@ -12,6 +12,9 @@ class_name AwaitingSelectionUpgradeTowersContainer
 @export var SUNSTONE_LEVEL_5_BUTTON: Button
 @export var SPINEL_LEVEL_2_BUTTON: Button
 @export var LARIMAR_LEVEL_2_BUTTON: Button
+@export var LARIMAR_LEVEL_3_BUTTON: Button
+@export var LARIMAR_LEVEL_4_BUTTON: Button
+@export var LARIMAR_LEVEL_5_BUTTON: Button
 @export var KUNZITE_LEVEL_2_BUTTON: Button
 @export var KUNZITE_LEVEL_3_BUTTON: Button
 @export var KUNZITE_LEVEL_4_BUTTON: Button
@@ -33,6 +36,9 @@ class_name AwaitingSelectionUpgradeTowersContainer
     SUNSTONE_LEVEL_5_BUTTON,
     SPINEL_LEVEL_2_BUTTON,
     LARIMAR_LEVEL_2_BUTTON,
+    LARIMAR_LEVEL_3_BUTTON,
+    LARIMAR_LEVEL_4_BUTTON,
+    LARIMAR_LEVEL_5_BUTTON,
     KUNZITE_LEVEL_2_BUTTON,
     KUNZITE_LEVEL_3_BUTTON,
     KUNZITE_LEVEL_4_BUTTON,
@@ -55,6 +61,9 @@ class_name AwaitingSelectionUpgradeTowersContainer
     TowerConstants.TowerIDs.SUNSTONE_LVL_5: SUNSTONE_LEVEL_5_BUTTON,
     TowerConstants.TowerIDs.SPINEL_LVL_2: SPINEL_LEVEL_2_BUTTON,
     TowerConstants.TowerIDs.LARIMAR_LVL_2: LARIMAR_LEVEL_2_BUTTON,
+    TowerConstants.TowerIDs.LARIMAR_LVL_3: LARIMAR_LEVEL_3_BUTTON,
+    TowerConstants.TowerIDs.LARIMAR_LVL_4: LARIMAR_LEVEL_4_BUTTON,
+    TowerConstants.TowerIDs.LARIMAR_LVL_5: LARIMAR_LEVEL_5_BUTTON,
     TowerConstants.TowerIDs.KUNZITE_LVL_2: KUNZITE_LEVEL_2_BUTTON,
     TowerConstants.TowerIDs.KUNZITE_LVL_3: KUNZITE_LEVEL_3_BUTTON,
     TowerConstants.TowerIDs.KUNZITE_LVL_4: KUNZITE_LEVEL_4_BUTTON,
