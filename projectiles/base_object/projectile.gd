@@ -35,6 +35,16 @@ const PROJECTILE_Z_AS_RELATIVE: bool = false
 @export var __aoe_detection_radius: int
 ## The amount of damage that gets inflicted when triggered
 @export var __aoe_damage_amount: int
+## If true, an aoe show hurtbox will be created on ready 
+## which allows for area of effect slow infliction
+@export var __aoe_slow_enabled: bool
+## The radius of aoe slow infliction for projectile.
+@export var __aoe_slow_detection_radius: int
+## The percentage a creep's speed will be reduced when triggered
+@export var __aoe_slow_percentage: int
+## The duration in seconds for which a creep will be slowed down
+@export var __aoe_slow_duration: int
+
 
 # PRIVATE VARS
 # =============
@@ -45,6 +55,7 @@ var __velocity: Vector2
 var __hurtbox: ProjectileHurtbox
 var __retarget_hurtbox: RetargetHurtbox
 var __aoe_damage_hurtbox: ProjectileHurtbox
+var __aoe_slow_hurtbox: ProjectileHurtbox
 
 # SIGNALS
 # =======
@@ -61,6 +72,8 @@ func _ready():
 	_create_retarget_hurtbox()
 	# Only creates AOE hurtbox if self.__aoe_enabled export is set to true
 	_create_aoe_hurtbox()
+	# Only creates AOE slow hurtbox if self.__aoe_slow_enabled export is set to true
+	_create_aoe_slow_hurtbox()
 	# Handle additional logic during _ready() method for subclasses
 	_extended_onready()
 	# Ensure human errors are avoided and ordering of prijectiles remains consistent
@@ -155,6 +168,22 @@ func _create_aoe_hurtbox():
 	# Set AOE hurtbox
 	__aoe_damage_hurtbox = new_aoe_hurtbox
 
+## Creates the AOE slow hurtbox if the __aoe_slow_enabled export is set to true.
+func _create_aoe_slow_hurtbox():
+	# Only creates AOE hurtbox if self.__aoe_slow_enabled export is set to true
+	if !__aoe_slow_enabled:
+		return
+	
+	# Check if the AOE radius is valid
+	assert(__aoe_slow_detection_radius > 0, "AOE slow detection radius must be greater than 0")
+
+	# Instantiate AOE hurtbox
+	var new_aoe_slow_hurtbox: ProjectileHurtbox = ProjectileConstants.HURTBOX_PRELOAD.instantiate()
+	add_child(new_aoe_slow_hurtbox)
+	new_aoe_slow_hurtbox.set_base_radius(__aoe_slow_detection_radius)
+	# Set AOE hurtbox
+	__aoe_slow_hurtbox = new_aoe_slow_hurtbox
+
 func _create_hurtbox():
 	var new_hurtbox: ProjectileHurtbox = ProjectileConstants.HURTBOX_PRELOAD.instantiate()
 	add_child(new_hurtbox)
@@ -224,6 +253,37 @@ func _inflict_aoe_damage():
 	for creep in __aoe_damage_hurtbox.get_detectable_creeps_in_range():
 		# Inflict damage to the creep
 		creep.take_damage(__aoe_damage_amount)
+
+
+## Does nothing if AOE is disabled. 
+func _handle_aoe_slow_infliction():
+	# Do nothing if AOE Slow is disabled
+	if !__aoe_slow_enabled:
+		return
+
+	# Check if the AOE slow amounts are valid
+	assert(__aoe_slow_duration > 0, "AOE slow duration must be greater than 0")
+	assert(__aoe_slow_percentage > 0, "AOE slow percentage must be greater than 0")
+	
+	# Check if the AOE hurtbox is valid
+	assert(__aoe_slow_hurtbox, "AOE hurtbox not created")
+	
+	# Inflict AOE damage to all creeps in the AOE hurtbox
+	_inflict_aoe_slow()
+
+
+
+## Inflicts AOE slow to all creeps in the AOE Slow hurtbox.
+## This method is called when the projectile inflicts damage to a creep.
+func _inflict_aoe_slow():
+	# Check if the AOE slow amounts are valid
+	assert(__aoe_slow_duration > 0, "AOE slow duration must be greater than 0")
+	assert(__aoe_slow_percentage > 0, "AOE slow percentage must be greater than 0")
+	
+	# Inflict damage to all creeps in the AOE hurtbox
+	for creep in __aoe_slow_hurtbox.get_detectable_creeps_in_range():
+		# Inflict damage to the creep
+		creep.slow(__aoe_slow_percentage, __aoe_slow_duration)
 
 ## Does nothing if projectile cannot inflict slow (i.e. __can_slow = false)
 func _handle_slow_infliction(inflictedCreep: Creep):
@@ -320,7 +380,7 @@ func get_slow_speed_reduction_percentage() -> int:
 func set_slow_speed_reduction_percentage(value: int) -> void:
 	__slow_speed_reduction_percentage = value
 
-# ─────────── AOE setters ───────────
+# ─────────── AOE Damage setters ───────────
 func set_aoe_enabled(enabled: bool) -> void:
 	__aoe_enabled = enabled
 
@@ -331,3 +391,19 @@ func set_aoe_detection_radius(radius: int) -> void:
 func set_aoe_damage_amount(amount: int) -> void:
 	# Clamp to zero or above so damage is never negative.
 	__aoe_damage_amount = max(amount, 0)
+
+# ─────────── AOE slow setters ───────────
+func set_aoe_slow_enabled(enabled: bool) -> void:
+	__aoe_slow_enabled = enabled
+
+func set_aoe_slow_detection_radius(radius: int) -> void:
+	# Don’t let the radius go negative.
+	__aoe_slow_detection_radius = max(radius, 0)
+
+func set_aoe_slow_percentage(percentage: int) -> void:
+	# Clamp to zero or above so damage is never negative.
+	__aoe_slow_percentage = max(percentage, 0)
+
+func set_aoe_slow_duration(duration: int) -> void:
+	# Clamp to zero or above so damage is never negative.
+	__aoe_slow_duration = max(duration, 0)

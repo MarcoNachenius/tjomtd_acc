@@ -25,6 +25,8 @@ func _inflict_damange(creep: Creep):
 	creep_hit.emit(creep)
 	# Handle AOE damage if enabled
 	_handle_aoe_damage_infliction()
+	# Handle AOE slow if enabled
+	_handle_aoe_slow_infliction()
 	# Handle slow infliction
 	_handle_slow_infliction(creep)
 	queue_free()  # Destroy the bullet after dealing damage
