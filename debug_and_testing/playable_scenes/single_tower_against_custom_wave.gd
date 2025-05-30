@@ -39,3 +39,7 @@ func _place_single_tower():
 	new_tower.switch_state(Tower.States.BUILT)
 	
 	new_tower.RANGE_DISPLAY_SHAPE.visible = true
+
+
+func _on_exit_game_pressed() -> void:
+	get_tree().quit()

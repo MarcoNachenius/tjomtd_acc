@@ -15,11 +15,6 @@ class_name RandomRicochetMissileSpawner
 @export var __slow_duration_seconds: float = 0.0
 ## Percentage of speed reduction for creep when inflicted
 @export var __slow_speed_reduction_percentage: int
-## If enabled, the projectile will assign a target to the projectile's hurtbox when it enters the area,
-## and the projectile does not have a target assigned.
-@export var __retargetable: bool = false
-## The radius of the retargetable area.
-@export var __retarget_radius: int
 ## If true, an aoe hurtbox will be created on ready 
 ## which allows for area of effect damage infliction
 @export var __aoe_enabled: bool
@@ -29,6 +24,15 @@ class_name RandomRicochetMissileSpawner
 @export var __aoe_damage_amount: int
 ## If true, damage will decrease after every hit
 @export var __damage_degredation_enabled: bool = false
+## If true, an aoe show hurtbox will be created on ready 
+## which allows for area of effect slow infliction
+@export var __aoe_slow_enabled: bool
+## The radius of aoe slow infliction for projectile.
+@export var __aoe_slow_detection_radius: int
+## The percentage a creep's speed will be reduced when triggered
+@export var __aoe_slow_percentage: int
+## The duration in seconds for which a creep will be slowed down
+@export var __aoe_slow_duration: float
 ## Rate at which missile loses damage after hitting a creep.
 @export var __damage_degredation_rate: int
 @export var __infinite_ricochets: bool = false
@@ -37,12 +41,25 @@ class_name RandomRicochetMissileSpawner
 func _launch_projectiles():
     # Create bullet
     var new_missile: RandomRicochetMissile = ProjectileConstants.RANDOM_RICOCHET_MISSILE_LOADS[MISSILE_PRELOAD].instantiate()
-    add_child(new_missile)
+
+    # Parameters that require 
+    # Area‑of‑effect parameters
+    new_missile.set_aoe_enabled(__aoe_enabled)
+    new_missile.set_aoe_detection_radius(__aoe_detection_radius)
+    new_missile.set_aoe_damage_amount(__aoe_damage_amount)
+
+    # Area‑of‑effect slow parameters
+    new_missile.set_aoe_slow_enabled(__aoe_slow_enabled)
+    new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
+    new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
+    new_missile.set_aoe_slow_duration(__aoe_slow_duration)
 
     # ──────── Setters ────────
     # Target
     assert(__target, "No target provided")
     new_missile.set_target(__target)
+
+    add_child(new_missile)
 
     # Velocity / speed
     new_missile.update_velocity_towards_target()
@@ -61,15 +78,6 @@ func _launch_projectiles():
     new_missile.set_can_slow(__can_slow)
     new_missile.set_slow_duration_seconds(__slow_duration_seconds)
     new_missile.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
-
-    # Retargeting parameters
-    new_missile.set_retargetable(__retargetable)
-    new_missile.set_retarget_radius(__retarget_radius)
-
-    # Area‑of‑effect parameters
-    new_missile.set_aoe_enabled(__aoe_enabled)
-    new_missile.set_aoe_detection_radius(__aoe_detection_radius)
-    new_missile.set_aoe_damage_amount(__aoe_damage_amount)
 
     # Damage degredation parameters
     new_missile.set_damage_degredation_enabled(__damage_degredation_enabled)

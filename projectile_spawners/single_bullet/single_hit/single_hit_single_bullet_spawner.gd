@@ -35,17 +35,34 @@ class_name SingleHitSingleBulletSpawner
 ## The percentage a creep's speed will be reduced when triggered
 @export var __aoe_slow_percentage: int
 ## The duration in seconds for which a creep will be slowed down
-@export var __aoe_slow_duration: int
+@export var __aoe_slow_duration: float
 
 func _launch_projectiles():
 	# Create bullet
 	var new_bullet: SingleHitBullet = ProjectileConstants.SINGLE_HIT_BULLET_LOADS[BULLET_PRELOAD].instantiate()
-	add_child(new_bullet)
+	
 
 	# ──────── Setters ────────
 	# Target
 	assert(__target, "No target provided")
 	new_bullet.set_target(__target)
+
+	# Area‑of‑effect slow parameters
+	new_bullet.set_aoe_slow_enabled(__aoe_slow_enabled)
+	new_bullet.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
+	new_bullet.set_aoe_slow_percentage(__aoe_slow_percentage)
+	new_bullet.set_aoe_slow_duration(__aoe_slow_duration)
+
+	# Area‑of‑effect parameters
+	new_bullet.set_aoe_enabled(__aoe_enabled)
+	new_bullet.set_aoe_detection_radius(__aoe_detection_radius)
+	new_bullet.set_aoe_damage_amount(__aoe_damage_amount)
+
+	# Retargeting parameters
+	new_bullet.set_retargetable(__retargetable)
+	new_bullet.set_retarget_radius(__retarget_radius)
+
+	add_child(new_bullet)
 
 	# Velocity / speed
 	new_bullet.update_velocity_towards_target()
@@ -65,17 +82,4 @@ func _launch_projectiles():
 	new_bullet.set_slow_duration_seconds(__slow_duration_seconds)
 	new_bullet.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
 
-	# Retargeting parameters
-	new_bullet.set_retargetable(__retargetable)
-	new_bullet.set_retarget_radius(__retarget_radius)
-
-	# Area‑of‑effect parameters
-	new_bullet.set_aoe_enabled(__aoe_enabled)
-	new_bullet.set_aoe_detection_radius(__aoe_detection_radius)
-	new_bullet.set_aoe_damage_amount(__aoe_damage_amount)
-
-	# Area‑of‑effect slow parameters
-	new_bullet.set_aoe_slow_enabled(__aoe_slow_enabled)
-	new_bullet.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
-	new_bullet.set_aoe_slow_percentage(__aoe_slow_percentage)
-	new_bullet.set_aoe_slow_duration(__aoe_slow_duration)
+	

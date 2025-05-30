@@ -35,12 +35,11 @@ class_name SingleMissileSpawner
 ## The percentage a creep's speed will be reduced when triggered
 @export var __aoe_slow_percentage: int
 ## The duration in seconds for which a creep will be slowed down
-@export var __aoe_slow_duration: int
+@export var __aoe_slow_duration: float
 
 func _launch_projectiles():
 	# Create bullet
 	var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_PRELOAD].instantiate()
-	add_child(new_missile)
 
 	# ──────── Setters ────────
 	# Target
@@ -79,3 +78,5 @@ func _launch_projectiles():
 	new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
 	new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
 	new_missile.set_aoe_slow_duration(__aoe_slow_duration)
+
+	add_child(new_missile)

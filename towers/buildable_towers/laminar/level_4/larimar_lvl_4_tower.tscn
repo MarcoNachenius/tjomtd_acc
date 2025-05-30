@@ -20,10 +20,16 @@ texture = ExtResource("3_l30m0")
 
 [node name="SingleHitSingleBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("3_kvumx")
+__bullet_damage = 30
+__bullet_speed = 35
+BULLET_PRELOAD = 7
+__aoe_enabled = true
+__aoe_detection_radius = 100
+__aoe_damage_amount = 30
 __aoe_slow_enabled = true
 __aoe_slow_detection_radius = 300
 __aoe_slow_percentage = 20
-__aoe_slow_duration = 15
+__aoe_slow_duration = 2.0
 __cooldown_duration = 1.0
 __detection_range = 300
 metadata/_custom_type_script = "uid://bsxteh17ub0se"

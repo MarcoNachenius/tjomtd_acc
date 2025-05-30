@@ -7,7 +7,7 @@
 [node name="SingleTowerAgainstCreep" type="Node2D" node_paths=PackedStringArray("GAME_MAP")]
 script = ExtResource("1_hpmdq")
 GAME_MAP = NodePath("GameMap")
-TOWER_ID = 33
+TOWER_ID = 23
 TOWER_PLACEMENT_COORD = Vector2i(5, 10)
 
 [node name="GameMap" parent="." instance=ExtResource("2_kt3m4")]
@@ -18,3 +18,19 @@ zoom = Vector2(0.5, 0.5)
 script = ExtResource("3_prpal")
 __game_map = NodePath("../GameMap")
 metadata/_custom_type_script = "uid://wadk3qruggns"
+
+[node name="ExitGame" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 408.0
+offset_top = 40.0
+offset_right = 495.0
+offset_bottom = 71.0
+grow_horizontal = 0
+scale = Vector2(3.08, 3.08)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Exit Game"
+
+[connection signal="pressed" from="ExitGame" to="." method="_on_exit_game_pressed"]

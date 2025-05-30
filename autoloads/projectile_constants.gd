@@ -39,7 +39,10 @@ enum ProjectileIDs {
 	BLACK_MARBLE_LVL_5,
 	SUNSTONE_LVL_4,
 	SUNSTONE_LVL_5,
-	SAM_SITE_LVL_1
+	SAM_SITE_LVL_1,
+	LARIMAR_LVL_3,
+	LARIMAR_LVL_4,
+	LARIMAR_LVL_5,
 }
 
 # ******************************************************************************************************************
@@ -53,6 +56,7 @@ enum SingleHitBullets {
 	SUNSTONE_LVL_3,
 	KUNZITE_LVL_2,
 	KUNZITE_LVL_4,
+	LARIMAR_LVL_4
 }
 
 enum TargetedRicochetBullets {
@@ -77,7 +81,8 @@ enum BulletsForSpawner {
 	KUNZITE_LVL_2,
 	KUNZITE_LVL_4,
 	BLACK_MARBLE_LVL_4,
-	BLACK_MARBLE_LVL_5
+	BLACK_MARBLE_LVL_5,
+	LARIMAR_LVL_4
 }
 
 
@@ -96,7 +101,9 @@ enum SingleHitMissiles {
 	BISMUTH_LVL_4,
 	BISMUTH_LVL_5,
 	SUNSTONE_LVL_4,
-	SAM_SITE_LVL_1
+	SAM_SITE_LVL_1,
+	LARIMAR_LVL_3,
+	LARIMAR_LVL_5
 }
 
 enum TargetedRicochetMissiles{
@@ -124,7 +131,9 @@ enum MissilesForSpawner {
 	TOMBSTONE_LVL_1,
 	SUNSTONE_LVL_4,
 	SUNSTONE_LVL_5,
-	SAM_SITE_LVL_1
+	SAM_SITE_LVL_1,
+	LARIMAR_LVL_3,
+	LARIMAR_LVL_5,
 }
 
 
@@ -138,7 +147,8 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary[SingleHitBullets, PackedScene] = {
 	SingleHitBullets.SUNSTONE_LVL_2: load("res://towers/buildable_towers/sunstone/level_2/sunstone_lvl_2_bullet.tscn"),
 	SingleHitBullets.SUNSTONE_LVL_3: load("res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn"),
 	SingleHitBullets.KUNZITE_LVL_2: load("res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn"),
-	SingleHitBullets.KUNZITE_LVL_4: load("res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn")
+	SingleHitBullets.KUNZITE_LVL_4: load("res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn"),
+	SingleHitBullets.LARIMAR_LVL_4: load("res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn")
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary[TargetedRicochetBullets, PackedScene] = {
@@ -164,6 +174,7 @@ const BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.SUNSTONE_LVL_3: "res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn",
 	BulletsForSpawner.KUNZITE_LVL_2: "res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn",
 	BulletsForSpawner.KUNZITE_LVL_4: "res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn",
+	BulletsForSpawner.LARIMAR_LVL_4: "res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn"
 	
 }
 
@@ -196,7 +207,9 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.TOMBSTONE_LVL_1: "res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn",
 	MissilesForSpawner.SUNSTONE_LVL_4: "res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn",
 	MissilesForSpawner.SUNSTONE_LVL_5: "res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn",
-	MissilesForSpawner.SAM_SITE_LVL_1: "res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn"
+	MissilesForSpawner.SAM_SITE_LVL_1: "res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn",
+	MissilesForSpawner.LARIMAR_LVL_3: "res://towers/buildable_towers/laminar/level_3/larimar_lvl_3_missile.tscn",
+	MissilesForSpawner.LARIMAR_LVL_5: "res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn"
 	
 }
 
@@ -212,5 +225,7 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary[SingleHitMissiles, PackedScene] = {
 	SingleHitMissiles.BISMUTH_LVL_4: load("res://towers/buildable_towers/bismuth/level_4/bismuth_lvl_4_missile.tscn"),
 	SingleHitMissiles.BISMUTH_LVL_5: load("res://towers/buildable_towers/bismuth/level_5/bismuth_lvl_5_missile.tscn"),
 	SingleHitMissiles.SUNSTONE_LVL_4: load("res://towers/buildable_towers/sunstone/level_4/sunstone_lvl_4_missile.tscn"),
-	SingleHitMissiles.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn")
+	SingleHitMissiles.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn"),
+	SingleHitMissiles.LARIMAR_LVL_3: load("res://towers/buildable_towers/laminar/level_3/larimar_lvl_3_missile.tscn"),
+	SingleHitMissiles.LARIMAR_LVL_5: load("res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn"),
 }

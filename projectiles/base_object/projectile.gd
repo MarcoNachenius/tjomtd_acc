@@ -43,7 +43,7 @@ const PROJECTILE_Z_AS_RELATIVE: bool = false
 ## The percentage a creep's speed will be reduced when triggered
 @export var __aoe_slow_percentage: int
 ## The duration in seconds for which a creep will be slowed down
-@export var __aoe_slow_duration: int
+@export var __aoe_slow_duration: float
 
 
 # PRIVATE VARS
@@ -404,6 +404,6 @@ func set_aoe_slow_percentage(percentage: int) -> void:
 	# Clamp to zero or above so damage is never negative.
 	__aoe_slow_percentage = max(percentage, 0)
 
-func set_aoe_slow_duration(duration: int) -> void:
+func set_aoe_slow_duration(duration: float) -> void:
 	# Clamp to zero or above so damage is never negative.
 	__aoe_slow_duration = max(duration, 0)
