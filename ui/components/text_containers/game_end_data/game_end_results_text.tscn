@@ -1,0 +1,88 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn5ve3rui2hq2"]
+
+[ext_resource type="Script" uid="uid://dxfglsncc3k7v" path="res://ui/components/text_containers/game_end_data/game_end_results_text_container.gd" id="1_cutbp"]
+
+[node name="GameEndResultsText" type="VBoxContainer" node_paths=PackedStringArray("GAME_OUTOME_LABEL", "FINAL_SCORE_AMOUNT_LABEL", "TOTAL_WAVES_COMPLETED_AMOUNT_LABEL", "FINAL_MAZE_COMPLETION_TIME_AMOUNT_LABEL", "FINAL_MAZE_DAMAGE_AMOUNT_LABEL", "FINAL_MAZE_LENGTH_AMOUNT_LABEL", "WAVES_COMPLETED_AMOUNT_LABEL")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_cutbp")
+GAME_OUTOME_LABEL = NodePath("GameOutcomeLabel")
+FINAL_SCORE_AMOUNT_LABEL = NodePath("FinalScoreAmount")
+TOTAL_WAVES_COMPLETED_AMOUNT_LABEL = NodePath("WavesCompletedAmount")
+FINAL_MAZE_COMPLETION_TIME_AMOUNT_LABEL = NodePath("MazeCompletionTimeAmount")
+FINAL_MAZE_DAMAGE_AMOUNT_LABEL = NodePath("TotalMazeDamageAmount")
+FINAL_MAZE_LENGTH_AMOUNT_LABEL = NodePath("TotalMazeDistanceAmount")
+WAVES_COMPLETED_AMOUNT_LABEL = NodePath("WavesCompletedAmount")
+
+[node name="GameOutcomeLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "You won!"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="EmptySpace" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = " "
+fit_content = true
+autowrap_mode = 0
+
+[node name="WavesCompletedHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Waves Completed:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="WavesCompletedAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="FinalScoreHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Final Score:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="FinalScoreAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MazeCompletionTimeHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Maze Completion Time:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MazeCompletionTimeAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TotalMazeDistanceHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Final Maze Distance:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TotalMazeDistanceAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TotalMazeDamageHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Total Maze Damage:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TotalMazeDamageAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0

@@ -10,6 +10,12 @@ GEM_TD_BUTTON = NodePath("GemTd")
 LINE_TD_BUTTON = NodePath("LineTd")
 BACK_TO_MAIN_MENU_BUTTON = NodePath("BackToMainMenu")
 
+[node name="HeaderText" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Select Map"
+fit_content = true
+horizontal_alignment = 1
+
 [node name="GemTd" type="Button" parent="."]
 layout_mode = 2
 text = "Gem TD"
@@ -17,6 +23,12 @@ text = "Gem TD"
 [node name="LineTd" type="Button" parent="."]
 layout_mode = 2
 text = "Line TD"
+
+[node name="BlankSpace" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "   "
+fit_content = true
+horizontal_alignment = 1
 
 [node name="BackToMainMenu" type="Button" parent="."]
 layout_mode = 2

@@ -1,5 +1,7 @@
 extends Node
 
+const TOTAL_WAVES: int = 5
+
 enum WaveProperties {
 	CREEP_ID,
 	CREEP_SPEED,
@@ -12,9 +14,9 @@ enum WaveProperties {
 const WAVE_1: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.CENTIPEDE,
 	WaveProperties.CREEP_SPEED: 8,
-	WaveProperties.CREEP_HEALTH: 1,
-	WaveProperties.WAVE_SIZE: 5,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 0.5,
+	WaveProperties.CREEP_HEALTH: 10,
+	WaveProperties.WAVE_SIZE: 10,
+	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0,
 	WaveProperties.POINTS_FOR_DEATH: 1
 }
 

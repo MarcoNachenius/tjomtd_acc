@@ -9,7 +9,9 @@
 [node name="RandomTowerBuildHUD" parent="." node_paths=PackedStringArray("GAME_MAP") instance=ExtResource("1_t7eln")]
 GAME_MAP = NodePath("../GemTD")
 
-[node name="MapCamera" parent="." node_paths=PackedStringArray("__game_map") instance=ExtResource("2_chst0")]
-__game_map = NodePath("../GemTD")
-
 [node name="GemTD" parent="." instance=ExtResource("3_eyvlh")]
+
+[node name="MapCamera" parent="." node_paths=PackedStringArray("__game_map") instance=ExtResource("2_chst0")]
+position = Vector2(443, 2827)
+zoom = Vector2(0.2, 0.2)
+__game_map = NodePath("../GemTD")

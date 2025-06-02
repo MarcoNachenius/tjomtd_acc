@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch1yg4n4t6d5f"]
+
+[ext_resource type="Script" uid="uid://csdfau5cwh873" path="res://ui/menus/game_end/game_end_menu.gd" id="1_cybof"]
+[ext_resource type="PackedScene" uid="uid://dn5ve3rui2hq2" path="res://ui/components/text_containers/game_end_data/game_end_results_text.tscn" id="2_kjpk8"]
+
+[node name="GameEndMenu" type="CanvasLayer" node_paths=PackedStringArray("BACK_TO_MAIN_MENU_BUTTON", "EXIT_GAME_BUTTON")]
+script = ExtResource("1_cybof")
+BACK_TO_MAIN_MENU_BUTTON = NodePath("MainContainer/ReturnToMainMenu")
+EXIT_GAME_BUTTON = NodePath("MainContainer/ExitGame")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -33.0
+offset_right = 46.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameEndResultsText" parent="MainContainer" instance=ExtResource("2_kjpk8")]
+layout_mode = 2
+
+[node name="EmptySpace" type="RichTextLabel" parent="MainContainer"]
+layout_mode = 2
+text = " "
+fit_content = true
+
+[node name="ReturnToMainMenu" type="Button" parent="MainContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="ExitGame" type="Button" parent="MainContainer"]
+layout_mode = 2
+text = "Exit Game"

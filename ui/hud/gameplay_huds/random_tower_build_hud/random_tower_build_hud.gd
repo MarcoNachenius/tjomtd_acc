@@ -136,6 +136,7 @@ func _connect_game_map_signals():
 	GAME_MAP.completed_wave.connect(_on_wave_completed)
 	GAME_MAP.tower_selected.connect(_on_tower_selected)
 	GAME_MAP.tower_placed.connect(_on_tower_placed)
+	GAME_MAP.lives_depleted.connect(_on_lives_depleted)
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
@@ -379,10 +380,37 @@ func _on_credits_lost(remaining_balance: int):
 func _on_life_gained(remaining_lives: int):
 	pass
 
+func _on_lives_depleted():
+	# Capture final results in CurrGameData autoload
+	CurrGameData.RESULT_TEXT = "Lives depleted"
+	CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
+	CurrGameData.FINAL_MAZE_DAMAGE = 0.0 # WIP
+	CurrGameData.FINAL_MAZE_LENGTH = 0 # WIP
+	CurrGameData.FINAL_SCORE = GAME_MAP.get_total_points_earned() # WIP
+	CurrGameData.WAVES_COMPLETED = GAME_MAP.get_total_waves_completed()
+
+	# Switch main scene to end game menu
+	get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
+
 func _on_life_lost(remaining_lives: int):
 	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(remaining_lives)
 
 func _on_wave_completed(total_waves_completed: int):
+	# Switch to end game menu once final wave has been completed
+	if total_waves_completed == WaveConstants.TOTAL_WAVES:
+		# Capture final results in CurrGameData autoload
+		CurrGameData.RESULT_TEXT = "All waves completed!"
+		CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
+		CurrGameData.FINAL_MAZE_DAMAGE = 0.0 # WIP
+		CurrGameData.FINAL_MAZE_LENGTH = 0 # WIP
+		CurrGameData.FINAL_SCORE = GAME_MAP.get_total_points_earned() # WIP
+		CurrGameData.WAVES_COMPLETED = GAME_MAP.get_total_waves_completed()
+		
+		# Switch main scene to end game menu
+		get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
+
+
+
 	# Update tower count
 	__current_turn_tower_count = 0
 	# Hide tower properties hbox
@@ -398,7 +426,7 @@ func _on_wave_completed(total_waves_completed: int):
 	# Hide start new wave button
 	START_NEW_WAVE_BUTTON.visible = false
 	# Update game stats display
-	GAME_STATS_CONTAINER.WAVES_COMPLETED_AMOUNT_LABEL.text = str(GAME_MAP.get_total_waves_completed())
+	GAME_STATS_CONTAINER.WAVES_COMPLETED_AMOUNT_LABEL.text = str(total_waves_completed)
 
 func _on_tower_selected(tower: Tower):
 	# Reset transparency of previously selected tower sprite and awaiting selection animation

@@ -20,6 +20,7 @@ signal lost_life(remaining_lives: int)
 signal completed_wave(total_waves_completed: int)
 signal tower_placed(tower: Tower)
 signal tower_selected(tower: Tower)
+signal lives_depleted
 
 # EXPORTS
 ## Map ID
@@ -81,6 +82,9 @@ func _ready():
 	__curr_balance = GameConstants.STARTING_BALANCE
 	__curr_state = States.NAVIGATION_MODE
 
+	# CURRENT GAME DATA
+	_reset_curr_game_data()
+
 	# RANDOM TOWER GENERATOR
 	_create_random_tower_generator()
 
@@ -131,6 +135,64 @@ func add_test_tower_sprite(placementGridTile: Vector2i):
 	add_child(path_tile)
 	path_tile.position = __placement_grid.map_to_local(placementGridTile)
 	path_tile.modulate = Color(0.0, 0.0, 0.0, 1.0)  # RGBA for solid blue
+
+## Removes the tower from towers on map or towers awaiting selection.
+func convert_tower_to_barricade(tower: Tower):
+	# Ensure that the tower is in a list
+	assert(__towers_on_map.has(tower) or __towers_awaiting_selection.has(tower), "Tower not in __towers_on_map list")
+	var tower_placement_grid_coord: Vector2i = tower.get_placement_grid_coordinate()
+	var tower_global_position: Vector2 = tower.global_position
+
+	# EITHER remove tower from __towers_awaiting_selection
+	if __towers_awaiting_selection.has(tower):
+		__towers_awaiting_selection.erase(tower)
+	else: # OR remove tower from __towers_on_map
+		__towers_on_map.erase(tower)
+
+	# Remove tower from placement grid coord dict for towers
+	_remove_tower_from_placement_grid_coords_dict(tower, __placement_grid_coords_for_towers)
+
+	# Remove tower scene from map
+	tower.queue_free()
+
+	# Place barricade
+	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
+	add_child(new_barricade)
+
+	# Ensure barricades do not appear as towers awaiting selection
+	new_barricade.switch_state(Tower.States.BUILT)
+
+	# Assign same placement grid coordinate and global position as the tower
+	new_barricade.set_placement_grid_coordinate(tower_placement_grid_coord)
+	new_barricade.global_position = tower_global_position
+
+	# Add barricade to list of those on map
+	__barricades_on_map.append(new_barricade)
+
+	# Add barricade placement coords 
+	_add_tower_to_placement_grid_coords_dict(new_barricade, __placement_grid_coords_for_barricades)
+
+func remove_barricade(barricade: Tower):
+	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
+	# Remove placement points
+	_remove_tower_impediment_points(barricade.get_placement_grid_coordinate())
+	# Remove from barricade dict
+	_remove_tower_from_placement_grid_coords_dict(barricade, __placement_grid_coords_for_barricades)
+	# Remove from barricade list
+	assert(__barricades_on_map.has(barricade), "Barricade not found in __barricades_on_map")
+	__barricades_on_map.erase(barricade)
+	# Remove from scene
+	barricade.queue_free()
+
+
+func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
+	var tower_id_array: Array[TowerConstants.TowerIDs] = []
+	# Iterate through the tower count dictionary
+	for tower_id in tower_count_dict.keys():
+		# Add the tower id to the array the number of times specified in the count
+		for i in range(tower_count_dict[tower_id]):
+			tower_id_array.append(tower_id)
+	return tower_id_array
 
 # ---------------
 # PRIVATE METHODS
@@ -555,65 +617,14 @@ func _update_current_path():
 	# Update path line
 	self.update_path_line()
 
-## Removes the tower from towers on map or towers awaiting selection.
-func convert_tower_to_barricade(tower: Tower):
-	# Ensure that the tower is in a list
-	assert(__towers_on_map.has(tower) or __towers_awaiting_selection.has(tower), "Tower not in __towers_on_map list")
-	var tower_placement_grid_coord: Vector2i = tower.get_placement_grid_coordinate()
-	var tower_global_position: Vector2 = tower.global_position
-
-	# EITHER remove tower from __towers_awaiting_selection
-	if __towers_awaiting_selection.has(tower):
-		__towers_awaiting_selection.erase(tower)
-	else: # OR remove tower from __towers_on_map
-		__towers_on_map.erase(tower)
-
-	# Remove tower from placement grid coord dict for towers
-	_remove_tower_from_placement_grid_coords_dict(tower, __placement_grid_coords_for_towers)
-
-	# Remove tower scene from map
-	tower.queue_free()
-
-	# Place barricade
-	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
-	add_child(new_barricade)
-
-	# Ensure barricades do not appear as towers awaiting selection
-	new_barricade.switch_state(Tower.States.BUILT)
-
-	# Assign same placement grid coordinate and global position as the tower
-	new_barricade.set_placement_grid_coordinate(tower_placement_grid_coord)
-	new_barricade.global_position = tower_global_position
-
-	# Add barricade to list of those on map
-	__barricades_on_map.append(new_barricade)
-
-	# Add barricade placement coords 
-	_add_tower_to_placement_grid_coords_dict(new_barricade, __placement_grid_coords_for_barricades)
-
-
-func remove_barricade(barricade: Tower):
-	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
-	# Remove placement points
-	_remove_tower_impediment_points(barricade.get_placement_grid_coordinate())
-	# Remove from barricade dict
-	_remove_tower_from_placement_grid_coords_dict(barricade, __placement_grid_coords_for_barricades)
-	# Remove from barricade list
-	assert(__barricades_on_map.has(barricade), "Barricade not found in __barricades_on_map")
-	__barricades_on_map.erase(barricade)
-	# Remove from scene
-	barricade.queue_free()
-
-
-func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConstants.TowerIDs, int]) -> Array[TowerConstants.TowerIDs]:
-	var tower_id_array: Array[TowerConstants.TowerIDs] = []
-	# Iterate through the tower count dictionary
-	for tower_id in tower_count_dict.keys():
-		# Add the tower id to the array the number of times specified in the count
-		for i in range(tower_count_dict[tower_id]):
-			tower_id_array.append(tower_id)
-	return tower_id_array
-
+## Restets all of the values in the CurrGameData autoload when a new map is loaded
+func _reset_curr_game_data() -> void:
+	CurrGameData.RESULT_TEXT = ""
+	CurrGameData.FINAL_MAZE_LENGTH = 0.0
+	CurrGameData.FINAL_MAZE_DAMAGE = 0.0
+	CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0
+	CurrGameData.FINAL_SCORE = 0
+	CurrGameData.WAVES_COMPLETED = 0
 
 # -------------------
 # GETTERS AND SETTERS
@@ -623,6 +634,9 @@ func get_towers_awaiting_selection() -> Array[Tower]:
 
 func get_towers_on_map() -> Array[Tower]:
 	return __towers_on_map
+
+func get_total_points_earned() -> int:
+	return __total_points_earned
 
 # __path_line_visible
 func show_path_line():
@@ -658,6 +672,12 @@ func get_total_waves_completed() -> int:
 
 func _on_creep_end_of_path_reached(creep: Creep):
 	__remaining_lives -= 1
+
+	# Emit lives depleted signal if there are no more remaining lives
+	if __remaining_lives < 1:
+		lives_depleted.emit()
+		return
+
 	lost_life.emit(__remaining_lives)
 	__total_active_creeps -= 1
 	

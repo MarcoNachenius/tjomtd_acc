@@ -13,7 +13,7 @@ var LINE_TD_COMPLETE_BUILD: PackedScene = load("res://ui/complete_hud_builds_wit
 
 # START NEW GAME
 # ==============
-const STARTING_LIVES: int = 20
+const STARTING_LIVES: int = 3
 const STARTING_BALANCE: int = 0
 const MAX_PLACEABLE_TOWERS_PER_TURN = 5
 

@@ -23,6 +23,8 @@ ProjectileConstants="*res://autoloads/projectile_constants.gd"
 ProjectileSpawnerConstants="*res://autoloads/projectile_spawner_constants.gd"
 TowerConstants="*res://autoloads/tower_constants.gd"
 WaveConstants="*res://autoloads/wave_constants.gd"
+CurrGameData="*res://autoloads/curr_game_data.gd"
+UIConstants="*res://autoloads/ui_constants.gd"
 
 [display]
 

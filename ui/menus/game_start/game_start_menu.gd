@@ -22,13 +22,17 @@ func _connect_select_map_container_button_signals():
 #                                    STARTING MENU CONTAINER
 # ==============================================================================================
 func _on_new_game_button_pressed():
-	# Hide starting menu container
-	STARTING_MENU_CONTAINER.visible = false
-	# Show select map container
-	SELECT_MAP_CONTAINER.visible = true
+	_display_select_map_container()
 
 func _on_exit_game_button_pressed():
 	get_tree().quit()
+
+## Shows and hides components that are required for displaying the main menu
+func _display_starting_menu():
+	# Show starting menu container
+	STARTING_MENU_CONTAINER.visible = true
+	# Hide select map container
+	SELECT_MAP_CONTAINER.visible = false
 
 
 #                                     SELECT MAP CONTAINER
@@ -39,12 +43,14 @@ func _on_gem_td_button_pressed():
 func _on_line_td_button_pressed():
 	get_tree().change_scene_to_packed(GameConstants.LINE_TD_COMPLETE_BUILD)
 
+func _display_select_map_container():
+	# Hide starting menu container
+	STARTING_MENU_CONTAINER.visible = false
+	# Show select map container
+	SELECT_MAP_CONTAINER.visible = true
 
 #                                     SHARED BUTTON SIGNALS
 # ==============================================================================================
 
 func _on_return_to_main_menu_button_pressed():
-	# Show starting menu container
-	STARTING_MENU_CONTAINER.visible = true
-	# Hide select map container
-	SELECT_MAP_CONTAINER.visible = false
+	_display_starting_menu()

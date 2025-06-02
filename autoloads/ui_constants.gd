@@ -1,4 +1,4 @@
 extends Node
 
-var POPULATED_HUD_BUILD_LOAD: PackedScene = load("res://ui/populated_hud_build_without_map/full_game_hud_build_without_game_map.tscn")
-
+var START_GAME_MENU_LOAD: PackedScene = load("res://ui/menus/game_start/game_start_menu.tscn")
+var END_GAME_MENU_LOAD: PackedScene = load("res://ui/menus/game_end/game_end_menu.tscn")

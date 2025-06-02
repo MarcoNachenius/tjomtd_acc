@@ -1,0 +1,19 @@
+extends VBoxContainer
+class_name GameEndResultsTextContainer
+
+@export var GAME_OUTOME_LABEL: RichTextLabel
+@export var FINAL_SCORE_AMOUNT_LABEL: RichTextLabel
+@export var TOTAL_WAVES_COMPLETED_AMOUNT_LABEL: RichTextLabel
+@export var FINAL_MAZE_COMPLETION_TIME_AMOUNT_LABEL: RichTextLabel
+@export var FINAL_MAZE_DAMAGE_AMOUNT_LABEL: RichTextLabel
+@export var FINAL_MAZE_LENGTH_AMOUNT_LABEL: RichTextLabel
+@export var WAVES_COMPLETED_AMOUNT_LABEL: RichTextLabel
+
+func _ready() -> void:
+    GAME_OUTOME_LABEL.text = CurrGameData.RESULT_TEXT
+    FINAL_SCORE_AMOUNT_LABEL.text = str(CurrGameData.FINAL_SCORE)
+    TOTAL_WAVES_COMPLETED_AMOUNT_LABEL.text = str(TOTAL_WAVES_COMPLETED_AMOUNT_LABEL)
+    FINAL_MAZE_COMPLETION_TIME_AMOUNT_LABEL.text = str(CurrGameData.FINAL_MAZE_COMPLETION_TIME)
+    FINAL_MAZE_DAMAGE_AMOUNT_LABEL.text = str(CurrGameData.FINAL_MAZE_DAMAGE)
+    FINAL_MAZE_LENGTH_AMOUNT_LABEL.text = str(CurrGameData.FINAL_MAZE_LENGTH)
+    WAVES_COMPLETED_AMOUNT_LABEL.text = str(CurrGameData.WAVES_COMPLETED)
