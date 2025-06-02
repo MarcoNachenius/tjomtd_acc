@@ -6,6 +6,7 @@ class_name MapCamera
 func _ready():
 	assert(__game_map, "GameMap not set in MapCamera")
 	__game_map.camera_moved.connect(_on_camera_moved)
+	position_smoothing_enabled = true
 
 
 func _process(delta):
