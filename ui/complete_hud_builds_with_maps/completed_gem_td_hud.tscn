@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw4jexer35pr5"]
+
+[ext_resource type="PackedScene" uid="uid://c8u365aao1ox5" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.tscn" id="1_t7eln"]
+[ext_resource type="PackedScene" uid="uid://bs55s7u8lwp5p" path="res://game/components/camera/map_camera.tscn" id="2_chst0"]
+[ext_resource type="PackedScene" uid="uid://cyit2njm4tkdc" path="res://maps/gem_td/gem_td.tscn" id="3_eyvlh"]
+
+[node name="CompletedGemTdHud" type="Node2D"]
+
+[node name="RandomTowerBuildHUD" parent="." node_paths=PackedStringArray("GAME_MAP") instance=ExtResource("1_t7eln")]
+GAME_MAP = NodePath("../GemTD")
+
+[node name="MapCamera" parent="." node_paths=PackedStringArray("__game_map") instance=ExtResource("2_chst0")]
+__game_map = NodePath("../GemTD")
+
+[node name="GemTD" parent="." instance=ExtResource("3_eyvlh")]

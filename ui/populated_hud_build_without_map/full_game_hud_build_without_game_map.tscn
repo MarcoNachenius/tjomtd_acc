@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2t0bs11bx8yw"]
+
+[ext_resource type="PackedScene" uid="uid://c8u365aao1ox5" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.tscn" id="1_pnvrf"]
+[ext_resource type="PackedScene" uid="uid://bs55s7u8lwp5p" path="res://game/components/camera/map_camera.tscn" id="2_n3uue"]
+
+[node name="FullGameHudBuildWithoutGameMap" type="Node2D"]
+
+[node name="RandomTowerBuildHUD" parent="." instance=ExtResource("1_pnvrf")]
+
+[node name="MapCamera" parent="." instance=ExtResource("2_n3uue")]

@@ -6,6 +6,11 @@ extends Node
 const COLLISION_SHAPE_PRECISION: int = 16
 
 
+# COMPLETE PACKED SCENE LOADS
+# ============================
+var GEM_TD_COMPLETE_BUILD: PackedScene = load("res://ui/complete_hud_builds_with_maps/completed_gem_td_hud.tscn")
+var LINE_TD_COMPLETE_BUILD: PackedScene = load("res://ui/complete_hud_builds_with_maps/completed_line_td_hud.tscn")
+
 # START NEW GAME
 # ==============
 const STARTING_LIVES: int = 20

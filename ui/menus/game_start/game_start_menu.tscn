@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://d10hxlsgy4u46"]
+
+[ext_resource type="Script" uid="uid://oaqhph1hwbl8" path="res://ui/menus/game_start/game_start_menu.gd" id="1_ttwxv"]
+[ext_resource type="PackedScene" uid="uid://b0l4rok7p0ldy" path="res://ui/components/button_containers/start_game_menu/starting_menu_container/starting_menu_container.tscn" id="1_x4qmd"]
+[ext_resource type="PackedScene" uid="uid://dohp51h4peqp7" path="res://ui/components/button_containers/start_game_menu/select_map_container/select_map_container.tscn" id="3_jc11y"]
+
+[node name="GameStartMenu" type="CanvasLayer" node_paths=PackedStringArray("STARTING_MENU_CONTAINER", "SELECT_MAP_CONTAINER")]
+script = ExtResource("1_ttwxv")
+STARTING_MENU_CONTAINER = NodePath("StartingMenuContainer")
+SELECT_MAP_CONTAINER = NodePath("SelectMapContainer")
+
+[node name="StartingMenuContainer" parent="." instance=ExtResource("1_x4qmd")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -33.0
+offset_right = 46.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectMapContainer" parent="." instance=ExtResource("3_jc11y")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -33.0
+offset_right = 35.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
