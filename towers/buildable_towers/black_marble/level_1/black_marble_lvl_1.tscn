@@ -22,7 +22,7 @@ texture = ExtResource("2_fgkmm")
 
 [node name="SingleHitSingleBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("5_skkas")
-__bullet_damage = 2
+__bullet_damage = 8
 __bullet_speed = 25
 __cooldown_duration = 0.5
-__detection_range = 300
+__detection_range = 400

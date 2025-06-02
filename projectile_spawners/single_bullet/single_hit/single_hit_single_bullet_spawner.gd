@@ -43,9 +43,6 @@ func _launch_projectiles():
 	
 
 	# ──────── Setters ────────
-	# Target
-	assert(__target, "No target provided")
-	new_bullet.set_target(__target)
 
 	# Area‑of‑effect slow parameters
 	new_bullet.set_aoe_slow_enabled(__aoe_slow_enabled)
@@ -63,6 +60,10 @@ func _launch_projectiles():
 	new_bullet.set_retarget_radius(__retarget_radius)
 
 	add_child(new_bullet)
+
+	# Target
+	assert(__target, "No target provided")
+	new_bullet.set_target(__target)
 
 	# Velocity / speed
 	new_bullet.update_velocity_towards_target()

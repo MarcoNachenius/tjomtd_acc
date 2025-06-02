@@ -42,14 +42,6 @@ func _launch_projectiles():
 	var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_PRELOAD].instantiate()
 
 	# ──────── Setters ────────
-	# Target
-	assert(__target, "No target provided")
-	new_missile.set_target(__target)
-
-	# Velocity / speed
-	new_missile.update_velocity_towards_target()
-	new_missile.set_speed(__missile_speed)
-	new_missile.update_isometric_speed()
 
 	# Base damage
 	new_missile.set_damage(__missile_damage)
@@ -80,3 +72,12 @@ func _launch_projectiles():
 	new_missile.set_aoe_slow_duration(__aoe_slow_duration)
 
 	add_child(new_missile)
+
+	# Target
+	assert(__target, "No target provided")
+	new_missile.set_target(__target)
+
+	# Velocity / speed
+	new_missile.update_velocity_towards_target()
+	new_missile.set_speed(__missile_speed)
+	new_missile.update_isometric_speed()

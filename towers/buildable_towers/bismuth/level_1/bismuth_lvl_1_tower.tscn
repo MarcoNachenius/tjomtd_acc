@@ -21,7 +21,7 @@ texture = ExtResource("3_tmp1l")
 
 [node name="SingleMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("4_am31k")
-__missile_damage = 3
-__missile_speed = 13
+__missile_damage = 15
+__missile_speed = 9
 __cooldown_duration = 1.0
 __detection_range = 400
