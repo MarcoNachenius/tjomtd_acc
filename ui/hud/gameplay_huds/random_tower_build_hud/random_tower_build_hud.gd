@@ -404,8 +404,6 @@ func _on_wave_completed(total_waves_completed: int):
 		# Switch main scene to end game menu
 		get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
 
-
-
 	# Update tower count
 	__current_turn_tower_count = 0
 	# Hide tower properties hbox
