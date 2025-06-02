@@ -374,11 +374,6 @@ func _on_remove_barricade_button_pressed():
 func _on_balance_altered(curr_balance: int):
 	GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(curr_balance)
 
-func _on_credits_lost(remaining_balance: int):
-	pass
-
-func _on_life_gained(remaining_lives: int):
-	pass
 
 func _on_lives_depleted():
 	# Capture final results in CurrGameData autoload
