@@ -30,7 +30,7 @@ const WAVE_2: Dictionary = {
 }
 
 const WAVE_3: Dictionary = {
-	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.DEMON,
+	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.RED_SPIDER,
 	WaveProperties.CREEP_SPEED: 8,
 	WaveProperties.CREEP_HEALTH: 40,
 	WaveProperties.WAVE_SIZE: 3,
@@ -39,7 +39,7 @@ const WAVE_3: Dictionary = {
 }
 
 const WAVE_4: Dictionary = {
-	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.RED_SPIDER,
+	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.DEMON,
 	WaveProperties.CREEP_SPEED: 9,
 	WaveProperties.CREEP_HEALTH: 60,
 	WaveProperties.WAVE_SIZE: 3,
@@ -48,7 +48,7 @@ const WAVE_4: Dictionary = {
 }
 
 const WAVE_5: Dictionary = {
-	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.CENTIPEDE,
+	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.BLUE_SPIDER,
 	WaveProperties.CREEP_SPEED: 8,
 	WaveProperties.CREEP_HEALTH: 120,
 	WaveProperties.WAVE_SIZE: 3,
