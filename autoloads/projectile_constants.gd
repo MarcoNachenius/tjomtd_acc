@@ -43,6 +43,9 @@ enum ProjectileIDs {
 	LARIMAR_LVL_3,
 	LARIMAR_LVL_4,
 	LARIMAR_LVL_5,
+	SPINEL_LVL_3,
+	SPINEL_LVL_4,
+	SPINEL_LVL_5,
 }
 
 # ******************************************************************************************************************
@@ -103,7 +106,10 @@ enum SingleHitMissiles {
 	SUNSTONE_LVL_4,
 	SAM_SITE_LVL_1,
 	LARIMAR_LVL_3,
-	LARIMAR_LVL_5
+	LARIMAR_LVL_5,
+	SPINEL_LVL_3,
+	SPINEL_LVL_4,
+	SPINEL_LVL_5
 }
 
 enum TargetedRicochetMissiles{
@@ -134,6 +140,9 @@ enum MissilesForSpawner {
 	SAM_SITE_LVL_1,
 	LARIMAR_LVL_3,
 	LARIMAR_LVL_5,
+	SPINEL_LVL_3,
+	SPINEL_LVL_4,
+	SPINEL_LVL_5
 }
 
 
@@ -197,6 +206,9 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.TEST_TARGETED_RICOCHET_MISSILE: "res://projectiles/missiles/multi_hit/targeted_ricochet/test_missile/test_targeted_ricochet_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_1: "res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_missile.tscn",
 	MissilesForSpawner.SPINEL_LVL_2: "res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_missile.tscn",
+	MissilesForSpawner.SPINEL_LVL_3: "res://towers/buildable_towers/spinel/level_3/spinel_lvl_3_missile.tscn",
+	MissilesForSpawner.SPINEL_LVL_4: "res://towers/buildable_towers/spinel/level_4/spinel_lvl_4_missile.tscn",
+	MissilesForSpawner.SPINEL_LVL_5: "res://towers/buildable_towers/spinel/level_5/spinel_lvl_5_missile.tscn",
 	MissilesForSpawner.KUNZITE_LVL_1: "res://towers/buildable_towers/bismuth/level_1/bismuth_lvl_1_missile.tscn",
 	MissilesForSpawner.KUNZITE_LVL_3: "res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_missile.tscn",
 	MissilesForSpawner.KUNZITE_LVL_5: "res://towers/buildable_towers/kunzite/level_5/kunzute_lvl_5_missile.tscn",
@@ -228,4 +240,7 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary[SingleHitMissiles, PackedScene] = {
 	SingleHitMissiles.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn"),
 	SingleHitMissiles.LARIMAR_LVL_3: load("res://towers/buildable_towers/laminar/level_3/larimar_lvl_3_missile.tscn"),
 	SingleHitMissiles.LARIMAR_LVL_5: load("res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn"),
+	SingleHitMissiles.SPINEL_LVL_3: load("res://towers/buildable_towers/spinel/level_3/spinel_lvl_3_missile.tscn"),
+	SingleHitMissiles.SPINEL_LVL_4: load("res://towers/buildable_towers/spinel/level_4/spinel_lvl_4_missile.tscn"),
+	SingleHitMissiles.SPINEL_LVL_5: load("res://towers/buildable_towers/spinel/level_5/spinel_lvl_5_missile.tscn")
 }

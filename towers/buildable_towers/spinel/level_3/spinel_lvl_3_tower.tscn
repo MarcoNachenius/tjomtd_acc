@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxwwtroif87xb"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_65111"]
+[ext_resource type="Texture2D" uid="uid://upmhjns60b2d" path="res://towers/buildable_towers/spinel/level_3/spinel_lvl_3_tower_sprite.png" id="2_dp5vk"]
+[ext_resource type="Script" uid="uid://da2h3gfp55xjn" path="res://projectile_spawners/single_missile/single_hit/single_missile_spawner.gd" id="3_2ilnn"]
+
+[node name="SpinelLvl3Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 3
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_65111")
+TOWER_ID = 25
+TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("SingleMissileSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -53)
+scale = Vector2(1, 0.92)
+texture = ExtResource("2_dp5vk")
+
+[node name="SingleMissileSpawner" type="Node2D" parent="."]
+script = ExtResource("3_2ilnn")
+MISSILE_PRELOAD = 14
+__missile_damage = 40
+__missile_speed = 20
+__aoe_enabled = true
+__aoe_detection_radius = 100
+__aoe_damage_amount = 20
+__cooldown_duration = 2.0
+__detection_range = 400
+metadata/_custom_type_script = "uid://da2h3gfp55xjn"

@@ -16,4 +16,5 @@ __aoe_damage_amount = 10
 metadata/_custom_type_script = "uid://b7ut4y4uuyqlk"
 
 [node name="MissileSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_gbbkj")

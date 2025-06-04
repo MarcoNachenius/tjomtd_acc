@@ -111,6 +111,9 @@ var BUILD_TOWER_PRELOADS: Dictionary[BuildTowerIDs, PackedScene] = {
     BuildTowerIDs.SUNSTONE_LVL_5: load("res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_tower.tscn"),
     BuildTowerIDs.SPINEL_LVL_1: load("res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_tower.tscn"),
     BuildTowerIDs.SPINEL_LVL_2: load("res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_tower.tscn"),
+    BuildTowerIDs.SPINEL_LVL_3: load("res://towers/buildable_towers/spinel/level_3/spinel_lvl_3_tower.tscn"),
+    BuildTowerIDs.SPINEL_LVL_4: load("res://towers/buildable_towers/spinel/level_4/spinel_lvl_4_tower.tscn"),
+    BuildTowerIDs.SPINEL_LVL_5: load("res://towers/buildable_towers/spinel/level_5/spinel_lvl_5_tower.tscn"),
     BuildTowerIDs.KUNZITE_LVL_1: load("res://towers/buildable_towers/kunzite/level_1/kunzite_lvl_1_tower.tscn"),
     BuildTowerIDs.KUNZITE_LVL_2: load("res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_tower.tscn"),
     BuildTowerIDs.KUNZITE_LVL_3: load("res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_tower.tscn"),
@@ -143,6 +146,9 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
     TowerIDs.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_level_1.tscn"),
     TowerIDs.SPINEL_LVL_1: load("res://towers/buildable_towers/spinel/level_1/spinel_lvl_1_tower.tscn"),
     TowerIDs.SPINEL_LVL_2: load("res://towers/buildable_towers/spinel/level_2/spinel_lvl_2_tower.tscn"),
+    TowerIDs.SPINEL_LVL_3: load("res://towers/buildable_towers/spinel/level_3/spinel_lvl_3_tower.tscn"),
+    TowerIDs.SPINEL_LVL_4: load("res://towers/buildable_towers/spinel/level_4/spinel_lvl_4_tower.tscn"),
+    TowerIDs.SPINEL_LVL_5: load("res://towers/buildable_towers/spinel/level_5/spinel_lvl_5_tower.tscn"),
     TowerIDs.KUNZITE_LVL_1: load("res://towers/buildable_towers/kunzite/level_1/kunzite_lvl_1_tower.tscn"),
     TowerIDs.KUNZITE_LVL_2: load("res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_tower.tscn"),
     TowerIDs.KUNZITE_LVL_3: load("res://towers/buildable_towers/kunzite/level_3/kunzite_lvl_3_tower.tscn"),
@@ -181,6 +187,9 @@ const TowerPrices: Dictionary = {
     TowerIDs.KUNZITE_LVL_5: 0,
     TowerIDs.SPINEL_LVL_1: 0,
     TowerIDs.SPINEL_LVL_2: 0,
+    TowerIDs.SPINEL_LVL_3: 0,
+    TowerIDs.SPINEL_LVL_4: 0,
+    TowerIDs.SPINEL_LVL_5: 0,
     TowerIDs.TOMBSTONE_LVL_1: 0,
     TowerIDs.TOMBSTONE_LVL_2: 50,
     TowerIDs.SAM_SITE_LVL_1: 0,
@@ -212,6 +221,9 @@ const UPGRADES_INTO: Dictionary = {
     TowerIDs.SUNSTONE_LVL_5: SUNSTONE_LVL_5_UPGRADES_INTO,
     TowerIDs.SPINEL_LVL_1: SPINEL_LVL_1_UPGRADES_INTO,
     TowerIDs.SPINEL_LVL_2: SPINEL_LVL_2_UPGRADES_INTO,
+    TowerIDs.SPINEL_LVL_3: SPINEL_LVL_3_UPGRADES_INTO,
+    TowerIDs.SPINEL_LVL_4: SPINEL_LVL_4_UPGRADES_INTO,
+    TowerIDs.SPINEL_LVL_5: SPINEL_LVL_5_UPGRADES_INTO,
     TowerIDs.TOMBSTONE_LVL_1: TOMBSTONE_LVL_1_UPGRADES_INTO,
     TowerIDs.KUNZITE_LVL_1: KUNZITE_LVL_1_UPGRADES_INTO,
     TowerIDs.KUNZITE_LVL_2: KUNZITE_LVL_2_UPGRADES_INTO,
@@ -246,6 +258,9 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.SUNSTONE_LVL_5: SUNSTONE_LVL_5_REQUIRES_TOWERS,
     TowerIDs.SPINEL_LVL_1: SPINEL_LVL_1_REQUIRES_TOWERS,
     TowerIDs.SPINEL_LVL_2: SPINEL_LVL_2_REQUIRES_TOWERS,
+    TowerIDs.SPINEL_LVL_3: SPINEL_LVL_3_REQUIRES_TOWERS,
+    TowerIDs.SPINEL_LVL_4: SPINEL_LVL_4_REQUIRES_TOWERS,
+    TowerIDs.SPINEL_LVL_5: SPINEL_LVL_5_REQUIRES_TOWERS,
     TowerIDs.TOMBSTONE_LVL_1: TOMBSTONE_LVL_1_REQUIRES_TOWERS,
     TowerIDs.KUNZITE_LVL_1: KUNZITE_LVL_1_REQUIRES_TOWERS,
     TowerIDs.KUNZITE_LVL_2: KUNZITE_LVL_2_REQUIRES_TOWERS,
@@ -290,6 +305,9 @@ const KUNZITE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const SPINEL_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
 const SPINEL_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
+const SPINEL_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const SPINEL_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
+const SPINEL_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const TOMBSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
 const SAM_SITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
 
@@ -322,6 +340,9 @@ const KUNZITE_LVL_4_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const KUNZITE_LVL_5_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const SPINEL_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const SPINEL_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const SPINEL_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const SPINEL_LVL_4_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+const SPINEL_LVL_5_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const TOMBSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.BLACK_MARBLE_LVL_1: 1,
     TowerIDs.BISMUTH_LVL_1: 1,
@@ -354,6 +375,9 @@ const AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, Dic
     TowerIDs.LARIMAR_LVL_4: LARIMAR_LVL_4_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.LARIMAR_LVL_5: LARIMAR_LVL_5_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.SPINEL_LVL_2: SPINEL_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
+    TowerIDs.SPINEL_LVL_3: SPINEL_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
+    TowerIDs.SPINEL_LVL_4: SPINEL_LVL_4_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
+    TowerIDs.SPINEL_LVL_5: SPINEL_LVL_5_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.KUNZITE_LVL_2: KUNZITE_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.KUNZITE_LVL_3: KUNZITE_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
     TowerIDs.KUNZITE_LVL_4: KUNZITE_LVL_4_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS,
@@ -381,8 +405,11 @@ const AWAITING_SELECTION_COMPOUND_UPGRADES_INTO: Dictionary[TowerIDs, Array] = {
     TowerIDs.SUNSTONE_LVL_3: [TowerIDs.SUNSTONE_LVL_4, TowerIDs.SUNSTONE_LVL_5],
     TowerIDs.SUNSTONE_LVL_4: [TowerIDs.SUNSTONE_LVL_5],
     TowerIDs.SUNSTONE_LVL_5: [],
-    TowerIDs.SPINEL_LVL_1: [TowerIDs.SPINEL_LVL_2],
-    TowerIDs.SPINEL_LVL_2: [],
+    TowerIDs.SPINEL_LVL_1: [TowerIDs.SPINEL_LVL_2, TowerIDs.SPINEL_LVL_3, TowerIDs.SPINEL_LVL_4, TowerIDs.SPINEL_LVL_5],
+    TowerIDs.SPINEL_LVL_2: [TowerIDs.SPINEL_LVL_3, TowerIDs.SPINEL_LVL_4, TowerIDs.SPINEL_LVL_5],
+    TowerIDs.SPINEL_LVL_3: [TowerIDs.SPINEL_LVL_4, TowerIDs.SPINEL_LVL_5],
+    TowerIDs.SPINEL_LVL_4: [TowerIDs.SPINEL_LVL_5],
+    TowerIDs.SPINEL_LVL_5: [],
     TowerIDs.KUNZITE_LVL_1: [TowerIDs.KUNZITE_LVL_2, TowerIDs.KUNZITE_LVL_3, TowerIDs.KUNZITE_LVL_4, TowerIDs.KUNZITE_LVL_5],
     TowerIDs.KUNZITE_LVL_2: [TowerIDs.KUNZITE_LVL_3, TowerIDs.KUNZITE_LVL_4, TowerIDs.KUNZITE_LVL_5],
     TowerIDs.KUNZITE_LVL_3: [TowerIDs.KUNZITE_LVL_4, TowerIDs.KUNZITE_LVL_5],
@@ -490,6 +517,24 @@ const LARIMAR_LVL_5_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary
 # ******
 const SPINEL_LVL_2_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
     TowerIDs.SPINEL_LVL_1: 2,
+}
+
+const SPINEL_LVL_3_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.SPINEL_LVL_1: 3,
+    TowerIDs.SPINEL_LVL_2: 2,
+}
+
+const SPINEL_LVL_4_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.SPINEL_LVL_1: 4,
+    TowerIDs.SPINEL_LVL_2: 3,
+    TowerIDs.SPINEL_LVL_3: 2,
+}
+
+const SPINEL_LVL_5_AWAITING_SELECTION_COMPOUND_UPGRADE_REQUIREMENTS: Dictionary[TowerIDs, int]  = {
+    TowerIDs.SPINEL_LVL_1: 5,
+    TowerIDs.SPINEL_LVL_2: 4,
+    TowerIDs.SPINEL_LVL_3: 3,
+    TowerIDs.SPINEL_LVL_4: 2,
 }
 
 # *******
