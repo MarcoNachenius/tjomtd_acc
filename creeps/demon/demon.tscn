@@ -16,6 +16,7 @@ MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 __points_for_death = 10
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(0, -79)
 scale = Vector2(1.9, 1.9)

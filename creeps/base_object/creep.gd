@@ -45,18 +45,20 @@ var __total_path_points: int
 # BUILTINS
 # ********
 func _ready():
-	self._create_stun_timer()
-	self._create_hitbox()
-	self._switch_state(States.MOVING)
+	_create_stun_timer()
+	_create_hitbox()
+	_set_ordering()
+	_switch_state(States.MOVING)
+
 
 func _process(delta):
 	match __curr_state:
 		States.MOVING:
-			self._handle_movement()
+			_handle_movement()
 		States.DYING:
-			self._handle_death()
+			_handle_death()
 		States.IDLE:
-			self._handle_idle()
+			_handle_idle()
 
 # **************
 # CUSTOM METHODS
@@ -65,6 +67,22 @@ func _create_hitbox():
 	var new_hitbox: CreepHitbox = CreepConstants.HITBOX_PRELOAD.instantiate() as CreepHitbox
 	add_child(new_hitbox)
 	__hitbox = new_hitbox
+
+func _set_ordering():
+	# Scene root
+	z_index = 4
+	z_as_relative = false
+	y_sort_enabled = true
+	# Animations
+	MOVEMENT_ANIMATIONS.z_index = 0
+	MOVEMENT_ANIMATIONS.z_as_relative = true
+	MOVEMENT_ANIMATIONS.y_sort_enabled = true
+	IDLE_ANIMATIONS.z_index = 0
+	IDLE_ANIMATIONS.z_as_relative = true
+	IDLE_ANIMATIONS.y_sort_enabled = true
+	DEATH_ANIMATIONS.z_index = 0
+	DEATH_ANIMATIONS.z_as_relative = true
+	DEATH_ANIMATIONS.y_sort_enabled = true   
 
 ## This function creates a list of compass directions based on the differences between consecutive points in the __path_points array.
 ## It iterates through the __path_points array, calculates the difference between each pair of consecutive points, and appends the
@@ -122,7 +140,7 @@ func _create_stun_timer():
 
 func _handle_death():
 	if __death_in_progress and !DEATH_ANIMATIONS.is_playing():
-		self._destroy()
+		_destroy()
 
 # Getters and Setters
 
@@ -265,9 +283,9 @@ func _handle_movement():
 		# Remove creep from the scene because the end of the path has been reached
 		if __penultimate_point_reached:
 			end_of_path_reached.emit(self)
-			self._destroy()
+			_destroy()
 		else: # Handle non-penultimate point change
-			self._assign_next_point()
+			_assign_next_point()
 		return
 	
 	# Apply position change
@@ -347,7 +365,7 @@ func stun(duration: float):
 func take_damage(amount: int):
 	__curr_health -= amount
 	if __curr_health < 1:
-		self._switch_state(States.DYING)
+		_switch_state(States.DYING)
 
 # ************
 # TODO METHODS
