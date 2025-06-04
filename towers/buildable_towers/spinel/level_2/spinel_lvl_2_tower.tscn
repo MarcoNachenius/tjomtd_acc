@@ -22,8 +22,11 @@ texture = ExtResource("3_tmt54")
 [node name="SingleMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("4_n0mm2")
 MISSILE_PRELOAD = 3
-__missile_damage = 10
-__missile_speed = 30
-__cooldown_duration = 0.7
+__missile_damage = 5
+__missile_speed = 14
+__aoe_enabled = true
+__aoe_detection_radius = 200
+__aoe_damage_amount = 15
+__cooldown_duration = 1.5
 __detection_range = 400
 metadata/_custom_type_script = "uid://da2h3gfp55xjn"

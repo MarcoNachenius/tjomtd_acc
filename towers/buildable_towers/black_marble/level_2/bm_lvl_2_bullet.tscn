@@ -11,5 +11,5 @@ metadata/_custom_type_script = "uid://2jlk7ijvr8cd"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
-scale = Vector2(0.56, 0.28)
+scale = Vector2(0.267425, 0.133713)
 texture = ExtResource("2_83u1i")

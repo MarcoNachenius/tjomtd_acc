@@ -24,6 +24,15 @@ class_name MultiTargetSingleHitSingleBulletSpawner
 @export var __aoe_detection_radius: int
 ## The amount of damage that gets inflicted when triggered
 @export var __aoe_damage_amount: int
+## If true, an aoe show hurtbox will be created on ready 
+## which allows for area of effect slow infliction
+@export var __aoe_slow_enabled: bool
+## The radius of aoe slow infliction for projectile.
+@export var __aoe_slow_detection_radius: int
+## The percentage a creep's speed will be reduced when triggered
+@export var __aoe_slow_percentage: int
+## The duration in seconds for which a creep will be slowed down
+@export var __aoe_slow_duration: float
 
 func _execute_extended_onready_commands():
     assert(__bullets_per_launch or __infinite_targets_per_launch, "No bullets per launch has been provided and infinite targets is set to false")
@@ -34,16 +43,8 @@ func _launch_projectiles():
     for creep in detectable_creeps:
         # Create bullet
         var new_bullet: SingleHitBullet = ProjectileConstants.SINGLE_HIT_BULLET_LOADS[BULLET_PRELOAD].instantiate()
-        add_child(new_bullet)
     
         # ──────── Setters ────────
-        # Target
-        new_bullet.set_target(creep)
-    
-        # Velocity / speed
-        new_bullet.update_velocity_towards_target()
-        new_bullet.set_speed(__bullet_speed)
-        new_bullet.update_isometric_speed()
     
         # Base damage
         new_bullet.set_damage(__bullet_damage)
@@ -62,6 +63,21 @@ func _launch_projectiles():
         new_bullet.set_aoe_enabled(__aoe_enabled)
         new_bullet.set_aoe_detection_radius(__aoe_detection_radius)
         new_bullet.set_aoe_damage_amount(__aoe_damage_amount)
+
+        # Area‑of‑effect slow parameters
+        new_bullet.set_aoe_slow_enabled(__aoe_slow_enabled)
+        new_bullet.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
+        new_bullet.set_aoe_slow_percentage(__aoe_slow_percentage)
+        new_bullet.set_aoe_slow_duration(__aoe_slow_duration)
+
+        add_child(new_bullet)
+
+        # Target
+        new_bullet.set_target(creep)
+        # Velocity / speed
+        new_bullet.update_velocity_towards_target()
+        new_bullet.set_speed(__bullet_speed)
+        new_bullet.update_isometric_speed()
 
         # Dont keep track of amount of bullets launched if infinite bullet launch is set to true
         if __infinite_targets_per_launch:
