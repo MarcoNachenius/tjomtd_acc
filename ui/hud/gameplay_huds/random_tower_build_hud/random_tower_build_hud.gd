@@ -185,6 +185,16 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 			TOWER_UPGRADES_CONTAINER.visible = true
 			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
+func _deselect_tower():
+	# Do nothing if there is no selected tower
+	if !__selected_tower:
+		return
+	# Hide range display shape
+	if __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
+		__selected_tower.RANGE_DISPLAY_SHAPE.visible = false
+	# Remove selected tower var
+	__selected_tower = null
+
 func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	_hide_containers_on_tower_kept()
 	# Handle towers awaiting selection
@@ -340,6 +350,8 @@ func _on_hide_tower_range_button_pressed():
 # =============================================================================================================
 ## Handle build random tower button pressed signal
 func _on_build_random_tower_button_pressed():
+	# Deselect tower
+	_deselect_tower()
 	# Hide tower properties hbox
 	TOWER_PROPERTIES_CONTAINER.visible = false
 	# Hide build tower button
