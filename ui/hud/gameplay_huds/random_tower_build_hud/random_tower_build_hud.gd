@@ -12,6 +12,7 @@ class_name RandomTowerBuildHUD
 @export var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER: AwaitingSelectionUpgradeTowersContainer
 @export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
 @export var TOWER_RANGE_VISIBILITY_CONTAINER: TowerRangeVisibilityContainer
+@export var EXTENDED_UPGRADES_CONTAINER: ExtendedUpgradesContainer
 # Standalone Buttons
 @export var START_NEW_WAVE_BUTTON: Button
 @export var UPGRADE_BUILD_LEVEL_BUTTON: Button
@@ -20,6 +21,11 @@ class_name RandomTowerBuildHUD
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
 	TOWER_UPGRADES_CONTAINER.SAM_SITE_BUTTON: _on_sam_site_button_pressed
+}
+
+@onready var EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_2_BUTTON: _on_tombstone_lvl_2_button_pressed,
+	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed
 }
 
 @onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -106,6 +112,8 @@ func _connect_all_component_signals():
 	_connect_path_visibility_container_signals()
 	# Tower range visibility container
 	_connnect_tower_range_visibility_container_signals()
+	# Extended upgrades
+	_connect_extended_upgrades_signals()
 	# Standalone Hud buttons
 	_connect_standalone_buttons_signals()
 
@@ -124,6 +132,12 @@ func _connect_tower_upgrades_signals():
 	for button in TOWER_UPGRADES_CONTAINER.ALL_TOWER_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
+
+func _connect_extended_upgrades_signals():
+	# Connect the button signals to the appropriate methods
+	for button in EXTENDED_UPGRADES_CONTAINER.ALL_BUTTONS:
+		# Retrieve the callback function from the dictionary using the button as the key.
+		button.pressed.connect(EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
 
 func _connnect_tower_range_visibility_container_signals():
 	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.pressed.connect(_on_show_tower_range_button_pressed)
@@ -264,6 +278,8 @@ func _handle_initial_container_visibility():
 	PATH_LINE_VISIBILITY_CONTAINER.visible = true
 	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON.visible = false
 	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON.visible = true
+	# Hide extended upgrades container
+	EXTENDED_UPGRADES_CONTAINER.visible = false
 
 ## Ensures that all containers before a wave starts are properly hidden
 func _hide_containers_on_tower_kept():
@@ -616,3 +632,13 @@ func _on_bismuth_level_4_button_pressed():
 
 func _on_bismuth_level_5_button_pressed():
 	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_5)
+
+
+#                                           |EXTENDED UPGRADE CONTAINER|
+# =============================================================================================================
+
+func _on_tombstone_lvl_2_button_pressed():
+	print("TOMBSTONE LVL 2 BUTTON PRESSED")
+
+func _on_sam_site_lvl_2_button_pressed():
+	print("sam_site LVL 2 BUTTON PRESSED")

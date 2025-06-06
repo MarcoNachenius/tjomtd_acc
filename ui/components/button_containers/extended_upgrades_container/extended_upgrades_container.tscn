@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpgwh1eruu2ej"]
+
+[ext_resource type="Script" uid="uid://be52rlgmkahsb" path="res://ui/components/button_containers/extended_upgrades_container/extended_upgrades_container.gd" id="1_wc636"]
+
+[node name="ExtendedUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_LVL_2_BUTTON", "SAM_SITE_LVL_2_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wc636")
+TOMBSTONE_LVL_2_BUTTON = NodePath("TombstoneLvl2Button")
+SAM_SITE_LVL_2_BUTTON = NodePath("SamSiteLvl2Button")
+
+[node name="TombstoneLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Tombstone
+Level 2"
+
+[node name="SamSiteLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Sam Site
+Level 2"
