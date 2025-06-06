@@ -925,6 +925,43 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 	tower_selected.emit(new_upgrade_tower)
 
 
+## Called when an upgrade tower exists on the towers on map list.
+func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	# Ensure the upgrade tower ID is valid
+	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
+	# Ensure the tower is in the list of towers on map
+	assert(__towers_on_map.has(selectedTower), "Tower not found in list of towers on map")
+	# Remove the tower from the list of towers on map
+	__towers_on_map.erase(selectedTower)
+
+	# Capture the tower's placement grid coordinate
+	var tower_placement_grid_coord: Vector2i = selectedTower.get_placement_grid_coordinate()
+	# Capture the tower's global position
+	var tower_global_position: Vector2 = selectedTower.global_position
+
+	# Remove towers from map scene
+	selectedTower.queue_free()
+	
+	# Create new tower based on provided tower ID
+	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
+	add_child(new_upgrade_tower)
+
+	# Set upgrade tower placement grid coordinate and global position
+	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
+	new_upgrade_tower.global_position = tower_global_position
+	
+	# Set the tower's state to built
+	new_upgrade_tower.switch_state(Tower.States.BUILT)
+	
+	# Add the tower to the list of towers on the map
+	__towers_on_map.append(new_upgrade_tower)
+
+	# Update the placement grid coordinates reference for the new tower
+	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers)
+
+	# Reselect tower to update hud containers
+	tower_selected.emit(new_upgrade_tower)
+
 ## Called when a copound upgrade tower exists on the towers awaiting selection list.
 func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, compoundUpgradeTowerID: TowerConstants.TowerIDs):
 	# Ensure the tower is in the list of towers awaiting selection
@@ -1003,14 +1040,20 @@ func _remove_tower_impediment_points(placementGridPoint: Vector2i):
 	# Update path 
 	self._update_current_path()
 
-
+## Handles awaiting selection towers AND upgrade towers
 func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
+
+	# Handle upgrade tower
+	if TowerConstants.UpgradeTowerIDs.values().has(selectedTower.TOWER_ID):
+		keep_extended_upgrade_tower(selectedTower, upgradeTowerID)
+		return
 
 	# Handle tower awaiting selection
 	if selectedTower.get_state() == Tower.States.AWAITING_SELECTION:
 		keep_upgrade_tower_from_towers_awaiting_selection(selectedTower, upgradeTowerID)
 		return
+	
 
 func subtract_funds(amount: int):
 	__curr_balance -= amount

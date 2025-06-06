@@ -20,8 +20,10 @@ texture = ExtResource("2_c6gdv")
 
 [node name="RandomRicochetMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("3_yv62o")
+MISSILE_PRELOAD = 2
 __missile_damage = 70
 __missile_speed = 30
+__total_ricochets = 3
 __cooldown_duration = 1.2
 __detection_range = 400
 metadata/_custom_type_script = "uid://ccsf5wjetkq1g"

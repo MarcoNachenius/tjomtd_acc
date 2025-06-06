@@ -291,6 +291,8 @@ func _hide_containers_on_tower_kept():
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 	# Hide build tower properties
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
+	# Hide extended upgrade containers
+	EXTENDED_UPGRADES_CONTAINER.visible = false
 
 ## Pulls all current values from map and reassigns them in game stats container.
 func _initialise_all_game_stats():
@@ -655,3 +657,10 @@ func _on_tombstone_lvl_2_button_pressed():
 
 func _on_sam_site_lvl_2_button_pressed():
 	print("sam_site LVL 2 BUTTON PRESSED")
+
+func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	assert(__selected_tower, "No tower is currently selected")
+	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower), "Selected tower is not an upgrade tower")
+	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
+	__selected_tower = null
+	

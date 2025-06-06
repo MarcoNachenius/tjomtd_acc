@@ -333,3 +333,82 @@ func test_upgrade_from_towers_on_map():
 
 	# Clean up
 	test_map.queue_free()
+
+
+func test_extended_upgrade_map():
+	# ================================================================
+	#                     ** CREATE BLANK MAP **
+	# ================================================================
+	var test_map = GameMap.new()
+	# LINE_TD is used because it has no mandatory path stops
+	test_map.MAP_ID = MapConstants.MapID.LINE_TD
+	# Set the map's size to 10x10
+	test_map.MAP_HEIGHT = 10
+	test_map.MAP_WIDTH = 10
+	# Ensure start and end points don't interfere with placement validity
+	test_map.__path_start_point = Vector2i(0, 0)
+	test_map.__path_end_point = Vector2i(0, 19)
+	# Create test tileset
+	var test_tileset = TileSet.new()
+	test_tileset.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+	test_tileset.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
+	test_tileset.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_VERTICAL
+	test_tileset.tile_size = Vector2i(256, 128)
+	# Asssign the test tileset to the map
+	test_map.tile_set = test_tileset
+	# Add the test map to the scene
+	add_child_autofree(test_map)
+	# Process frame to create the map
+	await get_tree().process_frame
+	# ================================================================
+
+	# Create tower loads
+	var black_marble_lvl_1: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1].instantiate()
+	var bismuth_lvl_1: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BISMUTH_LVL_1].instantiate()
+	var larimar_lvl_1: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.LARIMAR_LVL_1].instantiate()
+	
+	# Create test tower placement grid coordinates
+	var tower_1_placement_grid_coord: Vector2i = Vector2i(10, 0)
+	var tower_2_placement_grid_coord: Vector2i = Vector2i(10, 2)
+	var tower_3_placement_grid_coord: Vector2i = Vector2i(10, 4)
+
+	# Place towers that are required for upgrade tower on map
+	# Black Marble level 1
+	test_map.add_child(black_marble_lvl_1)
+	black_marble_lvl_1.set_placement_grid_coordinate(tower_1_placement_grid_coord)
+	black_marble_lvl_1.switch_state(Tower.States.BUILT)
+	# Bismuth level 1
+	test_map.add_child(bismuth_lvl_1)
+	bismuth_lvl_1.set_placement_grid_coordinate(tower_2_placement_grid_coord)
+	bismuth_lvl_1.switch_state(Tower.States.BUILT)
+	# Larimar level 1
+	test_map.add_child(larimar_lvl_1)
+	larimar_lvl_1.set_placement_grid_coordinate(tower_3_placement_grid_coord)
+	larimar_lvl_1.switch_state(Tower.States.BUILT)
+
+	# Simulate game map having 3 tower on map
+	test_map.__towers_on_map.append(black_marble_lvl_1)
+	test_map.__towers_on_map.append(bismuth_lvl_1)
+	test_map.__towers_on_map.append(larimar_lvl_1)
+
+	# Add mock tower impediments to the map dict
+	test_map._add_tower_to_placement_grid_coords_dict(black_marble_lvl_1, test_map.__placement_grid_coords_for_towers)
+	test_map._add_tower_to_placement_grid_coords_dict(bismuth_lvl_1, test_map.__placement_grid_coords_for_towers)
+	test_map._add_tower_to_placement_grid_coords_dict(larimar_lvl_1, test_map.__placement_grid_coords_for_towers)
+
+	# Simulate selecting larimar tower
+	var test_selected_tower: Tower = larimar_lvl_1
+
+	# Simulate keeping the tower
+	test_map.upgrade_from_towers_on_map(test_selected_tower, TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+
+	test_map.upgrade_tower(test_map.__towers_on_map[0], TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
+
+	# Ensure the tower is in the towers on map list
+	assert_eq(len(test_map.__towers_on_map), 1)
+	assert_eq(test_map.__towers_on_map[0].TOWER_ID, TowerConstants.TowerIDs.TOMBSTONE_LVL_2)
+	# Ensure the selected tower's placement grid coordinates are the same as the original
+	assert_eq(test_selected_tower.get_placement_grid_coordinate(), tower_3_placement_grid_coord)
+
+	# Clean up
+	test_map.queue_free()

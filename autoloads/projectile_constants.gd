@@ -46,6 +46,7 @@ enum ProjectileIDs {
 	SPINEL_LVL_3,
 	SPINEL_LVL_4,
 	SPINEL_LVL_5,
+	TOMBSTONE_LVL_2,
 }
 
 # ******************************************************************************************************************
@@ -119,7 +120,8 @@ enum TargetedRicochetMissiles{
 
 enum RandomRicochetMissiles {
 	TOMBSTONE_LVL_1,
-	SUNSTONE_LVL_5
+	SUNSTONE_LVL_5,
+	TOMBSTONE_LVL_2,
 }
 
 enum MissilesForSpawner {
@@ -142,7 +144,8 @@ enum MissilesForSpawner {
 	LARIMAR_LVL_5,
 	SPINEL_LVL_3,
 	SPINEL_LVL_4,
-	SPINEL_LVL_5
+	SPINEL_LVL_5,
+	TOMBSTONE_LVL_2,
 }
 
 
@@ -199,6 +202,7 @@ var TARGETED_RICOCHET_MISSILE_LOADS: Dictionary = {
 var RANDOM_RICOCHET_MISSILE_LOADS: Dictionary[RandomRicochetMissiles, PackedScene] = {
 	RandomRicochetMissiles.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn"),
 	RandomRicochetMissiles.SUNSTONE_LVL_5: load("res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn"),
+	RandomRicochetMissiles.TOMBSTONE_LVL_2: load("res://towers/upgrade_towers/tombstone/level_2/tombstone_lvl_2_missile.tscn"),
 }
 
 const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
@@ -221,7 +225,8 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.SUNSTONE_LVL_5: "res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn",
 	MissilesForSpawner.SAM_SITE_LVL_1: "res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_missile.tscn",
 	MissilesForSpawner.LARIMAR_LVL_3: "res://towers/buildable_towers/laminar/level_3/larimar_lvl_3_missile.tscn",
-	MissilesForSpawner.LARIMAR_LVL_5: "res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn"
+	MissilesForSpawner.LARIMAR_LVL_5: "res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn",
+	MissilesForSpawner.TOMBSTONE_LVL_2: "res://towers/upgrade_towers/tombstone/level_2/tombstone_lvl_2_missile.tscn",
 	
 }
 
