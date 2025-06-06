@@ -2,7 +2,7 @@ extends Node
 class_name RandomTowerGenerator
 
 # CONSTANTS
-const MAX_LEVEL: int = 30
+const MAX_LEVEL: int = 5
 
 # LOCALS
 var __curr_buildable_tower_preloads: Array[PackedScene] = []
@@ -23,7 +23,7 @@ func generate_random_tower_preload() -> PackedScene:
 
 ## Increases the current level and updates the current buildable tower preloads.
 func upgrade_level() -> void:
-	assert(__curr_level < MAX_LEVEL, "Cannot upgrade level beyond MAX_LEVEL")
+	assert(__curr_level <= MAX_LEVEL, "Cannot upgrade level beyond MAX_LEVEL")
 	__curr_level += 1
 	# Update current buildable tower preloads list
 	match __curr_level: # Match is used because nested arrays are not supported.
@@ -33,7 +33,15 @@ func upgrade_level() -> void:
 		2:
 			__curr_buildable_tower_preloads.append_array(LEVEL_2_BUILDABLE_TOWER_PRELOADS)
 			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
-
+		3:
+			__curr_buildable_tower_preloads.append_array(LEVEL_3_BUILDABLE_TOWER_PRELOADS)
+			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
+		4:
+			__curr_buildable_tower_preloads.append_array(LEVEL_4_BUILDABLE_TOWER_PRELOADS)
+			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
+		5:
+			__curr_buildable_tower_preloads.append_array(LEVEL_5_BUILDABLE_TOWER_PRELOADS)
+			__curr_upgrade_cost = LEVEL_UPGRADE_PRICES[__curr_level]
 
 
 var LEVEL_1_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [

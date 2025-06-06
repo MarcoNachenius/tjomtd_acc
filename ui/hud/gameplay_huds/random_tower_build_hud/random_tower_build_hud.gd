@@ -319,7 +319,7 @@ func _on_upgrade_build_level_button_pressed():
 	# Do nothing if player cannot afford level upgrade
 	if GAME_MAP.get_curr_balance() < GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost():
 		return
-	
+
 	# Subtract upgrade cost from current balance
 	GAME_MAP.subtract_funds(GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost())
 	
@@ -331,6 +331,10 @@ func _on_upgrade_build_level_button_pressed():
 
 	# Update display of current build level
 	GAME_STATS_CONTAINER.CURR_BUILD_LEVEL_AMOUNT_LABEL.text = str(GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_level())
+
+	# Permanently hide button when upgrade level limit has been reached
+	if GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_level() > GAME_MAP.RANDOM_TOWER_GENERATOR.MAX_LEVEL:
+		UPGRADE_BUILD_LEVEL_BUTTON.visible = false
 
 	
 
