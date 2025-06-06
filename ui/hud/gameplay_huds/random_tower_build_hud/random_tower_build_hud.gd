@@ -258,6 +258,9 @@ func _handle_compound_upgrade_for_towers_awaiting_selection():
 		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 		return
 	
+	# Hide extended upgrade container
+	EXTENDED_UPGRADES_CONTAINER.visible = false
+
 	# Ensure blank compound upgrades container is visible before its button visibility is handled
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = true
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.hide_all_buttons()
@@ -380,6 +383,8 @@ func _on_build_random_tower_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = false
 	# Show exit build mode button
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = true
+	# Hide extended upgrade container
+	EXTENDED_UPGRADES_CONTAINER.visible = false
 	# Switch to build mode
 	GAME_MAP.set_state(GAME_MAP.States.BUILD_MODE)
 	# Assign random towrer preload to the game map
@@ -500,6 +505,8 @@ func _on_tower_selected(tower: Tower):
 	
 	# Handle upgrade tower selection
 	if TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID):
+		# Hide keep tower button 
+		TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
 		# Hide compound upgrades container
 		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 		# Show extended upgrades container
@@ -511,12 +518,14 @@ func _on_tower_selected(tower: Tower):
 			EXTENDED_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 		return
 
-	# Handle built tower selection
+	# Handle non-upgrade built tower selection
 	if __selected_tower.get_state() == Tower.States.BUILT:
 		# Hide keep tower button
 		TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
 		# Handle tower upgrade container visibility
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
+		# Hide extended upgrade container
+		EXTENDED_UPGRADES_CONTAINER.visible = false
 	
 	# Handle compound tower upgrades.
 	_handle_compound_upgrade_for_towers_awaiting_selection()
