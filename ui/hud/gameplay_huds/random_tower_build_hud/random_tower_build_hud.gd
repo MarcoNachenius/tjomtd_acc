@@ -492,6 +492,19 @@ func _on_tower_selected(tower: Tower):
 		_handle_compound_upgrade_for_towers_awaiting_selection()
 		return
 	
+	# Handle upgrade tower selection
+	if TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID):
+		# Hide compound upgrades container
+		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
+		# Show extended upgrades container
+		EXTENDED_UPGRADES_CONTAINER.visible = true
+		# Ensure no previously revealed buttons are still visible
+		EXTENDED_UPGRADES_CONTAINER.hide_all_buttons()
+		# Show viable upgrade buttons
+		for upgrade_tower_id in __selected_tower.get_upgrades_into_tower_ids():
+			EXTENDED_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
+		return
+
 	# Handle built tower selection
 	if __selected_tower.get_state() == Tower.States.BUILT:
 		# Hide keep tower button

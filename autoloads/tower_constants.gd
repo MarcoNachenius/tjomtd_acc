@@ -316,9 +316,9 @@ const SPINEL_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const SPINEL_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const SPINEL_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const SPINEL_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
-const TOMBSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const TOMBSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_2]
 const TOMBSTONE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
-const SAM_SITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = []
+const SAM_SITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_2]
 const SAM_SITE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 
 # REQUIRE TOWERS

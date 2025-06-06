@@ -1019,4 +1019,3 @@ func subtract_funds(amount: int):
 # TODO
 func handle_single_point_impediment_placement():
 	pass
-
