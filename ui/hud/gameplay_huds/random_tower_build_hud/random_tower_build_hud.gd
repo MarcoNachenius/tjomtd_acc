@@ -653,14 +653,14 @@ func _on_bismuth_level_5_button_pressed():
 # =============================================================================================================
 
 func _on_tombstone_lvl_2_button_pressed():
-	print("TOMBSTONE LVL 2 BUTTON PRESSED")
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
 
 func _on_sam_site_lvl_2_button_pressed():
-	print("sam_site LVL 2 BUTTON PRESSED")
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
 
 func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	assert(__selected_tower, "No tower is currently selected")
-	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower), "Selected tower is not an upgrade tower")
+	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID), "Selected tower is not an upgrade tower")
 	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
 	__selected_tower = null
 	
