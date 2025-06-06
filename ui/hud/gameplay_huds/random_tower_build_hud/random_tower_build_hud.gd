@@ -660,7 +660,12 @@ func _on_sam_site_lvl_2_button_pressed():
 
 func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	assert(__selected_tower, "No tower is currently selected")
+	assert(__selected_tower.__curr_state == Tower.States.BUILT, "Cannot upgrade tower awaiting selection")
 	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID), "Selected tower is not an upgrade tower")
+
+	# Handle insufficient funds
+	if GAME_MAP.get_curr_balance() < TowerConstants.TowerPrices[upgradeTowerID]:
+		return
+
 	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
-	__selected_tower = null
 	

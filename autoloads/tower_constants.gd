@@ -162,7 +162,7 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
 
 }
 
-const TowerPrices: Dictionary = {
+const TowerPrices: Dictionary[TowerIDs, int] = {
     TowerIDs.BARRICADE: 0,
     TowerIDs.BLACK_MARBLE_LVL_1: 0,
     TowerIDs.BLACK_MARBLE_LVL_2: 0,
@@ -195,7 +195,7 @@ const TowerPrices: Dictionary = {
     TowerIDs.SPINEL_LVL_4: 0,
     TowerIDs.SPINEL_LVL_5: 0,
     TowerIDs.TOMBSTONE_LVL_1: 0,
-    TowerIDs.TOMBSTONE_LVL_2: 50,
+    TowerIDs.TOMBSTONE_LVL_2: 500,
     TowerIDs.SAM_SITE_LVL_1: 0,
     TowerIDs.SAM_SITE_LVL_2: 50
 }
