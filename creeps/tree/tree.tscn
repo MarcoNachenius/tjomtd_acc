@@ -1616,10 +1616,10 @@ script = ExtResource("1_m02ng")
 DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
+SPEED_TO_MOVEMENT_FPS_RATIO = 0.3
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_cgj75")
 animation = &"move_w"
 
@@ -1629,5 +1629,6 @@ sprite_frames = SubResource("SpriteFrames_ymsai")
 animation = &"idle_w"
 
 [node name="DeathAnimations" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_tkrii")
 animation = &"death_w"
