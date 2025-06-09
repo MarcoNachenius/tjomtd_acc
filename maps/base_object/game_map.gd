@@ -877,6 +877,9 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 	# Update the placement grid coordinates reference for the new tower
 	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers)
 
+	# Ensure upgraded tower is not awaiting selection
+	new_upgrade_tower.switch_state(Tower.States.BUILT)
+
 	# Reselect tower to update hud containers
 	tower_selected.emit(new_upgrade_tower)
 

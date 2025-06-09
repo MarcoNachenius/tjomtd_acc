@@ -526,9 +526,6 @@ func _on_tower_selected(tower: Tower):
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_on_map())
 		# Hide extended upgrade container
 		EXTENDED_UPGRADES_CONTAINER.visible = false
-	
-	# Handle compound tower upgrades.
-	_handle_compound_upgrade_for_towers_awaiting_selection()
 
 
 func _on_tower_placed(_tower: Tower):
