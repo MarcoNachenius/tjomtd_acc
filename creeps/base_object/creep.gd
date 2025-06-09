@@ -14,7 +14,7 @@ signal end_of_path_reached(creep: Creep)
 @export var IDLE_ANIMATIONS: AnimatedSprite2D
 @export var MOVEMENT_ANIMATIONS: AnimatedSprite2D
 @export var __points_for_death: int
-
+@export var SPEED_TO_MOVEMENT_FPS_RATIO: float = 0.5
 
 var __curr_compass_direction: CreepConstants.CompassDirections
 var __curr_health: int
@@ -301,7 +301,7 @@ func _handle_movement():
 	# Play movement animation
 	MOVEMENT_ANIMATIONS.play(CreepConstants.CompassDirToMovementAnimations[__curr_compass_direction])
 	# Adjust animation speed
-	MOVEMENT_ANIMATIONS.speed_scale = __curr_speed / 2
+	MOVEMENT_ANIMATIONS.speed_scale = __curr_speed * SPEED_TO_MOVEMENT_FPS_RATIO
 
 # ***********
 # WIP METHODS
