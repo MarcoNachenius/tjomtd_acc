@@ -108,14 +108,32 @@ func test_pumpkin_death_animations():
     add_child_autofree(dummy_creep)
     dummy_creep.stun(10)
 
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_n"), "Human creep has 'death_n animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_ne"), "Human creep has 'death_ne animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_e"), "Human creep has 'death_e animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_se"), "Human creep has 'death_se animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_s"), "Human creep has 'death_s animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_sw"), "Human creep has 'death_sw animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_w"), "Human creep has 'death_w animation'")
-    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_nw"), "Human creep has 'death_nw animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_n"), "Pumpkin creep has 'death_n animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_ne"), "Pumpkin creep has 'death_ne animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_e"), "Pumpkin creep has 'death_e animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_se"), "Pumpkin creep has 'death_se animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_s"), "Pumpkin creep has 'death_s animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_sw"), "Pumpkin creep has 'death_sw animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_w"), "Pumpkin creep has 'death_w animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_nw"), "Pumpkin creep has 'death_nw animation'")
+
+    # Clean up
+    dummy_creep.queue_free()
+
+func test_tree_death_animations():
+    # Create dummy creep
+    var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.TREE].instantiate()
+    add_child_autofree(dummy_creep)
+    dummy_creep.stun(10)
+
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_n"), "Tree creep has 'death_n animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_ne"), "Tree creep has 'death_ne animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_e"), "Tree creep has 'death_e animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_se"), "Tree creep has 'death_se animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_s"), "Tree creep has 'death_s animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_sw"), "Tree creep has 'death_sw animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_w"), "Tree creep has 'death_w animation'")
+    assert_true(dummy_creep.DEATH_ANIMATIONS.sprite_frames.has_animation("death_nw"), "Tree creep has 'death_nw animation'")
 
     # Clean up
     dummy_creep.queue_free()
