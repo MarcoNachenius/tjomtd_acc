@@ -37,7 +37,12 @@ enum TowerIDs {
     KUNZITE_LVL_4,
     KUNZITE_LVL_5,
     SAM_SITE_LVL_1,
-    SAM_SITE_LVL_2,    
+    SAM_SITE_LVL_2,
+    SAM_SITE_LVL_3,
+    TOMBSTONE_LVL_3,
+    LAVA_POOL_LVL_1,
+    LAVA_POOL_LVL_2,
+    LAVA_POOL_LVL_3,    
 }
 
 enum BuildTowerIDs {
@@ -79,6 +84,11 @@ enum UpgradeTowerIDs {
     TOMBSTONE_LVL_2 = TowerIDs.TOMBSTONE_LVL_2,
     SAM_SITE_LVL_1 = TowerIDs.SAM_SITE_LVL_1,
     SAM_SITE_LVL_2 = TowerIDs.SAM_SITE_LVL_2,
+    TOMBSTONE_LVL_3 = TowerIDs.TOMBSTONE_LVL_3,
+    SAM_SITE_LVL_3 = TowerIDs.SAM_SITE_LVL_3,
+    LAVA_POOL_LVL_1 = TowerIDs.LAVA_POOL_LVL_1,
+    LAVA_POOL_LVL_2 = TowerIDs.LAVA_POOL_LVL_2,
+    LAVA_POOL_LVL_3 = TowerIDs.LAVA_POOL_LVL_3,
 }
 
 var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
@@ -86,6 +96,9 @@ var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
     UpgradeTowerIDs.TOMBSTONE_LVL_2: load("res://towers/upgrade_towers/tombstone/level_2/tombstone_lvl_2_tower.tscn"),
     UpgradeTowerIDs.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_tower.tscn"),
     UpgradeTowerIDs.SAM_SITE_LVL_2: load("res://towers/upgrade_towers/sam_site/level_2/sam_site_lvl_2_tower.tscn"),
+    UpgradeTowerIDs.LAVA_POOL_LVL_1: load("res://towers/upgrade_towers/lava_pool/level_1/lava_pool_lvl_1.tscn"),
+    UpgradeTowerIDs.LAVA_POOL_LVL_2: load("res://towers/upgrade_towers/lava_pool/level_2/lava_pool_lvl_2.tscn"),
+    UpgradeTowerIDs.LAVA_POOL_LVL_3: load("res://towers/upgrade_towers/lava_pool/level_3/lava_pool_lvl_3.tscn"),
 }
 
 
@@ -159,6 +172,9 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
     TowerIDs.KUNZITE_LVL_5: load("res://towers/buildable_towers/kunzite/level_5/kunzite_lvl_5_tower.tscn"),
     TowerIDs.SAM_SITE_LVL_1: load("res://towers/upgrade_towers/sam_site/level_1/sam_site_lvl_1_tower.tscn"),
     TowerIDs.SAM_SITE_LVL_2: load("res://towers/upgrade_towers/sam_site/level_2/sam_site_lvl_2_tower.tscn"),
+    TowerIDs.LAVA_POOL_LVL_1: load("res://towers/upgrade_towers/lava_pool/level_1/lava_pool_lvl_1.tscn"),
+    TowerIDs.LAVA_POOL_LVL_2: load("res://towers/upgrade_towers/lava_pool/level_2/lava_pool_lvl_2.tscn"),
+    TowerIDs.LAVA_POOL_LVL_3: load("res://towers/upgrade_towers/lava_pool/level_3/lava_pool_lvl_3.tscn"),
 
 }
 
@@ -197,7 +213,10 @@ const TowerPrices: Dictionary[TowerIDs, int] = {
     TowerIDs.TOMBSTONE_LVL_1: 0,
     TowerIDs.TOMBSTONE_LVL_2: 50,
     TowerIDs.SAM_SITE_LVL_1: 0,
-    TowerIDs.SAM_SITE_LVL_2: 50
+    TowerIDs.SAM_SITE_LVL_2: 50,
+    TowerIDs.LAVA_POOL_LVL_1: 0,
+    TowerIDs.LAVA_POOL_LVL_2: 50,
+    TowerIDs.LAVA_POOL_LVL_3: 100,
 }
 
 
@@ -237,6 +256,9 @@ const UPGRADES_INTO: Dictionary = {
     TowerIDs.KUNZITE_LVL_5: KUNZITE_LVL_5_UPGRADES_INTO,
     TowerIDs.SAM_SITE_LVL_1: SAM_SITE_LVL_1_UPGRADES_INTO,
     TowerIDs.SAM_SITE_LVL_2: SAM_SITE_LVL_2_UPGRADES_INTO,
+    TowerIDs.LAVA_POOL_LVL_1: LAVA_POOL_LVL_1_UPGRADES_INTO,
+    TowerIDs.LAVA_POOL_LVL_2: LAVA_POOL_LVL_2_UPGRADES_INTO,
+    TowerIDs.LAVA_POOL_LVL_3: LAVA_POOL_LVL_3_UPGRADES_INTO,
 
 }
 
@@ -276,6 +298,9 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.KUNZITE_LVL_5: KUNZITE_LVL_5_REQUIRES_TOWERS,
     TowerIDs.SAM_SITE_LVL_1: SAM_SITE_LVL_1_REQUIRES_TOWERS,
     TowerIDs.SAM_SITE_LVL_2: SAM_SITE_LVL_2_REQUIRES_TOWERS,
+    TowerIDs.LAVA_POOL_LVL_1: LAVA_POOL_LVL_1_REQUIRES_TOWERS,
+    TowerIDs.LAVA_POOL_LVL_2: LAVA_POOL_LVL_2_REQUIRES_TOWERS,
+    TowerIDs.LAVA_POOL_LVL_3: LAVA_POOL_LVL_3_REQUIRES_TOWERS,
 }
 
 # COMPONENT LOADS
@@ -320,6 +345,9 @@ const TOMBSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_2
 const TOMBSTONE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 const SAM_SITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_2]
 const SAM_SITE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
+const LAVA_POOL_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.LAVA_POOL_LVL_2]
+const LAVA_POOL_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.LAVA_POOL_LVL_3]
+const LAVA_POOL_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 
 # REQUIRE TOWERS
 const BARRICADE_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
@@ -369,6 +397,17 @@ const SAM_SITE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
 
 const SAM_SITE_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.SAM_SITE_LVL_1: 1,
+}
+const LAVA_POOL_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.BLACK_MARBLE_LVL_2: 1,
+    TowerIDs.SPINEL_LVL_3: 1,
+    TowerIDs.SPINEL_LVL_2: 1
+}
+const LAVA_POOL_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.LAVA_POOL_LVL_1: 1,
+}
+const LAVA_POOL_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.LAVA_POOL_LVL_2: 1,
 }
 
 #                             | AWAITING SELECTION UPGRADE |
