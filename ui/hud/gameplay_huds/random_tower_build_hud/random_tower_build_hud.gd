@@ -20,12 +20,15 @@ class_name RandomTowerBuildHUD
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
-	TOWER_UPGRADES_CONTAINER.SAM_SITE_BUTTON: _on_sam_site_button_pressed
+	TOWER_UPGRADES_CONTAINER.SAM_SITE_BUTTON: _on_sam_site_button_pressed,
+	TOWER_UPGRADES_CONTAINER.LAVA_POOL_BUTTON: _on_lava_pool_button_pressed,
 }
 
 @onready var EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_2_BUTTON: _on_tombstone_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed
+	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed,
+	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_2_BUTTON: _on_lava_pool_lvl_2_button_pressed,
+	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_3_BUTTON: _on_lava_pool_lvl_3_button_pressed,
 }
 
 @onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -570,6 +573,8 @@ func _on_tombstone_button_pressed():
 func _on_sam_site_button_pressed():
 	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_1)
 
+func _on_lava_pool_button_pressed():
+	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_1)
 
 #                                 | Awaiting Selection Upgrade Tower Container |
 # =============================================================================================================
@@ -667,6 +672,12 @@ func _on_tombstone_lvl_2_button_pressed():
 
 func _on_sam_site_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
+
+func _on_lava_pool_lvl_2_button_pressed():
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_2)
+
+func _on_lava_pool_lvl_3_button_pressed():
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_3)
 
 func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	assert(__selected_tower, "No tower is currently selected")

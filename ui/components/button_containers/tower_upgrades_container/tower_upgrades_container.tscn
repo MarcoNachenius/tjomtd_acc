@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://nkdpi8i71fo5" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.gd" id="1_8dg2t"]
 
-[node name="TowerUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_BUTTON", "SAM_SITE_BUTTON")]
+[node name="TowerUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_BUTTON", "SAM_SITE_BUTTON", "LAVA_POOL_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_8dg2t")
 TOMBSTONE_BUTTON = NodePath("TombstoneButton")
 SAM_SITE_BUTTON = NodePath("SamSiteButton")
+LAVA_POOL_BUTTON = NodePath("LavaPoolButton")
 
 [node name="TombstoneButton" type="Button" parent="."]
 layout_mode = 2
@@ -16,3 +17,7 @@ text = "Tombstone"
 [node name="SamSiteButton" type="Button" parent="."]
 layout_mode = 2
 text = "Sam Site"
+
+[node name="LavaPoolButton" type="Button" parent="."]
+layout_mode = 2
+text = "Lava Pool"

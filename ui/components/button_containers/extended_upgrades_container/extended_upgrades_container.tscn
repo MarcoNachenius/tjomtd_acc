@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://be52rlgmkahsb" path="res://ui/components/button_containers/extended_upgrades_container/extended_upgrades_container.gd" id="1_wc636"]
 
-[node name="ExtendedUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_LVL_2_BUTTON", "SAM_SITE_LVL_2_BUTTON")]
+[node name="ExtendedUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_LVL_2_BUTTON", "SAM_SITE_LVL_2_BUTTON", "LAVA_POOL_LVL_2_BUTTON", "LAVA_POOL_LVL_3_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wc636")
 TOMBSTONE_LVL_2_BUTTON = NodePath("TombstoneLvl2Button")
 SAM_SITE_LVL_2_BUTTON = NodePath("SamSiteLvl2Button")
+LAVA_POOL_LVL_2_BUTTON = NodePath("LavaPoolLvl2Button")
+LAVA_POOL_LVL_3_BUTTON = NodePath("LavaPoolLvl3Button")
 
 [node name="TombstoneLvl2Button" type="Button" parent="."]
 layout_mode = 2
@@ -18,3 +20,13 @@ Level 2"
 layout_mode = 2
 text = "Sam Site
 Level 2"
+
+[node name="LavaPoolLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Lava Pool
+Level 2"
+
+[node name="LavaPoolLvl3Button" type="Button" parent="."]
+layout_mode = 2
+text = "Lava Pool
+Level 3"

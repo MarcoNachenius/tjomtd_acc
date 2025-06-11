@@ -312,7 +312,7 @@ var TOWER_SURFACE_SPRITE_LOAD: PackedScene = load("res://towers/sprites/tower_su
 # UPGRADES INTO
 const BARRICADE_UPGRADES_INTO: Array[TowerIDs] = []
 const BLACK_MARBLE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
-const BLACK_MARBLE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
+const BLACK_MARBLE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.LAVA_POOL_LVL_1]
 const BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const BLACK_MARBLE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const BLACK_MARBLE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
@@ -337,8 +337,8 @@ const KUNZITE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const SPINEL_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
-const SPINEL_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
-const SPINEL_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const SPINEL_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.LAVA_POOL_LVL_1]
+const SPINEL_LVL_3_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.LAVA_POOL_LVL_1]
 const SPINEL_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const SPINEL_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const TOMBSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_2]
@@ -381,6 +381,7 @@ const SPINEL_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const SPINEL_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const SPINEL_LVL_4_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
 const SPINEL_LVL_5_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {}
+
 const TOMBSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.BLACK_MARBLE_LVL_1: 1,
     TowerIDs.BISMUTH_LVL_1: 1,
@@ -389,19 +390,20 @@ const TOMBSTONE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
 const TOMBSTONE_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.TOMBSTONE_LVL_1: 1,
 }
+
 const SAM_SITE_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.KUNZITE_LVL_1: 1,
     TowerIDs.SUNSTONE_LVL_1: 1,
     TowerIDs.SPINEL_LVL_1: 1
 }
-
 const SAM_SITE_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.SAM_SITE_LVL_1: 1,
 }
+
 const LAVA_POOL_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.BLACK_MARBLE_LVL_2: 1,
-    TowerIDs.SPINEL_LVL_3: 1,
-    TowerIDs.SPINEL_LVL_2: 1
+    TowerIDs.SPINEL_LVL_2: 1,
+    TowerIDs.SPINEL_LVL_3: 1
 }
 const LAVA_POOL_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.LAVA_POOL_LVL_1: 1,
