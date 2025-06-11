@@ -13,7 +13,7 @@
 
 [node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "EXTENDED_UPGRADES_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON")]
 script = ExtResource("1_kyn4q")
-GAME_STATS_CONTAINER = NodePath("GameStatsContianer")
+GAME_STATS_CONTAINER = NodePath("GameStatsPanel/GameStatsContianer")
 BUILD_RANDOM_TOWER_CONTAINER = NodePath("MapCommands/BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")
 TOWER_UPGRADES_CONTAINER = NodePath("TowerCommands/TowerUpgradesContainer")
@@ -74,11 +74,6 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "Start New Wave"
 
-[node name="GameStatsContianer" parent="." instance=ExtResource("7_jg8ij")]
-offset_right = 153.0
-offset_bottom = 212.0
-size_flags_horizontal = 0
-
 [node name="ComponentVisibility" type="VBoxContainer" parent="."]
 anchors_preset = 4
 anchor_top = 0.5
@@ -104,3 +99,11 @@ offset_left = -87.0
 offset_right = 0.0
 offset_bottom = 31.0
 grow_horizontal = 0
+
+[node name="GameStatsPanel" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameStatsContianer" parent="GameStatsPanel" instance=ExtResource("7_jg8ij")]
+layout_mode = 2
+size_flags_horizontal = 0
