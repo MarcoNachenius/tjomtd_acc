@@ -17,16 +17,19 @@ text = "Tombstone
 Level 2"
 
 [node name="SamSiteLvl2Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Sam Site
 Level 2"
 
 [node name="LavaPoolLvl2Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Lava Pool
 Level 2"
 
 [node name="LavaPoolLvl3Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Lava Pool
 Level 3"
