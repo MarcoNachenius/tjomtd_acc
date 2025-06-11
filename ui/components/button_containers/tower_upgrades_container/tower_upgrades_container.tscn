@@ -15,9 +15,11 @@ layout_mode = 2
 text = "Tombstone"
 
 [node name="SamSiteButton" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Sam Site"
 
 [node name="LavaPoolButton" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Lava Pool"
