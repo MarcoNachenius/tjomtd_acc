@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://b6ftmr51a6ksa"
 
 [node name="BuildRandomTower" type="Button" parent="."]
 layout_mode = 2
-text = "Build Random Tower"
+text = "Enter Build Mode"
 
 [node name="ExitBuildMode" type="Button" parent="."]
 layout_mode = 2
