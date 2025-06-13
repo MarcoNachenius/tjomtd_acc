@@ -7,12 +7,14 @@ class_name TowerUpgradesContainer
 @export var SAM_SITE_BUTTON: Button
 @export var LAVA_POOL_BUTTON: Button
 @export var ICE_SHARD_BUTTON: Button
+@export var EMP_STUNNER_BUTTON: Button
 
 @onready var ALL_TOWER_BUTTONS: Array[Button] = [
 	TOMBSTONE_BUTTON,
 	SAM_SITE_BUTTON,
 	LAVA_POOL_BUTTON,
 	ICE_SHARD_BUTTON,
+	EMP_STUNNER_BUTTON,
 ]
 
 @onready var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
@@ -20,6 +22,7 @@ class_name TowerUpgradesContainer
 	TowerConstants.TowerIDs.SAM_SITE_LVL_1: SAM_SITE_BUTTON,
 	TowerConstants.TowerIDs.LAVA_POOL_LVL_1: LAVA_POOL_BUTTON,
 	TowerConstants.TowerIDs.ICE_SHARD_LVL_1: ICE_SHARD_BUTTON,
+	TowerConstants.TowerIDs.EMP_STUNNER_LVL_1: EMP_STUNNER_BUTTON,
 }
 
 func _ready():

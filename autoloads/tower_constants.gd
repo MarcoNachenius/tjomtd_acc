@@ -359,18 +359,18 @@ const BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const BLACK_MARBLE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const BLACK_MARBLE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const BISMUTH_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
-const BISMUTH_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
+const BISMUTH_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_LVL_1]
 const BISMUTH_LVL_3_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.ICE_SHARD_LVL_1]
 const BISMUTH_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const BISMUTH_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const LARIMAR_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
 const LARIMAR_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.ICE_SHARD_LVL_1]
-const LARIMAR_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const LARIMAR_LVL_3_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_LVL_1]
 const LARIMAR_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const LARIMAR_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const SUNSTONE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
 const SUNSTONE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
-const SUNSTONE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const SUNSTONE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_LVL_1]
 const SUNSTONE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
 const SUNSTONE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const KUNZITE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SAM_SITE_LVL_1]
@@ -468,9 +468,9 @@ const LAVA_POOL_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.LAVA_POOL_LVL_2: 1,
 }
 const EMP_STUNNER_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
-    #TowerIDs.SPINEL_LVL_1: 1,
-    #TowerIDs.KUNZITE_LVL_1: 1,
-    #TowerIDs.SAM_SITE_LVL_1: 1
+    TowerIDs.BISMUTH_LVL_2: 1,
+    TowerIDs.LARIMAR_LVL_3: 1,
+    TowerIDs.SUNSTONE_LVL_3: 1
 }
 const EMP_STUNNER_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.EMP_STUNNER_LVL_1: 1,
