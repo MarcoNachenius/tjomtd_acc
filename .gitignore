@@ -15,3 +15,4 @@ data_*/
 mono_crash.*.json
 
 single_tower_against_custom_wave*
+debug_and_testing/playable_scenes/single_tower_against_custom_wave.tscn
