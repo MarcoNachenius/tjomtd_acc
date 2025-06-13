@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc1ahdf3f7pe3"]
+[gd_scene load_steps=4 format=3 uid="uid://dc1ahdf3f7pe3"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_mm4f7"]
-[ext_resource type="PackedScene" uid="uid://bjancdx67lk7e" path="res://towers/base_object/templates/tower_sprite_termplate.tscn" id="2_hgq33"]
 [ext_resource type="Texture2D" uid="uid://bnfamukpapdio" path="res://towers/upgrade_towers/emp_stunner/level_1/emp_stunner_lvl_1_tower_sprite.png" id="3_63g4l"]
 [ext_resource type="Script" uid="uid://lpqc81j5gpf6" path="res://projectile_spawners/stun_aura/stun_aura.gd" id="3_585le"]
 
@@ -12,9 +11,6 @@ TOWER_SPRITE = NodePath("TowerSprite")
 PRIMARY_PROJECTILE_SPAWNER = NodePath("StunAura")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
-[node name="TowerSpriteTermplate" parent="." instance=ExtResource("2_hgq33")]
-z_index = 0
-
 [node name="TowerSprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
@@ -23,7 +19,6 @@ texture = ExtResource("3_63g4l")
 
 [node name="StunAura" type="Node2D" parent="."]
 script = ExtResource("3_585le")
-STUN_DURATION = 3.3
 __cooldown_duration = 4.0
-__detection_range = 400
+__detection_range = 150
 metadata/_custom_type_script = "uid://lpqc81j5gpf6"
