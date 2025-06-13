@@ -351,7 +351,7 @@ func stun(duration: float):
 		return
 	
 	# Do nothing if number of active stun effects is already at its maximum
-	if __num_of_active_stun_effects == GameConstants.MAX_SIMULTANEOUS_STUN_EFFECTS:
+	if __num_of_active_stun_effects >= GameConstants.MAX_SIMULTANEOUS_STUN_EFFECTS:
 		return
 
 	# Extend the remaining time by adding the new duration
