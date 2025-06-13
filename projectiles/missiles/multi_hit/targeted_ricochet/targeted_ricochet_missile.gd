@@ -131,9 +131,12 @@ func _on_ricochet_detection_hurtbox_exited(area):
 func _handle_ricochet(damanged_creep: Creep):
 
 	var detectable_creeps = __ricochet_detection_hurtbox.get_detectable_creeps_in_range()
-	# Keep moving at the same velocity if there are no creeps in range.
-	if detectable_creeps.is_empty():
+	# Keep moving at the same velocity if there are no other detectable creeps in range.
+	if detectable_creeps.is_empty() or (detectable_creeps.size() == 1 and detectable_creeps[0] == damanged_creep):
 		__last_damaged_creep = null
+		# Stop targeting the damaged creep
+		if __target:
+			__target = null
 		return
 
 	# Evaluate detectable creeps in range
