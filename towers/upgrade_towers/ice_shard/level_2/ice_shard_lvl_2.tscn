@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dws3ybtyo1s0v"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_ym2wb"]
+[ext_resource type="Texture2D" uid="uid://cblvmrn77xsn3" path="res://towers/upgrade_towers/ice_shard/level_2/ice_shard_lvl_2_tower_sprite.png" id="2_gv21v"]
 [ext_resource type="Script" uid="uid://6i8ljwyjab20" path="res://projectile_spawners/slow_aura/slow_aura.gd" id="2_iutyl"]
-[ext_resource type="PackedScene" uid="uid://bjancdx67lk7e" path="res://towers/base_object/templates/tower_sprite_termplate.tscn" id="3_inkf2"]
 
 [node name="IceShardLvl2" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
 script = ExtResource("1_ym2wb")
@@ -14,12 +14,15 @@ metadata/_custom_type_script = "uid://c4b07ddcari8y"
 [node name="TowerSprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(0, -44)
+scale = Vector2(1, 0.76)
+texture = ExtResource("2_gv21v")
 
 [node name="SlowAura" type="Node2D" parent="."]
 script = ExtResource("2_iutyl")
+SLOW_ALL_CREEPS_IN_RANGE = false
+MAX_SIMULTANEOUS_TARGETS = 3
+SLOW_PERCENTAGE = 30
 __cooldown_duration = 0.3
 __detection_range = 230
 metadata/_custom_type_script = "uid://6i8ljwyjab20"
-
-[node name="TowerSpriteTermplate" parent="." instance=ExtResource("3_inkf2")]
-z_index = 0
