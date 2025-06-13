@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctngd0yxicf8h"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_x48wd"]
+
+[node name="EmpStunnerLvl2" type="Node2D"]
+script = ExtResource("1_x48wd")
+TOWER_ID = 44
+metadata/_custom_type_script = "uid://c4b07ddcari8y"

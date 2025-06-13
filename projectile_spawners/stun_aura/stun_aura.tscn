@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3d08ulu3fvih"]
 
-[ext_resource type="Script" uid="uid://kaif82mfoojg" path="res://projectile_spawners/base_object/projectile_spawner.gd" id="1_0lown"]
+[ext_resource type="Script" uid="uid://lpqc81j5gpf6" path="res://projectile_spawners/stun_aura/stun_aura.gd" id="1_0lown"]
 
 [node name="StunAura" type="Node2D"]
 script = ExtResource("1_0lown")

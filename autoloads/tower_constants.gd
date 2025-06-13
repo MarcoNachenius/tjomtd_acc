@@ -45,7 +45,10 @@ enum TowerIDs {
     LAVA_POOL_LVL_3,
     ICE_SHARD_LVL_1,
     ICE_SHARD_LVL_2,
-    ICE_SHARD_LVL_3,    
+    ICE_SHARD_LVL_3,
+    EMP_STUNNER_LVL_1,
+    EMP_STUNNER_LVL_2,
+    EMP_STUNNER_LVL_3,    
 }
 
 enum BuildTowerIDs {
@@ -95,6 +98,9 @@ enum UpgradeTowerIDs {
     ICE_SHARD_LVL_1 = TowerIDs.ICE_SHARD_LVL_1,
     ICE_SHARD_LVL_2 = TowerIDs.ICE_SHARD_LVL_2,
     ICE_SHARD_LVL_3 = TowerIDs.ICE_SHARD_LVL_3,
+    EMP_STUNNER_LVL_1 = TowerIDs.EMP_STUNNER_LVL_1,
+    EMP_STUNNER_LVL_2 = TowerIDs.EMP_STUNNER_LVL_2,
+    EMP_STUNNER_LVL_3 = TowerIDs.EMP_STUNNER_LVL_3,
 }
 
 var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
@@ -108,6 +114,9 @@ var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
     UpgradeTowerIDs.ICE_SHARD_LVL_1: load("res://towers/upgrade_towers/ice_shard/level_1/ice_shard_lvl_1.tscn"),
     UpgradeTowerIDs.ICE_SHARD_LVL_2: load("res://towers/upgrade_towers/ice_shard/level_2/ice_shard_lvl_2.tscn"),
     UpgradeTowerIDs.ICE_SHARD_LVL_3: load("res://towers/upgrade_towers/ice_shard/level_3/ice_shard_lvl_3.tscn"),
+    UpgradeTowerIDs.EMP_STUNNER_LVL_1: load("res://towers/upgrade_towers/emp_stunner/level_1/emp_stunner_lvl_1.tscn"),
+    UpgradeTowerIDs.EMP_STUNNER_LVL_2: load("res://towers/upgrade_towers/emp_stunner/level_2/emp_stunner_lvl_2.tscn"),
+    UpgradeTowerIDs.EMP_STUNNER_LVL_3: load("res://towers/upgrade_towers/emp_stunner/level_3/emp_stunner_lvl_3.tscn"),
 }
 
 
@@ -187,6 +196,9 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
     TowerIDs.ICE_SHARD_LVL_1: load("res://towers/upgrade_towers/ice_shard/level_1/ice_shard_lvl_1.tscn"),
     TowerIDs.ICE_SHARD_LVL_2: load("res://towers/upgrade_towers/ice_shard/level_2/ice_shard_lvl_2.tscn"),
     TowerIDs.ICE_SHARD_LVL_3: load("res://towers/upgrade_towers/ice_shard/level_3/ice_shard_lvl_3.tscn"),
+    TowerIDs.EMP_STUNNER_LVL_1: load("res://towers/upgrade_towers/emp_stunner/level_1/emp_stunner_lvl_1.tscn"),
+    TowerIDs.EMP_STUNNER_LVL_2: load("res://towers/upgrade_towers/emp_stunner/level_2/emp_stunner_lvl_2.tscn"),
+    TowerIDs.EMP_STUNNER_LVL_3: load("res://towers/upgrade_towers/emp_stunner/level_3/emp_stunner_lvl_3.tscn"),
 
 }
 
@@ -232,6 +244,9 @@ const TowerPrices: Dictionary[TowerIDs, int] = {
     TowerIDs.ICE_SHARD_LVL_1: 0,
     TowerIDs.ICE_SHARD_LVL_2: 50,
     TowerIDs.ICE_SHARD_LVL_3: 100,
+    TowerIDs.EMP_STUNNER_LVL_1: 0,
+    TowerIDs.EMP_STUNNER_LVL_2: 50,
+    TowerIDs.EMP_STUNNER_LVL_3: 100,
 }
 
 
@@ -277,6 +292,9 @@ const UPGRADES_INTO: Dictionary = {
     TowerIDs.ICE_SHARD_LVL_1: ICE_SHARD_LVL_1_UPGRADES_INTO,
     TowerIDs.ICE_SHARD_LVL_2: ICE_SHARD_LVL_2_UPGRADES_INTO,
     TowerIDs.ICE_SHARD_LVL_3: ICE_SHARD_LVL_3_UPGRADES_INTO,
+    TowerIDs.EMP_STUNNER_LVL_1: EMP_STUNNER_LVL_1_UPGRADES_INTO,
+    TowerIDs.EMP_STUNNER_LVL_2: EMP_STUNNER_LVL_2_UPGRADES_INTO,
+    TowerIDs.EMP_STUNNER_LVL_3: EMP_STUNNER_LVL_3_UPGRADES_INTO,
 
 }
 
@@ -322,6 +340,9 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.ICE_SHARD_LVL_1: ICE_SHARD_LVL_1_REQUIRES_TOWERS,
     TowerIDs.ICE_SHARD_LVL_2: ICE_SHARD_LVL_2_REQUIRES_TOWERS,
     TowerIDs.ICE_SHARD_LVL_3: ICE_SHARD_LVL_3_REQUIRES_TOWERS,
+    TowerIDs.EMP_STUNNER_LVL_1: EMP_STUNNER_LVL_1_REQUIRES_TOWERS,
+    TowerIDs.EMP_STUNNER_LVL_2: EMP_STUNNER_LVL_2_REQUIRES_TOWERS,
+    TowerIDs.EMP_STUNNER_LVL_3: EMP_STUNNER_LVL_3_REQUIRES_TOWERS,
 }
 
 # COMPONENT LOADS
@@ -372,6 +393,9 @@ const LAVA_POOL_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const ICE_SHARD_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.ICE_SHARD_LVL_2]
 const ICE_SHARD_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.ICE_SHARD_LVL_3]
 const ICE_SHARD_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
+const EMP_STUNNER_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_LVL_2]
+const EMP_STUNNER_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_LVL_3]
+const EMP_STUNNER_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 
 
 # REQUIRE TOWERS
@@ -443,6 +467,18 @@ const LAVA_POOL_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
 const LAVA_POOL_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.LAVA_POOL_LVL_2: 1,
 }
+const EMP_STUNNER_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    #TowerIDs.SPINEL_LVL_1: 1,
+    #TowerIDs.KUNZITE_LVL_1: 1,
+    #TowerIDs.SAM_SITE_LVL_1: 1
+}
+const EMP_STUNNER_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.EMP_STUNNER_LVL_1: 1,
+}
+const EMP_STUNNER_LVL_3_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.EMP_STUNNER_LVL_2: 1,
+}
+
 
 #                             | AWAITING SELECTION UPGRADE |
 # ==========================================================================================
