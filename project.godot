@@ -13,6 +13,9 @@ config_version=5
 config/name="TjomTD test environment"
 run/main_scene="uid://d10hxlsgy4u46"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://dfi4fqtxnev8i"
 
 [autoload]
 
