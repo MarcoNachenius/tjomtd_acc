@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d10hxlsgy4u46"]
+[gd_scene load_steps=5 format=3 uid="uid://d10hxlsgy4u46"]
 
 [ext_resource type="Script" uid="uid://oaqhph1hwbl8" path="res://ui/menus/game_start/game_start_menu.gd" id="1_ttwxv"]
 [ext_resource type="PackedScene" uid="uid://b0l4rok7p0ldy" path="res://ui/components/button_containers/start_game_menu/starting_menu_container/starting_menu_container.tscn" id="1_x4qmd"]
 [ext_resource type="PackedScene" uid="uid://dohp51h4peqp7" path="res://ui/components/button_containers/start_game_menu/select_map_container/select_map_container.tscn" id="3_jc11y"]
+[ext_resource type="AudioStream" uid="uid://7hruyuyswp8p" path="res://audio/hud/background_music/audio_files/main_menu_music.mp3" id="4_sa2yr"]
 
-[node name="GameStartMenu" type="CanvasLayer" node_paths=PackedStringArray("STARTING_MENU_CONTAINER", "SELECT_MAP_CONTAINER")]
+[node name="GameStartMenu" type="CanvasLayer" node_paths=PackedStringArray("STARTING_MENU_CONTAINER", "SELECT_MAP_CONTAINER", "BACKGROUND_MUSIC_TRACK")]
 script = ExtResource("1_ttwxv")
 STARTING_MENU_CONTAINER = NodePath("StartingMenuContainer")
 SELECT_MAP_CONTAINER = NodePath("SelectMapContainer")
+BACKGROUND_MUSIC_TRACK = NodePath("AudioStreamPlayer")
 
 [node name="StartingMenuContainer" parent="." instance=ExtResource("1_x4qmd")]
 anchors_preset = 8
@@ -35,3 +37,6 @@ offset_right = 35.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sa2yr")

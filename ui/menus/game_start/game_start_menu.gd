@@ -2,9 +2,11 @@ extends CanvasLayer
 
 @export var STARTING_MENU_CONTAINER: StartingMenuContainer
 @export var SELECT_MAP_CONTAINER: SelectMapContainer
+@export var BACKGROUND_MUSIC_TRACK: AudioStreamPlayer
 
 func _ready() -> void:
 	_connect_all_button_container_signals()
+	BACKGROUND_MUSIC_TRACK.play()
 
 func _connect_all_button_container_signals():
 	_connect_starting_menu_container_button_signals()
