@@ -2,3 +2,4 @@ extends Node2D
 class_name HudAudioManager
 
 @export var INSUFFICIENT_FUNDS_AUDIO: InsufficientFundsAudioStreams
+@export var BACKGROUND_MUSIC_AUDIO: BackgroundMusicAudioStreams

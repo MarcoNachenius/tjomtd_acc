@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn13lwy0i7noy"]
+
+[ext_resource type="Script" uid="uid://k2l1e4uiuykf" path="res://audio/hud/background_music/background_music_audio_streams.gd" id="1_a7l8g"]
+[ext_resource type="PackedScene" uid="uid://ew5cqe34o7oq" path="res://audio/hud/background_music/audio_stream_scenes/background_music_track_1_audio_stream.tscn" id="2_x6ve2"]
+
+[node name="BackgroundMusicAudioStreams" type="Node2D" node_paths=PackedStringArray("TRACK_1")]
+script = ExtResource("1_a7l8g")
+TRACK_1 = NodePath("BackgroundMusicTrack1AudioStream")
+
+[node name="BackgroundMusicTrack1AudioStream" parent="." instance=ExtResource("2_x6ve2")]

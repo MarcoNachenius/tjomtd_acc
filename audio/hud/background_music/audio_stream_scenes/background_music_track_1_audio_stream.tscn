@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ew5cqe34o7oq"]
+
+[ext_resource type="AudioStream" uid="uid://cywnlq8x31vp2" path="res://audio/hud/background_music/audio_files/background_music_track_1.mp3" id="1_7gs7u"]
+
+[node name="BackgroundMusicTrack1AudioStream" type="AudioStreamPlayer"]
+stream = ExtResource("1_7gs7u")
