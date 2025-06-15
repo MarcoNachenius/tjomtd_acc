@@ -599,12 +599,19 @@ func _hide_selected_tower_stats() -> void:
 func _on_show_tower_stats_button_pressed():
 	__show_selected_tower_stats = true
 	SELECTED_TOWER_STATS_CONTAINER.visible = true
+	SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.visible = true
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = false
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = true
+	if __selected_tower:
+		SELECTED_TOWER_STATS_CONTAINER.populate_tower_stats(__selected_tower)
+	else:
+		SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
 
 func _on_hide_tower_stats_button_pressed():
 	__show_selected_tower_stats = false
-	SELECTED_TOWER_STATS_CONTAINER.visible = false
+	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
+	SELECTED_TOWER_STATS_CONTAINER.TOWER_NAME_TEXT.text = "Tower Stats Hidden"
+	SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.visible = false
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false
 #                                      | Tower Properties Container |

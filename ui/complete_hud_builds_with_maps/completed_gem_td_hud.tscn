@@ -7,8 +7,8 @@
 [node name="CompletedGemTdHud" type="Node2D"]
 
 [node name="MapCamera" parent="." node_paths=PackedStringArray("__game_map") instance=ExtResource("2_chst0")]
-position = Vector2(443, 2827)
-zoom = Vector2(0.2, 0.2)
+position = Vector2(540, 2324)
+zoom = Vector2(0.35, 0.35)
 __game_map = NodePath("../GemTD")
 
 [node name="RandomTowerBuildHUD" parent="." node_paths=PackedStringArray("GAME_MAP") instance=ExtResource("1_t7eln")]
