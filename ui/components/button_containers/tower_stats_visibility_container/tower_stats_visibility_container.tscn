@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh1y0gw52bkw6"]
+
+[ext_resource type="Script" uid="uid://dohh5ga2c671s" path="res://ui/components/button_containers/tower_stats_visibility_container/tower_stats_visibility_container.gd" id="1_2eqy3"]
+
+[node name="TowerStatsVisibilityContainer" type="HBoxContainer" node_paths=PackedStringArray("SHOW_TOWER_STATS_BUTTON", "HIDE_TOWER_STATS_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2eqy3")
+SHOW_TOWER_STATS_BUTTON = NodePath("ShowTowerStatsButton")
+HIDE_TOWER_STATS_BUTTON = NodePath("HideTowerStatsButton")
+
+[node name="ShowTowerStatsButton" type="Button" parent="."]
+layout_mode = 2
+text = "Show Tower Stats"
+
+[node name="HideTowerStatsButton" type="Button" parent="."]
+layout_mode = 2
+text = "Hide Tower Stats"

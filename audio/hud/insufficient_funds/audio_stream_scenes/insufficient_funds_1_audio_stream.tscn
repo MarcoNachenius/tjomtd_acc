@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bemwia5tmn3uo"]
+
+[ext_resource type="AudioStream" uid="uid://bicro004846yy" path="res://audio/hud/insufficient_funds/audio_files/insufficient_funds_1.ogg" id="1_x3ud4"]
+
+[node name="InsufficientFunds1AudioStream" type="AudioStreamPlayer"]
+stream = ExtResource("1_x3ud4")

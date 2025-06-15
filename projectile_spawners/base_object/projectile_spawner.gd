@@ -114,6 +114,9 @@ func _on_hurtbox_exited(area):
 func _execute_extended_onready_commands():
 	pass
 
+func get_damage() -> int:
+	return 0
+
 func _on_cooldown_timer_timeout():
 	__launch_cooled_down = true
 	_update_target_selection()
@@ -203,3 +206,6 @@ func _target_least_health_creep(detectableCreeps: Array[Creep]):
 ## Retrurns the range of the projectile spawner in pixels.
 func get_detection_range() -> int:
 	return __detection_range
+
+func get_cooldown_duration() -> float:
+	return __cooldown_duration

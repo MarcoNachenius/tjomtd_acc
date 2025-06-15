@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://r7v6g63is2hk"]
+
+[ext_resource type="Script" uid="uid://c183wjk6mc8lc" path="res://ui/components/text_containers/selected_tower_stats_container/selected_tower_stats_container.gd" id="1_nvpoh"]
+[ext_resource type="PackedScene" uid="uid://dyndpeov51384" path="res://ui/components/text_containers/selected_tower_stats_container/tower_attribute_container.tscn" id="2_ug0jy"]
+
+[node name="SelectedTowerStatsContainer" type="VBoxContainer" node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_ATTR_CONTAINER")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_nvpoh")
+TOWER_NAME_TEXT = NodePath("RichTextLabel")
+TOWER_ATTR_CONTAINER = NodePath("TowerAttributeContainer")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "<TOWER NAME>"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TowerAttributeContainer" parent="." instance=ExtResource("2_ug0jy")]
+visible = false
+layout_mode = 2

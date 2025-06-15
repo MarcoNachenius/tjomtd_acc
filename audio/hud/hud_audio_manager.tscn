@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqhfcjp7un861"]
+
+[ext_resource type="Script" uid="uid://bbuxhrrjwyt3m" path="res://audio/hud/hud_audio_manager.gd" id="1_6mbe4"]
+[ext_resource type="PackedScene" uid="uid://mlsksmrwdu08" path="res://audio/hud/insufficient_funds/combined_insufficient_funds_audio_streams.tscn" id="2_5dns7"]
+
+[node name="HudAudioManager" type="Node2D" node_paths=PackedStringArray("INSUFFICIENT_FUNDS_AUDIO")]
+script = ExtResource("1_6mbe4")
+INSUFFICIENT_FUNDS_AUDIO = NodePath("InsufficientFundsAudioStreams")
+
+[node name="InsufficientFundsAudioStreams" parent="." instance=ExtResource("2_5dns7")]

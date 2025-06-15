@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://mlsksmrwdu08"]
+
+[ext_resource type="Script" uid="uid://cr2v6j243n2ai" path="res://audio/hud/insufficient_funds/combined_insufficient_funds_audio_streams.gd" id="1_v8gnt"]
+[ext_resource type="PackedScene" uid="uid://bemwia5tmn3uo" path="res://audio/hud/insufficient_funds/audio_stream_scenes/insufficient_funds_1_audio_stream.tscn" id="2_t6ktx"]
+[ext_resource type="PackedScene" uid="uid://b20nslhf5erhy" path="res://audio/hud/insufficient_funds/audio_stream_scenes/insufficient_funds_2_audio_stream.tscn" id="3_ck514"]
+[ext_resource type="PackedScene" uid="uid://bicownts6rofh" path="res://audio/hud/insufficient_funds/audio_stream_scenes/insufficient_funds_3_audio_stream.tscn" id="4_fnrro"]
+
+[node name="InsufficientFundsAudioStreams" type="Node2D" node_paths=PackedStringArray("STREAM_1", "STREAM_2", "STREAM_3")]
+script = ExtResource("1_v8gnt")
+STREAM_1 = NodePath("InsufficientFunds1AudioStream")
+STREAM_2 = NodePath("InsufficientFunds2AudioStream")
+STREAM_3 = NodePath("InsufficientFunds3AudioStream")
+
+[node name="InsufficientFunds1AudioStream" parent="." instance=ExtResource("2_t6ktx")]
+
+[node name="InsufficientFunds2AudioStream" parent="." instance=ExtResource("3_ck514")]
+
+[node name="InsufficientFunds3AudioStream" parent="." instance=ExtResource("4_fnrro")]

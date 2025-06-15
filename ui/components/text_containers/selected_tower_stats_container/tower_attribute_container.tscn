@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyndpeov51384"]
+
+[ext_resource type="Script" uid="uid://ba0xout8racee" path="res://ui/components/text_containers/selected_tower_stats_container/tower_attribute_container.gd" id="1_v1tih"]
+
+[node name="TowerAttributeContainer" type="VBoxContainer" node_paths=PackedStringArray("DAMAGE_HEADER", "DAMAGE_VALUE", "COOLDOWN_HEADER", "COOLDOWN_VALUE", "RANGE_HEADER", "RANGE_VALUE")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 158.0
+grow_horizontal = 2
+script = ExtResource("1_v1tih")
+DAMAGE_HEADER = NodePath("DamageHeader")
+DAMAGE_VALUE = NodePath("DamageValue")
+COOLDOWN_HEADER = NodePath("CooldownHeader")
+COOLDOWN_VALUE = NodePath("CooldownValue")
+RANGE_HEADER = NodePath("RangeHeader")
+RANGE_VALUE = NodePath("RangeValue")
+
+[node name="DamageHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Damage:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DamageValue" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RangeHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Range:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RangeValue" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CooldownHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Attack Cooldown:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CooldownValue" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0.0s"
+fit_content = true
+autowrap_mode = 0

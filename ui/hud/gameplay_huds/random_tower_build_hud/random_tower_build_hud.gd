@@ -13,9 +13,14 @@ class_name RandomTowerBuildHUD
 @export var PATH_LINE_VISIBILITY_CONTAINER: PathLineVisibilityContainer
 @export var TOWER_RANGE_VISIBILITY_CONTAINER: TowerRangeVisibilityContainer
 @export var EXTENDED_UPGRADES_CONTAINER: ExtendedUpgradesContainer
+@export var SELECTED_TOWER_STATS_CONTAINER: SelectedTowerStatsContainer
+@export var TOWER_STATS_VISIBILITY_CONTAINER: TowerStatsVisibilityContainer
+
 # Standalone Buttons
 @export var START_NEW_WAVE_BUTTON: Button
 @export var UPGRADE_BUILD_LEVEL_BUTTON: Button
+# Audio manager
+@export var HUD_AUDIO_MANAGER: HudAudioManager
 
 # CONSTANTS - Onready variables
 @onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -84,6 +89,7 @@ var __max_towers_per_turn = GameConstants.MAX_PLACEABLE_TOWERS_PER_TURN
 var __current_turn_tower_count = 0
 ## Tracks if player wants tower range to be displayed when selected
 @onready var __show_selected_tower_range: bool = true
+@onready var __show_selected_tower_stats: bool = true
 
 # *****************
 # INHERITED METHODS
@@ -125,12 +131,27 @@ func _connect_all_component_signals():
 	_connect_extended_upgrades_signals()
 	# Standalone Hud buttons
 	_connect_standalone_buttons_signals()
+	# Tower stats visibility container
+	_connect_tower_stats_visibility_container()
+
 
 ## Connects signals for buttons in the BuildRandomTowerHBox
 func _connect_build_random_tower_container_signals():
 	# Connect the button signals to the appropriate methods
 	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.pressed.connect(_on_build_random_tower_button_pressed)
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.pressed.connect(_on_exit_build_mode_button_pressed)
+
+func _connect_tower_stats_visibility_container():
+	# Connect signals
+	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.pressed.connect(_on_show_tower_stats_button_pressed)
+	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.pressed.connect(_on_hide_tower_stats_button_pressed)
+	# Set initial state
+	__show_selected_tower_stats = true
+	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
+	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false
+	SELECTED_TOWER_STATS_CONTAINER. visible = true
+	# Set initial values
+	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
 
 func _connect_path_visibility_container_signals():
 	for button in PATH_LINE_VISIBILITY_CONTAINER.ALL_BUTTONS:
@@ -217,6 +238,8 @@ func _deselect_tower():
 		__selected_tower.RANGE_DISPLAY_SHAPE.visible = false
 	# Remove selected tower var
 	__selected_tower = null
+	# Clear selected tower stats
+	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
 
 func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	_hide_containers_on_tower_kept()
@@ -330,6 +353,8 @@ func _on_start_new_wave_button_pressed():
 func _on_upgrade_build_level_button_pressed():
 	# Do nothing if player cannot afford level upgrade
 	if GAME_MAP.get_curr_balance() < GAME_MAP.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost():
+		# Play insufficient funds sound
+		HUD_AUDIO_MANAGER.INSUFFICIENT_FUNDS_AUDIO.play_insufficient_funds_sound()
 		return
 
 	# Subtract upgrade cost from current balance
@@ -498,6 +523,9 @@ func _on_tower_selected(tower: Tower):
 
 	# Ensure properties container is visible 
 	TOWER_PROPERTIES_CONTAINER.visible = true
+
+	# Update selected tower stats container
+	_handle_selected_tower_stats(__selected_tower)
 	
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
@@ -550,6 +578,35 @@ func _on_tower_placed(_tower: Tower):
 	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
 
 
+#                                           | Selected Tower Stats Container |
+# =============================================================================================================
+func _handle_selected_tower_stats(tower) -> void:
+	# Do nothing if tower stat display is deactivated
+	if !__show_selected_tower_stats:
+		return
+	# Update tower stats
+	SELECTED_TOWER_STATS_CONTAINER.populate_tower_stats(tower)
+
+func _show_selected_tower_stats() -> void:
+	SELECTED_TOWER_STATS_CONTAINER.visible = true
+
+func _hide_selected_tower_stats() -> void:
+	SELECTED_TOWER_STATS_CONTAINER.visible = false
+
+#                                         | Tower Stats Visibility Container |
+# =============================================================================================================
+
+func _on_show_tower_stats_button_pressed():
+	__show_selected_tower_stats = true
+	SELECTED_TOWER_STATS_CONTAINER.visible = true
+	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = false
+	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = true
+
+func _on_hide_tower_stats_button_pressed():
+	__show_selected_tower_stats = false
+	SELECTED_TOWER_STATS_CONTAINER.visible = false
+	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
+	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false
 #                                      | Tower Properties Container |
 # =============================================================================================================
 
@@ -711,6 +768,8 @@ func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 
 	# Handle insufficient funds
 	if GAME_MAP.get_curr_balance() < TowerConstants.TowerPrices[upgradeTowerID]:
+		# Play insufficient funds sound
+		HUD_AUDIO_MANAGER.INSUFFICIENT_FUNDS_AUDIO.play_insufficient_funds_sound()
 		return
 
 	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
