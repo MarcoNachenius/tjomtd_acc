@@ -19,7 +19,7 @@ texture = ExtResource("2_r8nim")
 
 [node name="HealthDrainer" type="Node2D" parent="."]
 script = ExtResource("2_bdil4")
-__damage = 4
+__damage = 8
 __cooldown_duration = 0.1
 __detection_range = 150
 metadata/_custom_type_script = "uid://dgkrm5vj6e567"
