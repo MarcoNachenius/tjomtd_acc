@@ -92,10 +92,10 @@ var LEVEL_5_BUILDABLE_TOWER_PRELOADS: Array[PackedScene] = [
 const LEVEL_UPGRADE_PRICES: Array[int] = [
 	0,
 	10, # Level 1
-	20, # Level 2
-	30, # Level 3
-	40, # Level 4
-	50, # Level 5
+	50, # Level 2
+	300, # Level 3
+	1000, # Level 4
+	5000, # Level 5
 ]
 
 # GETTERS
