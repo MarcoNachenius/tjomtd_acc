@@ -65,3 +65,6 @@ func _launch_projectiles():
 	new_bullet.set_total_ricochets(__total_ricochets)
 	# set Ricochet Detection Radius
 	new_bullet.set_ricochet_detection_radius(__ricochet_detection_radius)
+
+func get_damage() -> int:
+	return __bullet_damage

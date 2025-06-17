@@ -68,3 +68,6 @@ func _launch_projectiles():
 func _execute_extended_onready_commands():
     # Create instance of missile
     __missile_load = load(ProjectileConstants.MISSILE_PATHS[MISSILE_ID])
+
+func get_damage() -> int:
+    return __missile_damage
