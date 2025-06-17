@@ -83,4 +83,5 @@ func _launch_projectiles():
 	new_bullet.set_slow_duration_seconds(__slow_duration_seconds)
 	new_bullet.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
 
-	
+func get_damage() -> int:
+	return __bullet_damage

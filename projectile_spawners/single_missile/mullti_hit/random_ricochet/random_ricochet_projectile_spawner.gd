@@ -86,3 +86,6 @@ func _launch_projectiles():
     # Ricochet parameters
     new_missile.set_infinite_ricochets(__infinite_ricochets)
     new_missile.set_total_ricochets(__total_ricochets)
+
+func get_damage() -> int:
+    return __missile_damage

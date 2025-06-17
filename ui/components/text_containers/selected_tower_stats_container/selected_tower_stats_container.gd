@@ -14,9 +14,16 @@ func populate_tower_stats(tower: Tower) -> void:
 		return
 	
 	TOWER_ATTR_CONTAINER.visible = true
+	_assign_description(tower)
 	_assign_damage(tower)
 	_assign_range(tower)
 	_assign_cooldown(tower)
+
+func _assign_description(tower: Tower) -> void:
+	if TowerDescriptions.TOWER_ID_TO_DESCRPTION_TEXT.keys().has(tower.TOWER_ID):
+		TOWER_ATTR_CONTAINER.DESCRIPTION_VALUE.text = TowerDescriptions.TOWER_ID_TO_DESCRPTION_TEXT[tower.TOWER_ID]
+	else:
+		TOWER_ATTR_CONTAINER.DESCRIPTION_VALUE.text = " TOWER DESCRIPTION NOT FOUND"
 
 func _assign_tower_name(tower: Tower) -> void:
 	if TowerConstants.TOWER_NAMES.keys().has(tower.TOWER_ID):

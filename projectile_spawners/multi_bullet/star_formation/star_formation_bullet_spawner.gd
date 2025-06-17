@@ -87,3 +87,6 @@ func _execute_extended_onready_commands():
 	# Create static angle if formation policy is set to static
 	if __formation_policy == FormationPolicy.STATIC:
 		__static_launch_angle = randf_range(0.0, TAU/__bullets_per_launch)
+
+func get_damage() -> int:
+	return __bullet_damage

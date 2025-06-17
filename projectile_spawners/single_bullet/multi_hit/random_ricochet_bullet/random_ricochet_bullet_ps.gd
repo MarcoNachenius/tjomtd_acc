@@ -63,3 +63,6 @@ func _launch_projectiles():
 	new_bullet.set_infinite_ricochets(__infinite_ricochets)
 	# set Total Ricochets
 	new_bullet.set_total_ricochets(__total_ricochets)
+
+func get_damage() -> int:
+	return __bullet_damage

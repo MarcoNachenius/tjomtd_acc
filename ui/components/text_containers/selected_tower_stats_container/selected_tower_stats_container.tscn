@@ -13,6 +13,7 @@ TOWER_ATTR_CONTAINER = NodePath("TowerAttributeContainer")
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "<TOWER NAME>"
 fit_content = true
 autowrap_mode = 0

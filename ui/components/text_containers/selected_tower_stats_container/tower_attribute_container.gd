@@ -7,3 +7,5 @@ class_name TowerAttributesContainer
 @export var COOLDOWN_VALUE: RichTextLabel
 @export var RANGE_HEADER: RichTextLabel
 @export var RANGE_VALUE: RichTextLabel
+@export var DESCRIPTION_HEADER: RichTextLabel
+@export var DESCRIPTION_VALUE: RichTextLabel

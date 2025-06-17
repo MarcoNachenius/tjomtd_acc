@@ -81,3 +81,6 @@ func _launch_projectiles():
 	new_missile.update_velocity_towards_target()
 	new_missile.set_speed(__missile_speed)
 	new_missile.update_isometric_speed()
+
+func get_damage() -> int:
+	return __missile_damage

@@ -28,6 +28,7 @@ TowerConstants="*res://autoloads/tower_constants.gd"
 WaveConstants="*res://autoloads/wave_constants.gd"
 CurrGameData="*res://autoloads/curr_game_data.gd"
 UIConstants="*res://autoloads/ui_constants.gd"
+TowerDescriptions="*res://autoloads/tower_descroptions.gd"
 
 [display]
 

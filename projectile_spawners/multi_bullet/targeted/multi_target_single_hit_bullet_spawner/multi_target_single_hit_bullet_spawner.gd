@@ -90,3 +90,5 @@ func _launch_projectiles():
         if num_of_bullets_launched == __bullets_per_launch:
             break
 
+func get_damage() -> int:
+    return __bullet_damage

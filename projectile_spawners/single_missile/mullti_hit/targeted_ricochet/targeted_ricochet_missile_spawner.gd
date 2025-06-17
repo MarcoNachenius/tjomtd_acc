@@ -68,3 +68,7 @@ func _launch_projectiles():
 	new_missile.set_aoe_enabled(__aoe_enabled)
 	new_missile.set_aoe_detection_radius(__aoe_detection_radius)
 	new_missile.set_aoe_damage_amount(__aoe_damage_amount)
+
+
+func get_damage() -> int:
+	return __missile_damage
