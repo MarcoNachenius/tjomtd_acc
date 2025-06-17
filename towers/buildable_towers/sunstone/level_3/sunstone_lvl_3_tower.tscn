@@ -21,8 +21,9 @@ texture = ExtResource("3_8jlm0")
 
 [node name="StarFormationBulletSpawner" type="Node2D" parent="."]
 script = ExtResource("4_8jlm0")
-__bullet_damage = 10
+__bullet_damage = 20
 __bullet_speed = 10
+__bullets_per_launch = 4
 BULLET_ID = 6
 __cooldown_duration = 0.5
 __detection_range = 300
