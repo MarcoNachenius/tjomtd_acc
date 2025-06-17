@@ -32,6 +32,12 @@ class_name ExtendedUpgradesContainer
     TowerConstants.TowerIDs.EMP_STUNNER_LVL_3: EMP_STUNNER_LVL_3_BUTTON,
 }
 
+func _ready() -> void:
+    # Add tower prices to button text
+    for tower_id in TOWER_ID_TO_BUTTON_DICT.keys():
+        var button: Button = TOWER_ID_TO_BUTTON_DICT[tower_id]
+        button.text += " (" + str(TowerConstants.TowerPrices[tower_id]) + ")"
+
 # PUBLIC METHODS
 func hide_all_buttons():
     for button in ALL_BUTTONS:
