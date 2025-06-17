@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dok5kuf6fxf0g" path="res://ui/components/text_containers/game_stats_container/game_stats_contianer.gd" id="1_7or2r"]
 
-[node name="GameStatsContianer" type="VBoxContainer" node_paths=PackedStringArray("CURR_BALANCE_AMOUNT_LABEL", "REMAINING_LIVES_AMOUNT_LABEL", "WAVES_COMPLETED_AMOUNT_LABEL", "CURR_BUILD_LEVEL_AMOUNT_LABEL")]
+[node name="GameStatsContianer" type="VBoxContainer" node_paths=PackedStringArray("CURR_BALANCE_AMOUNT_LABEL", "REMAINING_LIVES_AMOUNT_LABEL", "WAVES_COMPLETED_AMOUNT_LABEL", "CURR_BUILD_LEVEL_AMOUNT_LABEL", "MAZE_LENGTH_AMOUNT_LABEL")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_7or2r")
@@ -10,6 +10,7 @@ CURR_BALANCE_AMOUNT_LABEL = NodePath("CurrBalanceAmount")
 REMAINING_LIVES_AMOUNT_LABEL = NodePath("RemainingLivesAmount")
 WAVES_COMPLETED_AMOUNT_LABEL = NodePath("WavesCompletedAmount")
 CURR_BUILD_LEVEL_AMOUNT_LABEL = NodePath("CurrBuildLevelAmount")
+MAZE_LENGTH_AMOUNT_LABEL = NodePath("MazeLengthAmount")
 
 [node name="CurrBalanceHeader" type="RichTextLabel" parent="."]
 layout_mode = 2
@@ -55,6 +56,18 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="WavesCompletedAmount" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MazeLengthHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "Maze length:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MazeLengthAmount" type="RichTextLabel" parent="."]
 layout_mode = 2
 text = "0"
 fit_content = true

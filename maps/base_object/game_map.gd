@@ -20,6 +20,7 @@ signal lost_life(remaining_lives: int)
 signal completed_wave(total_waves_completed: int)
 signal tower_placed(tower: Tower)
 signal tower_selected(tower: Tower)
+signal maze_length_updated(updated_maze_length: int)
 signal lives_depleted
 
 # EXPORTS
@@ -614,6 +615,9 @@ func _update_current_path():
 	# Perform update
 	__curr_path = updated_path
 
+	# Emit maze length updated signal
+	maze_length_updated.emit(get_maze_length())
+
 	# Update path line
 	self.update_path_line()
 
@@ -665,6 +669,14 @@ func get_curr_balance() -> int:
 
 func get_total_waves_completed() -> int:
 	return __total_waves_completed
+
+func get_maze_length() -> int:
+	var total_length := 0
+	for i in range(1, __curr_path.size()):
+		var from_point: Vector2i = __curr_path[i - 1]
+		var to_point: Vector2i = __curr_path[i]
+		total_length += round(from_point.distance_to(to_point))
+	return total_length
 
 # **************
 # SIGNAL METHODS

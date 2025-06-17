@@ -184,6 +184,7 @@ func _connect_game_map_signals():
 	GAME_MAP.tower_selected.connect(_on_tower_selected)
 	GAME_MAP.tower_placed.connect(_on_tower_placed)
 	GAME_MAP.lives_depleted.connect(_on_lives_depleted)
+	GAME_MAP.maze_length_updated.connect(_on_maze_length_updated)
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
@@ -334,6 +335,7 @@ func _initialise_all_game_stats():
 	GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(GameConstants.STARTING_BALANCE)
 	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(GameConstants.STARTING_LIVES)
 	GAME_STATS_CONTAINER.CURR_BUILD_LEVEL_AMOUNT_LABEL.text = str(1)
+	GAME_STATS_CONTAINER.MAZE_LENGTH_AMOUNT_LABEL.text = str(int(GAME_MAP.__path_start_point.distance_to(GAME_MAP.__path_end_point)))
 
 # ****************
 # SIGNAL CALLBACKS
@@ -576,6 +578,9 @@ func _on_tower_placed(_tower: Tower):
 	# Avoid tower preload staying the same when a tower is placed, the max nummber of turn towers has
 	# not been reached and the game map is still in build mode.
 	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
+
+func _on_maze_length_updated(updated_maze_length: int):
+	GAME_STATS_CONTAINER.MAZE_LENGTH_AMOUNT_LABEL.text = str(updated_maze_length)
 
 
 #                                           | Selected Tower Stats Container |
