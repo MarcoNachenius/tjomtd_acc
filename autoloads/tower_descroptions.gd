@@ -36,7 +36,7 @@ const TOWER_ID_TO_DESCRPTION_TEXT: Dictionary[TowerConstants.TowerIDs, String]  
     TowerConstants.TowerIDs.SAM_SITE_LVL_1: "Fires missile in random direction that is\ncapable of targeting nearby creeps",
     TowerConstants.TowerIDs.SAM_SITE_LVL_2: "Fires two missiles in random direction that is\ncapable of targeting nearby creeps",
     TowerConstants.TowerIDs.SAM_SITE_LVL_3: "Tower descrption found but not given description.",
-    TowerConstants.TowerIDs.TOMBSTONE_LVL_3: "Tower descrption found but not given description.",
+    TowerConstants.TowerIDs.TOMBSTONE_LVL_3: "Launches up to two homing missiles at different creeps a time.\nMissile capable of hitting three creeps before it is destroyed.\nOnce the missile hits a creep,\nit will ricochet in a random direction.",
     TowerConstants.TowerIDs.LAVA_POOL_LVL_1: "Burns all creeps that enter tower range,\ndealing 10 damage per second.",
     TowerConstants.TowerIDs.LAVA_POOL_LVL_2: "Burns all creeps that enter tower range,\ndealing 20 damage per second.",
     TowerConstants.TowerIDs.LAVA_POOL_LVL_3: "Burns all creeps that enter tower range,\ndealing 80 damage per second.",

@@ -15,3 +15,8 @@ func test_tombstone_lvl_2_tower_id():
 	assert_true(tombstone_lvl_2_tower.TOWER_ID == TowerConstants.TowerIDs.TOMBSTONE_LVL_2, "Expected TOMBSTONE_LVL_2 tower ID to be TOMBSTONE_LVL_2")
 	tombstone_lvl_2_tower.queue_free()
 
+func test_tombstone_lvl_3_tower_id():
+	var tombstone_lvl_3_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[TowerConstants.TowerIDs.TOMBSTONE_LVL_3].instantiate()
+	add_child_autofree(tombstone_lvl_3_tower)
+	assert_true(tombstone_lvl_3_tower.TOWER_ID == TowerConstants.TowerIDs.TOMBSTONE_LVL_3, "Expected TOMBSTONE_LVL_3 tower ID to be TOMBSTONE_LVL_3")
+	tombstone_lvl_3_tower.queue_free()

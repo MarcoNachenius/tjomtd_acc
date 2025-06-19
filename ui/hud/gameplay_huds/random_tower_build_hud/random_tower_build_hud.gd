@@ -33,6 +33,7 @@ class_name RandomTowerBuildHUD
 
 @onready var EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_2_BUTTON: _on_tombstone_lvl_2_button_pressed,
+	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_3_BUTTON: _on_tombstone_lvl_3_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_2_BUTTON: _on_lava_pool_lvl_2_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_3_BUTTON: _on_lava_pool_lvl_3_button_pressed,
@@ -751,6 +752,9 @@ func _on_bismuth_level_5_button_pressed():
 
 func _on_tombstone_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
+
+func _on_tombstone_lvl_3_button_pressed():
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_3)
 
 func _on_sam_site_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
