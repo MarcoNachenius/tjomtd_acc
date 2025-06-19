@@ -10,5 +10,5 @@ MISSILE_SPRITE = NodePath("MissileSprite")
 metadata/_custom_type_script = "uid://c06wq6oyjdg5a"
 
 [node name="MissileSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.68, 0.38)
+scale = Vector2(0.413333, 0.23098)
 texture = ExtResource("2_f334w")

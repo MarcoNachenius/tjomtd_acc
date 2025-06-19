@@ -460,7 +460,7 @@ func _on_lives_depleted():
 	CurrGameData.RESULT_TEXT = "Lives depleted"
 	CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
 	CurrGameData.FINAL_MAZE_DAMAGE = 0.0 # WIP
-	CurrGameData.FINAL_MAZE_LENGTH = 0 # WIP
+	CurrGameData.FINAL_MAZE_LENGTH = GAME_MAP.get_maze_length()
 	CurrGameData.FINAL_SCORE = GAME_MAP.get_total_points_earned() # WIP
 	CurrGameData.WAVES_COMPLETED = GAME_MAP.get_total_waves_completed()
 
