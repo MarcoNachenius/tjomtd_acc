@@ -47,6 +47,8 @@ enum ProjectileIDs {
 	SPINEL_LVL_4,
 	SPINEL_LVL_5,
 	TOMBSTONE_LVL_2,
+	TOMBSTONE_LVL_3,
+	SAM_SITE_LVL_3,
 }
 
 # ******************************************************************************************************************
@@ -110,7 +112,8 @@ enum SingleHitMissiles {
 	LARIMAR_LVL_5,
 	SPINEL_LVL_3,
 	SPINEL_LVL_4,
-	SPINEL_LVL_5
+	SPINEL_LVL_5,
+	SAM_SITE_LVL_3,
 }
 
 enum TargetedRicochetMissiles{
@@ -122,6 +125,7 @@ enum RandomRicochetMissiles {
 	TOMBSTONE_LVL_1,
 	SUNSTONE_LVL_5,
 	TOMBSTONE_LVL_2,
+	TOMBSTONE_LVL_3,
 }
 
 enum MissilesForSpawner {
@@ -146,6 +150,8 @@ enum MissilesForSpawner {
 	SPINEL_LVL_4,
 	SPINEL_LVL_5,
 	TOMBSTONE_LVL_2,
+	TOMBSTONE_LVL_3,
+	SAM_SITE_LVL_3
 }
 
 
@@ -203,6 +209,7 @@ var RANDOM_RICOCHET_MISSILE_LOADS: Dictionary[RandomRicochetMissiles, PackedScen
 	RandomRicochetMissiles.TOMBSTONE_LVL_1: load("res://towers/upgrade_towers/tombstone/level_1/tombstone_lvl_1_missile.tscn"),
 	RandomRicochetMissiles.SUNSTONE_LVL_5: load("res://towers/buildable_towers/sunstone/level_5/sunstone_lvl_5_missile.tscn"),
 	RandomRicochetMissiles.TOMBSTONE_LVL_2: load("res://towers/upgrade_towers/tombstone/level_2/tombstone_lvl_2_missile.tscn"),
+	RandomRicochetMissiles.TOMBSTONE_LVL_3: load("res://towers/upgrade_towers/tombstone/level_3/tombstone_lvl_3_missile.tscn")
 }
 
 const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
@@ -227,6 +234,8 @@ const MISSILE_PATHS: Dictionary[MissilesForSpawner, String] = {
 	MissilesForSpawner.LARIMAR_LVL_3: "res://towers/buildable_towers/laminar/level_3/larimar_lvl_3_missile.tscn",
 	MissilesForSpawner.LARIMAR_LVL_5: "res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn",
 	MissilesForSpawner.TOMBSTONE_LVL_2: "res://towers/upgrade_towers/tombstone/level_2/tombstone_lvl_2_missile.tscn",
+	MissilesForSpawner.TOMBSTONE_LVL_3: "res://towers/upgrade_towers/tombstone/level_3/tombstone_lvl_3_missile.tscn",
+	MissilesForSpawner.SAM_SITE_LVL_3: "res://towers/upgrade_towers/sam_site/level_3/sam_site_lvl_3_missile.tscn"
 	
 }
 
@@ -247,5 +256,6 @@ var SINGLE_HIT_MISSILE_LOADS: Dictionary[SingleHitMissiles, PackedScene] = {
 	SingleHitMissiles.LARIMAR_LVL_5: load("res://towers/buildable_towers/laminar/level_5/larimar_lvl_5_missile.tscn"),
 	SingleHitMissiles.SPINEL_LVL_3: load("res://towers/buildable_towers/spinel/level_3/spinel_lvl_3_missile.tscn"),
 	SingleHitMissiles.SPINEL_LVL_4: load("res://towers/buildable_towers/spinel/level_4/spinel_lvl_4_missile.tscn"),
-	SingleHitMissiles.SPINEL_LVL_5: load("res://towers/buildable_towers/spinel/level_5/spinel_lvl_5_missile.tscn")
+	SingleHitMissiles.SPINEL_LVL_5: load("res://towers/buildable_towers/spinel/level_5/spinel_lvl_5_missile.tscn"),
+	SingleHitMissiles.SAM_SITE_LVL_3: load("res://towers/upgrade_towers/sam_site/level_3/sam_site_lvl_3_missile.tscn"),
 }

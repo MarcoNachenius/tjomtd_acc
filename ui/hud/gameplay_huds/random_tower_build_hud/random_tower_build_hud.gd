@@ -35,6 +35,7 @@ class_name RandomTowerBuildHUD
 	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_2_BUTTON: _on_tombstone_lvl_2_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_3_BUTTON: _on_tombstone_lvl_3_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed,
+	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_3_BUTTON: _on_sam_site_lvl_3_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_2_BUTTON: _on_lava_pool_lvl_2_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_3_BUTTON: _on_lava_pool_lvl_3_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.ICE_SHARD_LVL_2_BUTTON: _on_ice_shard_lvl_2_button_pressed,
@@ -758,6 +759,9 @@ func _on_tombstone_lvl_3_button_pressed():
 
 func _on_sam_site_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_2)
+
+func _on_sam_site_lvl_3_button_pressed():
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_3)
 
 func _on_lava_pool_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_2)

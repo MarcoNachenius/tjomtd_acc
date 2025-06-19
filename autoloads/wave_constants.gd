@@ -48,7 +48,7 @@ const WAVE_4: Dictionary = {
 }
 
 const WAVE_5: Dictionary = {
-	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.BLUE_SPIDER,
+	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.PUMPKIN,
 	WaveProperties.CREEP_SPEED: 6,
 	WaveProperties.CREEP_HEALTH: 45,
 	WaveProperties.WAVE_SIZE: 10,

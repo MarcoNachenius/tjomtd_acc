@@ -20,6 +20,7 @@ texture = ExtResource("3_tvvul")
 
 [node name="MultiRandomRicochetMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("4_fooox")
+MISSILE_PRELOAD = 3
 __missile_damage = 50
 __missile_speed = 15
 __cooldown_duration = 1.0
