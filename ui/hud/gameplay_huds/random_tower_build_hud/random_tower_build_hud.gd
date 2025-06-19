@@ -757,7 +757,7 @@ func _on_tombstone_lvl_3_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_3)
 
 func _on_sam_site_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_2)
 
 func _on_lava_pool_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_2)
