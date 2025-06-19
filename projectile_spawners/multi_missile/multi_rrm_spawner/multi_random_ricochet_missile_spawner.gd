@@ -63,8 +63,7 @@ func _launch_projectiles():
 
         # ──────── Setters ────────
         # Target
-        assert(__target, "No target provided")
-        new_missile.set_target(__target)
+        new_missile.set_target(creep)
 
         add_child(new_missile)
 
