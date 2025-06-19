@@ -7,7 +7,7 @@
 [node name="SingleTowerAgainstCreep" type="Node2D" node_paths=PackedStringArray("GAME_MAP")]
 script = ExtResource("1_hpmdq")
 GAME_MAP = NodePath("GameMap")
-TOWER_ID = 35
+TOWER_ID = 29
 TOWER_PLACEMENT_COORD = Vector2i(5, 10)
 
 [node name="GameMap" parent="." instance=ExtResource("2_kt3m4")]
