@@ -23,7 +23,7 @@ texture = ExtResource("2_mc3gx")
 [node name="TargetedMultiMissileSpawner" type="Node2D" parent="."]
 script = ExtResource("3_mc3gx")
 __missile_damage = 10
-__missile_speed = 30
+__missile_speed = 20
 MISSILE_ID = 5
 __cooldown_duration = 0.5
 __detection_range = 400

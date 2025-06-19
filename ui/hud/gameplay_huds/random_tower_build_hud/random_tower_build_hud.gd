@@ -148,8 +148,8 @@ func _connect_tower_stats_visibility_container():
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.pressed.connect(_on_hide_tower_stats_button_pressed)
 	# Set initial state
 	__show_selected_tower_stats = true
-	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
-	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false
+	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = false
+	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = true
 	SELECTED_TOWER_STATS_CONTAINER. visible = true
 	# Set initial values
 	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
@@ -616,7 +616,7 @@ func _on_show_tower_stats_button_pressed():
 func _on_hide_tower_stats_button_pressed():
 	__show_selected_tower_stats = false
 	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
-	SELECTED_TOWER_STATS_CONTAINER.TOWER_NAME_TEXT.text = "Tower Stats Hidden"
+	SELECTED_TOWER_STATS_CONTAINER.TOWER_NAME_TEXT.text = "(Tower Stats Hidden)\nPress 'Show Tower Stats' to show selected tower description."
 	SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.visible = false
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false

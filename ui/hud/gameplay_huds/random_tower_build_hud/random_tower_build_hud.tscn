@@ -17,7 +17,7 @@
 [node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "EXTENDED_UPGRADES_CONTAINER", "SELECTED_TOWER_STATS_CONTAINER", "TOWER_STATS_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON", "HUD_AUDIO_MANAGER")]
 script = ExtResource("1_kyn4q")
 GAME_STATS_CONTAINER = NodePath("StatsContainer/GameStatsPanel/GameStatsContianer")
-BUILD_RANDOM_TOWER_CONTAINER = NodePath("MapCommands/BuildRandomTowerContainer")
+BUILD_RANDOM_TOWER_CONTAINER = NodePath("MapCommands/VBoxContainer/BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")
 TOWER_UPGRADES_CONTAINER = NodePath("TowerCommands/TowerUpgradesContainer")
 AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeTowers")
@@ -26,7 +26,7 @@ TOWER_RANGE_VISIBILITY_CONTAINER = NodePath("ComponentVisibility/TowerRangeVisib
 EXTENDED_UPGRADES_CONTAINER = NodePath("TowerCommands/ExtendedUpgradesContainer")
 SELECTED_TOWER_STATS_CONTAINER = NodePath("StatsContainer/SelectedTowerStatsPanel/SelectedTowerStatsContainer")
 TOWER_STATS_VISIBILITY_CONTAINER = NodePath("ComponentVisibility/TowerStatsVisibilityContainer")
-START_NEW_WAVE_BUTTON = NodePath("MapCommands/StartNewWaveButton")
+START_NEW_WAVE_BUTTON = NodePath("MapCommands/VBoxContainer/StartNewWaveButton")
 UPGRADE_BUILD_LEVEL_BUTTON = NodePath("MapCommands/Upgrade Tower Probability")
 HUD_AUDIO_MANAGER = NodePath("HudAudioManager")
 
@@ -65,20 +65,24 @@ offset_top = -33.0
 offset_bottom = 33.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="BuildRandomTowerContainer" parent="MapCommands" instance=ExtResource("2_ntkvv")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MapCommands"]
+layout_mode = 2
+
+[node name="BuildRandomTowerContainer" parent="MapCommands/VBoxContainer" instance=ExtResource("2_ntkvv")]
 layout_mode = 2
 size_flags_horizontal = 8
+
+[node name="StartNewWaveButton" type="Button" parent="MapCommands/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Start New Wave"
 
 [node name="Upgrade Tower Probability" type="Button" parent="MapCommands"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Upgrade Build Level (0)"
-
-[node name="StartNewWaveButton" type="Button" parent="MapCommands"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Start New Wave"
 
 [node name="ComponentVisibility" type="VBoxContainer" parent="."]
 anchors_preset = 4
