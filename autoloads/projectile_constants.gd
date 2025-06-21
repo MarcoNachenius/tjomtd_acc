@@ -49,6 +49,8 @@ enum ProjectileIDs {
 	TOMBSTONE_LVL_2,
 	TOMBSTONE_LVL_3,
 	SAM_SITE_LVL_3,
+	GATLING_GUN_LVL_1,
+	GATLING_GUN_LVL_2,
 }
 
 # ******************************************************************************************************************
@@ -62,7 +64,8 @@ enum SingleHitBullets {
 	SUNSTONE_LVL_3,
 	KUNZITE_LVL_2,
 	KUNZITE_LVL_4,
-	LARIMAR_LVL_4
+	LARIMAR_LVL_4,
+	GATLING_GUN_LVL_1,
 }
 
 enum TargetedRicochetBullets {
@@ -73,7 +76,8 @@ enum TargetedRicochetBullets {
 enum RandomRicochetBullets {
 	TEST_RANDOM_RICOCHET_BULLET,
 	BLACK_MARBLE_LVL_2,
-	BLACK_MARBLE_LVL_4
+	BLACK_MARBLE_LVL_4,
+	GATLING_GUN_LVL_2,
 }
 
 enum BulletsForSpawner {
@@ -88,7 +92,9 @@ enum BulletsForSpawner {
 	KUNZITE_LVL_4,
 	BLACK_MARBLE_LVL_4,
 	BLACK_MARBLE_LVL_5,
-	LARIMAR_LVL_4
+	LARIMAR_LVL_4,
+	GATLING_GUN_LVL_1,
+	GATLING_GUN_LVL_2,
 }
 
 
@@ -166,7 +172,8 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary[SingleHitBullets, PackedScene] = {
 	SingleHitBullets.SUNSTONE_LVL_3: load("res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn"),
 	SingleHitBullets.KUNZITE_LVL_2: load("res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn"),
 	SingleHitBullets.KUNZITE_LVL_4: load("res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn"),
-	SingleHitBullets.LARIMAR_LVL_4: load("res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn")
+	SingleHitBullets.LARIMAR_LVL_4: load("res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn"),
+	SingleHitBullets.GATLING_GUN_LVL_1: load("res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_bullet.tscn")
 }
 
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary[TargetedRicochetBullets, PackedScene] = {
@@ -177,7 +184,8 @@ var TARGETED_RICOCHET_BULLET_LOADS: Dictionary[TargetedRicochetBullets, PackedSc
 var RANDOM_RICOCHET_BULLET_LOADS: Dictionary[RandomRicochetBullets, PackedScene] = {
 	RandomRicochetBullets.TEST_RANDOM_RICOCHET_BULLET: load("res://projectiles/bullets/multi_hit/random_ricochet/test_bullet/test_rrb.tscn"),
 	RandomRicochetBullets.BLACK_MARBLE_LVL_2: load("res://towers/buildable_towers/black_marble/level_2/bm_lvl_2_bullet.tscn"),
-	RandomRicochetBullets.BLACK_MARBLE_LVL_4: load("res://towers/buildable_towers/black_marble/level_4/black_marble_lvl_4_bullet.tscn")
+	RandomRicochetBullets.BLACK_MARBLE_LVL_4: load("res://towers/buildable_towers/black_marble/level_4/black_marble_lvl_4_bullet.tscn"),
+	RandomRicochetBullets.GATLING_GUN_LVL_2: load("res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_bullet.tscn")
 }
 
 const BULLET_PATHS: Dictionary = {
@@ -192,7 +200,9 @@ const BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.SUNSTONE_LVL_3: "res://towers/buildable_towers/sunstone/level_3/sunstone_lvl_3_bullet.tscn",
 	BulletsForSpawner.KUNZITE_LVL_2: "res://towers/buildable_towers/kunzite/level_2/kunzite_lvl_2_bullet.tscn",
 	BulletsForSpawner.KUNZITE_LVL_4: "res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn",
-	BulletsForSpawner.LARIMAR_LVL_4: "res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn"
+	BulletsForSpawner.LARIMAR_LVL_4: "res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn",
+	BulletsForSpawner.GATLING_GUN_LVL_1: "res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_bullet.tscn",
+	BulletsForSpawner.GATLING_GUN_LVL_2: "res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_bullet.tscn"
 	
 }
 

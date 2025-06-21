@@ -11,6 +11,7 @@ class_name ExtendedUpgradesContainer
 @export var ICE_SHARD_LVL_3_BUTTON: Button
 @export var EMP_STUNNER_LVL_2_BUTTON: Button
 @export var EMP_STUNNER_LVL_3_BUTTON: Button
+@export var GATLING_GUN_LVL_2_BUTTON: Button
 
 @onready var ALL_BUTTONS: Array[Button] = [
     TOMBSTONE_LVL_3_BUTTON,
@@ -23,6 +24,7 @@ class_name ExtendedUpgradesContainer
     ICE_SHARD_LVL_3_BUTTON,
     EMP_STUNNER_LVL_2_BUTTON,
     EMP_STUNNER_LVL_3_BUTTON,
+    GATLING_GUN_LVL_2_BUTTON,
 ]
 
 @onready var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
@@ -36,6 +38,7 @@ class_name ExtendedUpgradesContainer
     TowerConstants.TowerIDs.ICE_SHARD_LVL_3: ICE_SHARD_LVL_3_BUTTON,
     TowerConstants.TowerIDs.EMP_STUNNER_LVL_2: EMP_STUNNER_LVL_2_BUTTON,
     TowerConstants.TowerIDs.EMP_STUNNER_LVL_3: EMP_STUNNER_LVL_3_BUTTON,
+    TowerConstants.TowerIDs.GATLING_GUN_LVL_2: GATLING_GUN_LVL_2_BUTTON,
 }
 
 func _ready() -> void:

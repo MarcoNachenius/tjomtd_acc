@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdk78emda8f3g"]
+
+[ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_fval5"]
+[ext_resource type="PackedScene" uid="uid://beax5lqhsxm70" path="res://towers/sprites/temp_tower_sprite.tscn" id="2_2jvfa"]
+[ext_resource type="Texture2D" uid="uid://dyrcl1aimw1hn" path="res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_tower_sprite.png" id="2_33o5d"]
+[ext_resource type="Script" uid="uid://bsxteh17ub0se" path="res://projectile_spawners/single_bullet/single_hit/single_hit_single_bullet_spawner.gd" id="3_jeogy"]
+
+[node name="GatlingGunLvl1Tower" type="Node2D" node_paths=PackedStringArray("TOWER_SPRITE", "PRIMARY_PROJECTILE_SPAWNER")]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_fval5")
+TOWER_ID = 46
+TOWER_SPRITE = NodePath("TowerSprite")
+PRIMARY_PROJECTILE_SPAWNER = NodePath("SingleHitSingleBulletSpawner")
+metadata/_custom_type_script = "uid://c4b07ddcari8y"
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -49)
+scale = Vector2(1, 0.88)
+texture = ExtResource("2_33o5d")
+
+[node name="TempTowerSprite" parent="." instance=ExtResource("2_2jvfa")]
+visible = false
+z_index = 0
+
+[node name="SingleHitSingleBulletSpawner" type="Node2D" parent="."]
+script = ExtResource("3_jeogy")
+__bullet_damage = 4
+__bullet_speed = 30
+BULLET_PRELOAD = 8
+__cooldown_duration = 0.25
+__detection_range = 350
+metadata/_custom_type_script = "uid://bsxteh17ub0se"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://nkdpi8i71fo5" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.gd" id="1_8dg2t"]
 
-[node name="TowerUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_BUTTON", "SAM_SITE_BUTTON", "LAVA_POOL_BUTTON", "ICE_SHARD_BUTTON", "EMP_STUNNER_BUTTON")]
+[node name="TowerUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_BUTTON", "SAM_SITE_BUTTON", "LAVA_POOL_BUTTON", "ICE_SHARD_BUTTON", "EMP_STUNNER_BUTTON", "GATLING_GUN_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_8dg2t")
@@ -11,6 +11,7 @@ SAM_SITE_BUTTON = NodePath("SamSiteButton")
 LAVA_POOL_BUTTON = NodePath("LavaPoolButton")
 ICE_SHARD_BUTTON = NodePath("IceShardButton")
 EMP_STUNNER_BUTTON = NodePath("EMPStunnerButton")
+GATLING_GUN_BUTTON = NodePath("GatlingGunButton")
 
 [node name="TombstoneButton" type="Button" parent="."]
 layout_mode = 2
@@ -33,3 +34,8 @@ text = "Ice Shard"
 [node name="EMPStunnerButton" type="Button" parent="."]
 layout_mode = 2
 text = "EMP Stunner"
+
+[node name="GatlingGunButton" type="Button" parent="."]
+layout_mode = 2
+text = "Gatling Gun
+"
