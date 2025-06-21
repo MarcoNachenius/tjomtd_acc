@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccre3iftw6j25"]
+[gd_scene load_steps=4 format=3 uid="uid://ccre3iftw6j25"]
 
 [ext_resource type="Script" uid="uid://c4b07ddcari8y" path="res://towers/base_object/tower.gd" id="1_0rsir"]
-[ext_resource type="PackedScene" uid="uid://beax5lqhsxm70" path="res://towers/sprites/temp_tower_sprite.tscn" id="2_pveo2"]
 [ext_resource type="Texture2D" uid="uid://b7e7s2bg6hi7q" path="res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_tower_sprite.png" id="3_mtm84"]
 [ext_resource type="Script" uid="uid://ciswnqnqe0n4u" path="res://projectile_spawners/single_bullet/multi_hit/random_ricochet_bullet/random_ricochet_bullet_ps.gd" id="4_6cx8u"]
 
@@ -12,15 +11,11 @@ TOWER_SPRITE = NodePath("TowerSprite")
 PRIMARY_PROJECTILE_SPAWNER = NodePath("RandomRicochetBulletSpawner")
 metadata/_custom_type_script = "uid://c4b07ddcari8y"
 
-[node name="TempTowerSprite" parent="." instance=ExtResource("2_pveo2")]
-visible = false
-z_index = 0
-
 [node name="TowerSprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -50)
-scale = Vector2(1, 0.8)
+position = Vector2(0, -39)
+scale = Vector2(1, 0.6)
 texture = ExtResource("3_mtm84")
 
 [node name="RandomRicochetBulletSpawner" type="Node2D" parent="."]

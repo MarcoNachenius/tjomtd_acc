@@ -9,7 +9,8 @@ enum CreepIDs {
     BLUE_SPIDER,
     HUMAN,
     PUMPKIN,
-    TREE
+    TREE,
+    ROBOT
 }
 
 var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
@@ -19,7 +20,8 @@ var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
     CreepIDs.BLUE_SPIDER: load("res://creeps/blue_spider/blue_spider.tscn"),
     CreepIDs.HUMAN: load("res://creeps/human/human.tscn"),
     CreepIDs.PUMPKIN: load("res://creeps/pumpkin/pumpkin.tscn"),
-    CreepIDs.TREE: load("res://creeps/tree/tree.tscn")
+    CreepIDs.TREE: load("res://creeps/tree/tree.tscn"),
+    CreepIDs.ROBOT: load("res://creeps/robot/robot_creep.tscn"),
 }
 
 

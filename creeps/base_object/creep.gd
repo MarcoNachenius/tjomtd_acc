@@ -15,6 +15,7 @@ signal end_of_path_reached(creep: Creep)
 @export var MOVEMENT_ANIMATIONS: AnimatedSprite2D
 @export var __points_for_death: int
 @export var SPEED_TO_MOVEMENT_FPS_RATIO: float = 0.5
+@export var FINAL_BOSS_MODE: bool = false
 
 var __curr_compass_direction: CreepConstants.CompassDirections
 var __curr_health: int
