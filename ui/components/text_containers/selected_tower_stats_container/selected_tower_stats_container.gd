@@ -58,7 +58,10 @@ func _assign_upgrades_into(tower: Tower) -> void:
 		var altered_tower_name: String = ""
 		for word in split_tower_name:
 			altered_tower_name += word + " "
+		
+		# Add processed tower name line
 		upgrades_into_text += "  - " + altered_tower_name
+	 
 	TOWER_ATTR_CONTAINER.UPGRADES_INTO_VALUE.text = upgrades_into_text
 
 ## Handles logic when tower is deselected
