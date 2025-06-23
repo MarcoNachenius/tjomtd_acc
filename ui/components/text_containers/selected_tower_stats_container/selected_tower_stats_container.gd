@@ -42,7 +42,23 @@ func _assign_cooldown(tower) -> void:
 	TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_cooldown_duration()) + "s"
 
 func _assign_upgrades_into(tower: Tower) -> void:
-	var upgrades_into_text: String = "WORK IN PROGRESS"
+	var upgrades_into_text: String = ""
+	var found_tower_id: bool = TowerConstants.UPGRADES_INTO.keys().has(tower.TOWER_ID)
+	# Handle situation where tower id has not been found in TowerConstants.UPGRADES_INTO
+	if !found_tower_id:
+		TOWER_ATTR_CONTAINER.UPGRADES_INTO_VALUE.text = "Tower ID not found in TowerConstants.UPGRADES_INTO"
+		return
+	
+	var upgrades_into_tower_list: Array[TowerConstants.TowerIDs] = TowerConstants.UPGRADES_INTO[tower.TOWER_ID]
+	# Construct display text string value
+	for upgrade_tower_id in upgrades_into_tower_list:
+		# Remove "Level x" suffix from tower name
+		var split_tower_name = TowerConstants.TOWER_NAMES[upgrade_tower_id].split(" ")
+		split_tower_name.resize(split_tower_name.size() - 2)
+		var altered_tower_name: String = ""
+		for word in split_tower_name:
+			altered_tower_name += word + " "
+		upgrades_into_text += "  - " + altered_tower_name
 	TOWER_ATTR_CONTAINER.UPGRADES_INTO_VALUE.text = upgrades_into_text
 
 ## Handles logic when tower is deselected
