@@ -18,6 +18,7 @@ func populate_tower_stats(tower: Tower) -> void:
 	_assign_damage(tower)
 	_assign_range(tower)
 	_assign_cooldown(tower)
+	_assign_upgrades_into(tower)
 
 func _assign_description(tower: Tower) -> void:
 	if TowerDescriptions.TOWER_ID_TO_DESCRPTION_TEXT.keys().has(tower.TOWER_ID):
@@ -39,6 +40,10 @@ func _assign_range(tower: Tower) -> void:
 
 func _assign_cooldown(tower) -> void:
 	TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_cooldown_duration()) + "s"
+
+func _assign_upgrades_into(tower: Tower) -> void:
+	var upgrades_into_text: String = "WORK IN PROGRESS"
+	TOWER_ATTR_CONTAINER.UPGRADES_INTO_VALUE.text = upgrades_into_text
 
 ## Handles logic when tower is deselected
 func clear_tower_stats() -> void:

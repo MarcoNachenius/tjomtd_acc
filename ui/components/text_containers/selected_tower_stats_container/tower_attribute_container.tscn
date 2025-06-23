@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba0xout8racee" path="res://ui/components/text_containers/selected_tower_stats_container/tower_attribute_container.gd" id="1_v1tih"]
 
-[node name="TowerAttributeContainer" type="VBoxContainer" node_paths=PackedStringArray("DAMAGE_HEADER", "DAMAGE_VALUE", "COOLDOWN_HEADER", "COOLDOWN_VALUE", "RANGE_HEADER", "RANGE_VALUE", "DESCRIPTION_HEADER", "DESCRIPTION_VALUE")]
+[node name="TowerAttributeContainer" type="VBoxContainer" node_paths=PackedStringArray("DAMAGE_HEADER", "DAMAGE_VALUE", "COOLDOWN_HEADER", "COOLDOWN_VALUE", "RANGE_HEADER", "RANGE_VALUE", "DESCRIPTION_HEADER", "DESCRIPTION_VALUE", "UPGRADES_INTO_HEADER", "UPGRADES_INTO_VALUE")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -19,6 +19,8 @@ RANGE_HEADER = NodePath("HBoxContainer/VBoxContainer/RangeHeader")
 RANGE_VALUE = NodePath("HBoxContainer/VBoxContainer/RangeValue")
 DESCRIPTION_HEADER = NodePath("HBoxContainer/VBoxContainer2/DescrptionHeader")
 DESCRIPTION_VALUE = NodePath("HBoxContainer/VBoxContainer2/DescrptionText")
+UPGRADES_INTO_HEADER = NodePath("HBoxContainer/VBoxContainer/UpgradesIntoHeader")
+UPGRADES_INTO_VALUE = NodePath("HBoxContainer/VBoxContainer/UpgradesIntoValue")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -61,6 +63,18 @@ autowrap_mode = 0
 [node name="CooldownValue" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "0.0s"
+fit_content = true
+autowrap_mode = 0
+
+[node name="UpgradesIntoHeader" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Upgrades Into:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="UpgradesIntoValue" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "- Tower Name"
 fit_content = true
 autowrap_mode = 0
 

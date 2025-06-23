@@ -9,3 +9,5 @@ class_name TowerAttributesContainer
 @export var RANGE_VALUE: RichTextLabel
 @export var DESCRIPTION_HEADER: RichTextLabel
 @export var DESCRIPTION_VALUE: RichTextLabel
+@export var UPGRADES_INTO_HEADER: RichTextLabel
+@export var UPGRADES_INTO_VALUE: RichTextLabel
