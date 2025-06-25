@@ -22,6 +22,7 @@ signal tower_placed(tower: Tower)
 signal tower_selected(tower: Tower)
 signal maze_length_updated(updated_maze_length: int)
 signal lives_depleted
+signal final_boss_path_completed(total_damage_taken: int)
 
 # EXPORTS
 ## Map ID
@@ -699,6 +700,9 @@ func _on_creep_end_of_path_reached(creep: Creep):
 	if __total_active_wave_creeps == 0 and !CREEP_SPAWNER.wave_initiation_in_progress():
 		__total_waves_completed += 1
 		completed_wave.emit(__total_waves_completed)
+
+func _on_final_boss_path_completed(damage_inflicted: int):
+	final_boss_path_completed.emit(damage_inflicted)
 
 func _on_creep_death(creep: Creep):
 	var creep_points: int = creep.get_points_for_death()

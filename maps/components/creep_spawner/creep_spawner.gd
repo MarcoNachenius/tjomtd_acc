@@ -41,14 +41,18 @@ func _spawn_wave_creep():
 	if __total_wave_creeps_spawned == __wave_size:
 		return
 	var new_creep: Creep = __wave_creep_preload.instantiate() as Creep
-	new_creep.creep_death.connect(__game_map._on_creep_death)
-	new_creep.end_of_path_reached.connect(__game_map._on_creep_end_of_path_reached)
+	if __final_boss_spawnning:
+		new_creep.FINAL_BOSS_MODE = true
+	# Connect signals
+	if new_creep.FINAL_BOSS_MODE:
+		new_creep.end_of_path_reached.connect(__game_map._on_final_boss_path_completed)
+	else: # Regular wave creep
+		new_creep.creep_death.connect(__game_map._on_creep_death)
+		new_creep.end_of_path_reached.connect(__game_map._on_creep_end_of_path_reached)
 	# Create and add creep 
 	new_creep.position = __game_map.__main_tileset.map_to_local(__game_map.__path_start_point)
 	new_creep.position.x += 64 # I have no idea why this is fixes creep starting position
 	__game_map.add_child(new_creep)
-	if __final_boss_spawnning:
-		new_creep.FINAL_BOSS_MODE = true
 	# Set creep properties
 	new_creep.set_path_points(__game_map.creep_mapped_to_local_path_positions())
 	new_creep.set_starting_health(__wave_creep_properties[WaveConstants.WaveProperties.CREEP_HEALTH])

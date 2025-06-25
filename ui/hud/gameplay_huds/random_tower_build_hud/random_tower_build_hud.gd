@@ -189,6 +189,7 @@ func _connect_game_map_signals():
 	GAME_MAP.tower_placed.connect(_on_tower_placed)
 	GAME_MAP.lives_depleted.connect(_on_lives_depleted)
 	GAME_MAP.maze_length_updated.connect(_on_maze_length_updated)
+	GAME_MAP.final_boss_path_completed.connect(_on_final_boss_path_completed)
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
@@ -457,17 +458,20 @@ func _on_balance_altered(curr_balance: int):
 	GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(curr_balance)
 
 
-func _on_lives_depleted():
+func _on_final_boss_path_completed(damage_inflicted: int):
 	# Capture final results in CurrGameData autoload
 	CurrGameData.RESULT_TEXT = "Lives depleted"
 	CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
-	CurrGameData.FINAL_MAZE_DAMAGE = 0.0 # WIP
+	CurrGameData.FINAL_MAZE_DAMAGE = damage_inflicted
 	CurrGameData.FINAL_MAZE_LENGTH = GAME_MAP.get_maze_length()
 	CurrGameData.FINAL_SCORE = GAME_MAP.get_total_points_earned() # WIP
 	CurrGameData.WAVES_COMPLETED = GAME_MAP.get_total_waves_completed()
 
 	# Switch main scene to end game menu
 	get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
+
+func _on_lives_depleted():
+	GAME_MAP.CREEP_SPAWNER.initiate_final_boss_wave()
 
 func _on_life_lost(remaining_lives: int):
 	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(remaining_lives)
