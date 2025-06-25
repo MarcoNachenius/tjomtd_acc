@@ -196,6 +196,12 @@ func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConsta
 			tower_id_array.append(tower_id)
 	return tower_id_array
 
+## Removes all creeps from the map
+func remove_remaining_creeps() -> void:
+	for child in get_children():
+		if child is Creep:
+			child.queue_free()
+
 # ---------------
 # PRIVATE METHODS
 # ---------------
@@ -684,6 +690,10 @@ func get_maze_length() -> int:
 # **************
 
 func _on_creep_end_of_path_reached(creep: Creep):
+	if creep.FINAL_BOSS_MODE:
+		final_boss_path_completed.emit(creep.get_curr_health())
+		return
+	
 	__remaining_lives -= 1
 
 	# Emit lives depleted signal if there are no more remaining lives
@@ -700,9 +710,6 @@ func _on_creep_end_of_path_reached(creep: Creep):
 	if __total_active_wave_creeps == 0 and !CREEP_SPAWNER.wave_initiation_in_progress():
 		__total_waves_completed += 1
 		completed_wave.emit(__total_waves_completed)
-
-func _on_final_boss_path_completed(damage_inflicted: int):
-	final_boss_path_completed.emit(damage_inflicted)
 
 func _on_creep_death(creep: Creep):
 	var creep_points: int = creep.get_points_for_death()

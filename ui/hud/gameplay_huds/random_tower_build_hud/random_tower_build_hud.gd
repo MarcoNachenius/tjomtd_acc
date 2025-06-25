@@ -471,6 +471,7 @@ func _on_final_boss_path_completed(damage_inflicted: int):
 	get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
 
 func _on_lives_depleted():
+	GAME_MAP.remove_remaining_creeps()
 	GAME_MAP.CREEP_SPAWNER.initiate_final_boss_wave()
 
 func _on_life_lost(remaining_lives: int):
