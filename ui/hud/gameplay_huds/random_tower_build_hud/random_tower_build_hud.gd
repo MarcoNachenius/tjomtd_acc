@@ -91,6 +91,9 @@ var __selected_tower: Tower
 var __max_towers_per_turn = GameConstants.MAX_PLACEABLE_TOWERS_PER_TURN
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
+var __final_wave_reached: bool = false
+
+# ONREADYS
 ## Tracks if player wants tower range to be displayed when selected
 @onready var __show_selected_tower_range: bool = true
 @onready var __show_selected_tower_stats: bool = true
@@ -460,7 +463,10 @@ func _on_balance_altered(curr_balance: int):
 
 func _on_final_boss_path_completed(damage_inflicted: int):
 	# Capture final results in CurrGameData autoload
-	CurrGameData.RESULT_TEXT = "Lives depleted"
+	if __final_wave_reached:
+		CurrGameData.RESULT_TEXT = "All waves completed."
+	else:
+		CurrGameData.RESULT_TEXT = "Lives depleted"
 	CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
 	CurrGameData.FINAL_MAZE_DAMAGE = damage_inflicted
 	CurrGameData.FINAL_MAZE_LENGTH = GAME_MAP.get_maze_length()
@@ -478,19 +484,18 @@ func _on_life_lost(remaining_lives: int):
 	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(remaining_lives)
 
 func _on_wave_completed(total_waves_completed: int):
-	# Switch to end game menu once final wave has been completed
+	# Handle situation where all waves have been completed
 	if total_waves_completed == WaveConstants.TOTAL_WAVES:
-		# Capture final results in CurrGameData autoload
-		CurrGameData.RESULT_TEXT = "All waves completed!"
-		CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
-		CurrGameData.FINAL_MAZE_DAMAGE = 0.0 # WIP
-		CurrGameData.FINAL_MAZE_LENGTH = 0 # WIP
-		CurrGameData.FINAL_SCORE = GAME_MAP.get_total_points_earned() # WIP
-		CurrGameData.WAVES_COMPLETED = GAME_MAP.get_total_waves_completed()
-		
-		# Switch main scene to end game menu
-		get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
+		__final_wave_reached = true
+		# Remove any remaining projectiles still on map
+		GAME_MAP.remove_remaining_projectiles()
+		GAME_MAP.CREEP_SPAWNER.initiate_final_boss_wave()
+		return
 
+	# Remove any remaining projectiles still on map
+	GAME_MAP.remove_remaining_projectiles()
+
+	# UPDATE CONTAINER DISPLAY
 	# Update tower count
 	__current_turn_tower_count = 0
 	# Hide tower properties hbox

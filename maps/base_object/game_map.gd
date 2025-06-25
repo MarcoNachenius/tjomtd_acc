@@ -202,6 +202,12 @@ func remove_remaining_creeps() -> void:
 		if child is Creep:
 			child.queue_free()
 
+## Removes all projectiles from the map
+func remove_remaining_projectiles() -> void:
+	for child in get_children():
+		if child is Projectile:
+			child.queue_free()
+
 # ---------------
 # PRIVATE METHODS
 # ---------------
