@@ -10,6 +10,7 @@ var __wave_number: int
 var __wave_size: int
 var __wave_creep_spawn_cooldown_time: float # Time in seconds 
 var __wave_creep_properties: Dictionary
+var __final_boss_spawnning: bool = false
 
 signal creep_spawned(creep: Creep)
 
@@ -46,6 +47,8 @@ func _spawn_wave_creep():
 	new_creep.position = __game_map.__main_tileset.map_to_local(__game_map.__path_start_point)
 	new_creep.position.x += 64 # I have no idea why this is fixes creep starting position
 	__game_map.add_child(new_creep)
+	if __final_boss_spawnning:
+		new_creep.FINAL_BOSS_MODE = true
 	# Set creep properties
 	new_creep.set_path_points(__game_map.creep_mapped_to_local_path_positions())
 	new_creep.set_starting_health(__wave_creep_properties[WaveConstants.WaveProperties.CREEP_HEALTH])
@@ -70,6 +73,18 @@ func initiate_new_wave():
 	__wave_size = __wave_creep_properties[WaveConstants.WaveProperties.WAVE_SIZE]
 	_spawn_wave_creep()
 	__wave_number += 1
+
+
+func initiate_final_boss_wave():
+	# Retireve wave properties
+	__wave_creep_properties = WaveConstants.FINAL_BOSS_WAVE
+	__total_wave_creeps_spawned = 0
+	__final_boss_spawnning = true
+	# Set wave spawn properties 
+	__wave_creep_preload = CreepConstants.CreepPreloads[__wave_creep_properties[WaveConstants.WaveProperties.CREEP_ID]]
+	__spawn_cooldown_timer.wait_time = __wave_creep_properties[WaveConstants.WaveProperties.SPAWN_COOLDOWN_TIME]
+	__wave_size = __wave_creep_properties[WaveConstants.WaveProperties.WAVE_SIZE]
+	_spawn_wave_creep()
 
 # *******
 # SIGNALS

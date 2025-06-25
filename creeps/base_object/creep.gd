@@ -364,7 +364,15 @@ func stun(duration: float):
 ## Reduces the creep's health by the specified amount.
 ## If the creep's health drops to or below 0, switches the creep's state to DYING.
 func take_damage(amount: int):
+	# Final boss creep tracks damage dealt to it
+	if FINAL_BOSS_MODE:
+		__curr_health += amount
+		return
+	
+	# Take damage
 	__curr_health -= amount
+	
+	# Switch state to dying if health has depleted
 	if __curr_health < 1:
 		_switch_state(States.DYING)
 

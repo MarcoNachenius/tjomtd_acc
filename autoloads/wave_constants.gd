@@ -11,6 +11,15 @@ enum WaveProperties {
 	POINTS_FOR_DEATH
 }
 
+const FINAL_BOSS_WAVE: Dictionary = {
+	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.ROBOT,
+	WaveProperties.CREEP_SPEED: 5,
+	WaveProperties.CREEP_HEALTH: 10,
+	WaveProperties.WAVE_SIZE: 1,
+	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0,
+	WaveProperties.POINTS_FOR_DEATH: 1
+}
+
 const WAVE_1: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.TREE,
 	WaveProperties.CREEP_SPEED: 5,
