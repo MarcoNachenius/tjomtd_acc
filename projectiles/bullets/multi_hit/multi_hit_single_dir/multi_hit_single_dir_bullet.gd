@@ -65,8 +65,8 @@ func _on_hurtbox_entered(area):
 # *******
 
 ## Sets the damage value for this bullet
-func set_damage(amount: int):
-    __damage = amount
+func set_damage(damage_amount: int):
+    __damage = damage_amount
 
 func set_infinite_hits(value: bool) -> void:
     __infinite_hits = value
