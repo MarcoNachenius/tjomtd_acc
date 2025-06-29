@@ -36,7 +36,7 @@ To get the game up and running, follow these simple steps:
 - **Zooming**: Use the scroll wheel to zoom in and out of the map.
 
 ### Build Mode
-- **Entering Build Mode**: Press the "Build Random Tower" button to enter build mode.
+- **Entering Build Mode**: Press the "Enter Build Mode" button to switch to build mode.
 - **Placing Towers**:
   - While in build mode, hold down the left mouse button to preview the tower placement area on the map.
   - The preview will show the surface of the tower with a color highlight:
