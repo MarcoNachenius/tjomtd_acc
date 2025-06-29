@@ -30,6 +30,7 @@ class_name RandomTowerBuildHUD
 	TOWER_UPGRADES_CONTAINER.ICE_SHARD_BUTTON: _on_ice_shard_button_pressed,
 	TOWER_UPGRADES_CONTAINER.EMP_STUNNER_BUTTON: _on_emp_stunner_button_pressed,
 	TOWER_UPGRADES_CONTAINER.GATLING_GUN_BUTTON: _on_gatling_gun_button_pressed,
+	TOWER_UPGRADES_CONTAINER.SHARP_SHOOTER_BUTTON: _on_sharp_shooter_button_pressed,
 }
 
 @onready var EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -44,6 +45,7 @@ class_name RandomTowerBuildHUD
 	EXTENDED_UPGRADES_CONTAINER.EMP_STUNNER_LVL_2_BUTTON: _on_emp_stunner_lvl_2_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.EMP_STUNNER_LVL_3_BUTTON: _on_emp_stunner_lvl_3_button_pressed,
 	EXTENDED_UPGRADES_CONTAINER.GATLING_GUN_LVL_2_BUTTON: _on_gatling_gun_lvl_2_button_pressed,
+	EXTENDED_UPGRADES_CONTAINER.SHARP_SHOOTER_LVL_2_BUTTON: _on_sharp_shooter_lvl_2_button_pressed,
 }
 
 @onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -674,6 +676,9 @@ func _on_emp_stunner_button_pressed():
 func _on_gatling_gun_button_pressed():
 	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.GATLING_GUN_LVL_1)
 
+func _on_sharp_shooter_button_pressed():
+	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_1)
+
 
 #                                 | Awaiting Selection Upgrade Tower Container |
 # =============================================================================================================
@@ -765,6 +770,8 @@ func _on_bismuth_level_5_button_pressed():
 
 #                                           |EXTENDED UPGRADE CONTAINER|
 # =============================================================================================================
+func _on_sharp_shooter_lvl_2_button_pressed():
+	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_2)
 
 func _on_tombstone_lvl_2_button_pressed():
 	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)

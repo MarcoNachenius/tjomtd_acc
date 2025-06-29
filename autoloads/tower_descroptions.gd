@@ -48,4 +48,6 @@ const TOWER_ID_TO_DESCRPTION_TEXT: Dictionary[TowerConstants.TowerIDs, String]  
     TowerConstants.TowerIDs.EMP_STUNNER_LVL_3: "Stuns two creeps in range for 2.0 seconds.",
     TowerConstants.TowerIDs.GATLING_GUN_LVL_1: "Rapidly fires bullet towards creep.",
     TowerConstants.TowerIDs.GATLING_GUN_LVL_2: "Rapidly fires bullet towards creep.\nBullet capable of hitting two creeps before it is destroyed.\nOnce the bullet hits a creep, it will ricochet in a random direction.",
+    TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_1: "Fires bullet towards creep.\nBullet will keep traveling in a straight line and hit all creeps in its path.",
+    TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_2: "Fires bullet towards creep.\nBullet will keep traveling in a straight line and hit all creeps in its path.",
 }

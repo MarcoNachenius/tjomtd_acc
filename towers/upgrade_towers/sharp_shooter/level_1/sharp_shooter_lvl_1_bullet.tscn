@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfymlon38ks65"]
+
+[ext_resource type="Script" uid="uid://cel5ol1rh1gir" path="res://projectiles/bullets/multi_hit/multi_hit_single_dir/multi_hit_single_dir_bullet.gd" id="1_jrefx"]
+[ext_resource type="Texture2D" uid="uid://jd5u7moqibjj" path="res://towers/upgrade_towers/sharp_shooter/level_1/sharp_shooter_lvl_1_bullet_sprite.png" id="2_agyq5"]
+
+[node name="SharpShooterLvl1Bullet" type="Node2D"]
+z_index = 4
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_jrefx")
+metadata/_custom_type_script = "uid://cel5ol1rh1gir"
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.599999, 0.299999)
+texture = ExtResource("2_agyq5")

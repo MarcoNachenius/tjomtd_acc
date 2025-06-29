@@ -51,6 +51,8 @@ enum ProjectileIDs {
 	SAM_SITE_LVL_3,
 	GATLING_GUN_LVL_1,
 	GATLING_GUN_LVL_2,
+	SHARP_SHOOTER_LVL_1,
+	SHARP_SHOOTER_LVL_2,
 }
 
 # ******************************************************************************************************************
@@ -66,6 +68,11 @@ enum SingleHitBullets {
 	KUNZITE_LVL_4,
 	LARIMAR_LVL_4,
 	GATLING_GUN_LVL_1,
+}
+
+enum MultiHitSingleDirBullets {
+	SHARP_SHOOTER_LVL_1,
+	SHARP_SHOOTER_LVL_2,
 }
 
 enum TargetedRicochetBullets {
@@ -95,6 +102,8 @@ enum BulletsForSpawner {
 	LARIMAR_LVL_4,
 	GATLING_GUN_LVL_1,
 	GATLING_GUN_LVL_2,
+	SHARP_SHOOTER_LVL_1,
+	SHARP_SHOOTER_LVL_2,
 }
 
 
@@ -176,6 +185,11 @@ var SINGLE_HIT_BULLET_LOADS: Dictionary[SingleHitBullets, PackedScene] = {
 	SingleHitBullets.GATLING_GUN_LVL_1: load("res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_bullet.tscn")
 }
 
+var MULTI_HIT_SINGLE_DIR_BULLET_LOADS: Dictionary[MultiHitSingleDirBullets, PackedScene] = {
+	MultiHitSingleDirBullets.SHARP_SHOOTER_LVL_1: load("res://towers/upgrade_towers/sharp_shooter/level_1/sharp_shooter_lvl_1_bullet.tscn"),
+	MultiHitSingleDirBullets.SHARP_SHOOTER_LVL_2: load("res://towers/upgrade_towers/sharp_shooter/level_2/sharp_shooter_lvl_2_bullet.tscn")
+}
+
 var TARGETED_RICOCHET_BULLET_LOADS: Dictionary[TargetedRicochetBullets, PackedScene] = {
 	TargetedRicochetBullets.BLACK_MARBLE_LVL_3: load("res://towers/buildable_towers/black_marble/level_3/black_marble_lvl_3_bullet.tscn"),
 	TargetedRicochetBullets.BLACK_MARBLE_LVL_5: load("res://towers/buildable_towers/black_marble/level_5/black_marble_lvl_5_bullet.tscn")
@@ -202,8 +216,9 @@ const BULLET_PATHS: Dictionary = {
 	BulletsForSpawner.KUNZITE_LVL_4: "res://towers/buildable_towers/kunzite/level_4/kunzite_lvl_4_bullet.tscn",
 	BulletsForSpawner.LARIMAR_LVL_4: "res://towers/buildable_towers/laminar/level_4/larimar_lvl_4_bullet.tscn",
 	BulletsForSpawner.GATLING_GUN_LVL_1: "res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_bullet.tscn",
-	BulletsForSpawner.GATLING_GUN_LVL_2: "res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_bullet.tscn"
-	
+	BulletsForSpawner.GATLING_GUN_LVL_2: "res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_bullet.tscn",
+	BulletsForSpawner.SHARP_SHOOTER_LVL_1: "res://towers/upgrade_towers/sharp_shooter/level_1/sharp_shooter_lvl_1_bullet.tscn",
+	BulletsForSpawner.SHARP_SHOOTER_LVL_2: "res://towers/upgrade_towers/sharp_shooter/level_2/sharp_shooter_lvl_2_bullet.tscn",
 }
 
 

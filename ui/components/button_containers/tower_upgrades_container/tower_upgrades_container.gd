@@ -9,6 +9,7 @@ class_name TowerUpgradesContainer
 @export var ICE_SHARD_BUTTON: Button
 @export var EMP_STUNNER_BUTTON: Button
 @export var GATLING_GUN_BUTTON: Button
+@export var SHARP_SHOOTER_BUTTON: Button
 
 @onready var ALL_TOWER_BUTTONS: Array[Button] = [
 	TOMBSTONE_BUTTON,
@@ -17,6 +18,7 @@ class_name TowerUpgradesContainer
 	ICE_SHARD_BUTTON,
 	EMP_STUNNER_BUTTON,
 	GATLING_GUN_BUTTON,
+	SHARP_SHOOTER_BUTTON,
 ]
 
 @onready var TOWER_ID_TO_BUTTON_DICT: Dictionary[TowerConstants.TowerIDs, Button] = {
@@ -26,6 +28,7 @@ class_name TowerUpgradesContainer
 	TowerConstants.TowerIDs.ICE_SHARD_LVL_1: ICE_SHARD_BUTTON,
 	TowerConstants.TowerIDs.EMP_STUNNER_LVL_1: EMP_STUNNER_BUTTON,
 	TowerConstants.TowerIDs.GATLING_GUN_LVL_1: GATLING_GUN_BUTTON,
+	TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_1: SHARP_SHOOTER_BUTTON,
 }
 
 func _ready():
@@ -42,6 +45,7 @@ func _validate_tower_button_exports():
 	assert(ICE_SHARD_BUTTON, "ICE_SHARD_BUTTON is not assigned in the inspector.")
 	assert(EMP_STUNNER_BUTTON, "EMP_STUNNER_BUTTON is not assigned in the inspector.")
 	assert(GATLING_GUN_BUTTON, "GATLING_GUN_BUTTON is not assigned in the inspector.")
+	assert(SHARP_SHOOTER_BUTTON, "SHARP_SHOOTER_BUTTON is not assigned in the inspector.")
 
 # PUBLIC METHODS
 # ==============

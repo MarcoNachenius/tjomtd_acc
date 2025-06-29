@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://be52rlgmkahsb" path="res://ui/components/button_containers/extended_upgrades_container/extended_upgrades_container.gd" id="1_wc636"]
 
-[node name="ExtendedUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_LVL_2_BUTTON", "TOMBSTONE_LVL_3_BUTTON", "SAM_SITE_LVL_2_BUTTON", "SAM_SITE_LVL_3_BUTTON", "LAVA_POOL_LVL_2_BUTTON", "LAVA_POOL_LVL_3_BUTTON", "ICE_SHARD_LVL_2_BUTTON", "ICE_SHARD_LVL_3_BUTTON", "EMP_STUNNER_LVL_2_BUTTON", "EMP_STUNNER_LVL_3_BUTTON", "GATLING_GUN_LVL_2_BUTTON")]
+[node name="ExtendedUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_LVL_2_BUTTON", "TOMBSTONE_LVL_3_BUTTON", "SAM_SITE_LVL_2_BUTTON", "SAM_SITE_LVL_3_BUTTON", "LAVA_POOL_LVL_2_BUTTON", "LAVA_POOL_LVL_3_BUTTON", "ICE_SHARD_LVL_2_BUTTON", "ICE_SHARD_LVL_3_BUTTON", "EMP_STUNNER_LVL_2_BUTTON", "EMP_STUNNER_LVL_3_BUTTON", "GATLING_GUN_LVL_2_BUTTON", "SHARP_SHOOTER_LVL_2_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wc636")
@@ -17,6 +17,7 @@ ICE_SHARD_LVL_3_BUTTON = NodePath("IceShardLvl3Button")
 EMP_STUNNER_LVL_2_BUTTON = NodePath("EMPStunnerLvl2Button")
 EMP_STUNNER_LVL_3_BUTTON = NodePath("EMPStunnerLvl3Button")
 GATLING_GUN_LVL_2_BUTTON = NodePath("GatlingGunLvl2Button")
+SHARP_SHOOTER_LVL_2_BUTTON = NodePath("SharpShooterLvl2Button")
 
 [node name="TombstoneLvl2Button" type="Button" parent="."]
 layout_mode = 2
@@ -79,4 +80,9 @@ Level 3"
 [node name="GatlingGunLvl2Button" type="Button" parent="."]
 layout_mode = 2
 text = "Gatling Gun
+Level 2"
+
+[node name="SharpShooterLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Sharp Shooter
 Level 2"

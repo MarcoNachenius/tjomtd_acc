@@ -50,7 +50,9 @@ enum TowerIDs {
     EMP_STUNNER_LVL_2,
     EMP_STUNNER_LVL_3,
     GATLING_GUN_LVL_1,
-    GATLING_GUN_LVL_2,    
+    GATLING_GUN_LVL_2,
+    SHARP_SHOOTER_LVL_1,
+    SHARP_SHOOTER_LVL_2,    
 }
 
 enum BuildTowerIDs {
@@ -105,6 +107,8 @@ enum UpgradeTowerIDs {
     EMP_STUNNER_LVL_3 = TowerIDs.EMP_STUNNER_LVL_3,
     GATLING_GUN_LVL_1 = TowerIDs.GATLING_GUN_LVL_1,
     GATLING_GUN_LVL_2 = TowerIDs.GATLING_GUN_LVL_2,
+    SHARP_SHOOTER_LVL_1 = TowerIDs.SHARP_SHOOTER_LVL_1,
+    SHARP_SHOOTER_LVL_2 = TowerIDs.SHARP_SHOOTER_LVL_2,
 }
 
 var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
@@ -125,6 +129,8 @@ var UPGRADE_TOWER_PRELOADS: Dictionary[UpgradeTowerIDs, PackedScene] = {
     UpgradeTowerIDs.EMP_STUNNER_LVL_3: load("res://towers/upgrade_towers/emp_stunner/level_3/emp_stunner_lvl_3.tscn"),
     UpgradeTowerIDs.GATLING_GUN_LVL_1: load("res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_tower.tscn"),
     UpgradeTowerIDs.GATLING_GUN_LVL_2: load("res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_tower.tscn"),
+    UpgradeTowerIDs.SHARP_SHOOTER_LVL_1: load("res://towers/upgrade_towers/sharp_shooter/level_1/sharp_shooter_lvl_1_tower.tscn"),
+    UpgradeTowerIDs.SHARP_SHOOTER_LVL_2: load("res://towers/upgrade_towers/sharp_shooter/level_2/sharp_shooter_lvl_2_tower.tscn"),
 }
 
 
@@ -211,6 +217,8 @@ var ALL_TOWER_LOADS: Dictionary[TowerIDs, PackedScene] = {
     TowerIDs.EMP_STUNNER_LVL_3: load("res://towers/upgrade_towers/emp_stunner/level_3/emp_stunner_lvl_3.tscn"),
     TowerIDs.GATLING_GUN_LVL_1: load("res://towers/upgrade_towers/gatling_gun/level_1/gatling_gun_lvl_1_tower.tscn"),
     TowerIDs.GATLING_GUN_LVL_2: load("res://towers/upgrade_towers/gatling_gun/level_2/gatling_gun_lvl_2_tower.tscn"),
+    TowerIDs.SHARP_SHOOTER_LVL_1: load("res://towers/upgrade_towers/sharp_shooter/level_1/sharp_shooter_lvl_1_tower.tscn"),
+    TowerIDs.SHARP_SHOOTER_LVL_2: load("res://towers/upgrade_towers/sharp_shooter/level_2/sharp_shooter_lvl_2_tower.tscn"),
 
 }
 
@@ -263,6 +271,8 @@ const TowerPrices: Dictionary[TowerIDs, int] = {
     TowerIDs.EMP_STUNNER_LVL_3: 100,
     TowerIDs.GATLING_GUN_LVL_1: 0,
     TowerIDs.GATLING_GUN_LVL_2: 50,
+    TowerIDs.SHARP_SHOOTER_LVL_1: 0,
+    TowerIDs.SHARP_SHOOTER_LVL_2: 50,
 }
 
 
@@ -315,6 +325,8 @@ const UPGRADES_INTO: Dictionary = {
     TowerIDs.EMP_STUNNER_LVL_3: EMP_STUNNER_LVL_3_UPGRADES_INTO,
     TowerIDs.GATLING_GUN_LVL_1: GATLING_GUN_LVL_1_UPGRADES_INTO,
     TowerIDs.GATLING_GUN_LVL_2: GATLING_GUN_LVL_2_UPGRADES_INTO,
+    TowerIDs.SHARP_SHOOTER_LVL_1: SHARP_SHOOTER_LVL_1_UPGRADES_INTO,
+    TowerIDs.SHARP_SHOOTER_LVL_2: SHARP_SHOOTER_LVL_2_UPGRADES_INTO,
 
 }
 
@@ -367,6 +379,8 @@ const REQUIRES_TOWERS: Dictionary = {
     TowerIDs.EMP_STUNNER_LVL_3: EMP_STUNNER_LVL_3_REQUIRES_TOWERS,
     TowerIDs.GATLING_GUN_LVL_1: GATLING_GUN_LVL_1_REQUIRES_TOWERS,
     TowerIDs.GATLING_GUN_LVL_2: GATLING_GUN_LVL_2_REQUIRES_TOWERS,
+    TowerIDs.SHARP_SHOOTER_LVL_1: SHARP_SHOOTER_LVL_1_REQUIRES_TOWERS,
+    TowerIDs.SHARP_SHOOTER_LVL_2: SHARP_SHOOTER_LVL_2_REQUIRES_TOWERS,
 }
 
 # COMPONENT LOADS
@@ -379,8 +393,8 @@ var TOWER_SURFACE_SPRITE_LOAD: PackedScene = load("res://towers/sprites/tower_su
 const BARRICADE_UPGRADES_INTO: Array[TowerIDs] = []
 const BLACK_MARBLE_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
 const BLACK_MARBLE_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.LAVA_POOL_LVL_1]
-const BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.GATLING_GUN_LVL_1]
-const BLACK_MARBLE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = []
+const BLACK_MARBLE_LVL_3_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.GATLING_GUN_LVL_1, TowerIDs.SHARP_SHOOTER_LVL_1]
+const BLACK_MARBLE_LVL_4_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SHARP_SHOOTER_LVL_1]
 const BLACK_MARBLE_LVL_5_UPGRADES_INTO: Array[TowerIDs] = []
 const BISMUTH_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.TOMBSTONE_LVL_1]
 const BISMUTH_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_LVL_1]
@@ -424,6 +438,8 @@ const EMP_STUNNER_LVL_2_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.EMP_STUNNER_L
 const EMP_STUNNER_LVL_3_UPGRADES_INTO: Array[TowerIDs] = []
 const GATLING_GUN_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.GATLING_GUN_LVL_2]
 const GATLING_GUN_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
+const SHARP_SHOOTER_LVL_1_UPGRADES_INTO: Array[TowerIDs] = [TowerIDs.SHARP_SHOOTER_LVL_2]
+const SHARP_SHOOTER_LVL_2_UPGRADES_INTO: Array[TowerIDs] = []
 
 
 # REQUIRE TOWERS
@@ -522,6 +538,15 @@ const GATLING_GUN_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
 
 const GATLING_GUN_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
     TowerIDs.GATLING_GUN_LVL_1: 1,
+}
+
+const SHARP_SHOOTER_LVL_1_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.BLACK_MARBLE_LVL_3: 1,
+    TowerIDs.BLACK_MARBLE_LVL_4: 1,
+}
+
+const SHARP_SHOOTER_LVL_2_REQUIRES_TOWERS: Dictionary[TowerIDs, int] = {
+    TowerIDs.SHARP_SHOOTER_LVL_1: 1,
 }
 
 #                             | AWAITING SELECTION UPGRADE |
@@ -783,4 +808,6 @@ const TOWER_NAMES: Dictionary[TowerIDs, String] = {
     TowerIDs.EMP_STUNNER_LVL_3: "EMP Stunner Level 3",
     TowerIDs.GATLING_GUN_LVL_1: "Gatling Gun Level 1",
     TowerIDs.GATLING_GUN_LVL_2: "Gatling Gun Level 2",
+    TowerIDs.SHARP_SHOOTER_LVL_1: "Sharp Shooter Level 1",
+    TowerIDs.SHARP_SHOOTER_LVL_2: "Sharp Shooter Level 2",
 }

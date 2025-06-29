@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bohavvvdxd40g"]
+
+[ext_resource type="Script" uid="uid://fe4axwxgb68h" path="res://projectile_spawners/single_bullet/multi_hit/multi_hit_single_dir_bullet/multi_hit_single_dir_bullet_spawner.gd" id="1_ja0k5"]
+
+[node name="MultiHitSingleDirBulletSpawner" type="Node2D"]
+script = ExtResource("1_ja0k5")
+metadata/_custom_type_script = "uid://kaif82mfoojg"
