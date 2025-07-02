@@ -29,6 +29,9 @@ class_name TargetedRicochetBulletSpawner
 @export var __aoe_slow_duration: float
 
 func _launch_projectiles():
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+	
 	# Create bullet
 	var new_bullet: TargetedRicochetBullet = ProjectileConstants.TARGETED_RICOCHET_BULLET_LOADS[BULLET_PRELOAD].instantiate()
 	# Parameters that require 

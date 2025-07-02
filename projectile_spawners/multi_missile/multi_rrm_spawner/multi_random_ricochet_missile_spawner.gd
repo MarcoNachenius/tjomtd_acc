@@ -40,6 +40,9 @@ class_name MultiRandomRicochetMissileSpawner
 @export var __total_ricochets: int = 2
 
 func _launch_projectiles():
+    # Play sound effect
+    play_launch_projectile_sound_effect()
+	
     var missiles_launched: int = 0
     for creep in __hurtbox.get_detectable_creeps_in_range():
         # Break loop if max number of tagets per launch has been reached

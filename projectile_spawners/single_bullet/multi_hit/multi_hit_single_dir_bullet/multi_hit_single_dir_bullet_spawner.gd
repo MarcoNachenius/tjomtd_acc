@@ -37,6 +37,9 @@ class_name MultiHitSingleDirBulletSpawner
 @export var __aoe_slow_duration: float
 
 func _launch_projectiles():
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+	
 	# Create bullet
 	var new_bullet: MultiHitSingleDirBullet = ProjectileConstants.MULTI_HIT_SINGLE_DIR_BULLET_LOADS[BULLET_PRELOAD].instantiate()
 	

@@ -38,6 +38,9 @@ func _execute_extended_onready_commands():
     assert(__bullets_per_launch or __infinite_targets_per_launch, "No bullets per launch has been provided and infinite targets is set to false")
 
 func _launch_projectiles():
+    # Play sound effect
+    play_launch_projectile_sound_effect()
+	
     var detectable_creeps: Array[Creep] = __hurtbox.get_detectable_creeps_in_range()
     var num_of_bullets_launched: int = 0
     for creep in detectable_creeps:

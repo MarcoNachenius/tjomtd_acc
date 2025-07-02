@@ -21,6 +21,9 @@ enum FormationPolicy {
 
 
 func _launch_projectiles():
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+	
 	assert(__target, "No target for launch has been set")
 	# TARGETED formation
 	if __formation_policy == FormationPolicy.TARGETED:

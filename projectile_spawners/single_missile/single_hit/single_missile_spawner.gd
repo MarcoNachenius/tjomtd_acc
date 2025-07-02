@@ -38,6 +38,9 @@ class_name SingleMissileSpawner
 @export var __aoe_slow_duration: float
 
 func _launch_projectiles():
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+
 	# Create bullet
 	var new_missile: SingleHitMissile = ProjectileConstants.SINGLE_HIT_MISSILE_LOADS[MISSILE_PRELOAD].instantiate()
 

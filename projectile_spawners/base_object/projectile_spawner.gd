@@ -19,6 +19,7 @@ enum TargetingPolicies {
 @export var __detection_range: int
 @export var __enforce_targeting_policy: bool
 @export var __targeting_policy: TargetingPolicies
+@export var LAUNCH_PROJECTILE_AUDIO: AudioStreamPlayer2D
 
 # LOCALS
 var __cooldown_timer: Timer
@@ -36,6 +37,17 @@ func _ready():
 	self._create_cooldown_timer()
 	__launch_cooled_down = true
 	_execute_extended_onready_commands()
+
+# *******
+# PUBLICS
+# *******
+## Plays the launch projectile sound effect if it exists.
+## This method should be called in the _launch_projectiles method
+## of the derived class.
+func play_launch_projectile_sound_effect():
+	if LAUNCH_PROJECTILE_AUDIO:
+		LAUNCH_PROJECTILE_AUDIO.play()
+
 
 # ********
 # PRIVATES
@@ -92,6 +104,7 @@ func _update_target_selection():
 func _start_cooldown_timer():
 	__cooldown_timer.start()
 	__launch_cooled_down = false
+
 
 # *******
 # SIGNALS

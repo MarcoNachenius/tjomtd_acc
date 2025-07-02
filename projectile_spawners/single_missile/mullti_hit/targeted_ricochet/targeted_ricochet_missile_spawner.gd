@@ -29,6 +29,9 @@ class_name TargetedRicochetMissileSpawner
 @export var __aoe_damage_amount: int
 
 func _launch_projectiles():
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+	
 	# Create missile
 	var new_missile: TargetedRicochetMissile = ProjectileConstants.TARGETED_RICOCHET_MISSILE_LOADS[MISSILE_LOAD].instantiate()
 	add_child(new_missile)

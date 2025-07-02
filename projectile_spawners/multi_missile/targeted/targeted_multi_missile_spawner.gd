@@ -33,6 +33,9 @@ var __missile_load
 
 
 func _launch_projectiles():
+    # Play sound effect
+    play_launch_projectile_sound_effect()
+	
     var number_of_missiles_launched: int = 0
     for detectable_creep in __hurtbox.get_detectable_creeps_in_range():
         # Check if the maximum number of missiles has been reached

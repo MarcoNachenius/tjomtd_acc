@@ -28,6 +28,9 @@ class_name RandomRicochetBulletSpawner
 
 
 func _launch_projectiles():
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+	
 	# Create bullet
 	var new_bullet: RandomRicochetBullet = ProjectileConstants.RANDOM_RICOCHET_BULLET_LOADS[BULLET_PRELOAD].instantiate()
 
