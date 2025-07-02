@@ -16,6 +16,8 @@ signal end_of_path_reached(creep: Creep)
 @export var __points_for_death: int
 @export var SPEED_TO_MOVEMENT_FPS_RATIO: float = 0.5
 @export var FINAL_BOSS_MODE: bool = false
+@export var TAKE_DAMAGE_AUDIO: AudioStreamPlayer2D
+@export var DEATH_AUDIO: AudioStreamPlayer2D
 
 var __curr_compass_direction: CreepConstants.CompassDirections
 var __curr_health: int
@@ -315,6 +317,9 @@ func _switch_state(state: States):
 	# Handle state-specific logic based on the new state
 	match state:
 		States.DYING:
+			# Play death sound effect
+			if DEATH_AUDIO:
+				DEATH_AUDIO.play()
 			creep_death.emit(self)
 			__death_in_progress = true
 			__detectable = false
@@ -363,7 +368,7 @@ func stun(duration: float):
 
 ## Reduces the creep's health by the specified amount.
 ## If the creep's health drops to or below 0, switches the creep's state to DYING.
-func take_damage(amount: int):
+func take_damage(amount: int, playSoundEffect: bool = true):
 	# Final boss creep tracks damage dealt to it
 	if FINAL_BOSS_MODE:
 		__curr_health += amount
@@ -371,6 +376,10 @@ func take_damage(amount: int):
 	
 	# Take damage
 	__curr_health -= amount
+
+	# Play take damae sound effect
+	if TAKE_DAMAGE_AUDIO and playSoundEffect:
+		TAKE_DAMAGE_AUDIO.play()
 	
 	# Switch state to dying if health has depleted
 	if __curr_health < 1:

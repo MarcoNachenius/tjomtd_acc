@@ -12,7 +12,7 @@ enum WaveProperties {
 }
 
 const FINAL_BOSS_WAVE: Dictionary = {
-	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.ROBOT,
+	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.TREE,
 	WaveProperties.CREEP_SPEED: 5,
 	WaveProperties.CREEP_HEALTH: 10,
 	WaveProperties.WAVE_SIZE: 1,

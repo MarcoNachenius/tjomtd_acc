@@ -1,4 +1,4 @@
-[gd_scene load_steps=237 format=3 uid="uid://brqdb2l5kktuo"]
+[gd_scene load_steps=239 format=3 uid="uid://brqdb2l5kktuo"]
 
 [ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_m02ng"]
 [ext_resource type="Texture2D" uid="uid://dv5ruqnc3uv58" path="res://creeps/tree/animation_sprites/move/move_e.png" id="2_jcuag"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://dip1dyjhxed45" path="res://creeps/tree/animation_sprites/death/death_se.png" id="23_80owb"]
 [ext_resource type="Texture2D" uid="uid://buio8p7ux07p0" path="res://creeps/tree/animation_sprites/death/death_sw.png" id="24_yux4x"]
 [ext_resource type="Texture2D" uid="uid://cpg4mgp58kir5" path="res://creeps/tree/animation_sprites/death/death_w.png" id="25_e7g3u"]
+[ext_resource type="AudioStream" uid="uid://bi6r1qegydbse" path="res://creeps/tree/tree_take_damage.wav" id="26_3o2di"]
+[ext_resource type="AudioStream" uid="uid://b4h0ev5v82dru" path="res://creeps/tree/tree_death.wav" id="27_lkfts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28i4m"]
 atlas = ExtResource("2_jcuag")
@@ -1611,12 +1613,14 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Tree" type="Node2D" node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS")]
+[node name="Tree" type="Node2D" node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS", "TAKE_DAMAGE_AUDIO", "DEATH_AUDIO")]
 script = ExtResource("1_m02ng")
 DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 SPEED_TO_MOVEMENT_FPS_RATIO = 0.3
+TAKE_DAMAGE_AUDIO = NodePath("TakeDamageAudio")
+DEATH_AUDIO = NodePath("DeathAudio")
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
@@ -1632,3 +1636,9 @@ animation = &"idle_w"
 visible = false
 sprite_frames = SubResource("SpriteFrames_tkrii")
 animation = &"death_w"
+
+[node name="TakeDamageAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_3o2di")
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("27_lkfts")

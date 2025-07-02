@@ -16,14 +16,16 @@ func _launch_projectiles():
 	# Handle damage to all creeps in range
 	if DAMAGE_ALL_CREEPS_IN_RANGE:
 		for viable_creep in available_targets:
-			viable_creep.take_damage(__damage)
+			# Damage creep without playing sound effect
+			viable_creep.take_damage(__damage, false)
 		return
 	
 	# Handle damage to specified number of creeps
 	if !DAMAGE_ALL_CREEPS_IN_RANGE:
 		var num_of_creeps_damaged: int = 0
 		for viable_creep in available_targets:
-			viable_creep.take_damage(__damage)
+			# Damage creep without playing sound effect
+			viable_creep.take_damage(__damage, false)
 			num_of_creeps_damaged += 1
 			if num_of_creeps_damaged >= MAX_SIMULTANEOUS_TARGETS:
 				break
