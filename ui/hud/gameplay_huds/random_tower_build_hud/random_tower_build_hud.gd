@@ -359,6 +359,8 @@ func _on_start_new_wave_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Hide start new wave button
 	START_NEW_WAVE_BUTTON.visible = false
+	# Ensure remove barricade button is hidden in case barricade is selected
+	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
