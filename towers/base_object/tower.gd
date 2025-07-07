@@ -13,7 +13,7 @@ enum TowerOrigin {
 }
 
 # ORDERING CONTSTANTS
-const TOWER_Z_INDEX: int = 3
+const TOWER_Z_INDEX: int = 4
 const TOWER_Z_AS_RELATIVE: bool = true
 const TOWER_SPRITE_Z_INDEX: int = 1
 const TOWER_SPRITE_Z_AS_RELATIVE: bool = true
