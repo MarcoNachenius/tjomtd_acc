@@ -13,7 +13,6 @@ signal end_of_path_reached(creep: Creep)
 @export var DEATH_ANIMATIONS: AnimatedSprite2D
 @export var IDLE_ANIMATIONS: AnimatedSprite2D
 @export var MOVEMENT_ANIMATIONS: AnimatedSprite2D
-@export var __points_for_death: int
 @export var SPEED_TO_MOVEMENT_FPS_RATIO: float = 0.5
 @export var FINAL_BOSS_MODE: bool = false
 @export var TAKE_DAMAGE_AUDIO: AudioStreamPlayer2D
@@ -32,6 +31,7 @@ var __hitbox: CreepHitbox
 var __is_wave_creep: bool
 var __num_of_active_stun_effects: int
 var __num_of_active_slow_effects: int
+var __points_for_death: int
 var __path_compass_directions: Array[CreepConstants.CompassDirections]
 var __path_points: Array[Vector2i]
 var __path_velocities: Array[Vector2]
