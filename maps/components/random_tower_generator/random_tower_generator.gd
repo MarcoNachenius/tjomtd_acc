@@ -106,3 +106,9 @@ func get_curr_upgrade_cost() -> int:
 
 func get_curr_level() -> int:
 	return __curr_level
+
+## Loads the current level's buildable tower preloads.
+func load_level(level: int) -> void:
+	assert(level >= 1 and level <= MAX_LEVEL, "Invalid level: %d" % level)
+	for __ in range(level - 1):
+		upgrade_level()

@@ -51,8 +51,8 @@ const WAVE_3: Dictionary = {
 const WAVE_4: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.CENTIPEDE,
 	WaveProperties.CREEP_SPEED: 5,
-	WaveProperties.CREEP_HEALTH: 130,
-	WaveProperties.WAVE_SIZE: 54,
+	WaveProperties.CREEP_HEALTH: 10,
+	WaveProperties.WAVE_SIZE: 25,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 0.2,
 	WaveProperties.POINTS_FOR_DEATH: 4
 }

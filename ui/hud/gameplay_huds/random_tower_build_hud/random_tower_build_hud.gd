@@ -494,10 +494,15 @@ func _on_wave_completed(total_waves_completed: int):
 		# Remove any remaining projectiles still on map
 		GAME_MAP.remove_remaining_projectiles()
 		GAME_MAP.CREEP_SPAWNER.initiate_final_boss_wave()
+		# Remove save file from disk
+		GameDataStorage.delete_save_file()
 		return
 
 	# Remove any remaining projectiles still on map
 	GAME_MAP.remove_remaining_projectiles()
+
+	# Save game
+	GAME_MAP.save_game()
 
 	# UPDATE CONTAINER DISPLAY
 	# Update tower count

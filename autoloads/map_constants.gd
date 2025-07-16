@@ -4,9 +4,9 @@ const MAP_TILE_WIDTH: int = 256
 const MAP_TILE_HEIGHT: int = 128
 
 enum MapID {
-    LINE_TD,
-    GEM_TD,
-    BLANK_MAP
+    LINE_TD = 1,
+    GEM_TD = 2,
+    BLANK_MAP = 3
 }
 
 # BLANK MAP

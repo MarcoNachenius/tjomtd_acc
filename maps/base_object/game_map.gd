@@ -143,7 +143,6 @@ func convert_tower_to_barricade(tower: Tower):
 	# Ensure that the tower is in a list
 	assert(__towers_on_map.has(tower) or __towers_awaiting_selection.has(tower), "Tower not in __towers_on_map list")
 	var tower_placement_grid_coord: Vector2i = tower.get_placement_grid_coordinate()
-	var tower_global_position: Vector2 = tower.global_position
 
 	# EITHER remove tower from __towers_awaiting_selection
 	if __towers_awaiting_selection.has(tower):
@@ -157,22 +156,7 @@ func convert_tower_to_barricade(tower: Tower):
 	# Remove tower scene from map
 	tower.queue_free()
 
-	# Place barricade
-	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
-	add_child(new_barricade)
-
-	# Ensure barricades do not appear as towers awaiting selection
-	new_barricade.switch_state(Tower.States.BUILT)
-
-	# Assign same placement grid coordinate and global position as the tower
-	new_barricade.set_placement_grid_coordinate(tower_placement_grid_coord)
-	new_barricade.global_position = tower_global_position
-
-	# Add barricade to list of those on map
-	__barricades_on_map.append(new_barricade)
-
-	# Add barricade placement coords 
-	_add_tower_to_placement_grid_coords_dict(new_barricade, __placement_grid_coords_for_barricades)
+	place_barricade(tower_placement_grid_coord)
 
 func remove_barricade(barricade: Tower):
 	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
@@ -207,6 +191,56 @@ func remove_remaining_projectiles() -> void:
 	for child in get_children():
 		if child is Projectile:
 			child.queue_free()
+
+## Updates current save file and writes it to disk.
+func save_game():
+	# Game map data
+	# Balance
+	GameDataStorage.ACTIVE_GAME_DATA.set_remaining_balance(__curr_balance)
+	# Remaining lives
+	GameDataStorage.ACTIVE_GAME_DATA.set_remaining_lives(__remaining_lives)
+	# Barricades
+	var barricade_positions: Array[Vector2i] = []
+	for barricade in __barricades_on_map:
+		barricade_positions.append(barricade.get_placement_grid_coordinate())
+	GameDataStorage.ACTIVE_GAME_DATA.set_barricade_positions(barricade_positions)
+	# Towers
+	var tower_postion_to_tower_id: Dictionary[Vector2i, int] = {}
+	for tower in __placement_grid_coords_for_towers.values():
+		tower_postion_to_tower_id[tower.get_placement_grid_coordinate()] = tower.TOWER_ID
+	GameDataStorage.ACTIVE_GAME_DATA.set_placed_towers(tower_postion_to_tower_id)
+	# Creep spawner data
+	CREEP_SPAWNER.update_wave_data()
+	# Build level
+	GameDataStorage.ACTIVE_GAME_DATA.build_level = RANDOM_TOWER_GENERATOR.get_curr_level()
+	# Write updated data to disk
+	GameDataStorage.save_game_data()
+
+## Loads game data from disk.
+func load_game():
+	# Place towers
+	var tower_coord_to_id_dict: Dictionary[Vector2i, int] = GameDataStorage.ACTIVE_GAME_DATA.get_placed_towers()
+	for placement_coord in tower_coord_to_id_dict.keys():
+		var tower_id = tower_coord_to_id_dict[placement_coord]
+		place_built_tower(placement_coord, tower_id)
+	
+	# Place barricades
+	for barricade_placement_coord in GameDataStorage.ACTIVE_GAME_DATA.get_barricade_positions():
+		place_barricade(barricade_placement_coord, true)
+	
+	# Build level
+	RANDOM_TOWER_GENERATOR.load_level(GameDataStorage.ACTIVE_GAME_DATA.build_level)
+
+	# Remaining lives
+	__remaining_lives = GameDataStorage.ACTIVE_GAME_DATA.get_remaining_lives()
+
+	# Balance
+	__curr_balance = GameDataStorage.ACTIVE_GAME_DATA.get_remaining_balance()
+
+	# Wave number
+	CREEP_SPAWNER.load_wave_data()
+	__total_waves_completed = GameDataStorage.ACTIVE_GAME_DATA.wave_number
+
 
 # ---------------
 # PRIVATE METHODS
@@ -767,8 +801,59 @@ func _set_map_tile_impediments():
 		for point in impediment_points:
 			__path_impediments.append(point)
 
+## Instantiates a barraciade at the specified grid position and updates the lists/dicts accordingly.
+## Primarily used for loading game and debugging. 
+func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = false):
+	if addImpedimentPoints:
+		place_tower_impediment_points(placementGridPoint)
+	# Place barricade
+	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
+	add_child(new_barricade)
 
-## Instantiates a new tower at the specified grid position and adds it as a child to the current node.
+	# Ensure barricades do not appear as towers awaiting selection
+	new_barricade.switch_state(Tower.States.BUILT)
+
+	# Assign same placement grid coordinate and global position as the tower
+	new_barricade.set_placement_grid_coordinate(placementGridPoint)
+	new_barricade.position = __placement_grid.map_to_local(placementGridPoint)
+
+	# Add barricade to list of those on map
+	__barricades_on_map.append(new_barricade)
+
+	# Add barricade placement coords 
+	_add_tower_to_placement_grid_coords_dict(new_barricade, __placement_grid_coords_for_barricades)
+
+## Instantiates a new tower at the specified grid position and adds it as a built tower.
+## Does NOT handle barricades. Does not emit any signals. Primarily used for loading game and debugging.  
+func place_built_tower(placementGridPoint: Vector2i, towerID: int):
+	# Place tower impediment points
+	place_tower_impediment_points(placementGridPoint)
+	
+	__build_tower_preload = TowerConstants.ALL_TOWER_LOADS[towerID]
+
+	# Create new tower instance
+	var new_tower: Tower = __build_tower_preload.instantiate()
+	new_tower.set_placement_grid_coordinate(placementGridPoint)
+	add_child(new_tower)
+	new_tower.position = __placement_grid.map_to_local(placementGridPoint)
+	
+
+	# Update tower placement grid dict
+	_add_tower_to_placement_grid_coords_dict(new_tower, __placement_grid_coords_for_towers)
+
+	# Create tower selection area
+	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
+	new_tower_selection_area.set_referenced_tower(new_tower)
+	new_tower.add_child(new_tower_selection_area)
+	new_tower.set_selection_area(new_tower_selection_area)
+
+	# Ensure tower is awaiting selection
+	new_tower.switch_state(Tower.States.BUILT)
+
+	# Add to list of towers awaiting selection
+	__towers_on_map.append(new_tower)
+
+## Instantiates a new tower at the specified grid position and adds it as a tower awaiting selection.
 func place_tower(placementGridPoint: Vector2i):
 	# Place tower impediment points
 	place_tower_impediment_points(placementGridPoint)
