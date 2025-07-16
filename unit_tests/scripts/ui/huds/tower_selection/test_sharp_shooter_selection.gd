@@ -43,7 +43,7 @@ func test_create_blank_map():
 	test_map.queue_free()
 
 
-func test_sam_site_lvl_1_selection():
+func test_sharp_shooter_lvl_1_selection():
 	# ================================================================
 	#                     ** CREATE BLANK MAP **
 	# ================================================================
@@ -83,18 +83,18 @@ func test_sam_site_lvl_1_selection():
 	await get_tree().process_frame
 
 	# Create towers required for upgrade to tombstone
-	var sam_site_lvl_1: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_1].instantiate()
-	test_game_map.add_child(sam_site_lvl_1)
-	sam_site_lvl_1.switch_state(Tower.States.BUILT)
+	var sharp_shooter_lvl_1: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_1].instantiate()
+	test_game_map.add_child(sharp_shooter_lvl_1)
+	sharp_shooter_lvl_1.switch_state(Tower.States.BUILT)
 
 	# Create simulated list of towers and assign to game map
-	var test_towers_awaiting_selection: Array[Tower] = [sam_site_lvl_1]
+	var test_towers_awaiting_selection: Array[Tower] = [sharp_shooter_lvl_1]
 	test_game_map.__towers_on_map = test_towers_awaiting_selection
 
-	assert_not_null(sam_site_lvl_1.PRIMARY_PROJECTILE_SPAWNER, "Tower has primary projectile spawner assigned.")
+	assert_not_null(sharp_shooter_lvl_1.PRIMARY_PROJECTILE_SPAWNER, "Tower has primary projectile spawner assigned.")
 
 	# Simulate tower being selected
-	test_game_map.tower_selected.emit(sam_site_lvl_1)
+	test_game_map.tower_selected.emit(sharp_shooter_lvl_1)
 
 	# Process frame to ensure the tower selected signal is processed
 	await get_tree().process_frame
@@ -102,11 +102,11 @@ func test_sam_site_lvl_1_selection():
 	# Clean up
 	test_game_map.queue_free()
 	test_random_tower_build_hud.queue_free()
-	sam_site_lvl_1.queue_free()
+	sharp_shooter_lvl_1.queue_free()
 	# Process frame to ensure all objects are cleaned up
 	await get_tree().process_frame
 
-func test_sam_site_lvl_2_selection():
+func test_sharp_shooter_lvl_2_selection():
 	# ================================================================
 	#                     ** CREATE BLANK MAP **
 	# ================================================================
@@ -146,18 +146,18 @@ func test_sam_site_lvl_2_selection():
 	await get_tree().process_frame
 
 	# Create towers required for upgrade to tombstone
-	var sam_site_lvl_2: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_2].instantiate()
-	test_game_map.add_child(sam_site_lvl_2)
-	sam_site_lvl_2.switch_state(Tower.States.BUILT)
+	var sharp_shooter_lvl_2: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_2].instantiate()
+	test_game_map.add_child(sharp_shooter_lvl_2)
+	sharp_shooter_lvl_2.switch_state(Tower.States.BUILT)
 
 	# Create simulated list of towers and assign to game map
-	var test_towers_awaiting_selection: Array[Tower] = [sam_site_lvl_2]
+	var test_towers_awaiting_selection: Array[Tower] = [sharp_shooter_lvl_2]
 	test_game_map.__towers_on_map = test_towers_awaiting_selection
 
-	assert_not_null(sam_site_lvl_2.PRIMARY_PROJECTILE_SPAWNER, "Tower has primary projectile spawner assigned.")
+	assert_not_null(sharp_shooter_lvl_2.PRIMARY_PROJECTILE_SPAWNER, "Tower has primary projectile spawner assigned.")
 
 	# Simulate tower being selected
-	test_game_map.tower_selected.emit(sam_site_lvl_2)
+	test_game_map.tower_selected.emit(sharp_shooter_lvl_2)
 
 	# Process frame to ensure the tower selected signal is processed
 	await get_tree().process_frame
@@ -165,6 +165,6 @@ func test_sam_site_lvl_2_selection():
 	# Clean up
 	test_game_map.queue_free()
 	test_random_tower_build_hud.queue_free()
-	sam_site_lvl_2.queue_free()
+	sharp_shooter_lvl_2.queue_free()
 	# Process frame to ensure all objects are cleaned up
 	await get_tree().process_frame
