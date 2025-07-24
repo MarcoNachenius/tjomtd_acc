@@ -26,12 +26,12 @@ const WAVE_1: Dictionary = {
 	WaveProperties.CREEP_HEALTH: 10,
 	WaveProperties.WAVE_SIZE: 10,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 1.2,
-	WaveProperties.POINTS_FOR_DEATH: 1
+	WaveProperties.POINTS_FOR_DEATH: 2
 }
 
 const WAVE_2: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.HUMAN,
-	WaveProperties.CREEP_SPEED: 4,
+	WaveProperties.CREEP_SPEED: 3,
 	WaveProperties.CREEP_HEALTH: 15,
 	WaveProperties.WAVE_SIZE: 12,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 1.1,
@@ -41,7 +41,7 @@ const WAVE_2: Dictionary = {
 const WAVE_3: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.RED_SPIDER,
 	WaveProperties.CREEP_SPEED: 5,
-	WaveProperties.CREEP_HEALTH: 22,
+	WaveProperties.CREEP_HEALTH: 18,
 	WaveProperties.WAVE_SIZE: 12,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 1.0,
 	WaveProperties.POINTS_FOR_DEATH: 3
@@ -52,16 +52,16 @@ const WAVE_4: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.CENTIPEDE,
 	WaveProperties.CREEP_SPEED: 5,
 	WaveProperties.CREEP_HEALTH: 10,
-	WaveProperties.WAVE_SIZE: 25,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 0.2,
+	WaveProperties.WAVE_SIZE: 17,
+	WaveProperties.SPAWN_COOLDOWN_TIME: 0.5,
 	WaveProperties.POINTS_FOR_DEATH: 4
 }
 
 const WAVE_5: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.PUMPKIN,
 	WaveProperties.CREEP_SPEED: 6,
-	WaveProperties.CREEP_HEALTH: 150,
-	WaveProperties.WAVE_SIZE: 12,
+	WaveProperties.CREEP_HEALTH: 20,
+	WaveProperties.WAVE_SIZE: 10,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 0.9,
 	WaveProperties.POINTS_FOR_DEATH: 5
 }
@@ -69,7 +69,7 @@ const WAVE_5: Dictionary = {
 const WAVE_6: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.HUMAN,
 	WaveProperties.CREEP_SPEED: 6,
-	WaveProperties.CREEP_HEALTH: 170,
+	WaveProperties.CREEP_HEALTH: 35,
 	WaveProperties.WAVE_SIZE: 12,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 0.9,
 	WaveProperties.POINTS_FOR_DEATH: 6
@@ -78,7 +78,7 @@ const WAVE_6: Dictionary = {
 const WAVE_7: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.RED_SPIDER,
 	WaveProperties.CREEP_SPEED: 6,
-	WaveProperties.CREEP_HEALTH: 190,
+	WaveProperties.CREEP_HEALTH: 50,
 	WaveProperties.WAVE_SIZE: 12,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 0.9,
 	WaveProperties.POINTS_FOR_DEATH: 7
@@ -87,7 +87,7 @@ const WAVE_7: Dictionary = {
 const WAVE_8: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.BLUE_SPIDER,
 	WaveProperties.CREEP_SPEED: 6,
-	WaveProperties.CREEP_HEALTH: 210,
+	WaveProperties.CREEP_HEALTH: 70,
 	WaveProperties.WAVE_SIZE: 12,
 	WaveProperties.SPAWN_COOLDOWN_TIME: 0.9,
 	WaveProperties.POINTS_FOR_DEATH: 8
@@ -96,10 +96,10 @@ const WAVE_8: Dictionary = {
 const WAVE_9: Dictionary = {
 	WaveProperties.CREEP_ID: CreepConstants.CreepIDs.CENTIPEDE,
 	WaveProperties.CREEP_SPEED: 6,
-	WaveProperties.CREEP_HEALTH: 230,
-	WaveProperties.WAVE_SIZE: 59,
-	WaveProperties.SPAWN_COOLDOWN_TIME: 0.2,
-	WaveProperties.POINTS_FOR_DEATH: 9
+	WaveProperties.CREEP_HEALTH: 30,
+	WaveProperties.WAVE_SIZE: 40,
+	WaveProperties.SPAWN_COOLDOWN_TIME: 0.4,
+	WaveProperties.POINTS_FOR_DEATH: 5
 }
 
 const WAVE_10: Dictionary = {
