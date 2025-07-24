@@ -119,7 +119,7 @@ func _ready():
 func _unhandled_input(event):
 	# Handle build mode
 	if __curr_state == States.BUILD_MODE:
-		_handle_build_mode()
+		_handle_build_mode(event)
 	if __curr_state == States.NAVIGATION_MODE:
 		_handle_navigation_mode()
 
@@ -186,11 +186,30 @@ func remove_remaining_creeps() -> void:
 		if child is Creep:
 			child.queue_free()
 
-## Removes all projectiles from the map
+## Removes all Projectile instances from the scene tree, including those nested under other nodes.
+##
+## Behavior:
+##     • Starts at the current node and recursively traverses all descendants.
+##     • Frees any node that is an instance of the Projectile class or one of its subclasses.
 func remove_remaining_projectiles() -> void:
-	for child in get_children():
+	_remove_projectiles_recursive(self)
+
+
+## Recursively traverses the scene tree starting from the given node and frees any Projectile instances found.
+##
+## Parameters:
+##     node (Node): The node from which to begin the recursive search.
+##
+## Notes:
+##     • This function uses depth-first traversal.
+##     • It relies on the Projectile base class being properly registered using `class_name Projectile`.
+func _remove_projectiles_recursive(node: Node) -> void:
+	for child in node.get_children():
+		# Check if the current child is an instance of Projectile or a subclass
 		if child is Projectile:
 			child.queue_free()
+		# Recursively search this child's children
+		_remove_projectiles_recursive(child)
 
 ## Updates current save file and writes it to disk.
 func save_game():
@@ -543,18 +562,24 @@ func get_tower_from_global_position(globalPosition: Vector2) -> Tower:
 
 
 ## Governs validity surface hightlights and impediment placements on map
-func _handle_build_mode():
+func _handle_build_mode(event: InputEvent = null):
 	match __impediment_placement_type:
 		ImpedimentPlacementTypes.SINGLE_POINT:
 			self.handle_single_point_impediment_placement()
 		
 		ImpedimentPlacementTypes.TOWER:
-			self._handle_tower_placement()
+			self._handle_tower_placement(event)
 
 ## Handles the placement of a tower impediment by snapping the position to the grid and 
 ## displaying a placement highlight. The highlight changes color based on whether the 
 ## placement is valid. This ensures visual feedback for the player when positioning towers.
-func _handle_tower_placement():
+func _handle_tower_placement(event: InputEvent = null):
+	# Do nothing if touch has been released when run on Android
+	if event is InputEventScreenTouch and event.is_released():
+		__valid_build_position_surface_highlight.visible = false
+		__invalid_build_position_surface_highlight.visible = false
+		return
+
 	# Do nothing if select button is not pressed down
 	if !Input.is_action_pressed("select") and !Input.is_action_just_released("select"):
 		__valid_build_position_surface_highlight.visible = false
@@ -1177,5 +1202,5 @@ func subtract_funds(amount: int):
 	balance_altered.emit(__curr_balance)
 
 # TODO
-func handle_single_point_impediment_placement():
+func handle_single_point_impediment_placement(event: InputEvent = null):
 	pass

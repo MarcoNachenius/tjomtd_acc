@@ -9,6 +9,13 @@ func _ready():
 	position_smoothing_enabled = true
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMagnifyGesture:
+		if event.factor > 1.0:
+			_zoom_in()
+		if event.factor < 1.0:
+			_zoom_out()
+
 func _process(delta):
 	if Input.is_action_just_pressed("zoom_in"):
 		_zoom_in()

@@ -27,7 +27,7 @@ const MAX_PLACEABLE_TOWERS_PER_TURN = 5
 # Zoom Constants
 const MAX_ZOOM = 2.0
 const MIN_ZOOM = 0.2
-const ZOOM_SPEED = 0.05
+const ZOOM_SPEED = 0.005
 
 
 # HUD LOADS
