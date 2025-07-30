@@ -327,7 +327,7 @@ func can_add_single_point_impediment(mainGridPoints: Vector2i) -> bool:
 ## Determines if a tower can be placed at the specified placement grid point without blocking the path.
 func can_place_tower(placementGridPoint: Vector2i) -> bool:
 	var normal_grid_points: Array[Vector2i] = self.get_tower_impediment_points(placementGridPoint)
-	# Check for disqualified points
+	# Check for coordinates that fall outside the map boundries
 	for point in normal_grid_points:
 		# Check if the points are within the valid width range of the map
 		if point.x < 0 or point.x > (MAP_WIDTH * 2) - 1:
@@ -335,7 +335,7 @@ func can_place_tower(placementGridPoint: Vector2i) -> bool:
 		# Check if the points are within the valid height range of the map
 		if point.y < 0 or point.y > (MAP_HEIGHT * 2) - 1:
 			return false
-	# Check if the points are already solid (impediments)
+	# Check if the points are already occupied
 		if __path_impediments.has(point):
 			return false
 
@@ -343,12 +343,14 @@ func can_place_tower(placementGridPoint: Vector2i) -> bool:
 	for point in normal_grid_points:
 		__astar_grid.set_point_solid(point, true)
 
-	# Generate possible alternative path
+	# Generate possible alternative path.
 	var alternative_path = []
 	for i in range(__mandatory_waypoints.size() - 1):
 		var from_point: Vector2i = __mandatory_waypoints[i]
 		var to_point: Vector2i = __mandatory_waypoints[i + 1]
 		var path_segment = __astar_grid.get_id_path(from_point, to_point)
+		# When one segment of the creep path is not possible, it can
+		# be concluded that there is no viable path. 
 		if path_segment.size() == 0:
 			alternative_path = []
 			break
@@ -574,31 +576,37 @@ func _handle_build_mode(event: InputEvent = null):
 ## displaying a placement highlight. The highlight changes color based on whether the 
 ## placement is valid. This ensures visual feedback for the player when positioning towers.
 func _handle_tower_placement(event: InputEvent = null):
-	# Do nothing if touch has been released when run on Android
+	# Hide surface highlights if touch has been released (Android)
 	if event is InputEventScreenTouch and event.is_released():
 		__valid_build_position_surface_highlight.visible = false
 		__invalid_build_position_surface_highlight.visible = false
 		return
 
-	# Do nothing if select button is not pressed down
+	# Hide surface highlights if select button is not pressed down
 	if !Input.is_action_pressed("select") and !Input.is_action_just_released("select"):
 		__valid_build_position_surface_highlight.visible = false
 		__invalid_build_position_surface_highlight.visible = false
 		return
 
 	# Get the current mouse position in the local coordinate space of the placement grid.
-	var mouse_pos = get_local_mouse_position()
+	var mouse_pos: Vector2 = get_local_mouse_position()
 	
 	# Convert the mouse position into the corresponding tile position on the grid.
 	# This allows snapping the tower placement to the grid structure.
 	var placement_tile_position: Vector2i = __placement_grid.local_to_map(mouse_pos)
+
+	# Apply the tower placement offset to the tile position.
+	# This offset places the tower slightly away from the cursor or touch position,
+	# allowing for easier placement without overlapping the cursor.
+	# See GameConstants.TOWER_PLACEMENT_OFFSET for more details.
+	placement_tile_position += GameConstants.TOWER_PLACEMENT_OFFSET
 	
 	# Snap the calculated tile position back into local coordinates.
 	# This ensures the tower or highlight aligns with the tile grid.
-	var snap_to_grid_position = __placement_grid.map_to_local(placement_tile_position)
+	var snap_to_grid_position: Vector2 = __placement_grid.map_to_local(placement_tile_position)
 	
 	# Check if the tower can be placed at the current position.
-	var tower_placement_possible = self.can_place_tower(placement_tile_position)
+	var tower_placement_possible: bool = self.can_place_tower(placement_tile_position)
 
 	# Determine the placement validity and update the visual feedback accordingly.
 	if !tower_placement_possible:

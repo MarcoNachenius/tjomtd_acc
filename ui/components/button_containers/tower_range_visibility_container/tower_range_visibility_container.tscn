@@ -11,8 +11,10 @@ HIDE_TOWER_RANGE_BUTTON = NodePath("HideTowerRangeButton")
 
 [node name="ShowTowerRangeButton" type="Button" parent="."]
 layout_mode = 2
-text = "Show Tower Range"
+text = "Show
+Tower Range"
 
 [node name="HideTowerRangeButton" type="Button" parent="."]
 layout_mode = 2
-text = "Hide Tower Range"
+text = "Hide
+Tower Range"

@@ -11,8 +11,10 @@ HIDE_PATH_BUTTON = NodePath("HidePathButton")
 
 [node name="ShowPathButton" type="Button" parent="."]
 layout_mode = 2
-text = "Show Path"
+text = "Show
+Creep Path"
 
 [node name="HidePathButton" type="Button" parent="."]
 layout_mode = 2
-text = "Hide Path"
+text = "Hide
+Creep Path"

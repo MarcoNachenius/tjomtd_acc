@@ -29,6 +29,14 @@ const MAX_ZOOM = 2.0
 const MIN_ZOOM = 0.2
 const ZOOM_SPEED = 0.005
 
+# TOWER PLACEMENT
+# ===============
+## This is plrimarily used in the Android version of the game to allow for easier tower placement.
+## This value controlls the number of placement tiles that a tower can be placed 
+## away from the cursor or touch position.
+## Negative x value means that the tower can be placed to the left of the cursor/touch position.
+## Negative y value means that the tower can be placed above the cursor/touch position (inverted y axis).
+const TOWER_PLACEMENT_OFFSET: Vector2i = Vector2i(-2, -2)
 
 # HUD LOADS
 # =========

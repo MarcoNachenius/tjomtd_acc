@@ -36,9 +36,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -99.5
-offset_top = -40.0
-offset_right = 99.5
+offset_left = -623.0
+offset_top = -54.0
+offset_right = 623.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -60,9 +60,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -178.0
-offset_top = -33.0
-offset_bottom = 33.0
+offset_left = -275.0
+offset_top = -53.5
+offset_bottom = 53.5
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -77,12 +77,14 @@ size_flags_horizontal = 8
 [node name="StartNewWaveButton" type="Button" parent="MapCommands/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Start New Wave"
+text = "Start
+New Wave"
 
 [node name="Upgrade Tower Probability" type="Button" parent="MapCommands"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Upgrade Build Level (0)"
+text = "Upgrade
+Build Level (0)"
 
 [node name="ComponentVisibility" type="VBoxContainer" parent="."]
 anchors_preset = 4
@@ -92,6 +94,7 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
+size_flags_horizontal = 0
 
 [node name="TowerRangeVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("7_2ld34")]
 layout_mode = 2
@@ -116,8 +119,8 @@ grow_horizontal = 0
 [node name="HudAudioManager" parent="." instance=ExtResource("11_2csad")]
 
 [node name="StatsContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 566.0
+offset_bottom = 266.0
 theme_override_constants/separation = 20
 
 [node name="GameStatsPanel" type="PanelContainer" parent="StatsContainer"]
