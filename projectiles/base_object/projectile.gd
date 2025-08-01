@@ -28,6 +28,11 @@ const PROJECTILE_Z_AS_RELATIVE: bool = false
 @export var __retargetable: bool = false
 ## The radius of the retargetable area.
 @export var __retarget_radius: int
+## If true, the projectile will delay retargeting for a certain distance.
+@export var __delay_retargeting: bool = false
+## The distance in pixels after which the projectile will retarget.
+## This is only used if __delay_retargeting is set to true.
+@export var __retarget_delay_distance: int = 0
 ## If true, an aoe hurtbox will be created on ready 
 ## which allows for area of effect damage infliction
 @export var __aoe_enabled: bool
@@ -48,6 +53,9 @@ const PROJECTILE_Z_AS_RELATIVE: bool = false
 
 # PRIVATE VARS
 # =============
+## The distance travelled by the projectile in pixels.
+## This is used to determine when to retarget the projectile if __delay_retargeting is set to true.
+var __distance_travelled: float = 0
 var __isometric_speed: float
 var __speed: int
 var __target: Creep
@@ -82,6 +90,18 @@ func _ready():
 # *******
 # PUBLICS
 # *******
+## Switch off monitoring of the retarget hurtbox until the projectile
+## has travelled a certain distance.
+func delay_retargeting(distance: int) -> void:
+	# Ensure the distance is valid and the projectile is retargetable.
+	assert(distance > 0, "Retarget delay distance must be greater than 0")
+	assert(__retargetable, "Cannot delay retargeting if projectile is not retargetable")
+	
+	# Set the distance after which the projectile will retarget
+	__delay_retargeting = true
+	__retarget_delay_distance = distance
+
+
 func get_velocity() -> Vector2:
 	return __velocity
 
@@ -228,6 +248,27 @@ func _create_stun_hurtbox():
 func _extended_onready():
 	pass
 
+## Handles the retargeting delay if __delay_retargeting is set to true.
+## Does nothing if __delay_retargeting is set to false or if __retargetable is set to false.
+func _handle_retarget_delay() -> void:
+	# Do nothing if retargeting is not enabled
+	if !__retargetable:
+		return
+
+	# Do nothing if retargeting delay is not enabled
+	if !__delay_retargeting:
+		return
+
+	# Calculate and increment distance travelled
+	var calculated_velocity: Vector2 = __velocity * __speed # Non-isometric distance
+	__distance_travelled += Vector2.ZERO.distance_to(calculated_velocity)
+
+	# Enable retargeting once distance travelled is greater or equal
+	# than retarget delay distance.
+	if __distance_travelled >= __retarget_delay_distance:
+		# Ensure tracking of distance travelled is disabled.
+		__delay_retargeting = false
+
 ## Does nothing if AOE is disabled. 
 func _handle_aoe_damage_infliction():
 	# Do nothing if AOE is disabled
@@ -308,6 +349,10 @@ func _on_hurtbox_entered(area):
 
 
 func _on_retarget_hurtbox_entered(area):
+	# Do nothing if retargeting delay is active
+	if __delay_retargeting:
+		return
+
 	# Ignore retargeting if current target is assigned, not being queued free and still detectable
 	if __target and is_instance_valid(__target) and __target.is_detectable():
 		return

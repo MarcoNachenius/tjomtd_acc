@@ -23,6 +23,10 @@ class_name StarSingleHitMissileSpawner
 @export var __retargetable: bool = false
 ## The radius of the retargetable area.
 @export var __retarget_radius: int
+## If value is larger than 0 and __retargetable is true,
+## missile's retargeting ability will only be enabled after
+## it has travelled the given distance. 
+@export var __retarget_delay_distance: int = 200
 ## If true, an aoe hurtbox will be created on ready 
 ## which allows for area of effect damage infliction
 @export var __aoe_enabled: bool
@@ -102,10 +106,19 @@ func _launch_projectiles():
 				# No movement update required if target is set
 				add_child(new_missile)
 				continue
-			# Manually create movement for missiles which do not have a target assigned
+			
+			# Assign retarget delay
+			if __retargetable and __retarget_delay_distance > 0:
+				new_missile.delay_retargeting(__retarget_delay_distance)
+
+			# Add missile to scene
 			add_child(new_missile)
+			
+			# Assign direction
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
 			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
+
+			
 		
 	if __formation_policy == FormationPolicy.RANDOM:
 		# Calculate angle to targeted creep
@@ -137,9 +150,17 @@ func _launch_projectiles():
 			new_missile.set_aoe_detection_radius(__aoe_detection_radius)
 			new_missile.set_aoe_damage_amount(__aoe_damage_amount)
 
+			# Assign retarget delay
+			if __retargetable and __retarget_delay_distance > 0:
+				new_missile.delay_retargeting(__retarget_delay_distance)
+
+			# Add missile to scene
 			add_child(new_missile)
+			
+			# Assign direction
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
 			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
+
 
 	if __formation_policy == FormationPolicy.STATIC:
 		# Create launch angles
@@ -169,10 +190,16 @@ func _launch_projectiles():
 			new_missile.set_aoe_detection_radius(__aoe_detection_radius)
 			new_missile.set_aoe_damage_amount(__aoe_damage_amount)
 
+			# Assign retarget delay
+			if __retargetable and __retarget_delay_distance > 0:
+				new_missile.delay_retargeting(__retarget_delay_distance)
+
+			# Add missile to scene
 			add_child(new_missile)
+			
+			# Assign direction
 			new_missile.update_movement_towards_angle(adjusted_launch_angle)
 			new_missile.MISSILE_SPRITE.rotate(adjusted_launch_angle)
-
 
 
 # ===========================

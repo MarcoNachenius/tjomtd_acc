@@ -15,6 +15,8 @@ func _handle_movement():
 		update_isometric_speed()
 		MISSILE_SPRITE.look_at(__target.global_position)
 	position += __velocity * __isometric_speed
+	
+	_handle_retarget_delay()
 
 ## Self destructs after dealing damage
 func _inflict_damange(creep: Creep):

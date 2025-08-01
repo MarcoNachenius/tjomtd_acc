@@ -35,6 +35,8 @@ func _handle_movement():
     # Change missile position
 	position += __velocity * __isometric_speed
 
+	_handle_retarget_delay()
+
 ## Inflicts damage to the specified creep and handles ricochet logic.
 func _inflict_damange(creep: Creep):
 	creep.take_damage(__damage)
