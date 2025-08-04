@@ -20,6 +20,10 @@ class_name SingleMissileSpawner
 @export var __retargetable: bool = false
 ## The radius of the retargetable area.
 @export var __retarget_radius: int
+## If value is larger than 0 and __retargetable is true,
+## missile's retargeting ability will only be enabled after
+## it has travelled the given distance. 
+@export var __retarget_delay_distance: int
 ## If true, an aoe hurtbox will be created on ready 
 ## which allows for area of effect damage infliction
 @export var __aoe_enabled: bool
@@ -73,6 +77,10 @@ func _launch_projectiles():
 	new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
 	new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
 	new_missile.set_aoe_slow_duration(__aoe_slow_duration)
+
+	# Assign retarget delay
+	if __retargetable and __retarget_delay_distance > 0:
+		new_missile.delay_retargeting(__retarget_delay_distance)
 
 	add_child(new_missile)
 
