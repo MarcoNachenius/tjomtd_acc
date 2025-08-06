@@ -42,6 +42,8 @@ func _spawn_wave_creep():
 		return
 	var new_creep: Creep = __wave_creep_preload.instantiate() as Creep
 	if __final_boss_spawnning:
+		# NB - Creep's maze completion timer will be created
+		#      and activated on ready when boss mode is active.
 		new_creep.FINAL_BOSS_MODE = true
 	
 	# Connect signals

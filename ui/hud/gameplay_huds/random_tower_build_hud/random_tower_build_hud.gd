@@ -465,14 +465,14 @@ func _on_balance_altered(curr_balance: int):
 	GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(curr_balance)
 
 
-func _on_final_boss_path_completed(damage_inflicted: int):
+func _on_final_boss_path_completed(damageInflicted: int, completionTimeSeconds: float):
 	# Capture final results in CurrGameData autoload
 	if __final_wave_reached:
 		CurrGameData.RESULT_TEXT = "All waves completed."
 	else:
 		CurrGameData.RESULT_TEXT = "Lives depleted"
-	CurrGameData.FINAL_MAZE_COMPLETION_TIME = 0.0 # WIP
-	CurrGameData.FINAL_MAZE_DAMAGE = damage_inflicted
+	CurrGameData.FINAL_MAZE_COMPLETION_TIME = completionTimeSeconds
+	CurrGameData.FINAL_MAZE_DAMAGE = damageInflicted
 	CurrGameData.FINAL_MAZE_LENGTH = GAME_MAP.get_maze_length()
 	CurrGameData.FINAL_SCORE = GAME_MAP.get_total_points_earned() # WIP
 	CurrGameData.WAVES_COMPLETED = GAME_MAP.get_total_waves_completed()

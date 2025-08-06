@@ -76,12 +76,14 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="TotalMazeDamageHeader" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 text = "Total Maze Damage:"
 fit_content = true
 autowrap_mode = 0
 
 [node name="TotalMazeDamageAmount" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 2
 text = "0"
 fit_content = true

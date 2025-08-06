@@ -22,7 +22,7 @@ signal tower_placed(tower: Tower)
 signal tower_selected(tower: Tower)
 signal maze_length_updated(updated_maze_length: int)
 signal lives_depleted
-signal final_boss_path_completed(total_damage_taken: int)
+signal final_boss_path_completed(total_damage_taken: int, maze_completion_time: float)
 
 # EXPORTS
 ## Map ID
@@ -763,11 +763,17 @@ func get_maze_length() -> int:
 # **************
 
 func _on_creep_end_of_path_reached(creep: Creep):
-	if creep.FINAL_BOSS_MODE:
-		final_boss_path_completed.emit(creep.get_curr_health())
-		return
-	
 	__remaining_lives -= 1
+	
+	if creep.FINAL_BOSS_MODE:
+		# Time in seconds
+		var maze_completion_time: float = creep.get_elapsed_travel_time()
+		# When a final boss is spawned, it's health functions as a mechanism for
+		# storing the total damage dealt to it.
+		# See Creep.take_damage() for more details.
+		var total_damage_taken: int = creep.get_curr_health()
+		final_boss_path_completed.emit(total_damage_taken, maze_completion_time)
+		return
 
 	# Emit lives depleted signal if there are no more remaining lives
 	if __remaining_lives < 1:

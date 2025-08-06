@@ -29,6 +29,8 @@ var __detectable: bool
 var __distance_to_next_point: float
 var __hitbox: CreepHitbox
 var __is_wave_creep: bool
+## Tracks the time at which the final boss starts maze.
+var __maze_start_millisecond_timestamp: int
 var __num_of_active_stun_effects: int
 var __num_of_active_slow_effects: int
 var __points_for_death: int
@@ -53,6 +55,9 @@ func _ready():
 	_set_ordering()
 	_switch_state(States.MOVING)
 
+	if FINAL_BOSS_MODE:
+		_create_maze_completion_timer()
+
 
 func _process(delta):
 	match __curr_state:
@@ -63,9 +68,18 @@ func _process(delta):
 		States.IDLE:
 			_handle_idle()
 
-# **************
-# CUSTOM METHODS
-# **************
+# ***************
+# PRIVATE METHODS
+# ***************
+## Creates and starts maze completion timer.
+func _create_maze_completion_timer():
+	# Milliseconds since engine start
+	__maze_start_millisecond_timestamp = Time.get_ticks_msec()  
+
+## Returns the number of seconds that have elapsed since the creep started its maze.
+func get_elapsed_travel_time() -> float:
+	return (Time.get_ticks_msec() - __maze_start_millisecond_timestamp) / 1000.0  # Convert to seconds
+
 func _create_hitbox():
 	var new_hitbox: CreepHitbox = CreepConstants.HITBOX_PRELOAD.instantiate() as CreepHitbox
 	add_child(new_hitbox)
@@ -144,6 +158,7 @@ func _create_stun_timer():
 func _handle_death():
 	if __death_in_progress and !DEATH_ANIMATIONS.is_playing():
 		_destroy()
+
 
 # Getters and Setters
 
