@@ -186,30 +186,16 @@ func remove_remaining_creeps() -> void:
 		if child is Creep:
 			child.queue_free()
 
-## Removes all Projectile instances from the scene tree, including those nested under other nodes.
-##
-## Behavior:
-##     • Starts at the current node and recursively traverses all descendants.
-##     • Frees any node that is an instance of the Projectile class or one of its subclasses.
+## Removes all projectiles still present on the map
 func remove_remaining_projectiles() -> void:
-	_remove_projectiles_recursive(self)
-
-
-## Recursively traverses the scene tree starting from the given node and frees any Projectile instances found.
-##
-## Parameters:
-##     node (Node): The node from which to begin the recursive search.
-##
-## Notes:
-##     • This function uses depth-first traversal.
-##     • It relies on the Projectile base class being properly registered using `class_name Projectile`.
-func _remove_projectiles_recursive(node: Node) -> void:
-	for child in node.get_children():
-		# Check if the current child is an instance of Projectile or a subclass
-		if child is Projectile:
-			child.queue_free()
-		# Recursively search this child's children
-		_remove_projectiles_recursive(child)
+	for tower in __towers_on_map:
+		for tower_child in tower.get_children():
+			# Ignore children that are not projectile spawners
+			if !tower_child is ProjectileSpawner:
+				continue
+			for projectile_spawner_child in tower_child.get_children():
+				if projectile_spawner_child is Projectile:
+					projectile_spawner_child.queue_free()
 
 ## Updates current save file and writes it to disk.
 func save_game():
