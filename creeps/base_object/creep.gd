@@ -15,6 +15,7 @@ signal end_of_path_reached(creep: Creep)
 @export var MOVEMENT_ANIMATIONS: AnimatedSprite2D
 @export var SPEED_TO_MOVEMENT_FPS_RATIO: float = 0.5
 @export var FINAL_BOSS_MODE: bool = false
+@export var HEALTH_BAR_Y_ELEVATION: int = 64
 @export var TAKE_DAMAGE_AUDIO: AudioStreamPlayer2D
 @export var DEATH_AUDIO: AudioStreamPlayer2D
 
@@ -28,6 +29,7 @@ var __death_in_progress: bool
 var __detectable: bool
 var __distance_to_next_point: float
 var __hitbox: CreepHitbox
+var __health_bar: HealthBar
 var __is_wave_creep: bool
 ## Tracks the time at which the final boss starts maze.
 var __maze_start_millisecond_timestamp: int
@@ -159,6 +161,26 @@ func _handle_death():
 	if __death_in_progress and !DEATH_ANIMATIONS.is_playing():
 		_destroy()
 
+## Primarily used as helper function for set_initial_health(). This ensures that 
+## health bar values are initialized in the correct order such that the health 
+## bar is only updated AFTER the creep's health has been set.
+func _create_health_bar():
+	# Create and assign health bar
+	var new_health_bar: HealthBar = CreepConstants.HEALTH_BAR_PRELOAD.instantiate()
+	add_child(new_health_bar)
+	__health_bar = new_health_bar
+	
+	# Set health bar elevation above the creep
+	new_health_bar.position.y = -HEALTH_BAR_Y_ELEVATION
+
+	# Show health bar
+	new_health_bar.visible = true
+
+	# Set max value
+	new_health_bar.max_value = __starting_health
+
+	# Fill health bar
+	new_health_bar.value = __starting_health
 
 # Getters and Setters
 
@@ -216,9 +238,11 @@ func get_starting_speed() -> int:
 func get_curr_state() -> States:
 	return __curr_state
 
+## Assigns starting health AND updates health bar accordingly
 func set_starting_health(health: int) -> void:
 	__starting_health = health
 	__curr_health = health
+	_create_health_bar()
 
 ## Sets the starting speed for the creep.
 ## Also assigns current speed to the same value.
@@ -391,6 +415,9 @@ func take_damage(amount: int, playSoundEffect: bool = true):
 	
 	# Take damage
 	__curr_health -= amount
+
+	# Update health bar
+	__health_bar.update_health_value(__curr_health)
 
 	# Play take damae sound effect
 	if TAKE_DAMAGE_AUDIO and playSoundEffect:

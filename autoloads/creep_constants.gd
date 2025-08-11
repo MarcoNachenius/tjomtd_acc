@@ -98,3 +98,4 @@ const CompassDirToStr: Dictionary = {
 # COMPONENTS
 # ==========
 var HITBOX_PRELOAD: PackedScene = load("res://creeps/components/hitbox/creep_hitbox.tscn")
+var HEALTH_BAR_PRELOAD: PackedScene = load("res://creeps/components/health_bar/health_bar.tscn")
