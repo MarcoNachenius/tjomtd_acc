@@ -41,6 +41,7 @@ offset_top = -54.0
 offset_right = 623.0
 grow_horizontal = 2
 grow_vertical = 0
+alignment = 1
 
 [node name="TowerPropertiesContainer" parent="TowerCommands" instance=ExtResource("3_puoe6")]
 layout_mode = 2
