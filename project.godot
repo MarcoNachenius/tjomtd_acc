@@ -30,6 +30,7 @@ CurrGameData="*res://autoloads/curr_game_data.gd"
 UIConstants="*res://autoloads/ui_constants.gd"
 TowerDescriptions="*res://autoloads/tower_descroptions.gd"
 GameDataStorage="*res://autoloads/game_data_storage.gd"
+SlateConstants="*res://autoloads/slate_constants.gd"
 
 [display]
 
@@ -65,6 +66,11 @@ zoom_out={
 [input_devices]
 
 pointing/android/enable_pan_and_scale_gestures=true
+
+[layer_names]
+
+2d_physics/layer_1="Tower Detection Area"
+2d_physics/layer_2="Creep Hurtbox"
 
 [rendering]
 

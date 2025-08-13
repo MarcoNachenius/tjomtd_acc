@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbe1a0qav0wcn"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_lt3n5"]
+[ext_resource type="PackedScene" uid="uid://bjancdx67lk7e" path="res://towers/base_object/templates/tower_sprite_termplate.tscn" id="2_g0d6b"]
+
+[node name="HoldSlateLvl1" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
+script = ExtResource("1_lt3n5")
+SLATE_SPRITE = NodePath("TowerSpriteTermplate")
+metadata/_custom_type_script = "uid://cmwqa742rvnbl"
+
+[node name="TowerSpriteTermplate" parent="." instance=ExtResource("2_g0d6b")]

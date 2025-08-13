@@ -6,7 +6,8 @@ extends Node2D
 
 func _ready():
 	_place_single_tower()
-	GAME_MAP.CREEP_SPAWNER.initiate_final_boss_wave()
+	GAME_MAP.CREEP_SPAWNER.initiate_new_wave()
+	GAME_MAP.place_slate(SlateConstants.SlateIDs.HOLD_SLATE_LVL_1, TOWER_PLACEMENT_COORD)
 
 func _place_single_tower():
 	# Place tower impediment points

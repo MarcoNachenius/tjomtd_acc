@@ -67,15 +67,16 @@ var __towers_awaiting_selection: Array[Tower]
 var __towers_on_map: Array[Tower]
 var __valid_build_position_surface_highlight: Sprite2D
 
-# INVARIABLE COMPONENTS
-# =====================
+# SINGLETONS
+# ==========
 var CREEP_SPAWNER: CreepSpawner
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
+@onready var SLATE_MANAGER: SlateManager = SlateManager.new()
 
 # -----------------
 # INHERITED METHODS
 # -----------------
-func _ready():
+func _ready() -> void:
 	__total_points_earned = 0
 	__total_waves_completed = 0
 	__total_active_creeps = 0
@@ -116,7 +117,7 @@ func _ready():
 	self._create_projectile_boundary_area()
 
 
-func _unhandled_input(event):
+func _unhandled_input(event) -> void:
 	# Handle build mode
 	if __curr_state == States.BUILD_MODE:
 		_handle_build_mode(event)
@@ -127,19 +128,19 @@ func _unhandled_input(event):
 # --------------
 # PUBLIC METHODS
 # --------------
-func add_test_single_point_path_impediment_sprite(mainGridTile: Vector2i):
+func add_test_single_point_path_impediment_sprite(mainGridTile: Vector2i) -> void:
 	var path_tile = MapConstants.SINGLE_POINT_IMPEDIMENT_RED_SURFACE.instantiate()
 	__main_tileset.add_child(path_tile)
 	path_tile.position = __main_tileset.map_to_local(mainGridTile)
 
-func add_test_tower_sprite(placementGridTile: Vector2i):
+func add_test_tower_sprite(placementGridTile: Vector2i) -> void:
 	var path_tile = MapConstants.TOWER_PLACEMENT_RED_SURFACE.instantiate()
 	add_child(path_tile)
 	path_tile.position = __placement_grid.map_to_local(placementGridTile)
 	path_tile.modulate = Color(0.0, 0.0, 0.0, 1.0)  # RGBA for solid blue
 
 ## Removes the tower from towers on map or towers awaiting selection.
-func convert_tower_to_barricade(tower: Tower):
+func convert_tower_to_barricade(tower: Tower) -> void:
 	# Ensure that the tower is in a list
 	assert(__towers_on_map.has(tower) or __towers_awaiting_selection.has(tower), "Tower not in __towers_on_map list")
 	var tower_placement_grid_coord: Vector2i = tower.get_placement_grid_coordinate()
@@ -158,7 +159,7 @@ func convert_tower_to_barricade(tower: Tower):
 
 	place_barricade(tower_placement_grid_coord)
 
-func remove_barricade(barricade: Tower):
+func remove_barricade(barricade: Tower) -> void:
 	assert(barricade.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Provided tower should be barricade")
 	# Remove placement points
 	_remove_tower_impediment_points(barricade.get_placement_grid_coordinate())
@@ -198,7 +199,7 @@ func remove_remaining_projectiles() -> void:
 					projectile_spawner_child.queue_free()
 
 ## Updates current save file and writes it to disk.
-func save_game():
+func save_game() -> void:
 	# Game map data
 	# Balance
 	GameDataStorage.ACTIVE_GAME_DATA.set_remaining_balance(__curr_balance)
@@ -222,7 +223,7 @@ func save_game():
 	GameDataStorage.save_game_data()
 
 ## Loads game data from disk.
-func load_game():
+func load_game() -> void:
 	# Place towers
 	var tower_coord_to_id_dict: Dictionary[Vector2i, int] = GameDataStorage.ACTIVE_GAME_DATA.get_placed_towers()
 	for placement_coord in tower_coord_to_id_dict.keys():
@@ -252,7 +253,7 @@ func load_game():
 # ---------------
 
 ## Adds placement grid points as keys with provided tower as value. 
-func _add_tower_to_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
+func _add_tower_to_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]) -> void:
 	# Get list of all current impediment points 
 	var list_of_curr_impediment_points: Array[Vector2i] = placementGridCoordDict.keys()
 	# Get list of tower impediment points
@@ -267,7 +268,7 @@ func _add_tower_to_placement_grid_coords_dict(tower: Tower, placementGridCoordDi
 
 
 ## Replaces the values of placement grid coordinates for a tower in the placement grid coords for towers 
-func _replace_tower_in_placement_grid_coords_dict(oldTower: Tower, newTower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
+func _replace_tower_in_placement_grid_coords_dict(oldTower: Tower, newTower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]) -> void:
 	# Verify that the old tower's placement grid coordinate is equal to the new tower's placement grid coordinate
 	assert(oldTower.get_placement_grid_coordinate() == newTower.get_placement_grid_coordinate(), "Old and new tower placement grid coordinates do not match")
 
@@ -285,7 +286,7 @@ func _replace_tower_in_placement_grid_coords_dict(oldTower: Tower, newTower: Tow
 
 
 ## Adds placement grid points as keys with provided tower as value. 
-func _remove_tower_from_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]):
+func _remove_tower_from_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]) -> void:
 	# Get list of all current impediment points 
 	var list_of_curr_impediment_points: Array[Vector2i] = placementGridCoordDict.keys()
 	# Get list of tower impediment points
@@ -359,7 +360,7 @@ func clear_build_tower_values():
 ## The grid dimensions are set to double the map's width and height, allowing 
 ## finer granularity for placement and movement, such as units that can occupy 
 ## positions halfway between tiles, similar to Warcraft 3 building placement.
-func _create_astar_grid():
+func _create_astar_grid() -> void:
 	# Create a new instance of AStarGrid2D for pathfinding.
 	__astar_grid = AStarGrid2D.new()
 	__astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
@@ -384,7 +385,7 @@ func _create_astar_grid():
 ## Creates the main grid (TileMapLayer) for the map, setting up its properties from scratch 
 ## and adding it to the scene. This method ensures that the TileMapLayer aligns properly 
 ## with the map's tile structure and is configured for isometric gameplay.
-func _create_main_tileset():
+func _create_main_tileset() -> void:
 	# Create a new TileMapLayer instance to represent the map's main grid.
 	var new_tile_map = TileMapLayer.new()
 
@@ -416,7 +417,7 @@ func _create_main_tileset():
 	add_child(new_tile_map)
 
 ## Constructs map's tower placement grid from scratch and adds it to scene.
-func _create_placement_grid():
+func _create_placement_grid() -> void:
 	var new_tile_map = TileMapLayer.new()
 	# Build tileset
 	var new_tileset = TileSet.new()
@@ -438,7 +439,7 @@ func _create_random_tower_generator():
 
 ## Creates red(invalid position) and green(valid position) surface areas
 ## that follow mouse during build mode.
-func _create_tower_placement_validity_tiles():
+func _create_tower_placement_validity_tiles() -> void:
 	# Valid position tile
 	__invalid_build_position_surface_highlight = MapConstants.TOWER_PLACEMENT_RED_SURFACE.instantiate() as Sprite2D
 	__invalid_build_position_surface_highlight.visible = false
@@ -466,7 +467,7 @@ func creep_mapped_to_local_path_positions() -> Array[Vector2i]:
 		mapped_positions.append(Vector2i(__main_tileset.map_to_local(point)) + Vector2i(64, 0))
 	return mapped_positions
 
-func switch_states(new_state: States):
+func switch_states(new_state: States) -> void:
 	if __curr_state == new_state:
 		return
 	if new_state == States.BUILD_MODE:
@@ -478,7 +479,7 @@ func switch_states(new_state: States):
 		__valid_build_position_surface_highlight.visible = false
 		__invalid_build_position_surface_highlight.visible = false
 
-func update_path_line():
+func update_path_line() -> void:
 	# Avoid errors on path line instantiation
 	if __path_line:
 		__path_line.queue_free()
@@ -550,7 +551,7 @@ func get_tower_from_global_position(globalPosition: Vector2) -> Tower:
 
 
 ## Governs validity surface hightlights and impediment placements on map
-func _handle_build_mode(event: InputEvent = null):
+func _handle_build_mode(event: InputEvent = null) -> void:
 	match __impediment_placement_type:
 		ImpedimentPlacementTypes.SINGLE_POINT:
 			self.handle_single_point_impediment_placement()
@@ -561,7 +562,7 @@ func _handle_build_mode(event: InputEvent = null):
 ## Handles the placement of a tower impediment by snapping the position to the grid and 
 ## displaying a placement highlight. The highlight changes color based on whether the 
 ## placement is valid. This ensures visual feedback for the player when positioning towers.
-func _handle_tower_placement(event: InputEvent = null):
+func _handle_tower_placement(event: InputEvent = null) -> void:
 	# Hide surface highlights if touch has been released (Android)
 	if event is InputEventScreenTouch and event.is_released():
 		__valid_build_position_surface_highlight.visible = false
@@ -609,7 +610,7 @@ func _handle_tower_placement(event: InputEvent = null):
 		self.place_tower(placement_tile_position)
 
 
-func place_single_point_path_impediment(mainGridPoint: Vector2i):
+func place_single_point_path_impediment(mainGridPoint: Vector2i) -> void:
 	# Avoid duplicate coodrinates
 	if !__path_impediments.has(mainGridPoint):
 		__path_impediments.append(mainGridPoint)
@@ -619,7 +620,7 @@ func place_single_point_path_impediment(mainGridPoint: Vector2i):
 
 ## I want to make it clear here that I am not actually adding a tower to the scene, 
 ## rather I am simply adding the solid points to the main grid
-func place_tower_impediment_points(placementGridPoint: Vector2i):
+func place_tower_impediment_points(placementGridPoint: Vector2i) -> void:
 	var new_impediments: Array[Vector2i] = self.get_tower_impediment_points(placementGridPoint)
 	for point in new_impediments:
 		__astar_grid.set_point_solid(point)
@@ -628,7 +629,7 @@ func place_tower_impediment_points(placementGridPoint: Vector2i):
 	self._update_current_path()
 
 ## Resets mandatory path points if it already exists
-func _set_mandatory_waypoints():
+func _set_mandatory_waypoints() -> void:
 	var retrieved_mandatory_points: Array[Vector2i] = MapConstants.MandatoryWaypoints[MAP_ID]
 	var new_mandatory_waypoints: Array[Vector2i] = []
 	# Add path start point
@@ -655,7 +656,7 @@ func _set_mandatory_waypoints():
 
 ## Updates the current path based on the mandatory waypoints, as
 ## well as the path line.
-func _update_current_path():
+func _update_current_path() -> void:
 	var updated_path: Array[Vector2i] = []
 	for i in range(__mandatory_waypoints.size() - 1):
 		# Construct path segment
@@ -723,11 +724,11 @@ func get_state() -> States:
 	return __curr_state
 
 # __build_tower_preload
-func set_build_tower_preload(new_preload: PackedScene):
+func set_build_tower_preload(new_preload: PackedScene) -> void:
 	__build_tower_preload = new_preload
 
 # __build_tower_cost
-func set_build_tower_cost(new_cost: int):
+func set_build_tower_cost(new_cost: int) -> void:
 	__build_tower_cost = new_cost
 
 func get_curr_balance() -> int:
@@ -748,7 +749,7 @@ func get_maze_length() -> int:
 # SIGNAL METHODS
 # **************
 
-func _on_creep_end_of_path_reached(creep: Creep):
+func _on_creep_end_of_path_reached(creep: Creep) -> void:
 	__remaining_lives -= 1
 	
 	if creep.FINAL_BOSS_MODE:
@@ -776,7 +777,7 @@ func _on_creep_end_of_path_reached(creep: Creep):
 		__total_waves_completed += 1
 		completed_wave.emit(__total_waves_completed)
 
-func _on_creep_death(creep: Creep):
+func _on_creep_death(creep: Creep) -> void:
 	var creep_points: int = creep.get_points_for_death()
 	__curr_balance += creep_points
 	__total_points_earned += creep_points
@@ -789,7 +790,7 @@ func _on_creep_death(creep: Creep):
 		__total_waves_completed += 1
 		completed_wave.emit(__total_waves_completed)
 
-func _on_creep_spawned(creep: Creep):
+func _on_creep_spawned(creep: Creep) -> void:
 	__total_active_creeps += 1
 	if creep.get_is_wave_creep():
 		__total_active_wave_creeps += 1
@@ -809,7 +810,7 @@ func get_map_tile_impediment_points(mapTileCoordinates: Vector2i) -> Array[Vecto
 		]
 	return impediment_points
 
-func _set_map_tile_impediments():
+func _set_map_tile_impediments() -> void:
 	# Set start point as map tile impediment
 	var start_point_map_tile_coord: Vector2i = local_to_map(__main_tileset.map_to_local(__path_start_point))
 	var end_point_map_tile_coord: Vector2i = local_to_map(__main_tileset.map_to_local(__path_end_point))
@@ -828,7 +829,7 @@ func _set_map_tile_impediments():
 
 ## Instantiates a barraciade at the specified grid position and updates the lists/dicts accordingly.
 ## Primarily used for loading game and debugging. 
-func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = false):
+func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = false) -> void:
 	if addImpedimentPoints:
 		place_tower_impediment_points(placementGridPoint)
 	# Place barricade
@@ -850,7 +851,7 @@ func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = f
 
 ## Instantiates a new tower at the specified grid position and adds it as a built tower.
 ## Does NOT handle barricades. Does not emit any signals. Primarily used for loading game and debugging.  
-func place_built_tower(placementGridPoint: Vector2i, towerID: int):
+func place_built_tower(placementGridPoint: Vector2i, towerID: int) -> void:
 	# Place tower impediment points
 	place_tower_impediment_points(placementGridPoint)
 	
@@ -879,7 +880,7 @@ func place_built_tower(placementGridPoint: Vector2i, towerID: int):
 	__towers_on_map.append(new_tower)
 
 ## Instantiates a new tower at the specified grid position and adds it as a tower awaiting selection.
-func place_tower(placementGridPoint: Vector2i):
+func place_tower(placementGridPoint: Vector2i) -> void:
 	# Place tower impediment points
 	place_tower_impediment_points(placementGridPoint)
 	
@@ -909,7 +910,7 @@ func place_tower(placementGridPoint: Vector2i):
 
 ## Creates a new instance of CreepSpawner and adds it as a child to the current node.
 ## The CreepSpawner does not require positional information, as it will handled by the creep when spawned.
-func _create_creep_spawner():
+func _create_creep_spawner() -> void:
 	var new_creep_spawner: CreepSpawner = CreepSpawner.new()
 	add_child(new_creep_spawner)
 	CREEP_SPAWNER = new_creep_spawner
@@ -917,7 +918,7 @@ func _create_creep_spawner():
 	# Connect signal
 	CREEP_SPAWNER.creep_spawned.connect(_on_creep_spawned)
 
-func _create_projectile_boundary_area():
+func _create_projectile_boundary_area() -> void:
 	var new_area = MapConstants.PROJECTILE_BOUNDARY_AREA_PRELOAD.instantiate() as ProjectileBoundaryArea
 	var new_coll_shape = CollisionShape2D.new()
 	var new_shape = ConvexPolygonShape2D.new()
@@ -938,7 +939,7 @@ func _create_projectile_boundary_area():
 
 ## Removes the tower from the list of towers awaiting selection and adds it to the list of towers on the map.
 ## This method then moves the converts remaining towers awaiting selection (if any exist) to barricades.
-func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
+func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower) -> void:
 	# Ensure the tower is in the list of towers awaiting selection
 	assert(__towers_awaiting_selection.has(towerAwaitingSelection), "Tower not found in list of towers awaiting selection")
 	# Remove the tower from the list of towers awaiting selection
@@ -961,7 +962,7 @@ func keep_built_tower_awaiting_selection(towerAwaitingSelection: Tower):
 ## Called when a tower is selected for upgrade.
 ## This method removes the selected tower from the list of towers on the map and prepares it for upgrade.
 ## It also creates a new tower based on the provided upgrade tower ID and sets its position.
-func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:
 	# Ensure the upgrade tower ID is valid
 	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
 	# Ensure the tower is in the list of towers on map
@@ -1023,7 +1024,7 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 	tower_selected.emit(new_upgrade_tower)
 
 ## Called when an upgrade tower exists on the towers awaiting selection list.
-func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:
 	# Ensure the upgrade tower ID is valid
 	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
 	# Ensure the tower is in the list of towers awaiting selection
@@ -1068,7 +1069,7 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 
 
 ## Called when an upgrade tower exists on the towers on map list.
-func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:
 	# Ensure the upgrade tower ID is valid
 	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
 	# Ensure the tower is in the list of towers on map
@@ -1105,7 +1106,7 @@ func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerCons
 	tower_selected.emit(new_upgrade_tower)
 
 ## Called when a copound upgrade tower exists on the towers awaiting selection list.
-func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, compoundUpgradeTowerID: TowerConstants.TowerIDs):
+func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, compoundUpgradeTowerID: TowerConstants.TowerIDs) -> void:
 	# Ensure the tower is in the list of towers awaiting selection
 	assert(__towers_awaiting_selection.has(selectedTower), "Tower not found in list of towers awaiting selection")
 	# Remove the tower from the list of towers awaiting selection
@@ -1146,7 +1147,7 @@ func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: T
 	# Reselect tower to update hud containers
 	tower_selected.emit(new_upgrade_tower)
 
-func _handle_navigation_mode():
+func _handle_navigation_mode() -> void:
 	if Input.is_action_just_pressed("select"):
 		# Start tracking mouse position
 		__mouse_position = get_global_mouse_position()
@@ -1164,7 +1165,7 @@ func _handle_navigation_mode():
 		# Update mouse position
 		__mouse_position = new_mouse_position
 
-func remove_tower(tower: Tower):
+func remove_tower(tower: Tower) -> void:
 	# Remove tower from list
 	assert(__towers_on_map.has(tower), "Tower not found in map")
 	__towers_on_map.erase(tower)
@@ -1175,7 +1176,7 @@ func remove_tower(tower: Tower):
 
 ## Removes the tower impediment points from the map and updates the path accordingly.
 ## Helper method for self.remove_tower().
-func _remove_tower_impediment_points(placementGridPoint: Vector2i):
+func _remove_tower_impediment_points(placementGridPoint: Vector2i) -> void:
 	for point in get_tower_impediment_points(placementGridPoint):
 		__astar_grid.set_point_solid(point, false)
 		__path_impediments.remove_at(__path_impediments.find(point))
@@ -1183,7 +1184,7 @@ func _remove_tower_impediment_points(placementGridPoint: Vector2i):
 	self._update_current_path()
 
 ## Handles awaiting selection towers AND upgrade towers
-func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:
 	assert(TowerConstants.UpgradeTowerIDs.values().has(upgradeTowerID), "Invalid upgrade tower ID")
 
 	# Handle upgrade tower
@@ -1197,10 +1198,24 @@ func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeT
 		return
 	
 
-func subtract_funds(amount: int):
+func subtract_funds(amount: int) -> void:
 	__curr_balance -= amount
 	balance_altered.emit(__curr_balance)
 
 # TODO
-func handle_single_point_impediment_placement(event: InputEvent = null):
+func handle_single_point_impediment_placement(event: InputEvent = null) -> void:
 	pass
+
+func place_slate(slateID: SlateConstants.SlateIDs, placementGridCoord: Vector2i) -> void:
+	# Ensure SlateConstants.SLATE_LOADS has the provided slate ID
+	assert(SlateConstants.SLATE_LOADS.has(slateID), "Invalid slate ID")
+	# Instantiate the slate from the preload
+	var new_slate: Slate = SlateConstants.SLATE_LOADS[slateID].instantiate()
+	# Add the slate to 
+	add_child(new_slate)
+	# Set the slate's placement grid coordinate
+	new_slate.set_placement_grid_coordinate(placementGridCoord)
+	# Set the slate's global position based on the placement grid coordinate
+	new_slate.position = __placement_grid.map_to_local(placementGridCoord)
+	# Add the slate to the list of slates on the map
+	SLATE_MANAGER.add_slate_to_map(new_slate)

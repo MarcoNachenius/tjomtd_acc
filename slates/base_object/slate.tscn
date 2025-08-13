@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjgv45qjunmkp"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_ovnit"]
+
+[node name="Slate" type="Node2D"]
+script = ExtResource("1_ovnit")

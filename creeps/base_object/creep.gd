@@ -417,7 +417,8 @@ func take_damage(amount: int, playSoundEffect: bool = true):
 	__curr_health -= amount
 
 	# Update health bar
-	__health_bar.update_health_value(__curr_health)
+	if __health_bar:
+		__health_bar.update_health_value(__curr_health)
 
 	# Play take damae sound effect
 	if TAKE_DAMAGE_AUDIO and playSoundEffect:
