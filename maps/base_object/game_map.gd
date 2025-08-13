@@ -71,7 +71,7 @@ var __valid_build_position_surface_highlight: Sprite2D
 # ==========
 var CREEP_SPAWNER: CreepSpawner
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
-@onready var SLATE_MANAGER: SlateManager = SlateManager.new()
+var SLATE_MANAGER: SlateManager
 
 # -----------------
 # INHERITED METHODS
@@ -115,6 +115,9 @@ func _ready() -> void:
 
 	# PROJECTILE BOUNDARY AREA
 	self._create_projectile_boundary_area()
+
+	# SLATE MANAGER
+	_create_slate_manager()
 
 
 func _unhandled_input(event) -> void:
@@ -251,6 +254,10 @@ func load_game() -> void:
 # ---------------
 # PRIVATE METHODS
 # ---------------
+func _create_slate_manager() -> void:
+	var new_slate_manager_instance: SlateManager = SlateManager.new()
+	add_child(new_slate_manager_instance)
+	SLATE_MANAGER = new_slate_manager_instance
 
 ## Adds placement grid points as keys with provided tower as value. 
 func _add_tower_to_placement_grid_coords_dict(tower: Tower, placementGridCoordDict: Dictionary[Vector2i, Tower]) -> void:
