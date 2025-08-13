@@ -25,7 +25,6 @@ const AWAITING_SELECTION_ANIMATION_NAME: String = "awaiting_selection"
 var __build_cost: int
 var __curr_state: States
 var __curr_display_range: int
-var __selection_area: TowerSelectionArea
 var __placement_grid_coord: Vector2i
 var __upgrades_into: Array[TowerConstants.TowerIDs]
 var __requires_towers: Dictionary[TowerConstants.TowerIDs, int]
@@ -42,6 +41,10 @@ var SURFACE_SPRITE: Sprite2D
 var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
 var RANGE_DISPLAY_SHAPE: RangeDisplayShape
 
+# SINGLETONS
+## Area responsible for triggereing detection by tower auras.
+var DETECTION_AREA: TowerDetectionArea
+
 # BUILTINS
 func _ready():
 	assert(TowerConstants.TowerPrices.has(TOWER_ID), "No tower price provided in TowerConstants.TowerPrices")
@@ -54,21 +57,27 @@ func _ready():
 	_create_surface_sprite()
 	_create_awaiting_selection_animation()
 	_create_range_display_shape()
+	_create_detection_area()
 	# Set up z index and z as relative values
 	_handle_ordering()
 
 # PUBLIC METHODS
 # ==============
-func disable_selection_area():
-	assert(__selection_area, "No slection area has been created")
-	__selection_area.monitoring = false
 
-func enable_selection_area():
-	assert(__selection_area, "No slection area has been created")
-	__selection_area.monitoring = true
 
 # PRIVATE METHODS
 # ===============
+# Creates Area2D responsible for triggereing detection by tower auras.
+func _create_detection_area() -> void:
+	# Create and assign detection area singleton
+	var new_detection_area: TowerDetectionArea = TowerDetectionArea.new()
+	add_child(new_detection_area)
+	DETECTION_AREA = new_detection_area
+
+	# Have detection area reference tower
+	DETECTION_AREA.set_referenced_tower(self)
+
+
 func _create_surface_sprite():
 	var new_surface_sprite: Sprite2D = TowerConstants.TOWER_SURFACE_SPRITE_LOAD.instantiate()
 	SURFACE_SPRITE = new_surface_sprite
@@ -144,9 +153,6 @@ func get_requires_towers() -> Dictionary[TowerConstants.TowerIDs, int]:
 # SETTERS
 func set_build_cost(build_cost: int) -> void:
 	__build_cost = build_cost
-
-func set_selection_area(new_selection_area: TowerSelectionArea):
-	__selection_area = new_selection_area
 
 ## Sets the tower's placement grid coordinate on the map. 
 ## This is used to determine where the tower is placed on the map.

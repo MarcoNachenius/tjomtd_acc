@@ -867,12 +867,6 @@ func place_built_tower(placementGridPoint: Vector2i, towerID: int) -> void:
 	# Update tower placement grid dict
 	_add_tower_to_placement_grid_coords_dict(new_tower, __placement_grid_coords_for_towers)
 
-	# Create tower selection area
-	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
-	new_tower_selection_area.set_referenced_tower(new_tower)
-	new_tower.add_child(new_tower_selection_area)
-	new_tower.set_selection_area(new_tower_selection_area)
-
 	# Ensure tower is awaiting selection
 	new_tower.switch_state(Tower.States.BUILT)
 
@@ -895,12 +889,6 @@ func place_tower(placementGridPoint: Vector2i) -> void:
 
 	# Update tower placement grid dict
 	_add_tower_to_placement_grid_coords_dict(new_tower, __placement_grid_coords_for_towers)
-
-	# Create tower selection area
-	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
-	new_tower_selection_area.set_referenced_tower(new_tower)
-	new_tower.add_child(new_tower_selection_area)
-	new_tower.set_selection_area(new_tower_selection_area)
 
 	# Emit signals
 	tower_placed.emit(new_tower)

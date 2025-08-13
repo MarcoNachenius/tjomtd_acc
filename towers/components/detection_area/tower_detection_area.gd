@@ -1,5 +1,5 @@
 extends Area2D
-class_name TowerSelectionArea
+class_name TowerDetectionArea
 
 var __collision_shape: CollisionShape2D
 var __referenced_tower: Tower
