@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck7j01b174i50"]
+
+[ext_resource type="Script" uid="uid://crvvpe825h5b4" path="res://tower_auras/damage_aura/tower_damage_aura.gd" id="1_qtm13"]
+
+[node name="TowerDamageAura" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_qtm13")
+DAMAGE_INCREASE_FACTOR = 1.5
+metadata/_custom_type_script = "uid://djqsy77eq1qmm"

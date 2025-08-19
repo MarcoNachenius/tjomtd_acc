@@ -93,3 +93,13 @@ func _execute_extended_onready_commands():
 
 func get_damage() -> int:
 	return __bullet_damage
+
+func increase_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage increase must be positive number greater than 0.")
+	__bullet_damage += amount
+
+func decrease_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage decrease must be positive number greater than 0.")
+	__bullet_damage -= amount

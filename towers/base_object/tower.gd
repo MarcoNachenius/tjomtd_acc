@@ -36,14 +36,13 @@ var __requires_towers: Dictionary[TowerConstants.TowerIDs, int]
 @export var CUSTOM_TOWER_DISPLAY_RANGE: int 
 @export var PRIMARY_PROJECTILE_SPAWNER: ProjectileSpawner
 
-# GENERATED CHILD SCENES
+# SINGLETONS
 var SURFACE_SPRITE: Sprite2D
 var AWAITING_SELECTION_ANIMATION: AnimatedSprite2D
 var RANGE_DISPLAY_SHAPE: RangeDisplayShape
-
-# SINGLETONS
 ## Area responsible for triggereing detection by tower auras.
 var DETECTION_AREA: TowerDetectionArea
+var TOWER_AURA_MANAGER: TowerAuraManager
 
 # BUILTINS
 func _ready():
@@ -67,23 +66,43 @@ func _ready():
 
 # PRIVATE METHODS
 # ===============
-# Creates Area2D responsible for triggereing detection by tower auras.
+## Creates TowerAuraManager singleton and assigns it to TOWER_AURA_MANAGER.
+## NB: This method is exclusively used as a helper method for _create_tower_detection_area
+## and should not be called directly. This ensures that the TowerAuraManager
+## is created only when the detection area is created and that these two components
+## are always created in the right order.
+func _create_aura_manager() -> void:
+	assert(DETECTION_AREA, "Detection area must be created before creating aura manager")
+	# Create and assign TowerAuraManager singleton
+	var new_aura_manager_instance: TowerAuraManager = TowerAuraManager.new(self)
+	add_child(new_aura_manager_instance)
+	TOWER_AURA_MANAGER = new_aura_manager_instance
+
+## Creates Area2D responsible for triggereing detection by tower auras.
+## This method also creates the TowerAuraManager singleton if detection area is created.
 func _create_detection_area() -> void:
+	# Don't create detection area if tower is barricade
+	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
+		return
+	
 	# Create and assign detection area singleton
-	var new_detection_area: TowerDetectionArea = TowerDetectionArea.new()
+	var new_detection_area: TowerDetectionArea = TowerConstants.TOWER_DETECTION_AREA_LOAD.instantiate()
 	add_child(new_detection_area)
 	DETECTION_AREA = new_detection_area
 
 	# Have detection area reference tower
 	DETECTION_AREA.set_referenced_tower(self)
 
+	# Create and assign aura manager singleton
+	_create_aura_manager()
 
-func _create_surface_sprite():
+
+func _create_surface_sprite() -> void:
 	var new_surface_sprite: Sprite2D = TowerConstants.TOWER_SURFACE_SPRITE_LOAD.instantiate()
 	SURFACE_SPRITE = new_surface_sprite
 	add_child(SURFACE_SPRITE)
 
-func _create_awaiting_selection_animation():
+func _create_awaiting_selection_animation() -> void:
 	# Do not add animation for barricades
 	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
 		return
@@ -95,7 +114,7 @@ func _create_awaiting_selection_animation():
 
 ## Creates circle indicating range whenever tower is selected.
 ## Does not create range shape if tower is a barricade
-func _create_range_display_shape():
+func _create_range_display_shape() -> void:
 	# Barricades do not have any range
 	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
 		return
@@ -122,7 +141,7 @@ func _create_range_display_shape():
 	RANGE_DISPLAY_SHAPE.visible = false
 
 ## Avoid human error and ensure that tower and its sprite are always ordered correctly
-func _handle_ordering():
+func _handle_ordering() -> void:
 	# Handle scene root ordering
 	y_sort_enabled = true
 	z_as_relative = TOWER_Z_AS_RELATIVE
@@ -195,3 +214,7 @@ func switch_state(state: States):
 
 func get_state() -> States:
 	return __curr_state
+
+
+# SIGNAL METHODS
+# ==============

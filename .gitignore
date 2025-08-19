@@ -14,7 +14,5 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
-debug_and_testing/*
-debug_and_testing/playable_scenes/single_tower_against_custom_wave.tscn
 
 file_stoarage/save_files/*

@@ -4,7 +4,7 @@ class_name SlateManager
 # CONSTANTS
 
 # PRIVATE VARS
-var __slates_on_map: Array[Slate] = []
+@onready var __slates_on_map: Array[Slate] = []
 
 # PRIVATE METHODS
 # ===============
@@ -16,7 +16,7 @@ var __slates_on_map: Array[Slate] = []
 ## Ensures that no duplicates are added.
 func add_slate_to_map(slate: Slate) -> void:
     # Ensure the Slate does not already exist in the array.
-    assert(not __slates_on_map.has(slate), "Attempted to add a duplicate slate to __slates_on_map.")
+    assert(not __slates_on_map.has(slate), "Attempted to add a duplicate slate to __slates_on_map")
     
     # Append the Slate to the array.
     __slates_on_map.append(slate)
@@ -33,7 +33,7 @@ func remove_slate_from_map(slate: Slate) -> void:
 ## This prevents external code from directly modifying the internal array.
 func get_slates_on_map() -> Array[Slate]:
     # Return a duplicate so that outside code can't alter the original array directly.
-    return __slates_on_map.duplicate()
+    return __slates_on_map
 
 
 # SETTERS

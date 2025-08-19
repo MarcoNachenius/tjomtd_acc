@@ -1,6 +1,12 @@
 extends Area2D
 class_name TowerDetectionArea
 
+
+# CUSTOM SIGNALS
+signal damage_aura_entered(damageAura: TowerDamageAura)
+signal damage_aura_exited(damageAura: TowerDamageAura)
+
+# PRIVATE VARS
 var __collision_shape: CollisionShape2D
 var __referenced_tower: Tower
 
@@ -9,7 +15,12 @@ var __referenced_tower: Tower
 # ================
 
 func _ready():
+	# Add CollisionShape2D scene
 	_create_collision_shape()
+
+	# Connect Area2D signals
+	area_entered.connect(self._on_area_entered)
+	area_exited.connect(self._on_area_exited)
 
 # ====================
 # CUSTOM LOCAL METHODS
@@ -51,3 +62,16 @@ func get_collision_shape() -> CollisionShape2D:
 ## Sets the tower which this area will reference when selected. 
 func set_referenced_tower(referenced_tower: Tower) -> void:
 	__referenced_tower = referenced_tower
+
+
+# SIGNAL METHODS
+# ==============
+func _on_area_entered(area):
+	# DAMAGE AURA
+	if area is TowerDamageAura:
+		damage_aura_entered.emit(area)
+
+func _on_area_exited(area):
+	# DAMAGE AURA
+	if area is TowerDamageAura:
+		damage_aura_exited.emit(area)

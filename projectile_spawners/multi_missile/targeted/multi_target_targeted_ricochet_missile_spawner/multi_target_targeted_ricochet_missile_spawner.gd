@@ -52,79 +52,89 @@ class_name MultiTargetTargetedRicochetMissileSpawner
 @export var __total_ricochets: int = 3
 
 func _launch_projectiles():
-    # Play sound effect
-    play_launch_projectile_sound_effect()
-    
-    var missiles_launched: int = 0
-    for creep in __hurtbox.get_detectable_creeps_in_range():
-        # Break loop if max number of tagets per launch has been reached
-        if missiles_launched >= MAX_MISSILES_PER_LAUNCH:
-            break
+	# Play sound effect
+	play_launch_projectile_sound_effect()
+	
+	var missiles_launched: int = 0
+	for creep in __hurtbox.get_detectable_creeps_in_range():
+		# Break loop if max number of tagets per launch has been reached
+		if missiles_launched >= MAX_MISSILES_PER_LAUNCH:
+			break
 
-        # Create bullet
-        var new_missile: TargetedRicochetMissile = ProjectileConstants.TARGETED_RICOCHET_MISSILE_LOADS[MISSILE_PRELOAD].instantiate()
+		# Create bullet
+		var new_missile: TargetedRicochetMissile = ProjectileConstants.TARGETED_RICOCHET_MISSILE_LOADS[MISSILE_PRELOAD].instantiate()
 
-        # Parameters that require 
-        # Area‑of‑effect parameters
-        new_missile.set_aoe_enabled(__aoe_enabled)
-        new_missile.set_aoe_detection_radius(__aoe_detection_radius)
-        new_missile.set_aoe_damage_amount(__aoe_damage_amount)
+		# Parameters that require 
+		# Area‑of‑effect parameters
+		new_missile.set_aoe_enabled(__aoe_enabled)
+		new_missile.set_aoe_detection_radius(__aoe_detection_radius)
+		new_missile.set_aoe_damage_amount(__aoe_damage_amount)
 
-        # Area‑of‑effect slow parameters
-        new_missile.set_aoe_slow_enabled(__aoe_slow_enabled)
-        new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
-        new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
-        new_missile.set_aoe_slow_duration(__aoe_slow_duration)
+		# Area‑of‑effect slow parameters
+		new_missile.set_aoe_slow_enabled(__aoe_slow_enabled)
+		new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
+		new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
+		new_missile.set_aoe_slow_duration(__aoe_slow_duration)
 
-        # ──────── Setters ────────
-        # Target
-        new_missile.set_target(creep)
+		# ──────── Setters ────────
+		# Target
+		new_missile.set_target(creep)
 
-        # Assign retarget properties
-        new_missile.set_retargetable(__retargetable)
-        new_missile.set_retarget_radius(__retarget_radius)
+		# Assign retarget properties
+		new_missile.set_retargetable(__retargetable)
+		new_missile.set_retarget_radius(__retarget_radius)
 
-        # Assign retarget delay
-        if __retargetable and __retarget_delay_distance > 0:
-            new_missile.delay_retargeting(__retarget_delay_distance)
-        
-        # set Damage Degradation
-        new_missile.set_damage_degredation_enabled(__damage_degredation_enabled)
-        # set Damage Degradation Rate
-        new_missile.set_damage_degredation_rate(__damage_degredation_rate)
-        # set Infinite Ricochets
-        new_missile.set_infinite_ricochets(__infinite_ricochets)
-        # set Ricochet Detection Radius
-        new_missile.set_ricochet_detection_radius(__ricochet_detection_radius)
-        # set Total Ricochets
-        new_missile.set_total_ricochets(__total_ricochets)
+		# Assign retarget delay
+		if __retargetable and __retarget_delay_distance > 0:
+			new_missile.delay_retargeting(__retarget_delay_distance)
+		
+		# set Damage Degradation
+		new_missile.set_damage_degredation_enabled(__damage_degredation_enabled)
+		# set Damage Degradation Rate
+		new_missile.set_damage_degredation_rate(__damage_degredation_rate)
+		# set Infinite Ricochets
+		new_missile.set_infinite_ricochets(__infinite_ricochets)
+		# set Ricochet Detection Radius
+		new_missile.set_ricochet_detection_radius(__ricochet_detection_radius)
+		# set Total Ricochets
+		new_missile.set_total_ricochets(__total_ricochets)
 
-        add_child(new_missile)
+		add_child(new_missile)
 
-        # Velocity / speed
-        new_missile.update_velocity_towards_target()
-        new_missile.set_speed(__missile_speed)
-        new_missile.update_isometric_speed()
+		# Velocity / speed
+		new_missile.update_velocity_towards_target()
+		new_missile.set_speed(__missile_speed)
+		new_missile.update_isometric_speed()
 
-        # Base damage
-        new_missile.set_damage(__missile_damage)
+		# Base damage
+		new_missile.set_damage(__missile_damage)
 
-        # Stun parameters
-        new_missile.set_can_stun(__can_stun)
-        new_missile.set_stun_duration_seconds(__stun_duration_seconds)
-        new_missile.set_stun_probability_percentage(__stun_probability_percentage)
+		# Stun parameters
+		new_missile.set_can_stun(__can_stun)
+		new_missile.set_stun_duration_seconds(__stun_duration_seconds)
+		new_missile.set_stun_probability_percentage(__stun_probability_percentage)
 
-        # Slow parameters
-        new_missile.set_can_slow(__can_slow)
-        new_missile.set_slow_duration_seconds(__slow_duration_seconds)
-        new_missile.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
+		# Slow parameters
+		new_missile.set_can_slow(__can_slow)
+		new_missile.set_slow_duration_seconds(__slow_duration_seconds)
+		new_missile.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
 
-        # Dont keep track of amount of bullets launched if infinite bullet launch is set to true
-        if __infinite_targets_per_launch:
-            continue
+		# Dont keep track of amount of bullets launched if infinite bullet launch is set to true
+		if __infinite_targets_per_launch:
+			continue
 
-        # Increment missiles launched
-        missiles_launched += 1
+		# Increment missiles launched
+		missiles_launched += 1
 
 func get_damage() -> int:
-    return __missile_damage
+	return __missile_damage
+
+func increase_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage increase must be positive number greater than 0.")
+	__missile_damage += amount
+
+func decrease_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage decrease must be positive number greater than 0.")
+	__missile_damage -= amount

@@ -5,42 +5,13 @@ extends Node2D
 @export var TOWER_PLACEMENT_COORD: Vector2i
 
 func _ready():
-	_place_single_tower()
 	GAME_MAP.CREEP_SPAWNER.initiate_new_wave()
-	GAME_MAP.place_slate(SlateConstants.SlateIDs.HOLD_SLATE_LVL_1, TOWER_PLACEMENT_COORD)
-
-func _place_single_tower():
-	# Place tower impediment points
-	GAME_MAP.place_tower_impediment_points(TOWER_PLACEMENT_COORD)
-	
-	# Create new tower instance
-	var new_tower: Tower = TowerConstants.ALL_TOWER_LOADS[TOWER_ID].instantiate()
-	new_tower.set_placement_grid_coordinate(TOWER_PLACEMENT_COORD)
-	GAME_MAP.add_child(new_tower)
-	new_tower.position = GAME_MAP.__placement_grid.map_to_local(TOWER_PLACEMENT_COORD)
-
-	# Update tower placement grid dict
-	GAME_MAP._add_tower_to_placement_grid_coords_dict(new_tower, GAME_MAP.__placement_grid_coords_for_towers)
-
-	# Create tower selection area
-	var new_tower_selection_area: TowerSelectionArea = TowerConstants.TOWER_SELECTION_AREA_PRELOAD.instantiate()
-	new_tower_selection_area.set_referenced_tower(new_tower)
-	new_tower.add_child(new_tower_selection_area)
-	new_tower.set_selection_area(new_tower_selection_area)
-
-	# Emit signals
-	GAME_MAP.tower_placed.emit(new_tower)
-	# Add to appropriate barricade list
-	if new_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
-		GAME_MAP.__barricades_on_map.append(new_tower)
-	else: # OR ddd to appropriate towers awaiting slection list
-		GAME_MAP.__towers_awaiting_selection.append(new_tower)
-	
-	# Switch state 
-	new_tower.switch_state(Tower.States.BUILT)
-	
-	new_tower.RANGE_DISPLAY_SHAPE.visible = true
+	GAME_MAP.place_built_tower(TOWER_PLACEMENT_COORD, TOWER_ID)
+	var tower_aura: TowerDamageAura = TowerAuraConstants.TOWER_DAMAGE_AURA_PRELOAD.instantiate()
+	tower_aura.DAMAGE_INCREASE_FACTOR = 0.8
+	add_child(tower_aura)
+	tower_aura.global_position = GAME_MAP.__towers_on_map[0].global_position
 
 
-func _on_exit_game_pressed() -> void:
+func _on_exit_game_pressed():
 	get_tree().quit()

@@ -384,7 +384,7 @@ const REQUIRES_TOWERS: Dictionary = {
 }
 
 # COMPONENT LOADS
-var TOWER_SELECTION_AREA_PRELOAD: PackedScene = load("res://ui/components/tower_selection_area/tower_selection_area.tscn")
+var TOWER_DETECTION_AREA_LOAD: PackedScene = load("res://towers/components/detection_area/tower_detection_area.tscn")
 var AWAITING_SELECTION_ANIMATION_LOAD: PackedScene = load("res://towers/animated_sprites/awaiting_selection_animation.tscn")
 var TOWER_SURFACE_SPRITE_LOAD: PackedScene = load("res://towers/sprites/tower_surface_sprite.tscn")
 

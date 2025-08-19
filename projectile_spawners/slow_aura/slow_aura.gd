@@ -10,6 +10,9 @@ class_name SlowAura
 var __slow_duration: float
 
 func _execute_extended_onready_commands():
+    # Slow auras do not have damage by default, so damage buffs are not applicable.
+    ALLOW_DAMAGE_BUFFS = false
+
     if !SLOW_ALL_CREEPS_IN_RANGE:
         assert(MAX_SIMULTANEOUS_TARGETS > 0, "MAX_SIMULTANEOUS_TARGETS set to 0 when SLOW_ALL_CREEPS_IN_RANGE is false")
     if SLOW_PERCENTAGE <= 0 or SLOW_PERCENTAGE > 100:

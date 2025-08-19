@@ -20,8 +20,13 @@ enum TargetingPolicies {
 @export var __enforce_targeting_policy: bool
 @export var __targeting_policy: TargetingPolicies
 @export var LAUNCH_PROJECTILE_AUDIO: AudioStreamPlayer2D
+@export var ALLOW_DAMAGE_BUFFS: bool = true
 
-# LOCALS
+
+# SINGLETONS
+var INITIAL_DAMAGE: int
+
+# PRIVATE VARS
 var __cooldown_timer: Timer
 var __target: Creep
 var __hurtbox: ProjectileSpawnerHurtbox
@@ -36,6 +41,9 @@ func _ready():
 	# COOLDOWN TIMER
 	self._create_cooldown_timer()
 	__launch_cooled_down = true
+	# INITIAL DAMAGE
+	INITIAL_DAMAGE = get_damage()
+	# EXTENDED ONREADY COMMANDS
 	_execute_extended_onready_commands()
 
 # *******
@@ -48,6 +56,14 @@ func play_launch_projectile_sound_effect():
 	if LAUNCH_PROJECTILE_AUDIO:
 		LAUNCH_PROJECTILE_AUDIO.play()
 
+## Returns amount of damage that has been added to initial damage. 
+func total_bonus_damage() -> int:
+	return get_damage() - INITIAL_DAMAGE
+
+## Returns the ROUNDED amount of damage that will be added when a factor amount is applied to the initial damage.
+func damage_factor_amount(factor: float) -> int:
+	assert(factor > 0, "Factor must be greater than 0")
+	return round(INITIAL_DAMAGE * factor)
 
 # ********
 # PRIVATES
@@ -129,6 +145,14 @@ func _execute_extended_onready_commands():
 
 func get_damage() -> int:
 	return 0
+
+## Increases damage of launched projectiles by specified amount.
+func increase_damage(amount: int) -> void:
+	print("WARNING: Empty abstract method called. This method does nothing")
+
+## Decreases damage of launched projectiles by specified amount.
+func decrease_damage(amount: int) -> void:
+	print("WARNING: Empty abstract method called. This method does nothing")
 
 func _on_cooldown_timer_timeout():
 	__launch_cooled_down = true

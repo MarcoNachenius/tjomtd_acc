@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://wdxphc8o1v3p"]
+
+[ext_resource type="Script" uid="uid://djqsy77eq1qmm" path="res://tower_auras/components/aura_area/tower_aura_area.gd" id="1_kxodn"]
+
+[node name="TowerAuraArea" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_kxodn")

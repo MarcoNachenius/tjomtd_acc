@@ -9,6 +9,8 @@ func _execute_extended_onready_commands() -> void:
     assert(STUN_DURATION > 0, "Stun duration must be greater than 0")
     assert(MAX_CREEPS_PER_STUN > 0, "Max creeps per stun must be greater than 0")
     assert(STUN_ALL_TARGETS_IN_RAGE or MAX_CREEPS_PER_STUN > 0, "Either STUN_ALL_TARGETS_IN_RAGE must be true or MAX_CREEPS_PER_STUN must be greater than 0")
+    # Slow auras do not have damage by default, so damage buffs are not applicable.
+    ALLOW_DAMAGE_BUFFS = false
 
 func _launch_projectiles():
     # Fetch list of available targets

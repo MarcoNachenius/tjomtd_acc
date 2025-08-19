@@ -3,5 +3,5 @@
 [ext_resource type="Script" uid="uid://6j0r52jkuuvn" path="res://towers/components/detection_area/tower_detection_area.gd" id="1_1jdin"]
 
 [node name="TowerDetectionArea" type="Area2D"]
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_1jdin")

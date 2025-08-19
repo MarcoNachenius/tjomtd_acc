@@ -35,3 +35,14 @@ func _launch_projectiles():
 func _execute_extended_onready_commands():
 	if !DAMAGE_ALL_CREEPS_IN_RANGE:
 		assert(MAX_SIMULTANEOUS_TARGETS > 0, "MAX_SIMULTANEOUS_TARGETS set to 0 when DAMAGE_ALL_CREEPS_IN_RANGE is false")
+
+
+func increase_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage increase must be positive number greater than 0.")
+	__damage += amount
+
+func decrease_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage decrease must be positive number greater than 0.")
+	__damage -= amount

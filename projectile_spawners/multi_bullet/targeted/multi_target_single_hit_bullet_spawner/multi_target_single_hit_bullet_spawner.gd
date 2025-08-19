@@ -35,63 +35,73 @@ class_name MultiTargetSingleHitSingleBulletSpawner
 @export var __aoe_slow_duration: float
 
 func _execute_extended_onready_commands():
-    assert(__bullets_per_launch or __infinite_targets_per_launch, "No bullets per launch has been provided and infinite targets is set to false")
+	assert(__bullets_per_launch or __infinite_targets_per_launch, "No bullets per launch has been provided and infinite targets is set to false")
 
 func _launch_projectiles():
-    # Play sound effect
-    play_launch_projectile_sound_effect()
+	# Play sound effect
+	play_launch_projectile_sound_effect()
 	
-    var detectable_creeps: Array[Creep] = __hurtbox.get_detectable_creeps_in_range()
-    var num_of_bullets_launched: int = 0
-    for creep in detectable_creeps:
-        # Create bullet
-        var new_bullet: SingleHitBullet = ProjectileConstants.SINGLE_HIT_BULLET_LOADS[BULLET_PRELOAD].instantiate()
-    
-        # ──────── Setters ────────
-    
-        # Base damage
-        new_bullet.set_damage(__bullet_damage)
-    
-        # Stun parameters
-        new_bullet.set_can_stun(__can_stun)
-        new_bullet.set_stun_duration_seconds(__stun_duration_seconds)
-        new_bullet.set_stun_probability_percentage(__stun_probability_percentage)
-    
-        # Slow parameters
-        new_bullet.set_can_slow(__can_slow)
-        new_bullet.set_slow_duration_seconds(__slow_duration_seconds)
-        new_bullet.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
-    
-        # Area‑of‑effect parameters
-        new_bullet.set_aoe_enabled(__aoe_enabled)
-        new_bullet.set_aoe_detection_radius(__aoe_detection_radius)
-        new_bullet.set_aoe_damage_amount(__aoe_damage_amount)
+	var detectable_creeps: Array[Creep] = __hurtbox.get_detectable_creeps_in_range()
+	var num_of_bullets_launched: int = 0
+	for creep in detectable_creeps:
+		# Create bullet
+		var new_bullet: SingleHitBullet = ProjectileConstants.SINGLE_HIT_BULLET_LOADS[BULLET_PRELOAD].instantiate()
+	
+		# ──────── Setters ────────
+	
+		# Base damage
+		new_bullet.set_damage(__bullet_damage)
+	
+		# Stun parameters
+		new_bullet.set_can_stun(__can_stun)
+		new_bullet.set_stun_duration_seconds(__stun_duration_seconds)
+		new_bullet.set_stun_probability_percentage(__stun_probability_percentage)
+	
+		# Slow parameters
+		new_bullet.set_can_slow(__can_slow)
+		new_bullet.set_slow_duration_seconds(__slow_duration_seconds)
+		new_bullet.set_slow_speed_reduction_percentage(__slow_speed_reduction_percentage)
+	
+		# Area‑of‑effect parameters
+		new_bullet.set_aoe_enabled(__aoe_enabled)
+		new_bullet.set_aoe_detection_radius(__aoe_detection_radius)
+		new_bullet.set_aoe_damage_amount(__aoe_damage_amount)
 
-        # Area‑of‑effect slow parameters
-        new_bullet.set_aoe_slow_enabled(__aoe_slow_enabled)
-        new_bullet.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
-        new_bullet.set_aoe_slow_percentage(__aoe_slow_percentage)
-        new_bullet.set_aoe_slow_duration(__aoe_slow_duration)
+		# Area‑of‑effect slow parameters
+		new_bullet.set_aoe_slow_enabled(__aoe_slow_enabled)
+		new_bullet.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
+		new_bullet.set_aoe_slow_percentage(__aoe_slow_percentage)
+		new_bullet.set_aoe_slow_duration(__aoe_slow_duration)
 
-        add_child(new_bullet)
+		add_child(new_bullet)
 
-        # Target
-        new_bullet.set_target(creep)
-        # Velocity / speed
-        new_bullet.update_velocity_towards_target()
-        new_bullet.set_speed(__bullet_speed)
-        new_bullet.update_isometric_speed()
+		# Target
+		new_bullet.set_target(creep)
+		# Velocity / speed
+		new_bullet.update_velocity_towards_target()
+		new_bullet.set_speed(__bullet_speed)
+		new_bullet.update_isometric_speed()
 
-        # Dont keep track of amount of bullets launched if infinite bullet launch is set to true
-        if __infinite_targets_per_launch:
-            continue
+		# Dont keep track of amount of bullets launched if infinite bullet launch is set to true
+		if __infinite_targets_per_launch:
+			continue
 
-        # Increment bullets launched
-        num_of_bullets_launched += 1
+		# Increment bullets launched
+		num_of_bullets_launched += 1
 
-        # End loop if max number of simultaneous launches has been reached
-        if num_of_bullets_launched == __bullets_per_launch:
-            break
+		# End loop if max number of simultaneous launches has been reached
+		if num_of_bullets_launched == __bullets_per_launch:
+			break
 
 func get_damage() -> int:
-    return __bullet_damage
+	return __bullet_damage
+
+func increase_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage increase must be positive number greater than 0.")
+	__bullet_damage += amount
+
+func decrease_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage decrease must be positive number greater than 0.")
+	__bullet_damage -= amount

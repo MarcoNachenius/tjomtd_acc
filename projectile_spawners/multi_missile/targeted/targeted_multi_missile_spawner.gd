@@ -33,44 +33,54 @@ var __missile_load
 
 
 func _launch_projectiles():
-    # Play sound effect
-    play_launch_projectile_sound_effect()
+	# Play sound effect
+	play_launch_projectile_sound_effect()
 	
-    var number_of_missiles_launched: int = 0
-    for detectable_creep in __hurtbox.get_detectable_creeps_in_range():
-        # Check if the maximum number of missiles has been reached
-        if !__infinite_missiles_per_launch and number_of_missiles_launched >= __missiles_per_launch:
-            break
-        # Create missile
-        var new_missile = __missile_load.instantiate()
-        assert(new_missile != null, "Failed to instantiate missile")
-        # set Target
-        assert(__target, "No target provided")
-        # set Speed
-        new_missile.set_speed(__missile_speed)
-        # set Target
-        new_missile.set_target(detectable_creep)
-        # set Damage
-        new_missile.set_damage(__missile_damage)
-        # Parameters that require 
-        # Area‑of‑effect parameters
-        new_missile.set_aoe_enabled(__aoe_enabled)
-        new_missile.set_aoe_detection_radius(__aoe_detection_radius)
-        new_missile.set_aoe_damage_amount(__aoe_damage_amount)
-    
-        # Area‑of‑effect slow parameters
-        new_missile.set_aoe_slow_enabled(__aoe_slow_enabled)
-        new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
-        new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
-        new_missile.set_aoe_slow_duration(__aoe_slow_duration)
-        # Add to parent
-        add_child(new_missile)
-        # Increment number of missiles launched
-        number_of_missiles_launched += 1
+	var number_of_missiles_launched: int = 0
+	for detectable_creep in __hurtbox.get_detectable_creeps_in_range():
+		# Check if the maximum number of missiles has been reached
+		if !__infinite_missiles_per_launch and number_of_missiles_launched >= __missiles_per_launch:
+			break
+		# Create missile
+		var new_missile = __missile_load.instantiate()
+		assert(new_missile != null, "Failed to instantiate missile")
+		# set Target
+		assert(__target, "No target provided")
+		# set Speed
+		new_missile.set_speed(__missile_speed)
+		# set Target
+		new_missile.set_target(detectable_creep)
+		# set Damage
+		new_missile.set_damage(__missile_damage)
+		# Parameters that require 
+		# Area‑of‑effect parameters
+		new_missile.set_aoe_enabled(__aoe_enabled)
+		new_missile.set_aoe_detection_radius(__aoe_detection_radius)
+		new_missile.set_aoe_damage_amount(__aoe_damage_amount)
+	
+		# Area‑of‑effect slow parameters
+		new_missile.set_aoe_slow_enabled(__aoe_slow_enabled)
+		new_missile.set_aoe_slow_detection_radius(__aoe_slow_detection_radius)
+		new_missile.set_aoe_slow_percentage(__aoe_slow_percentage)
+		new_missile.set_aoe_slow_duration(__aoe_slow_duration)
+		# Add to parent
+		add_child(new_missile)
+		# Increment number of missiles launched
+		number_of_missiles_launched += 1
 
 func _execute_extended_onready_commands():
-    # Create instance of missile
-    __missile_load = load(ProjectileConstants.MISSILE_PATHS[MISSILE_ID])
+	# Create instance of missile
+	__missile_load = load(ProjectileConstants.MISSILE_PATHS[MISSILE_ID])
 
 func get_damage() -> int:
-    return __missile_damage
+	return __missile_damage
+
+func increase_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage increase must be positive number greater than 0.")
+	__missile_damage += amount
+
+func decrease_damage(amount: int) -> void:
+	assert(ALLOW_DAMAGE_BUFFS, "Damage buffs are not allowed when ALLOW_DAMAGE_BUFFS is set to 'false'.")
+	assert(amount > 0, "Damage decrease must be positive number greater than 0.")
+	__missile_damage -= amount
