@@ -39,8 +39,10 @@ func _on_damage_aura_entered(damageAura: TowerDamageAura) -> void:
 
 
 func _on_damage_aura_exited(damageAura: TowerDamageAura) -> void: # WIP
-	# Ensure damage aura is being tracked
-	assert(__active_damage_auras.keys().has(damageAura), "_on_damage_aura_exited called on damage aura which isn't being tracked")
+	# Tracking of damage aura may have been removed at some stage.
+	# For instance, the tower may have a max damage aura cap and only wants auras that are the most preferential to it.
+	if !__active_damage_auras.keys().has(damageAura):
+		return
 
 	# Retrieve damage buff amount
 	var damage_buff_amount: int = __active_damage_auras[damageAura]
