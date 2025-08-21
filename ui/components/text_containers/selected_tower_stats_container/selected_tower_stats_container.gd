@@ -33,7 +33,23 @@ func _assign_tower_name(tower: Tower) -> void:
 		TOWER_NAME_TEXT.text = "Tower name not found"
 
 func _assign_damage(tower: Tower) -> void:
-	TOWER_ATTR_CONTAINER.DAMAGE_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_damage())
+	# Don't bother finding potential damage buff amounts if there is no damage to increase
+	if tower.PRIMARY_PROJECTILE_SPAWNER.get_damage() == 0:
+		TOWER_ATTR_CONTAINER.DAMAGE_VALUE.text = str(0)
+		return
+	
+	var display_text: String = ""
+	
+	# Add base damage to display text
+	display_text += str(tower.PRIMARY_PROJECTILE_SPAWNER.INITIAL_DAMAGE)
+
+	# Add damage buff amount
+	var damage_buff_amount: int = tower.PRIMARY_PROJECTILE_SPAWNER.total_bonus_damage()
+	if damage_buff_amount > 0:
+		display_text += " (+%d)" % damage_buff_amount
+	
+	TOWER_ATTR_CONTAINER.DAMAGE_VALUE.text = display_text
+
 
 func _assign_range(tower: Tower) -> void:
 	TOWER_ATTR_CONTAINER.RANGE_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_detection_range())
