@@ -104,6 +104,7 @@ var __final_wave_reached: bool = false
 # INHERITED METHODS
 # *****************
 func _ready():
+	assert(GAME_MAP, "Game map has not been assigned")
 	# SIGNALS
 	_connect_all_component_signals()
 	# TOWER UPGRADE MANAGER
