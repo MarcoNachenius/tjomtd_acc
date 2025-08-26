@@ -352,8 +352,12 @@ func _initialise_all_game_stats():
 	GAME_STATS_CONTAINER.MAZE_LENGTH_AMOUNT_LABEL.text = str(int(GAME_MAP.__path_start_point.distance_to(GAME_MAP.__path_end_point)))
 
 ## Shows buttons for slates that may be upgraded from selected tower awaiting selection.
-func _handle_awaiting_selection_tower_slate_upgrades_display():
-	pass
+func _handle_awaiting_selection_tower_slate_upgrades_display() -> void:
+	# Get list of viable upgrade towers for selected tower
+	var viable_slate_ids: Array[SlateConstants.SlateIDs] = GAME_MAP.SLATE_MANAGER.selected_tower_awaiting_selection_slate_upgrades(__selected_tower.TOWER_ID)
+	# Set visibility of buttons which correspond with viable slate upgrades
+	AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER.show_buttons(viable_slate_ids)
+	
 
 # ****************
 # SIGNAL CALLBACKS
@@ -569,8 +573,10 @@ func _on_tower_selected(tower: Tower):
 		tower.TOWER_SPRITE.modulate.a = 1.0
 		# Show upgrade tower buttons based on towers awaiting selection
 		_show_upgrade_tower_buttons(__selected_tower, GAME_MAP.get_towers_awaiting_selection())
-		# Handle compound tower upgrades.
+		# Handle compound tower upgrades
 		_handle_compound_upgrade_for_towers_awaiting_selection()
+		# Handle awaiting selection slate upgrades
+		_handle_awaiting_selection_tower_slate_upgrades_display()
 		return
 	
 	# Handle upgrade tower selection

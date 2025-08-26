@@ -147,8 +147,10 @@ func _connect_button_pressed_signals() -> void:
 # ==============
 ## Shows buttons that correspond to the provided slate IDs
 func show_buttons(slateIDs: Array[SlateConstants.SlateIDs]) -> void:
+    # Ensure all previously visible buttons are no longer visible
+    hide_all_buttons()
     for slate_id in slateIDs:
-        assert(SLATE_ID_TO_BUTTON.keys().has(slate_id), "No button mapped to slate_id: %s" % [str(slate_id)])
+        assert(SLATE_ID_TO_BUTTON.keys().has(slate_id), "No button mapped to: %s" % [SlateDescriptions.SLATE_NAMES[slate_id]])
         SLATE_ID_TO_BUTTON[slate_id].visible = true
 
 func hide_all_buttons() -> void:
