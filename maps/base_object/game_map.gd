@@ -131,6 +131,14 @@ func _unhandled_input(event) -> void:
 # --------------
 # PUBLIC METHODS
 # --------------
+## Returns a dictionary of which towers are awaiting selection, and how many of them have been placed.
+func awaiting_selection_tower_count_dict() -> Dictionary[TowerConstants.TowerIDs, int]:
+	var count_dict: Dictionary[TowerConstants.TowerIDs, int] = {}
+	# Increment the count of a tower by 1 if it exists, or add new tower id and set it to 1 if it doesn't.
+	for tower in __towers_awaiting_selection:
+		count_dict[tower.TOWER_ID] = count_dict.get(tower.TOWER_ID, 0) + 1
+	return count_dict
+
 func add_test_single_point_path_impediment_sprite(mainGridTile: Vector2i) -> void:
 	var path_tile = MapConstants.SINGLE_POINT_IMPEDIMENT_RED_SURFACE.instantiate()
 	__main_tileset.add_child(path_tile)
@@ -255,7 +263,7 @@ func load_game() -> void:
 # PRIVATE METHODS
 # ---------------
 func _create_slate_manager() -> void:
-	var new_slate_manager_instance: SlateManager = SlateManager.new()
+	var new_slate_manager_instance: SlateManager = SlateManager.new(self)
 	add_child(new_slate_manager_instance)
 	SLATE_MANAGER = new_slate_manager_instance
 

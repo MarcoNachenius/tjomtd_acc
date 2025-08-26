@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://2bjxr0yqci4"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_0b8a6"]
+[ext_resource type="PackedScene" uid="uid://bjancdx67lk7e" path="res://towers/base_object/templates/tower_sprite_termplate.tscn" id="2_6yo71"]
+[ext_resource type="Script" uid="uid://lpqc81j5gpf6" path="res://projectile_spawners/stun_aura/stun_aura.gd" id="3_6yo71"]
+
+[node name="HoldSlateLvl2" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
+script = ExtResource("1_0b8a6")
+SLATE_ID = 1
+SLATE_SPRITE = NodePath("TowerSpriteTermplate")
+metadata/_custom_type_script = "uid://cmwqa742rvnbl"
+
+[node name="TowerSpriteTermplate" parent="." instance=ExtResource("2_6yo71")]
+
+[node name="StunAura" type="Node2D" parent="."]
+script = ExtResource("3_6yo71")
+MAX_CREEPS_PER_STUN = 2
+STUN_DURATION = 0.9
+__cooldown_duration = 1.0
+__detection_range = 300
+ALLOW_DAMAGE_BUFFS = false
+metadata/_custom_type_script = "uid://lpqc81j5gpf6"
