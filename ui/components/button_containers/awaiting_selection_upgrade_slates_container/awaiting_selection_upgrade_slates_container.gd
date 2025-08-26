@@ -35,9 +35,9 @@ class_name AwaitingSelectionUpgradeSlatesContainer
 # ==========
 @onready var ALL_BUTTONS: Array[Button] = [
     ## ===== Hold slates =====
-    #HOLD_SLATE_LVL_1_BUTTON,
-    #HOLD_SLATE_LVL_2_BUTTON,
-    #HOLD_SLATE_LVL_3_BUTTON,
+    HOLD_SLATE_LVL_1_BUTTON,
+    HOLD_SLATE_LVL_2_BUTTON,
+    HOLD_SLATE_LVL_3_BUTTON,
     ## ===== Slow slates =====
     #SLOW_SLATE_LVL_1_BUTTON,
     #SLOW_SLATE_LVL_2_BUTTON,
@@ -123,6 +123,8 @@ var __connected_game_map: GameMap
 func _ready() -> void:
     _connect_game_map()
     _connect_button_pressed_signals()
+    # Ensure no buttons are visible on ready
+    hide_all_buttons()
 
 # ===============
 # PRIVATE METHODS
@@ -143,6 +145,12 @@ func _connect_button_pressed_signals() -> void:
 # ==============
 # PUBLIC METHODS
 # ==============
+## Shows buttons that correspond to the provided slate IDs
+func show_buttons(slateIDs: Array[SlateConstants.SlateIDs]) -> void:
+    for slate_id in slateIDs:
+        assert(SLATE_ID_TO_BUTTON.keys().has(slate_id), "No button mapped to slate_id: %s" % [str(slate_id)])
+        SLATE_ID_TO_BUTTON[slate_id].visible = true
+
 func hide_all_buttons() -> void:
     for button in ALL_BUTTONS:
         button.visible = false

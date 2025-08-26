@@ -15,8 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://r7v6g63is2hk" path="res://ui/components/text_containers/selected_tower_stats_container/selected_tower_stats_container.tscn" id="12_5rmau"]
 [ext_resource type="PackedScene" uid="uid://dh1y0gw52bkw6" path="res://ui/components/button_containers/tower_stats_visibility_container/tower_stats_visibility_container.tscn" id="13_243pv"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "EXTENDED_UPGRADES_CONTAINER", "SELECTED_TOWER_STATS_CONTAINER", "TOWER_STATS_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON", "HUD_AUDIO_MANAGER")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER", "GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "EXTENDED_UPGRADES_CONTAINER", "SELECTED_TOWER_STATS_CONTAINER", "TOWER_STATS_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON", "HUD_AUDIO_MANAGER")]
 script = ExtResource("1_kyn4q")
+AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeSlatesContainer")
 GAME_STATS_CONTAINER = NodePath("StatsContainer/GameStatsPanel/GameStatsContianer")
 BUILD_RANDOM_TOWER_CONTAINER = NodePath("MapCommands/VBoxContainer/BuildRandomTowerContainer")
 TOWER_PROPERTIES_CONTAINER = NodePath("TowerCommands/TowerPropertiesContainer")

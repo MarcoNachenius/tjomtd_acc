@@ -6,7 +6,7 @@
 
 [node name="HoldSlateLvl1" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
 script = ExtResource("1_lt3n5")
-SLATE_SPRITE = NodePath("")
+SLATE_SPRITE = NodePath("SlateSprite")
 metadata/_custom_type_script = "uid://cmwqa742rvnbl"
 
 [node name="StunAura" type="Node2D" parent="."]

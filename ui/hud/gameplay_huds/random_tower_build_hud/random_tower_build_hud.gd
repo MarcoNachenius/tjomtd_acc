@@ -4,6 +4,7 @@ class_name RandomTowerBuildHUD
 # EXPORTS
 # =======
 # HBox/VBox Containers
+@export var AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER: AwaitingSelectionUpgradeSlatesContainer
 @export var GAME_STATS_CONTAINER: GameStatsContainer
 @export var BUILD_RANDOM_TOWER_CONTAINER: BuildRandomTowerContainer
 @export var GAME_MAP: GameMap
@@ -113,14 +114,16 @@ func _ready():
 	_handle_initial_container_visibility()
 	# Assign starting values to game stats container
 	_initialise_all_game_stats()
+	# Ensure awaiting selection slate upgrades container has been added
+	assert(AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER, "No awaiting selection slate upgrades container assigned")
 	
 	# Assign display amount of upgrade build level container
 	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.LEVEL_UPGRADE_PRICES[1]) + ")"
 
 
-# ****************
-# INTERNAL METHODS
-# ****************
+# ***************
+# PRIVATE METHODS
+# ***************
 ## Connect signals from all components to relevant handler methods on ready.
 func _connect_all_component_signals():
 	# Build random tower hbox
@@ -347,6 +350,10 @@ func _initialise_all_game_stats():
 	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(GameConstants.STARTING_LIVES)
 	GAME_STATS_CONTAINER.CURR_BUILD_LEVEL_AMOUNT_LABEL.text = str(1)
 	GAME_STATS_CONTAINER.MAZE_LENGTH_AMOUNT_LABEL.text = str(int(GAME_MAP.__path_start_point.distance_to(GAME_MAP.__path_end_point)))
+
+## Shows buttons for slates that may be upgraded from selected tower awaiting selection.
+func _handle_awaiting_selection_tower_slate_upgrades_display():
+	pass
 
 # ****************
 # SIGNAL CALLBACKS

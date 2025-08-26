@@ -68,7 +68,6 @@ var REQUIRES_TOWERS: Dictionary[SlateIDs, Dictionary] = {
         TowerConstants.TowerIDs.SUNSTONE_LVL_4: 1,
     },
     SlateIDs.HOLD_SLATE_LVL_3: {
-        TowerConstants.TowerIDs.LARIMAR_LVL_3: 1,
         TowerConstants.TowerIDs.LARIMAR_LVL_4: 1,
         TowerConstants.TowerIDs.SUNSTONE_LVL_5: 1,
     },
@@ -99,7 +98,7 @@ const TOWER_UPGRADES_INTO_SLATES: Dictionary[TowerConstants.TowerIDs, Array] = {
     TowerConstants.TowerIDs.LARIMAR_LVL_1: [SlateIDs.HOLD_SLATE_LVL_1],
     TowerConstants.TowerIDs.LARIMAR_LVL_2: [SlateIDs.HOLD_SLATE_LVL_1, SlateIDs.HOLD_SLATE_LVL_2],
     TowerConstants.TowerIDs.SUNSTONE_LVL_3: [SlateIDs.HOLD_SLATE_LVL_1],
-    TowerConstants.TowerIDs.LARIMAR_LVL_3: [SlateIDs.HOLD_SLATE_LVL_2, SlateIDs.HOLD_SLATE_LVL_3],
+    TowerConstants.TowerIDs.LARIMAR_LVL_3: [SlateIDs.HOLD_SLATE_LVL_2],
     TowerConstants.TowerIDs.SUNSTONE_LVL_4: [SlateIDs.HOLD_SLATE_LVL_2],
     TowerConstants.TowerIDs.LARIMAR_LVL_4: [SlateIDs.HOLD_SLATE_LVL_3],
     TowerConstants.TowerIDs.SUNSTONE_LVL_5: [SlateIDs.HOLD_SLATE_LVL_3],
