@@ -199,6 +199,7 @@ func _connect_game_map_signals():
 	GAME_MAP.lives_depleted.connect(_on_lives_depleted)
 	GAME_MAP.maze_length_updated.connect(_on_maze_length_updated)
 	GAME_MAP.final_boss_path_completed.connect(_on_final_boss_path_completed)
+	GAME_MAP.slate_placed.connect(_on_slate_placed)
 
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
@@ -343,6 +344,8 @@ func _hide_containers_on_tower_kept():
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
 	# Hide extended upgrade containers
 	EXTENDED_UPGRADES_CONTAINER.visible = false
+	# Hide awaiting selection slate container
+	AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER.visible = false
 
 ## Pulls all current values from map and reassigns them in game stats container.
 func _initialise_all_game_stats():
@@ -618,6 +621,14 @@ func _on_tower_placed(_tower: Tower):
 
 func _on_maze_length_updated(updated_maze_length: int):
 	GAME_STATS_CONTAINER.MAZE_LENGTH_AMOUNT_LABEL.text = str(updated_maze_length)
+
+
+# WIP
+func _on_slate_placed() -> void:
+	_deselect_tower()
+	_hide_containers_on_tower_kept()
+	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+	START_NEW_WAVE_BUTTON.visible = true
 
 
 #                                           | Selected Tower Stats Container |

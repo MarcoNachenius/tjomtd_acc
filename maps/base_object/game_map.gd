@@ -23,6 +23,7 @@ signal tower_selected(tower: Tower)
 signal maze_length_updated(updated_maze_length: int)
 signal lives_depleted
 signal final_boss_path_completed(total_damage_taken: int, maze_completion_time: float)
+signal slate_placed
 
 # EXPORTS
 ## Map ID
@@ -1090,7 +1091,10 @@ func keep_slate_from_towers_awaiting_selection(selectedTower: Tower, slateID: Sl
 	__towers_awaiting_selection.clear()
 
 	# Place slate in selected tower's placement grid position
-	place_slate(slateID, selected_tower_placement_grid_coord) 
+	place_slate(slateID, selected_tower_placement_grid_coord)
+
+	# Emit slate placed signal
+	slate_placed.emit() 
 
 ## Called when an upgrade tower exists on the towers on map list.
 func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:

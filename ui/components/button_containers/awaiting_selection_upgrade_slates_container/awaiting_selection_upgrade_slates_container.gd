@@ -147,6 +147,8 @@ func _connect_button_pressed_signals() -> void:
 # ==============
 ## Shows buttons that correspond to the provided slate IDs
 func show_buttons(slateIDs: Array[SlateConstants.SlateIDs]) -> void:
+    # Ensure base container is visible
+    self.visible = true
     # Ensure all previously visible buttons are no longer visible
     hide_all_buttons()
     for slate_id in slateIDs:
