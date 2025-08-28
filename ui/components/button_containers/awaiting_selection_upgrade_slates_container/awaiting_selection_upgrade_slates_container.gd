@@ -47,9 +47,9 @@ class_name AwaitingSelectionUpgradeSlatesContainer
     #BURN_SLATE_LVL_2_BUTTON,
     #BURN_SLATE_LVL_3_BUTTON,
     ## ===== Damage slates =====
-    #DAMAGE_SLATE_LVL_1_BUTTON,
-    #DAMAGE_SLATE_LVL_2_BUTTON,
-    #DAMAGE_SLATE_LVL_3_BUTTON,
+    DAMAGE_SLATE_LVL_1_BUTTON,
+    DAMAGE_SLATE_LVL_2_BUTTON,
+    DAMAGE_SLATE_LVL_3_BUTTON,
     ## ===== Range slates =====
     #RANGE_SLATE_LVL_1_BUTTON,
     #RANGE_SLATE_LVL_2_BUTTON,

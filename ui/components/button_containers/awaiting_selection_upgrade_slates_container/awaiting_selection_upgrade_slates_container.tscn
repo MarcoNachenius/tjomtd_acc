@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfg7p8e02gv8g" path="res://ui/components/button_containers/awaiting_selection_upgrade_slates_container/awaiting_selection_upgrade_slates_container.gd" id="1_xdidm"]
 
-[node name="AwaitingSelectionUpgradeSlatesContainer" type="HBoxContainer" node_paths=PackedStringArray("HOLD_SLATE_LVL_1_BUTTON", "HOLD_SLATE_LVL_2_BUTTON", "HOLD_SLATE_LVL_3_BUTTON", "SLOW_SLATE_LVL_1_BUTTON", "SLOW_SLATE_LVL_2_BUTTON", "SLOW_SLATE_LVL_3_BUTTON")]
+[node name="AwaitingSelectionUpgradeSlatesContainer" type="HBoxContainer" node_paths=PackedStringArray("HOLD_SLATE_LVL_1_BUTTON", "HOLD_SLATE_LVL_2_BUTTON", "HOLD_SLATE_LVL_3_BUTTON", "SLOW_SLATE_LVL_1_BUTTON", "SLOW_SLATE_LVL_2_BUTTON", "SLOW_SLATE_LVL_3_BUTTON", "DAMAGE_SLATE_LVL_1_BUTTON", "DAMAGE_SLATE_LVL_2_BUTTON", "DAMAGE_SLATE_LVL_3_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_xdidm")
@@ -12,6 +12,9 @@ HOLD_SLATE_LVL_3_BUTTON = NodePath("HoldSlateLvl3Button")
 SLOW_SLATE_LVL_1_BUTTON = NodePath("SlowSlateLvl1Button")
 SLOW_SLATE_LVL_2_BUTTON = NodePath("SlowSlateLvl2Button")
 SLOW_SLATE_LVL_3_BUTTON = NodePath("SlowSlateLvl3Button")
+DAMAGE_SLATE_LVL_1_BUTTON = NodePath("DamageSlateLvl1Button")
+DAMAGE_SLATE_LVL_2_BUTTON = NodePath("DamageSlateLvl2Button")
+DAMAGE_SLATE_LVL_3_BUTTON = NodePath("DamageSlateLvl3Button")
 
 [node name="HoldSlateLvl1Button" type="Button" parent="."]
 visible = false
@@ -32,16 +35,34 @@ text = "Hold Slate
 Level 3"
 
 [node name="SlowSlateLvl1Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Slow Slate
 Level 1"
 
 [node name="SlowSlateLvl2Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Slow Slate
 Level 2"
 
 [node name="SlowSlateLvl3Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Slow Slate
+Level 3"
+
+[node name="DamageSlateLvl1Button" type="Button" parent="."]
+layout_mode = 2
+text = "Damage Slate
+Level 1"
+
+[node name="DamageSlateLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Damage Slate
+Level 2"
+
+[node name="DamageSlateLvl3Button" type="Button" parent="."]
+layout_mode = 2
+text = "Damage Slate
 Level 3"

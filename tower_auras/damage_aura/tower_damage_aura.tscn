@@ -5,5 +5,5 @@
 [node name="TowerDamageAura" type="Area2D"]
 collision_layer = 8
 script = ExtResource("1_qtm13")
-DAMAGE_INCREASE_FACTOR = 1.5
+DAMAGE_INCREASE_FACTOR = 0.2
 metadata/_custom_type_script = "uid://djqsy77eq1qmm"
