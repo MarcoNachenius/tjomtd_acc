@@ -840,3 +840,5 @@ func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 
 	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
 	
+func get_selected_tower() -> Tower:
+	return __selected_tower

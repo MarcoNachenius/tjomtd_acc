@@ -1071,6 +1071,27 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 	tower_selected.emit(new_upgrade_tower)
 
 
+## Called when a slate upgrade is triggered from towers awaiting selection
+func keep_slate_from_towers_awaiting_selection(selectedTower: Tower, slateID: SlateConstants.SlateIDs) -> void:
+	# Ensure the tower is in the list of towers awaiting selection
+	assert(__towers_awaiting_selection.has(selectedTower), "Tower not found in list of towers awaiting selection")
+
+	# Capture the tower's placement grid coordinate
+	var selected_tower_placement_grid_coord: Vector2i = selectedTower.get_placement_grid_coordinate()
+
+	# Remove selected tower from towers awaiting selection
+	_remove_tower_awaiting_selection(selectedTower)
+
+	# Convert remaining towers awaiting selection to barricades
+	for tower in __towers_awaiting_selection.duplicate():
+		# Convert the tower to a barricade
+		convert_tower_to_barricade(tower)
+	# Clear the list of towers awaiting selection
+	__towers_awaiting_selection.clear()
+
+	# Place slate in selected tower's placement grid position
+	place_slate(slateID, selected_tower_placement_grid_coord) 
+
 ## Called when an upgrade tower exists on the towers on map list.
 func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:
 	# Ensure the upgrade tower ID is valid
@@ -1172,6 +1193,15 @@ func remove_tower(tower: Tower) -> void:
 	# Remove tower from list
 	assert(__towers_on_map.has(tower), "Tower not found in map")
 	__towers_on_map.erase(tower)
+	# Remove path impediments
+	_remove_tower_impediment_points(tower.get_placement_grid_coordinate())
+	# Remove tower
+	tower.queue_free()
+
+func _remove_tower_awaiting_selection(tower: Tower) -> void:
+	# Remove tower from list
+	assert(__towers_awaiting_selection.has(tower), "Tower not found in map")
+	__towers_awaiting_selection.erase(tower)
 	# Remove path impediments
 	_remove_tower_impediment_points(tower.get_placement_grid_coordinate())
 	# Remove tower

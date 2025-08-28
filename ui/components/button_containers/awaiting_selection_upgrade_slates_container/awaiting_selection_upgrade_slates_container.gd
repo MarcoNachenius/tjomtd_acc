@@ -39,9 +39,9 @@ class_name AwaitingSelectionUpgradeSlatesContainer
     HOLD_SLATE_LVL_2_BUTTON,
     HOLD_SLATE_LVL_3_BUTTON,
     ## ===== Slow slates =====
-    #SLOW_SLATE_LVL_1_BUTTON,
-    #SLOW_SLATE_LVL_2_BUTTON,
-    #SLOW_SLATE_LVL_3_BUTTON,
+    SLOW_SLATE_LVL_1_BUTTON,
+    SLOW_SLATE_LVL_2_BUTTON,
+    SLOW_SLATE_LVL_3_BUTTON,
     ## ===== Burn slates =====
     #BURN_SLATE_LVL_1_BUTTON,
     #BURN_SLATE_LVL_2_BUTTON,
@@ -172,13 +172,13 @@ func _on_damage_slate_lvl_3_button_pressed() -> void:
 
 # ===== Hold slates =====
 func _on_hold_slate_lvl_1_button_pressed() -> void:
-    print("Hold Slate Lvl 1 pressed. WIP")
+    __connected_game_map.keep_slate_from_towers_awaiting_selection(__connected_main_hud.get_selected_tower(), SlateConstants.SlateIDs.HOLD_SLATE_LVL_1)
 
 func _on_hold_slate_lvl_2_button_pressed() -> void:
-    print("Hold Slate Lvl 2 pressed. WIP")
+    __connected_game_map.keep_slate_from_towers_awaiting_selection(__connected_main_hud.get_selected_tower(), SlateConstants.SlateIDs.HOLD_SLATE_LVL_2)
 
 func _on_hold_slate_lvl_3_button_pressed() -> void:
-    print("Hold Slate Lvl 3 pressed. WIP")
+    __connected_game_map.keep_slate_from_towers_awaiting_selection(__connected_main_hud.get_selected_tower(), SlateConstants.SlateIDs.HOLD_SLATE_LVL_3)
 
 # ===== Slow slates =====
 func _on_slow_slate_lvl_1_button_pressed() -> void:

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkw2uuve4ejbf"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_lotq6"]
+[ext_resource type="Texture2D" uid="uid://djv6lnvd2i3t8" path="res://slates/slow_slates/slow_slate_lvl_3/slow_slate_lvl_3_sprite_scaled.png" id="2_6rk40"]
+[ext_resource type="Script" uid="uid://6i8ljwyjab20" path="res://projectile_spawners/slow_aura/slow_aura.gd" id="3_fkjxq"]
+
+[node name="SlowSlateLvl3" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
+script = ExtResource("1_lotq6")
+SLATE_ID = 5
+SLATE_SPRITE = NodePath("SpriteSLate")
+metadata/_custom_type_script = "uid://cmwqa742rvnbl"
+
+[node name="SpriteSLate" type="Sprite2D" parent="."]
+texture = ExtResource("2_6rk40")
+
+[node name="SlowAura" type="Node2D" parent="."]
+script = ExtResource("3_fkjxq")
+SLOW_PERCENTAGE = 30
+__cooldown_duration = 0.5
+__detection_range = 350
+ALLOW_DAMAGE_BUFFS = false
+metadata/_custom_type_script = "uid://6i8ljwyjab20"

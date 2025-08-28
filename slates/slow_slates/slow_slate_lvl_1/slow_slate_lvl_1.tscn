@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://r5dt64crw4yk"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_jnlc4"]
+[ext_resource type="Texture2D" uid="uid://dx28dqaxwxhus" path="res://slates/slow_slates/slow_slate_lvl_1/slow_slate_lvl_1_sprite_scaled.png" id="2_qn0xn"]
+[ext_resource type="Script" uid="uid://6i8ljwyjab20" path="res://projectile_spawners/slow_aura/slow_aura.gd" id="3_6ql4e"]
+
+[node name="SlowSlateLvl1" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
+script = ExtResource("1_jnlc4")
+SLATE_ID = 3
+SLATE_SPRITE = NodePath("SlateSprite")
+metadata/_custom_type_script = "uid://cmwqa742rvnbl"
+
+[node name="SlateSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_qn0xn")
+
+[node name="SlowAura" type="Node2D" parent="."]
+script = ExtResource("3_6ql4e")
+SLOW_ALL_CREEPS_IN_RANGE = false
+MAX_SIMULTANEOUS_TARGETS = 2
+SLOW_PERCENTAGE = 20
+__cooldown_duration = 0.5
+__detection_range = 200
+ALLOW_DAMAGE_BUFFS = false
+metadata/_custom_type_script = "uid://6i8ljwyjab20"
