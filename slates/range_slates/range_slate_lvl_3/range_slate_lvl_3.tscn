@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://doairr3von8ww"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_w2xba"]
+[ext_resource type="PackedScene" uid="uid://2dojtm78wc6a" path="res://tower_auras/range_aura/tower_range_aura.tscn" id="2_l1v1e"]
+[ext_resource type="Texture2D" uid="uid://dmyub4uyxfrc3" path="res://slates/range_slates/range_slate_lvl_3/range_slate_lvl_3_sprite_scaled.png" id="3_l1v1e"]
+
+[node name="RangeSlateLvl3" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
+script = ExtResource("1_w2xba")
+SLATE_ID = 14
+SLATE_SPRITE = NodePath("SlateSprite")
+metadata/_custom_type_script = "uid://cmwqa742rvnbl"
+
+[node name="TowerRangeAura" parent="." instance=ExtResource("2_l1v1e")]
+RANGE_INCREASE_FACTOR = 0.5
+__radius = 500.0
+
+[node name="SlateSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_l1v1e")
