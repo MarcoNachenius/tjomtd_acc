@@ -5,6 +5,9 @@ class_name TowerDetectionArea
 # CUSTOM SIGNALS
 signal damage_aura_entered(damageAura: TowerDamageAura)
 signal damage_aura_exited(damageAura: TowerDamageAura)
+signal range_aura_entered(rangeAura: TowerRangeAura)
+signal range_aura_exited(rangeAura: TowerRangeAura)
+
 
 # PRIVATE VARS
 var __collision_shape: CollisionShape2D
@@ -70,8 +73,20 @@ func _on_area_entered(area):
 	# DAMAGE AURA
 	if area is TowerDamageAura:
 		damage_aura_entered.emit(area)
+		return
+
+	# RANGE AURA
+	if area is TowerRangeAura:
+		range_aura_entered.emit(area)
+		return
 
 func _on_area_exited(area):
 	# DAMAGE AURA
 	if area is TowerDamageAura:
 		damage_aura_exited.emit(area)
+		return
+	
+	# RANGE AURA
+	if area is TowerRangeAura:
+		range_aura_exited.emit(area)
+		return

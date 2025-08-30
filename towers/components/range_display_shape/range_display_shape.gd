@@ -12,7 +12,12 @@ func _init(base_radius: float = 10.0):
 
 func _ready():
     scale = Vector2(1, 0.5)  # make it oval
-    #update()
 
 func _draw():
+    # Draw fresh circle every time Godot redraws this node
     draw_circle(Vector2.ZERO, __base_radius * 2, range_color)
+
+## Redraw the oval with a new radius
+func redraw_display_shape(new_radius: int) -> void:
+    __base_radius = float(new_radius)
+    queue_redraw()  # calls _draw() again

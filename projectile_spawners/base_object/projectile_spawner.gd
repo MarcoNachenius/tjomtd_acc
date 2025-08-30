@@ -21,10 +21,16 @@ enum TargetingPolicies {
 @export var __targeting_policy: TargetingPolicies
 @export var LAUNCH_PROJECTILE_AUDIO: AudioStreamPlayer2D
 @export var ALLOW_DAMAGE_BUFFS: bool = true
+@export var ALLOW_RANGE_BUFFS: bool = true
 
+
+# SIGNALS
+## Emitted to tower in order to update range display shape 
+signal range_altered(newRange: int)
 
 # SINGLETONS
 var INITIAL_DAMAGE: int
+var INITIAL_RANGE: int
 
 # PRIVATE VARS
 var __cooldown_timer: Timer
@@ -41,8 +47,7 @@ func _ready():
 	# COOLDOWN TIMER
 	self._create_cooldown_timer()
 	__launch_cooled_down = true
-	# INITIAL DAMAGE
-	INITIAL_DAMAGE = get_damage()
+	_capture_starting_values()
 	# EXTENDED ONREADY COMMANDS
 	_execute_extended_onready_commands()
 
@@ -65,6 +70,16 @@ func damage_factor_amount(factor: float) -> int:
 	assert(factor > 0, "Factor must be greater than 0")
 	return round(INITIAL_DAMAGE * factor)
 
+
+## Returns amount of range that has been added to initial range. 
+func total_bonus_range() -> int:
+	return get_detection_range() - INITIAL_RANGE
+
+## Returns the ROUNDED amount of range that will be added when a factor amount is applied to the initial range.
+func range_factor_amount(factor: float) -> int:
+	assert(factor > 0, "Factor must be greater than 0")
+	return round(INITIAL_RANGE * factor)
+
 # ********
 # PRIVATES
 # ********
@@ -76,6 +91,12 @@ func _angle_to_targeted_creep() -> float:
 	if angle_to_creep >= -PI and angle_to_creep < 0:
 		angle_to_creep += 2 * PI
 	return angle_to_creep
+
+func _capture_starting_values() -> void:
+	# INITIAL RANGE
+	INITIAL_RANGE = __detection_range
+	# INITIAL DAMAGE
+	INITIAL_DAMAGE = get_damage()
 
 func _create_hurtbox():
 	var new_hurtbox: ProjectileSpawnerHurtbox = ProjectileSpawnerConstants.HURTBOX_PRELOAD.instantiate()
@@ -153,6 +174,20 @@ func increase_damage(amount: int) -> void:
 ## Decreases damage of launched projectiles by specified amount.
 func decrease_damage(amount: int) -> void:
 	print("WARNING: Empty abstract method called. This method does nothing")
+
+## Increases range of projectile spawner 
+func increase_range(amount: int) -> void:
+	assert(amount > 0, "Zero or lower amounts are not allowed")
+	var new_range: int = get_detection_range() + amount
+	set_detection_range(new_range)
+
+## Decreases range of projectile spawner 
+func decrease_range(amount: int) -> void:
+	assert(amount > 0, "Zero or lower amounts are not allowed")
+	var new_range: int = get_detection_range() - amount
+	assert(new_range > 1, "Range must be larger than 1")
+	set_detection_range(new_range)
+
 
 func _on_cooldown_timer_timeout():
 	__launch_cooled_down = true
@@ -240,9 +275,20 @@ func _target_least_health_creep(detectableCreeps: Array[Creep]):
 # *******
 # GETTERS
 # *******
-## Retrurns the range of the projectile spawner in pixels.
+## Retrurns the CURRENT range of the projectile spawner in pixels.
 func get_detection_range() -> int:
 	return __detection_range
 
+
 func get_cooldown_duration() -> float:
 	return __cooldown_duration
+
+
+# *******
+# SETTERS
+# *******
+func set_detection_range(amount: int) -> void:
+	__detection_range = amount
+	__hurtbox.set_base_radius(amount)
+	# Emit range altered signal
+	range_altered.emit(amount)

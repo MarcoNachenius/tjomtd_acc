@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2dojtm78wc6a"]
+
+[ext_resource type="Script" uid="uid://b28ujb0temdqc" path="res://tower_auras/range_aura/tower_range_aura.gd" id="1_wu5fy"]
+
+[node name="TowerRangeAura" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_wu5fy")
+RANGE_INCREASE_FACTOR = 0.2
+metadata/_custom_type_script = "uid://djqsy77eq1qmm"

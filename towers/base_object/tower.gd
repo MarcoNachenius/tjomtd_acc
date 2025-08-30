@@ -140,6 +140,11 @@ func _create_range_display_shape() -> void:
 	RANGE_DISPLAY_SHAPE.z_index = 1
 	RANGE_DISPLAY_SHAPE.visible = false
 
+	# Conncect update range signal
+	# We place the signal connection here because we don't want to connect signals which alter
+	# display range shape if tower has no range to update
+	PRIMARY_PROJECTILE_SPAWNER.range_altered.connect(_on_range_altered)
+
 ## Avoid human error and ensure that tower and its sprite are always ordered correctly
 func _handle_ordering() -> void:
 	# Handle scene root ordering
@@ -218,3 +223,6 @@ func get_state() -> States:
 
 # SIGNAL METHODS
 # ==============
+func _on_range_altered(newRange) -> void:
+	# Update range display shape
+	RANGE_DISPLAY_SHAPE.redraw_display_shape(newRange)

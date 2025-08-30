@@ -52,7 +52,17 @@ func _assign_damage(tower: Tower) -> void:
 
 
 func _assign_range(tower: Tower) -> void:
-	TOWER_ATTR_CONTAINER.RANGE_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_detection_range())
+	var display_text: String = ""
+	
+	# Add base range to display text
+	display_text += str(tower.PRIMARY_PROJECTILE_SPAWNER.INITIAL_RANGE)
+
+	# Add range buff amount
+	var range_buff_amount: int = tower.PRIMARY_PROJECTILE_SPAWNER.total_bonus_range()
+	if range_buff_amount > 0:
+		display_text += " (+%d)" % range_buff_amount
+	
+	TOWER_ATTR_CONTAINER.RANGE_VALUE.text = display_text
 
 func _assign_cooldown(tower) -> void:
 	TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_cooldown_duration()) + "s"
