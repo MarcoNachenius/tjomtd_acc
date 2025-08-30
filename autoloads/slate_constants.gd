@@ -152,7 +152,7 @@ const TOWER_UPGRADES_INTO_SLATES: Dictionary[TowerConstants.TowerIDs, Array] = {
     TowerConstants.TowerIDs.LARIMAR_LVL_4: [SlateIDs.HOLD_SLATE_LVL_3],
     TowerConstants.TowerIDs.SUNSTONE_LVL_5: [SlateIDs.HOLD_SLATE_LVL_3],
     TowerConstants.TowerIDs.SUNSTONE_LVL_1: [SlateIDs.SLOW_SLATE_LVL_1],
-    TowerConstants.TowerIDs.SUNSTONE_LVL_2: [SlateIDs.SLOW_SLATE_LVL_1],
+    TowerConstants.TowerIDs.SUNSTONE_LVL_2: [SlateIDs.SLOW_SLATE_LVL_1, SlateIDs.SLOW_SLATE_LVL_3],
     TowerConstants.TowerIDs.BISMUTH_LVL_3: [SlateIDs.SLOW_SLATE_LVL_1],
     TowerConstants.TowerIDs.BISMUTH_LVL_4: [SlateIDs.SLOW_SLATE_LVL_2, SlateIDs.SLOW_SLATE_LVL_3],
 
