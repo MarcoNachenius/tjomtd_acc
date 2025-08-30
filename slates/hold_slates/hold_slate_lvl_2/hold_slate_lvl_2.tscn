@@ -14,8 +14,8 @@ metadata/_custom_type_script = "uid://cmwqa742rvnbl"
 script = ExtResource("3_6yo71")
 MAX_CREEPS_PER_STUN = 2
 STUN_DURATION = 0.9
-__cooldown_duration = 1.0
-__detection_range = 300
+__cooldown_duration = 2.9
+__detection_range = 128
 ALLOW_DAMAGE_BUFFS = false
 metadata/_custom_type_script = "uid://lpqc81j5gpf6"
 

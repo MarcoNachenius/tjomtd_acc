@@ -13,8 +13,8 @@ metadata/_custom_type_script = "uid://cmwqa742rvnbl"
 [node name="StunAura" type="Node2D" parent="."]
 script = ExtResource("2_ium0a")
 STUN_ALL_TARGETS_IN_RAGE = true
-__cooldown_duration = 1.6
-__detection_range = 300
+__cooldown_duration = 3.0
+__detection_range = 128
 metadata/_custom_type_script = "uid://lpqc81j5gpf6"
 
 [node name="SlateSprite" type="Sprite2D" parent="."]

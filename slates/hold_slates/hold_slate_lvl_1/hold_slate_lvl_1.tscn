@@ -12,8 +12,8 @@ metadata/_custom_type_script = "uid://cmwqa742rvnbl"
 [node name="StunAura" type="Node2D" parent="."]
 script = ExtResource("3_g0d6b")
 STUN_DURATION = 0.5
-__cooldown_duration = 1.0
-__detection_range = 256
+__cooldown_duration = 2.0
+__detection_range = 128
 ALLOW_DAMAGE_BUFFS = false
 metadata/_custom_type_script = "uid://lpqc81j5gpf6"
 
