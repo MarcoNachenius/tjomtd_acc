@@ -97,22 +97,22 @@ Build Level (0)"
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 40.0
-offset_bottom = 20.0
+offset_top = -34.0
+offset_right = 220.0
+offset_bottom = 136.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="TowerRangeVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("7_2ld34")]
+[node name="TowerStatsVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("13_243pv")]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="PathLineVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("5_saysw")]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="TowerStatsVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("13_243pv")]
+[node name="TowerRangeVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("7_2ld34")]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="ExitGameButton" parent="." instance=ExtResource("9_gouwm")]
 anchors_preset = 1
