@@ -264,21 +264,20 @@ func load_game() -> void:
 	__total_waves_completed = GameDataStorage.ACTIVE_GAME_DATA.wave_number
 
 
-## Determines whether a wave is currently active on the map.
-##
-## A wave is considered "in progress" if **either** of the following is true:
-##   • The creep spawner is in the process of initiating/spawning creeps.
-##   • There is at least one active creep still alive on the map.
+
+## A wave is considered "idle" if **both** of the following are true:
+##   • The creep spawner is not in the process of initiating/spawning creeps.
+##   • There are no creeps still alive on the map.
 ##
 ## Returns:
-##   bool – true if a wave is ongoing, false if the map is idle (no spawns pending, no creeps alive).
-func wave_in_progress() -> bool:
+##   bool – true if the map is idle (no wave in progress),
+##          false if a wave is being spawned or creeps are still alive.
+func is_idle() -> bool:
 	var initiating_wave: bool = CREEP_SPAWNER.wave_initiation_in_progress()
-	var alive_creeps_on_map: bool = __total_active_creeps > 0
+	var has_alive_creeps_on_map: bool = __total_active_creeps > 0
 
-	# A wave is in progress if we are spawning OR there are creeps still walking around.
-	return initiating_wave or alive_creeps_on_map
-
+	# Idle = not spawning AND no creeps alive
+	return !initiating_wave and !has_alive_creeps_on_map
 
 
 # ---------------
