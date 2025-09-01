@@ -260,6 +260,13 @@ func load_game() -> void:
 	__total_waves_completed = GameDataStorage.ACTIVE_GAME_DATA.wave_number
 
 
+## Returns true if a wave is currently in progess
+func wave_in_progress() -> bool:
+	var initiating_wave: bool = CREEP_SPAWNER.wave_initiation_in_progress()
+	var no_creeps_on_map: bool = __total_active_creeps == 0
+	return initiating_wave or !no_creeps_on_map
+
+
 # ---------------
 # PRIVATE METHODS
 # ---------------
