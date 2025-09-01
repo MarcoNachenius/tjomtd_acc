@@ -250,6 +250,12 @@ func load_game() -> void:
 	for barricade_placement_coord in GameDataStorage.ACTIVE_GAME_DATA.get_barricade_positions():
 		place_barricade(barricade_placement_coord, true)
 	
+	# Place slates
+	var slate_data = GameDataStorage.ACTIVE_GAME_DATA.get_slates_by_grid_coordinate()
+	for placement_coord in slate_data.keys():
+		for slate_id in slate_data[placement_coord]:
+			place_slate(slate_id, placement_coord)
+	
 	# Build level
 	RANDOM_TOWER_GENERATOR.load_level(GameDataStorage.ACTIVE_GAME_DATA.build_level)
 

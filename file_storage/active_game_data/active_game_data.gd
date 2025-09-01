@@ -18,6 +18,13 @@ extends Resource
 # ==================
 @export var wave_number: int
 @export var build_level: int
+# ==========
+# SLATE VARS
+# ==========
+## Slates placed on the map
+## Key   = grid coordinate (Vector2i)
+## Value = Array of slate IDs (SlateConstants.SlateIDs) placed at that coordinate
+@export var __slate_ids_to_grid_coordinate: Dictionary[Vector2i, Array] = {} : set = set_slates_by_grid_coordinate, get = get_slates_by_grid_coordinate
 
 
 # ===================
@@ -133,3 +140,15 @@ func set_remaining_lives(value: int) -> void:
 ##     int – The currently stored remaining lives.
 func get_remaining_lives() -> int:
 	return __remaining_lives
+
+## Setter for __slate_ids_to_grid_coordinate.
+## Replaces the entire dictionary with the given one.
+## No validation here — we assume only trusted code calls this.
+func set_slates_by_grid_coordinate(value: Dictionary[Vector2i, Array]) -> void:
+	__slate_ids_to_grid_coordinate = value
+
+
+## Getter for __slate_ids_to_grid_coordinate.
+## Returns a deep copy so callers can’t mutate internal state directly.
+func get_slates_by_grid_coordinate() -> Dictionary[Vector2i, Array]:
+	return __slate_ids_to_grid_coordinate.duplicate(true)

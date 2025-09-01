@@ -23,7 +23,7 @@ func _ready() -> void:
 ## Rules:
 ##  - Only consider slates that the given tower type can contribute to.
 ##  - A slate is viable iff ALL its required tower counts are satisfied by the
-##    current "awaiting selection" towers on the map.
+##	current "awaiting selection" towers on the map.
 ##  - Uses safe .get() lookups to avoid KeyErrors when a tower type isn't present.
 func selected_tower_awaiting_selection_slate_upgrades(towerID: TowerConstants.TowerIDs) -> Array[SlateConstants.SlateIDs]:
 	# Return value
@@ -62,7 +62,6 @@ func selected_tower_awaiting_selection_slate_upgrades(towerID: TowerConstants.To
 	return viable_slates
 
 
-
 ## Adds a Slate instance to the map's Slate list.
 ## Ensures that no duplicates are added.
 func add_slate_to_map(slate: Slate) -> void:
@@ -72,10 +71,38 @@ func add_slate_to_map(slate: Slate) -> void:
 	# Append the Slate to the array.
 	__slates_on_map.append(slate)
 
+
 ## Removes a Slate instance from the map's Slate list.
 func remove_slate_from_map(slate: Slate) -> void:
 	# Does nothing if slate is not in array by design
 	__slates_on_map.erase(slate)
+
+
+## Returns a dictionary mapping each placement grid coordinate (Vector2i)
+## to an array of SlateID ints that are placed there.
+##
+## Format:
+##   {
+##	   Vector2i(x, y): [SlateID, SlateID, ...],
+##	   ...
+##   }
+##
+## This matches the format required by ActiveGameData.__slates_by_grid_coordinate for saving.
+func slate_save_data() -> Dictionary[Vector2i, Array]:
+	var slate_dict: Dictionary[Vector2i, Array] = {}
+
+	for slate in __slates_on_map:
+		var coord: Vector2i = Vector2i(slate.get_placement_grid_coordinate())
+		var slate_id: int = int(slate.SLATE_ID)
+
+		# Get the existing array at this coord or a new one
+		var slate_ids_at_coord: Array = slate_dict.get(coord, [])
+		slate_ids_at_coord.append(slate_id)
+
+		# Reassign to ensure the updated array is stored in the dict
+		slate_dict[coord] = slate_ids_at_coord
+
+	return slate_dict
 
 
 # GETTERS

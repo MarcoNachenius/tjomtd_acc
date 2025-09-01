@@ -558,7 +558,7 @@ func _on_tower_selected(tower: Tower):
 	
 	# Allow ability for player to remove barricade once wave has been completed
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
-	if __selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE and !GAME_MAP.wave_in_progress():
+	if __selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE and !GAME_MAP.is_idle():
 		TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = true
 
 	# Ensure properties container is visible 
