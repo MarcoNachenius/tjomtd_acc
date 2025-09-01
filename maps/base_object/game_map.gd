@@ -1106,6 +1106,9 @@ func keep_slate_from_towers_awaiting_selection(selectedTower: Tower, slateID: Sl
 	# Capture the tower's placement grid coordinate
 	var selected_tower_placement_grid_coord: Vector2i = selectedTower.get_placement_grid_coordinate()
 
+	# Remove tower from placement grid coord dict for towers
+	_remove_tower_from_placement_grid_coords_dict(selectedTower, __placement_grid_coords_for_towers)
+
 	# Remove selected tower from towers awaiting selection
 	_remove_tower_awaiting_selection(selectedTower)
 
