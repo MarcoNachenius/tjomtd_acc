@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TjomTD test environment"
-run/main_scene="uid://d10hxlsgy4u46"
+run/main_scene="uid://bsdawu7osu7p8"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
