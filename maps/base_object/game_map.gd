@@ -212,7 +212,8 @@ func remove_remaining_projectiles() -> void:
 
 ## Updates current save file and writes it to disk.
 func save_game() -> void:
-	# Game map data
+	# GAME MAP DATA
+	# =============
 	# Balance
 	GameDataStorage.ACTIVE_GAME_DATA.set_remaining_balance(__curr_balance)
 	# Remaining lives
@@ -231,6 +232,9 @@ func save_game() -> void:
 	CREEP_SPAWNER.update_wave_data()
 	# Build level
 	GameDataStorage.ACTIVE_GAME_DATA.build_level = RANDOM_TOWER_GENERATOR.get_curr_level()
+	# Slates
+	GameDataStorage.ACTIVE_GAME_DATA.set_slates_by_grid_coordinate(SLATE_MANAGER.slate_save_data())
+
 	# Write updated data to disk
 	GameDataStorage.save_game_data()
 
@@ -260,11 +264,21 @@ func load_game() -> void:
 	__total_waves_completed = GameDataStorage.ACTIVE_GAME_DATA.wave_number
 
 
-## Returns true if a wave is currently in progess
+## Determines whether a wave is currently active on the map.
+##
+## A wave is considered "in progress" if **either** of the following is true:
+##   • The creep spawner is in the process of initiating/spawning creeps.
+##   • There is at least one active creep still alive on the map.
+##
+## Returns:
+##   bool – true if a wave is ongoing, false if the map is idle (no spawns pending, no creeps alive).
 func wave_in_progress() -> bool:
 	var initiating_wave: bool = CREEP_SPAWNER.wave_initiation_in_progress()
-	var no_creeps_on_map: bool = __total_active_creeps == 0
-	return initiating_wave or !no_creeps_on_map
+	var alive_creeps_on_map: bool = __total_active_creeps > 0
+
+	# A wave is in progress if we are spawning OR there are creeps still walking around.
+	return initiating_wave or alive_creeps_on_map
+
 
 
 # ---------------
