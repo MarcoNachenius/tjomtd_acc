@@ -48,8 +48,9 @@ alignment = 1
 [node name="TowerPropertiesContainer" parent="TowerCommands" instance=ExtResource("3_puoe6")]
 layout_mode = 2
 
-[node name="AwaitingSelectionUpgradeTowers" parent="TowerCommands" instance=ExtResource("5_x72he")]
+[node name="AwaitingSelectionUpgradeTowers" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_x72he")]
 layout_mode = 2
+CONNECTED_MAIN_HUB = NodePath("../..")
 
 [node name="TowerUpgradesContainer" parent="TowerCommands" instance=ExtResource("4_im64j")]
 layout_mode = 2

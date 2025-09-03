@@ -1,6 +1,10 @@
 extends HBoxContainer
 class_name AwaitingSelectionUpgradeTowersContainer
 
+
+# SINGLETON
+@export var CONNECTED_MAIN_HUB: RandomTowerBuildHUD
+
 # EXPORTS
 @export var BLACK_MARBLE_LEVEL_2_BUTTON: Button
 @export var BLACK_MARBLE_LEVEL_3_BUTTON: Button
@@ -83,7 +87,131 @@ class_name AwaitingSelectionUpgradeTowersContainer
     TowerConstants.TowerIDs.BISMUTH_LVL_5: BISMUTH_LEVEL_5_BUTTON,
 }
 
+@onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+    BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
+    BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
+    BLACK_MARBLE_LEVEL_4_BUTTON: _on_black_marble_level_4_button_pressed,
+    BLACK_MARBLE_LEVEL_5_BUTTON: _on_black_marble_level_5_button_pressed,
+    SUNSTONE_LEVEL_2_BUTTON: _on_sunstone_level_2_button_pressed,
+    SUNSTONE_LEVEL_3_BUTTON: _on_sunstone_level_3_button_pressed,
+    SUNSTONE_LEVEL_4_BUTTON: _on_sunstone_level_4_button_pressed,
+    SUNSTONE_LEVEL_5_BUTTON: _on_sunstone_level_5_button_pressed,
+    SPINEL_LEVEL_2_BUTTON: _on_spinel_level_2_button_pressed,
+    SPINEL_LEVEL_3_BUTTON: _on_spinel_level_3_button_pressed,
+    SPINEL_LEVEL_4_BUTTON: _on_spinel_level_4_button_pressed,
+    SPINEL_LEVEL_5_BUTTON: _on_spinel_level_5_button_pressed,
+    LARIMAR_LEVEL_2_BUTTON: _on_larimar_level_2_button_pressed,
+    LARIMAR_LEVEL_3_BUTTON: _on_larimar_level_3_button_pressed,
+    LARIMAR_LEVEL_4_BUTTON: _on_larimar_level_4_button_pressed,
+    LARIMAR_LEVEL_5_BUTTON: _on_larimar_level_5_button_pressed,
+    KUNZITE_LEVEL_2_BUTTON: _on_kunzite_level_2_button_pressed,
+    KUNZITE_LEVEL_3_BUTTON: _on_kunzite_level_3_button_pressed,
+    KUNZITE_LEVEL_4_BUTTON: _on_kunzite_level_4_button_pressed,
+    KUNZITE_LEVEL_5_BUTTON: _on_kunzite_level_5_button_pressed,
+    BISMUTH_LEVEL_2_BUTTON: _on_bismuth_level_2_button_pressed,
+    BISMUTH_LEVEL_3_BUTTON: _on_bismuth_level_3_button_pressed,
+    BISMUTH_LEVEL_4_BUTTON: _on_bismuth_level_4_button_pressed,
+    BISMUTH_LEVEL_5_BUTTON: _on_bismuth_level_5_button_pressed,
+    
+}
+
 # PUBLIC METHODS
 func hide_all_buttons():
     for button in ALL_BUTTONS:
         button.visible = false
+
+
+func _ready() -> void:
+    _connect_awaiting_selection_upgrade_towers_container_signals()
+    hide_all_buttons()
+
+
+func _connect_awaiting_selection_upgrade_towers_container_signals():
+    for button in ALL_BUTTONS:
+        # Retrieve the callback function from the dictionary using the button as the key.
+        button.pressed.connect(AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
+
+# BLACK MARBLE
+# ------------
+func _on_black_marble_level_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2)
+
+func _on_black_marble_level_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3)
+
+func _on_black_marble_level_4_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_4)
+
+func _on_black_marble_level_5_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_5)
+
+# SUNSTONE
+# --------
+func _on_sunstone_level_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_2)
+
+func _on_sunstone_level_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_3)
+
+func _on_sunstone_level_4_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_4)
+
+func _on_sunstone_level_5_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_5)
+
+# SPINEL
+# ------
+func _on_spinel_level_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_2)
+
+func _on_spinel_level_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_3)
+
+func _on_spinel_level_4_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_4)
+
+func _on_spinel_level_5_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_5)
+
+# LARIMAR
+# ------
+func _on_larimar_level_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_2)
+
+func _on_larimar_level_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_3)
+
+func _on_larimar_level_4_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_4)
+
+func _on_larimar_level_5_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_5)
+
+# KUNZITE
+# ------
+func _on_kunzite_level_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_2)
+
+func _on_kunzite_level_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_3)
+
+func _on_kunzite_level_4_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_4)
+
+func _on_kunzite_level_5_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_5)
+
+
+# BISMUTH
+# -------
+func _on_bismuth_level_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_2)
+
+func _on_bismuth_level_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_3)
+
+func _on_bismuth_level_4_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_4)
+
+func _on_bismuth_level_5_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP._handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_5)

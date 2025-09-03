@@ -49,33 +49,7 @@ class_name RandomTowerBuildHUD
 	EXTENDED_UPGRADES_CONTAINER.SHARP_SHOOTER_LVL_2_BUTTON: _on_sharp_shooter_lvl_2_button_pressed,
 }
 
-@onready var AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_2_BUTTON: _on_black_marble_level_2_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_3_BUTTON: _on_black_marble_level_3_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_4_BUTTON: _on_black_marble_level_4_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BLACK_MARBLE_LEVEL_5_BUTTON: _on_black_marble_level_5_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_2_BUTTON: _on_sunstone_level_2_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_3_BUTTON: _on_sunstone_level_3_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_4_BUTTON: _on_sunstone_level_4_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SUNSTONE_LEVEL_5_BUTTON: _on_sunstone_level_5_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SPINEL_LEVEL_2_BUTTON: _on_spinel_level_2_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SPINEL_LEVEL_3_BUTTON: _on_spinel_level_3_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SPINEL_LEVEL_4_BUTTON: _on_spinel_level_4_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.SPINEL_LEVEL_5_BUTTON: _on_spinel_level_5_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.LARIMAR_LEVEL_2_BUTTON: _on_larimar_level_2_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.LARIMAR_LEVEL_3_BUTTON: _on_larimar_level_3_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.LARIMAR_LEVEL_4_BUTTON: _on_larimar_level_4_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.LARIMAR_LEVEL_5_BUTTON: _on_larimar_level_5_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_2_BUTTON: _on_kunzite_level_2_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_3_BUTTON: _on_kunzite_level_3_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_4_BUTTON: _on_kunzite_level_4_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.KUNZITE_LEVEL_5_BUTTON: _on_kunzite_level_5_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BISMUTH_LEVEL_2_BUTTON: _on_bismuth_level_2_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BISMUTH_LEVEL_3_BUTTON: _on_bismuth_level_3_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BISMUTH_LEVEL_4_BUTTON: _on_bismuth_level_4_button_pressed,
-	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.BISMUTH_LEVEL_5_BUTTON: _on_bismuth_level_5_button_pressed,
-	
-}
+
 
 @onready var PATH_LINE_VISIBILITY_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON: _on_show_path_button_pressed,
@@ -84,7 +58,7 @@ class_name RandomTowerBuildHUD
 
 const UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX: String = "Upgrade Build Level ("
 
-# CONSTANTS - Invariable components
+# SINGLETONS
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 
 
@@ -134,8 +108,6 @@ func _connect_all_component_signals():
 	_connect_tower_properties_hbox_signals()
 	# Tower upgrades container
 	_connect_tower_upgrades_signals()
-	# Awaiting selection upgrade towers container
-	_connect_awaiting_selection_upgrade_towers_container_signals()
 	# Path visibility container
 	_connect_path_visibility_container_signals()
 	# Tower range visibility container
@@ -199,11 +171,6 @@ func _connect_game_map_signals():
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.pressed.connect(_on_remove_barricade_button_pressed)
-
-func _connect_awaiting_selection_upgrade_towers_container_signals():
-	for button in AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.ALL_BUTTONS:
-		# Retrieve the callback function from the dictionary using the button as the key.
-		button.pressed.connect(AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER_BUTTON_CALLBACKS[button])
 
 ## Connects pressed signals to callables for buttons on the hud that are not part of containers.
 func _connect_standalone_buttons_signals():
@@ -710,90 +677,7 @@ func _on_sharp_shooter_button_pressed():
 
 #                                 | Awaiting Selection Upgrade Tower Container |
 # =============================================================================================================
-# BLACK MARBLE
-# ------------
-func _on_black_marble_level_2_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2)
 
-func _on_black_marble_level_3_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3)
-
-func _on_black_marble_level_4_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_4)
-
-func _on_black_marble_level_5_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BLACK_MARBLE_LVL_5)
-
-# SUNSTONE
-# --------
-func _on_sunstone_level_2_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_2)
-
-func _on_sunstone_level_3_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_3)
-
-func _on_sunstone_level_4_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_4)
-
-func _on_sunstone_level_5_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SUNSTONE_LVL_5)
-
-# SPINEL
-# ------
-func _on_spinel_level_2_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_2)
-
-func _on_spinel_level_3_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_3)
-
-func _on_spinel_level_4_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_4)
-
-func _on_spinel_level_5_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.SPINEL_LVL_5)
-
-# LARIMAR
-# ------
-func _on_larimar_level_2_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_2)
-
-func _on_larimar_level_3_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_3)
-
-func _on_larimar_level_4_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_4)
-
-func _on_larimar_level_5_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.LARIMAR_LVL_5)
-
-# KUNZITE
-# ------
-func _on_kunzite_level_2_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_2)
-
-func _on_kunzite_level_3_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_3)
-
-func _on_kunzite_level_4_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_4)
-
-func _on_kunzite_level_5_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.KUNZITE_LVL_5)
-
-
-# BISMUTH
-# -------
-func _on_bismuth_level_2_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_2)
-
-func _on_bismuth_level_3_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_3)
-
-func _on_bismuth_level_4_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_4)
-
-func _on_bismuth_level_5_button_pressed():
-	_handle_built_tower_compound_upgrade(TowerConstants.TowerIDs.BISMUTH_LVL_5)
 
 
 #                                           |EXTENDED UPGRADE CONTAINER|
