@@ -1,6 +1,9 @@
 extends HBoxContainer
 class_name ExtendedUpgradesContainer
 
+# SINGLETON
+@export var CONNECTED_MAIN_HUB: RandomTowerBuildHUD
+
 @export var TOMBSTONE_LVL_2_BUTTON: Button
 @export var TOMBSTONE_LVL_3_BUTTON: Button
 @export var SAM_SITE_LVL_2_BUTTON: Button
@@ -64,7 +67,73 @@ func _ready() -> void:
     assert(GATLING_GUN_LVL_2_BUTTON, "GATLING_GUN_LVL_2_BUTTON is not assigned in the inspector.")
     assert(SHARP_SHOOTER_LVL_2_BUTTON, "SHARP_SHOOTER_LVL_2_BUTTON is not assigned in the inspector.")
 
+    # Connect signals
+    _connect_extended_upgrades_signals()
+    hide_all_buttons()
+
+
+@onready var EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+    TOMBSTONE_LVL_2_BUTTON: _on_tombstone_lvl_2_button_pressed,
+    TOMBSTONE_LVL_3_BUTTON: _on_tombstone_lvl_3_button_pressed,
+    SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed,
+    SAM_SITE_LVL_3_BUTTON: _on_sam_site_lvl_3_button_pressed,
+    LAVA_POOL_LVL_2_BUTTON: _on_lava_pool_lvl_2_button_pressed,
+    LAVA_POOL_LVL_3_BUTTON: _on_lava_pool_lvl_3_button_pressed,
+    ICE_SHARD_LVL_2_BUTTON: _on_ice_shard_lvl_2_button_pressed,
+    ICE_SHARD_LVL_3_BUTTON: _on_ice_shard_lvl_3_button_pressed,
+    EMP_STUNNER_LVL_2_BUTTON: _on_emp_stunner_lvl_2_button_pressed,
+    EMP_STUNNER_LVL_3_BUTTON: _on_emp_stunner_lvl_3_button_pressed,
+    GATLING_GUN_LVL_2_BUTTON: _on_gatling_gun_lvl_2_button_pressed,
+    SHARP_SHOOTER_LVL_2_BUTTON: _on_sharp_shooter_lvl_2_button_pressed,
+}
+
 # PUBLIC METHODS
 func hide_all_buttons():
     for button in ALL_BUTTONS:
         button.visible = false
+
+
+# PRIVATE METHODS
+func _connect_extended_upgrades_signals():
+    # Connect the button signals to the appropriate methods
+    for button in ALL_BUTTONS:
+        # Retrieve the callback function from the dictionary using the button as the key.
+        button.pressed.connect(EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
+
+#                                           |EXTENDED UPGRADE CONTAINER|
+# =============================================================================================================
+func _on_sharp_shooter_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_2)
+
+func _on_tombstone_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
+
+func _on_tombstone_lvl_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_3)
+
+func _on_sam_site_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_2)
+
+func _on_sam_site_lvl_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_3)
+
+func _on_lava_pool_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_2)
+
+func _on_lava_pool_lvl_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_3)
+
+func _on_ice_shard_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.ICE_SHARD_LVL_2)
+
+func _on_ice_shard_lvl_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.ICE_SHARD_LVL_3)
+
+func _on_emp_stunner_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.EMP_STUNNER_LVL_2)
+
+func _on_emp_stunner_lvl_3_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.EMP_STUNNER_LVL_3)
+
+func _on_gatling_gun_lvl_2_button_pressed():
+    CONNECTED_MAIN_HUB.GAME_MAP.handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.GATLING_GUN_LVL_2)

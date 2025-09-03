@@ -34,21 +34,6 @@ class_name RandomTowerBuildHUD
 	TOWER_UPGRADES_CONTAINER.SHARP_SHOOTER_BUTTON: _on_sharp_shooter_button_pressed,
 }
 
-@onready var EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
-	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_2_BUTTON: _on_tombstone_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.TOMBSTONE_LVL_3_BUTTON: _on_tombstone_lvl_3_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_2_BUTTON: _on_sam_site_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.SAM_SITE_LVL_3_BUTTON: _on_sam_site_lvl_3_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_2_BUTTON: _on_lava_pool_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.LAVA_POOL_LVL_3_BUTTON: _on_lava_pool_lvl_3_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.ICE_SHARD_LVL_2_BUTTON: _on_ice_shard_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.ICE_SHARD_LVL_3_BUTTON: _on_ice_shard_lvl_3_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.EMP_STUNNER_LVL_2_BUTTON: _on_emp_stunner_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.EMP_STUNNER_LVL_3_BUTTON: _on_emp_stunner_lvl_3_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.GATLING_GUN_LVL_2_BUTTON: _on_gatling_gun_lvl_2_button_pressed,
-	EXTENDED_UPGRADES_CONTAINER.SHARP_SHOOTER_LVL_2_BUTTON: _on_sharp_shooter_lvl_2_button_pressed,
-}
-
 
 
 @onready var PATH_LINE_VISIBILITY_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
@@ -112,8 +97,6 @@ func _connect_all_component_signals():
 	_connect_path_visibility_container_signals()
 	# Tower range visibility container
 	_connnect_tower_range_visibility_container_signals()
-	# Extended upgrades
-	_connect_extended_upgrades_signals()
 	# Standalone Hud buttons
 	_connect_standalone_buttons_signals()
 	# Tower stats visibility container
@@ -142,12 +125,6 @@ func _connect_tower_upgrades_signals():
 	for button in TOWER_UPGRADES_CONTAINER.ALL_TOWER_BUTTONS:
 		# Retrieve the callback function from the dictionary using the button as the key.
 		button.pressed.connect(TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
-
-func _connect_extended_upgrades_signals():
-	# Connect the button signals to the appropriate methods
-	for button in EXTENDED_UPGRADES_CONTAINER.ALL_BUTTONS:
-		# Retrieve the callback function from the dictionary using the button as the key.
-		button.pressed.connect(EXTENDED_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
 
 func _connnect_tower_range_visibility_container_signals():
 	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.pressed.connect(_on_show_tower_range_button_pressed)
@@ -237,7 +214,7 @@ func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs)
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 		return
 
-func _handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
+func handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
 	_hide_containers_on_tower_kept()
 	# Give player option to start new wave
 	START_NEW_WAVE_BUTTON.visible = true
@@ -680,45 +657,9 @@ func _on_sharp_shooter_button_pressed():
 
 
 
-#                                           |EXTENDED UPGRADE CONTAINER|
-# =============================================================================================================
-func _on_sharp_shooter_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_2)
 
-func _on_tombstone_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_2)
 
-func _on_tombstone_lvl_3_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_3)
-
-func _on_sam_site_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_2)
-
-func _on_sam_site_lvl_3_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_3)
-
-func _on_lava_pool_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_2)
-
-func _on_lava_pool_lvl_3_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_3)
-
-func _on_ice_shard_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.ICE_SHARD_LVL_2)
-
-func _on_ice_shard_lvl_3_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.ICE_SHARD_LVL_3)
-
-func _on_emp_stunner_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.EMP_STUNNER_LVL_2)
-
-func _on_emp_stunner_lvl_3_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.EMP_STUNNER_LVL_3)
-
-func _on_gatling_gun_lvl_2_button_pressed():
-	_handle_extended_upgrade(TowerConstants.UpgradeTowerIDs.GATLING_GUN_LVL_2)
-
-func _handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+func handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 	assert(__selected_tower, "No tower is currently selected")
 	assert(__selected_tower.__curr_state == Tower.States.BUILT, "Cannot upgrade tower awaiting selection")
 	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID), "Selected tower is not an upgrade tower")

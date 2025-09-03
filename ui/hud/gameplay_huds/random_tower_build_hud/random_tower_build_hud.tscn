@@ -55,8 +55,9 @@ CONNECTED_MAIN_HUB = NodePath("../..")
 [node name="TowerUpgradesContainer" parent="TowerCommands" instance=ExtResource("4_im64j")]
 layout_mode = 2
 
-[node name="ExtendedUpgradesContainer" parent="TowerCommands" instance=ExtResource("5_xie52")]
+[node name="ExtendedUpgradesContainer" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_xie52")]
 layout_mode = 2
+CONNECTED_MAIN_HUB = NodePath("../..")
 
 [node name="AwaitingSelectionUpgradeSlatesContainer" parent="TowerCommands" node_paths=PackedStringArray("__connected_main_hud") instance=ExtResource("6_prtqx")]
 layout_mode = 2
