@@ -64,8 +64,23 @@ func _assign_range(tower: Tower) -> void:
 	
 	TOWER_ATTR_CONTAINER.RANGE_VALUE.text = display_text
 
+## Assigns cooldown text to the tower's attribute container.
+## Ensures numbers have at most 2 decimal places, but no trailing zeros.
 func _assign_cooldown(tower) -> void:
-	TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text = str(tower.PRIMARY_PROJECTILE_SPAWNER.get_cooldown_duration()) + "s"
+	var display_text: String = ""
+
+	# Add base speed
+	var base_speed: float = tower.PRIMARY_PROJECTILE_SPAWNER.INITIAL_SPEED
+	display_text += str(float("%0.2f" % base_speed)) + "s"
+
+	# Add speed buff amount if present
+	var speed_buff_amount: float = tower.PRIMARY_PROJECTILE_SPAWNER.total_bonus_speed()
+	if speed_buff_amount > 0.0:
+		display_text += " (-" + str(float("%0.2f" % speed_buff_amount)) + "s)"
+
+	# Update label
+	TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text = display_text
+
 
 func _assign_upgrades_into(tower: Tower) -> void:
 	var upgrades_into_text: String = ""

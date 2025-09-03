@@ -7,6 +7,8 @@ signal damage_aura_entered(damageAura: TowerDamageAura)
 signal damage_aura_exited(damageAura: TowerDamageAura)
 signal range_aura_entered(rangeAura: TowerRangeAura)
 signal range_aura_exited(rangeAura: TowerRangeAura)
+signal speed_aura_entered(speedAura: TowerSpeedAura)
+signal speed_aura_exited(speedAura: TowerSpeedAura)
 
 
 # PRIVATE VARS
@@ -79,6 +81,12 @@ func _on_area_entered(area):
 	if area is TowerRangeAura:
 		range_aura_entered.emit(area)
 		return
+	
+	# SPEED AURA
+	if area is TowerSpeedAura:
+		speed_aura_entered.emit(area)
+		return
+
 
 func _on_area_exited(area):
 	# DAMAGE AURA
@@ -89,4 +97,9 @@ func _on_area_exited(area):
 	# RANGE AURA
 	if area is TowerRangeAura:
 		range_aura_exited.emit(area)
+		return
+	
+	# SPEED AURA
+	if area is TowerSpeedAura:
+		speed_aura_exited.emit(area)
 		return

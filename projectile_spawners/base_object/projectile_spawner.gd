@@ -22,6 +22,7 @@ enum TargetingPolicies {
 @export var LAUNCH_PROJECTILE_AUDIO: AudioStreamPlayer2D
 @export var ALLOW_DAMAGE_BUFFS: bool = true
 @export var ALLOW_RANGE_BUFFS: bool = true
+@export var ALLOW_SPEED_BUFFS: bool = true
 
 
 # SIGNALS
@@ -31,6 +32,7 @@ signal range_altered(newRange: int)
 # SINGLETONS
 var INITIAL_DAMAGE: int
 var INITIAL_RANGE: int
+var INITIAL_SPEED: float
 
 # PRIVATE VARS
 var __cooldown_timer: Timer
@@ -61,9 +63,21 @@ func play_launch_projectile_sound_effect():
 	if LAUNCH_PROJECTILE_AUDIO:
 		LAUNCH_PROJECTILE_AUDIO.play()
 
+
 ## Returns amount of damage that has been added to initial damage. 
 func total_bonus_damage() -> int:
 	return get_damage() - INITIAL_DAMAGE
+
+
+## Returns amount of range that has been added to initial range. 
+func total_bonus_range() -> int:
+	return get_detection_range() - INITIAL_RANGE
+
+
+## Returns amount of time in seconds that has been subtracted from initial cooldown duration. 
+func total_bonus_speed() -> float:
+	return INITIAL_SPEED - __cooldown_duration
+
 
 ## Returns the ROUNDED amount of damage that will be added when a factor amount is applied to the initial damage.
 func damage_factor_amount(factor: float) -> int:
@@ -71,14 +85,17 @@ func damage_factor_amount(factor: float) -> int:
 	return round(INITIAL_DAMAGE * factor)
 
 
-## Returns amount of range that has been added to initial range. 
-func total_bonus_range() -> int:
-	return get_detection_range() - INITIAL_RANGE
-
 ## Returns the ROUNDED amount of range that will be added when a factor amount is applied to the initial range.
 func range_factor_amount(factor: float) -> int:
 	assert(factor > 0, "Factor must be greater than 0")
 	return round(INITIAL_RANGE * factor)
+
+
+## Returns the ROUNDED cooldown time that will be subtracted when a factor amount is applied to the initial cooldown duration.
+func speed_factor_amount(factor: float) -> float:
+	assert(factor > 0, "Factor must be greater than 0")
+	return INITIAL_SPEED * factor
+
 
 # ********
 # PRIVATES
@@ -93,10 +110,10 @@ func _angle_to_targeted_creep() -> float:
 	return angle_to_creep
 
 func _capture_starting_values() -> void:
-	# INITIAL RANGE
 	INITIAL_RANGE = __detection_range
-	# INITIAL DAMAGE
 	INITIAL_DAMAGE = get_damage()
+	INITIAL_SPEED = get_cooldown_duration()
+
 
 func _create_hurtbox():
 	var new_hurtbox: ProjectileSpawnerHurtbox = ProjectileSpawnerConstants.HURTBOX_PRELOAD.instantiate()
@@ -187,6 +204,21 @@ func decrease_range(amount: int) -> void:
 	var new_range: int = get_detection_range() - amount
 	assert(new_range > 1, "Range must be larger than 1")
 	set_detection_range(new_range)
+
+
+## Increases speed of projectile spawner 
+func increase_speed(timeInSeconds: float) -> void:
+	assert(timeInSeconds > 0, "Zero or lower amounts are not allowed")
+	var new_speed: float = __cooldown_duration - timeInSeconds
+	set_cooldown_duration(new_speed)
+
+
+## Decreases speed of projectile spawner 
+func decrease_speed(timeInSeconds: float) -> void:
+	assert(timeInSeconds > 0, "Zero or lower amounts are not allowed")
+	var new_speed: float = __cooldown_duration + timeInSeconds
+	assert(new_speed > 0.0, "Cooldown duration must be positive number above 0")
+	set_cooldown_duration(new_speed)
 
 
 func _on_cooldown_timer_timeout():
@@ -292,3 +324,7 @@ func set_detection_range(amount: int) -> void:
 	__hurtbox.set_base_radius(amount)
 	# Emit range altered signal
 	range_altered.emit(amount)
+
+func set_cooldown_duration(newDurationSeconds: float) -> void:
+	__cooldown_timer.wait_time = newDurationSeconds
+	__cooldown_duration = newDurationSeconds

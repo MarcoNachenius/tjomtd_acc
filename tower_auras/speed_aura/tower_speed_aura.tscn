@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqah156xjxc8o"]
+
+[ext_resource type="Script" uid="uid://baoh2ud1umpuo" path="res://tower_auras/speed_aura/tower_speed_aura.gd" id="1_b0o62"]
+
+[node name="TowerSpeedAura" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_b0o62")
+metadata/_custom_type_script = "uid://djqsy77eq1qmm"
