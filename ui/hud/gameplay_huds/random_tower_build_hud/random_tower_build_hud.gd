@@ -159,12 +159,7 @@ func _connect_tower_stats_visibility_container():
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.pressed.connect(_on_show_tower_stats_button_pressed)
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.pressed.connect(_on_hide_tower_stats_button_pressed)
 	# Set initial state
-	__show_selected_tower_stats = true
-	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = false
-	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = true
-	SELECTED_TOWER_STATS_CONTAINER. visible = true
-	# Set initial values
-	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
+	_on_hide_tower_stats_button_pressed()
 
 func _connect_path_visibility_container_signals():
 	for button in PATH_LINE_VISIBILITY_CONTAINER.ALL_BUTTONS:
@@ -634,8 +629,9 @@ func _on_slate_placed() -> void:
 #                                           | Selected Tower Stats Container |
 # =============================================================================================================
 func _handle_selected_tower_stats(tower) -> void:
-	# Do nothing if tower stat display is deactivated
+	# Show tower stats hidden text if player has chosen to hide tower stats
 	if !__show_selected_tower_stats:
+		SELECTED_TOWER_STATS_CONTAINER.TOWER_NAME_TEXT.text = SELECTED_TOWER_STATS_CONTAINER.TOWER_STATS_HIDDEN_TEXT
 		return
 	# Update tower stats
 	SELECTED_TOWER_STATS_CONTAINER.populate_tower_stats(tower)
@@ -663,7 +659,7 @@ func _on_show_tower_stats_button_pressed():
 func _on_hide_tower_stats_button_pressed():
 	__show_selected_tower_stats = false
 	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
-	SELECTED_TOWER_STATS_CONTAINER.TOWER_NAME_TEXT.text = "(Tower Stats Hidden)\nPress 'Show Tower Stats' to show selected tower description."
+	SELECTED_TOWER_STATS_CONTAINER.TOWER_NAME_TEXT.text = SELECTED_TOWER_STATS_CONTAINER.TOWER_STATS_HIDDEN_TEXT
 	SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.visible = false
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false

@@ -4,6 +4,7 @@ class_name SelectedTowerStatsContainer
 @export var TOWER_NAME_TEXT: RichTextLabel
 @export var TOWER_ATTR_CONTAINER: TowerAttributesContainer
 
+const TOWER_STATS_HIDDEN_TEXT: String = "(Tower Stats Hidden)\nPress 'Show Tower Stats' to show selected tower description."
 
 func populate_tower_stats(tower: Tower) -> void:
 	TOWER_ATTR_CONTAINER.visible = true

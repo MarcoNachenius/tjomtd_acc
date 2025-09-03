@@ -100,6 +100,10 @@ func test_sharp_shooter_and_gatling_gun_button_appearance_awaiting_selection():
     # Ensure upgrade container is not visible before selecting a tower
     assert_false(test_random_tower_build_hud.TOWER_UPGRADES_CONTAINER.visible, "Tower upgrades container should not be visible")
 
+    # Ensure tower stats container is visible
+    test_random_tower_build_hud._on_show_tower_stats_button_pressed()
+    await get_tree().process_frame
+
     # Simulate tower being selected
     test_game_map.tower_selected.emit(black_marble_lvl_3)
 

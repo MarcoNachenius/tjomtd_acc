@@ -105,6 +105,10 @@ func test_damage_display_with_tower_damage_aura():
     black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.INITIAL_DAMAGE = TEST_STARTING_DAMAGE
     black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.__bullet_damage = TEST_STARTING_DAMAGE
 
+    # Ensure tower stats container is visible
+    test_random_tower_build_hud._on_show_tower_stats_button_pressed()
+    await get_tree().process_frame
+
     # Simulate tower being selected
     test_game_map.tower_selected.emit(black_marble_lvl_1)
 
