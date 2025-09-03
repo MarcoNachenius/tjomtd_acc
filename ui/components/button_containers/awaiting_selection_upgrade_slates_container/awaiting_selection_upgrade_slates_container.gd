@@ -55,9 +55,9 @@ class_name AwaitingSelectionUpgradeSlatesContainer
     RANGE_SLATE_LVL_2_BUTTON,
     RANGE_SLATE_LVL_3_BUTTON,
     ## ===== Speed slates =====
-    #SPEED_SLATE_LVL_1_BUTTON,
-    #SPEED_SLATE_LVL_2_BUTTON,
-    #SPEED_SLATE_LVL_3_BUTTON,
+    SPEED_SLATE_LVL_1_BUTTON,
+    SPEED_SLATE_LVL_2_BUTTON,
+    SPEED_SLATE_LVL_3_BUTTON,
 ]
 
 
@@ -214,10 +214,10 @@ func _on_range_slate_lvl_3_button_pressed() -> void:
 
 # ===== Speed slates =====
 func _on_speed_slate_lvl_1_button_pressed() -> void:
-    print("Speed Slate Lvl 1 pressed. WIP")
+    __connected_game_map.keep_slate_from_towers_awaiting_selection(__connected_main_hud.get_selected_tower(), SlateConstants.SlateIDs.SPEED_SLATE_LVL_1)
 
 func _on_speed_slate_lvl_2_button_pressed() -> void:
-    print("Speed Slate Lvl 2 pressed. WIP")
+    __connected_game_map.keep_slate_from_towers_awaiting_selection(__connected_main_hud.get_selected_tower(), SlateConstants.SlateIDs.SPEED_SLATE_LVL_2)
 
 func _on_speed_slate_lvl_3_button_pressed() -> void:
-    print("Speed Slate Lvl 3 pressed. WIP")
+    __connected_game_map.keep_slate_from_towers_awaiting_selection(__connected_main_hud.get_selected_tower(), SlateConstants.SlateIDs.SPEED_SLATE_LVL_3)

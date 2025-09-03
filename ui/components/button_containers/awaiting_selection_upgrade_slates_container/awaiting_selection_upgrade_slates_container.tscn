@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfg7p8e02gv8g" path="res://ui/components/button_containers/awaiting_selection_upgrade_slates_container/awaiting_selection_upgrade_slates_container.gd" id="1_xdidm"]
 
-[node name="AwaitingSelectionUpgradeSlatesContainer" type="HBoxContainer" node_paths=PackedStringArray("HOLD_SLATE_LVL_1_BUTTON", "HOLD_SLATE_LVL_2_BUTTON", "HOLD_SLATE_LVL_3_BUTTON", "SLOW_SLATE_LVL_1_BUTTON", "SLOW_SLATE_LVL_2_BUTTON", "SLOW_SLATE_LVL_3_BUTTON", "DAMAGE_SLATE_LVL_1_BUTTON", "DAMAGE_SLATE_LVL_2_BUTTON", "DAMAGE_SLATE_LVL_3_BUTTON", "RANGE_SLATE_LVL_1_BUTTON", "RANGE_SLATE_LVL_2_BUTTON", "RANGE_SLATE_LVL_3_BUTTON")]
+[node name="AwaitingSelectionUpgradeSlatesContainer" type="HBoxContainer" node_paths=PackedStringArray("HOLD_SLATE_LVL_1_BUTTON", "HOLD_SLATE_LVL_2_BUTTON", "HOLD_SLATE_LVL_3_BUTTON", "SLOW_SLATE_LVL_1_BUTTON", "SLOW_SLATE_LVL_2_BUTTON", "SLOW_SLATE_LVL_3_BUTTON", "DAMAGE_SLATE_LVL_1_BUTTON", "DAMAGE_SLATE_LVL_2_BUTTON", "DAMAGE_SLATE_LVL_3_BUTTON", "RANGE_SLATE_LVL_1_BUTTON", "RANGE_SLATE_LVL_2_BUTTON", "RANGE_SLATE_LVL_3_BUTTON", "SPEED_SLATE_LVL_1_BUTTON", "SPEED_SLATE_LVL_2_BUTTON", "SPEED_SLATE_LVL_3_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_xdidm")
@@ -18,6 +18,9 @@ DAMAGE_SLATE_LVL_3_BUTTON = NodePath("DamageSlateLvl3Button")
 RANGE_SLATE_LVL_1_BUTTON = NodePath("RangeSlateLvl1Button")
 RANGE_SLATE_LVL_2_BUTTON = NodePath("RangeSlateLvl2Button")
 RANGE_SLATE_LVL_3_BUTTON = NodePath("RangeSlateLvl3Button")
+SPEED_SLATE_LVL_1_BUTTON = NodePath("SpeedSlateLvl1Button")
+SPEED_SLATE_LVL_2_BUTTON = NodePath("SpeedSlateLvl2Button")
+SPEED_SLATE_LVL_3_BUTTON = NodePath("SpeedSlateLvl3Button")
 
 [node name="HoldSlateLvl1Button" type="Button" parent="."]
 visible = false
@@ -75,16 +78,34 @@ text = "Damage Slate
 Level 2"
 
 [node name="RangeSlateLvl1Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Range Slate
 Level 1"
 
 [node name="RangeSlateLvl2Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Range Slate
 Level 2"
 
 [node name="RangeSlateLvl3Button" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Range Slate
+Level 3"
+
+[node name="SpeedSlateLvl1Button" type="Button" parent="."]
+layout_mode = 2
+text = "Speed Slate
+Level 1"
+
+[node name="SpeedSlateLvl2Button" type="Button" parent="."]
+layout_mode = 2
+text = "Speed Slate
+Level 2"
+
+[node name="SpeedSlateLvl3Button" type="Button" parent="."]
+layout_mode = 2
+text = "Speed Slate
 Level 3"

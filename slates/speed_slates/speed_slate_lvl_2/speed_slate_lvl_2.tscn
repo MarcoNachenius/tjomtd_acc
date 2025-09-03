@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://blwm0581e22s6"]
+
+[ext_resource type="Script" uid="uid://cmwqa742rvnbl" path="res://slates/base_object/slate.gd" id="1_vsif1"]
+[ext_resource type="PackedScene" uid="uid://bqah156xjxc8o" path="res://tower_auras/speed_aura/tower_speed_aura.tscn" id="2_dtkn0"]
+[ext_resource type="Texture2D" uid="uid://bxx0koua037g6" path="res://slates/speed_slates/speed_slate_lvl_2/speed_slate_lvl_2_sprite_scaled.png" id="3_mwmcr"]
+
+[node name="SpeedSlateLvl2" type="Node2D" node_paths=PackedStringArray("SLATE_SPRITE")]
+script = ExtResource("1_vsif1")
+SLATE_ID = 16
+SLATE_SPRITE = NodePath("SlateSprite")
+metadata/_custom_type_script = "uid://cmwqa742rvnbl"
+
+[node name="TowerSpeedAura" parent="." instance=ExtResource("2_dtkn0")]
+SPEED_INCREASE_FACTOR = 0.4
+__radius = 400.0
+
+[node name="SlateSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_mwmcr")

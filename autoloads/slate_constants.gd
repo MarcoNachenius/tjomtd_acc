@@ -60,9 +60,9 @@ var SLATE_LOADS: Dictionary[SlateIDs, PackedScene] = {
     SlateIDs.RANGE_SLATE_LVL_3: load("res://slates/range_slates/range_slate_lvl_3/range_slate_lvl_3.tscn"),
 
     # ===== Speed slates =====
-    #SlateIDs.SPEED_SLATE_LVL_1: load(""),
-    #SlateIDs.SPEED_SLATE_LVL_2: load(""),
-    #SlateIDs.SPEED_SLATE_LVL_3: load(""),
+    SlateIDs.SPEED_SLATE_LVL_1: load("res://slates/speed_slates/speed_slate_lvl_1/speed_slate_lvl_1.tscn"),
+    SlateIDs.SPEED_SLATE_LVL_2: load("res://slates/speed_slates/speed_slate_lvl_2/speed_slate_lvl_2.tscn"),
+    SlateIDs.SPEED_SLATE_LVL_3: load("res://slates/speed_slates/speed_slate_lvl_3/speed_slate_lvl_3.tscn"),
 }
 
 
@@ -137,16 +137,25 @@ var REQUIRES_TOWERS: Dictionary[SlateIDs, Dictionary] = {
     },
     
     # ===== Speed slates =====
-    SlateIDs.SPEED_SLATE_LVL_1: {},
-    SlateIDs.SPEED_SLATE_LVL_2: {},
-    SlateIDs.SPEED_SLATE_LVL_3: {},
+    SlateIDs.SPEED_SLATE_LVL_1: {
+        TowerConstants.TowerIDs.SPINEL_LVL_2: 1,
+        TowerConstants.TowerIDs.SUNSTONE_LVL_3: 1,
+    },
+    SlateIDs.SPEED_SLATE_LVL_2: {
+        TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3: 1,
+        TowerConstants.TowerIDs.BISMUTH_LVL_4: 1,
+    },
+    SlateIDs.SPEED_SLATE_LVL_3: {
+        TowerConstants.TowerIDs.KUNZITE_LVL_4: 1,
+        TowerConstants.TowerIDs.LARIMAR_LVL_5: 1,
+    },
 }
 
 const TOWER_UPGRADES_INTO_SLATES: Dictionary[TowerConstants.TowerIDs, Array] = {
     # ===== Hold Slates and Slow Slates =====
     TowerConstants.TowerIDs.LARIMAR_LVL_1: [SlateIDs.HOLD_SLATE_LVL_1],
     TowerConstants.TowerIDs.LARIMAR_LVL_2: [SlateIDs.HOLD_SLATE_LVL_1, SlateIDs.HOLD_SLATE_LVL_2],
-    TowerConstants.TowerIDs.SUNSTONE_LVL_3: [SlateIDs.HOLD_SLATE_LVL_1, SlateIDs.SLOW_SLATE_LVL_2, SlateIDs.SLOW_SLATE_LVL_3],
+    TowerConstants.TowerIDs.SUNSTONE_LVL_3: [SlateIDs.HOLD_SLATE_LVL_1, SlateIDs.SLOW_SLATE_LVL_2, SlateIDs.SLOW_SLATE_LVL_3, SlateIDs.SPEED_SLATE_LVL_1],
     TowerConstants.TowerIDs.LARIMAR_LVL_3: [SlateIDs.HOLD_SLATE_LVL_2],
     TowerConstants.TowerIDs.SUNSTONE_LVL_4: [SlateIDs.HOLD_SLATE_LVL_2],
     TowerConstants.TowerIDs.LARIMAR_LVL_4: [SlateIDs.HOLD_SLATE_LVL_3],
@@ -154,19 +163,22 @@ const TOWER_UPGRADES_INTO_SLATES: Dictionary[TowerConstants.TowerIDs, Array] = {
     TowerConstants.TowerIDs.SUNSTONE_LVL_1: [SlateIDs.SLOW_SLATE_LVL_1],
     TowerConstants.TowerIDs.SUNSTONE_LVL_2: [SlateIDs.SLOW_SLATE_LVL_1, SlateIDs.SLOW_SLATE_LVL_3],
     TowerConstants.TowerIDs.BISMUTH_LVL_3: [SlateIDs.SLOW_SLATE_LVL_1],
-    TowerConstants.TowerIDs.BISMUTH_LVL_4: [SlateIDs.SLOW_SLATE_LVL_2, SlateIDs.SLOW_SLATE_LVL_3],
+    TowerConstants.TowerIDs.BISMUTH_LVL_4: [SlateIDs.SLOW_SLATE_LVL_2, SlateIDs.SLOW_SLATE_LVL_3, SlateIDs.SPEED_SLATE_LVL_2],
 
     # ===== Damage slates and Range Slates =====
     TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1: [SlateIDs.DAMAGE_SLATE_LVL_1],
     TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2: [SlateIDs.DAMAGE_SLATE_LVL_1],
-    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3: [SlateIDs.DAMAGE_SLATE_LVL_2, SlateIDs.DAMAGE_SLATE_LVL_3],
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3: [SlateIDs.DAMAGE_SLATE_LVL_2, SlateIDs.DAMAGE_SLATE_LVL_3, SlateIDs.SPEED_SLATE_LVL_2],
     TowerConstants.TowerIDs.BLACK_MARBLE_LVL_4: [SlateIDs.DAMAGE_SLATE_LVL_3],
     TowerConstants.TowerIDs.SPINEL_LVL_3: [SlateIDs.DAMAGE_SLATE_LVL_1, SlateIDs.RANGE_SLATE_LVL_2, SlateIDs.RANGE_SLATE_LVL_3],
     TowerConstants.TowerIDs.SPINEL_LVL_4: [SlateIDs.DAMAGE_SLATE_LVL_2, SlateIDs.RANGE_SLATE_LVL_3],
     TowerConstants.TowerIDs.SPINEL_LVL_5: [SlateIDs.DAMAGE_SLATE_LVL_3],
     TowerConstants.TowerIDs.SPINEL_LVL_1: [SlateIDs.RANGE_SLATE_LVL_1],
-    TowerConstants.TowerIDs.SPINEL_LVL_2: [SlateIDs.RANGE_SLATE_LVL_1],
+    TowerConstants.TowerIDs.SPINEL_LVL_2: [SlateIDs.RANGE_SLATE_LVL_1, SlateIDs.SPEED_SLATE_LVL_1],
     TowerConstants.TowerIDs.KUNZITE_LVL_3: [SlateIDs.RANGE_SLATE_LVL_1],
-    TowerConstants.TowerIDs.KUNZITE_LVL_4: [SlateIDs.RANGE_SLATE_LVL_2],
+    TowerConstants.TowerIDs.KUNZITE_LVL_4: [SlateIDs.RANGE_SLATE_LVL_2, SlateIDs.SPEED_SLATE_LVL_3],
     TowerConstants.TowerIDs.KUNZITE_LVL_5: [SlateIDs.RANGE_SLATE_LVL_3],
+    
+    # ===== Speed slates =====
+    TowerConstants.TowerIDs.LARIMAR_LVL_5: [SlateIDs.SPEED_SLATE_LVL_3],
 }

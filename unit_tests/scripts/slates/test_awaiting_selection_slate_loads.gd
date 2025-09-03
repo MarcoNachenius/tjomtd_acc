@@ -138,3 +138,37 @@ func test_range_slate_lvl_3_load():
     assert_not_null(slate_scene, "RANGE_SLATE_LVL_3 successfully loaded and instantiated.")
     # Clean up
     slate_scene.queue_free()
+
+
+# ++++++++++++
+# SPEED SLATES
+# ++++++++++++
+func test_speed_slate_lvl_1_load():
+    var slate_scene = SlateConstants.SLATE_LOADS[SlateConstants.SlateIDs.SPEED_SLATE_LVL_1].instantiate()
+    # Ensure loaded slate ID corresponds to the expected ID
+    assert_eq(slate_scene.SLATE_ID, SlateConstants.SlateIDs.SPEED_SLATE_LVL_1, "Slate ID of loaded scene is correct")
+    add_child_autofree(slate_scene)
+    await get_tree().process_frame
+    assert_not_null(slate_scene, "SPEED_SLATE_LVL_1 successfully loaded and instantiated.")
+    # Clean up
+    slate_scene.queue_free()
+
+func test_speed_slate_lvl_2_load():
+    var slate_scene = SlateConstants.SLATE_LOADS[SlateConstants.SlateIDs.SPEED_SLATE_LVL_2].instantiate()
+    # Ensure loaded slate ID corresponds to the expected ID
+    assert_eq(slate_scene.SLATE_ID, SlateConstants.SlateIDs.SPEED_SLATE_LVL_2, "Slate ID of loaded scene is correct")
+    add_child_autofree(slate_scene)
+    await get_tree().process_frame
+    assert_not_null(slate_scene, "SPEED_SLATE_LVL_2 successfully loaded and instantiated.")
+    # Clean up
+    slate_scene.queue_free()
+
+func test_speed_slate_lvl_3_load():
+    var slate_scene = SlateConstants.SLATE_LOADS[SlateConstants.SlateIDs.SPEED_SLATE_LVL_3].instantiate()
+    # Ensure loaded slate ID corresponds to the expected ID
+    assert_eq(slate_scene.SLATE_ID, SlateConstants.SlateIDs.SPEED_SLATE_LVL_3, "Slate ID of loaded scene is correct")
+    add_child_autofree(slate_scene)
+    await get_tree().process_frame
+    assert_not_null(slate_scene, "SPEED_SLATE_LVL_3 successfully loaded and instantiated.")
+    # Clean up
+    slate_scene.queue_free()
