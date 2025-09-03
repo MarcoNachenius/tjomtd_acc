@@ -1,6 +1,9 @@
 extends HBoxContainer
 class_name TowerUpgradesContainer
 
+# SINGLETON
+@export var CONNECTED_MAIN_HUB: RandomTowerBuildHUD
+
 # TOWER BUTTON EXPORTS
 # ====================
 @export var TOMBSTONE_BUTTON: Button
@@ -31,12 +34,32 @@ class_name TowerUpgradesContainer
 	TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_1: SHARP_SHOOTER_BUTTON,
 }
 
+@onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
+	TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
+	SAM_SITE_BUTTON: _on_sam_site_button_pressed,
+	LAVA_POOL_BUTTON: _on_lava_pool_button_pressed,
+	ICE_SHARD_BUTTON: _on_ice_shard_button_pressed,
+	EMP_STUNNER_BUTTON: _on_emp_stunner_button_pressed,
+	GATLING_GUN_BUTTON: _on_gatling_gun_button_pressed,
+	SHARP_SHOOTER_BUTTON: _on_sharp_shooter_button_pressed,
+}
+
+
 func _ready():
 	# Ensure all tower button exports have been assigned.
 	_validate_tower_button_exports()
+	# Tower upgrades container
+	_connect_tower_upgrades_signals()
 
 # PRIVATE METHODS
 # ===============
+func _connect_tower_upgrades_signals():
+	# Connect the button signals to the appropriate methods
+	for button in ALL_TOWER_BUTTONS:
+		# Retrieve the callback function from the dictionary using the button as the key.
+		button.pressed.connect(TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
+
+
 ## Ensures that all tower button exports have been assigned.
 func _validate_tower_button_exports():
 	assert(TOMBSTONE_BUTTON, "TOMBSTONE_BUTTON is not assigned in the inspector.")
@@ -54,3 +77,23 @@ func hide_all_tower_buttons():
 	for button in ALL_TOWER_BUTTONS:
 		button.visible = false
 
+func _on_tombstone_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
+
+func _on_sam_site_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_1)
+
+func _on_lava_pool_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_1)
+
+func _on_ice_shard_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.ICE_SHARD_LVL_1)
+
+func _on_emp_stunner_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.EMP_STUNNER_LVL_1)
+
+func _on_gatling_gun_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.GATLING_GUN_LVL_1)
+
+func _on_sharp_shooter_button_pressed():
+	CONNECTED_MAIN_HUB.handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_1)

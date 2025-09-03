@@ -52,8 +52,9 @@ layout_mode = 2
 layout_mode = 2
 CONNECTED_MAIN_HUB = NodePath("../..")
 
-[node name="TowerUpgradesContainer" parent="TowerCommands" instance=ExtResource("4_im64j")]
+[node name="TowerUpgradesContainer" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("4_im64j")]
 layout_mode = 2
+CONNECTED_MAIN_HUB = NodePath("../..")
 
 [node name="ExtendedUpgradesContainer" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_xie52")]
 layout_mode = 2

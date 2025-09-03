@@ -16,38 +16,29 @@ class_name RandomTowerBuildHUD
 @export var EXTENDED_UPGRADES_CONTAINER: ExtendedUpgradesContainer
 @export var SELECTED_TOWER_STATS_CONTAINER: SelectedTowerStatsContainer
 @export var TOWER_STATS_VISIBILITY_CONTAINER: TowerStatsVisibilityContainer
-
 # Standalone Buttons
 @export var START_NEW_WAVE_BUTTON: Button
 @export var UPGRADE_BUILD_LEVEL_BUTTON: Button
 # Audio manager
 @export var HUD_AUDIO_MANAGER: HudAudioManager
 
-# CONSTANTS - Onready variables
-@onready var TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
-	TOWER_UPGRADES_CONTAINER.TOMBSTONE_BUTTON: _on_tombstone_button_pressed,
-	TOWER_UPGRADES_CONTAINER.SAM_SITE_BUTTON: _on_sam_site_button_pressed,
-	TOWER_UPGRADES_CONTAINER.LAVA_POOL_BUTTON: _on_lava_pool_button_pressed,
-	TOWER_UPGRADES_CONTAINER.ICE_SHARD_BUTTON: _on_ice_shard_button_pressed,
-	TOWER_UPGRADES_CONTAINER.EMP_STUNNER_BUTTON: _on_emp_stunner_button_pressed,
-	TOWER_UPGRADES_CONTAINER.GATLING_GUN_BUTTON: _on_gatling_gun_button_pressed,
-	TOWER_UPGRADES_CONTAINER.SHARP_SHOOTER_BUTTON: _on_sharp_shooter_button_pressed,
-}
 
-
-
+# SINGLETONS
+# ==========
 @onready var PATH_LINE_VISIBILITY_CONTAINER_BUTTON_CALLBACKS: Dictionary[Button, Callable] = {
 	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON: _on_show_path_button_pressed,
 	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON: _on_hide_path_button_pressed
 }
-
-const UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX: String = "Upgrade Build Level ("
-
-# SINGLETONS
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 
 
-# LOCALS
+# CONSTANTS
+# =========
+const UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX: String = "Upgrade Build Level ("
+
+
+# PRIVATE VARS
+# ============
 var __selected_tower: Tower
 ## Number of towers that can be placed per turn
 var __max_towers_per_turn = GameConstants.MAX_PLACEABLE_TOWERS_PER_TURN
@@ -56,9 +47,11 @@ var __current_turn_tower_count = 0
 var __final_wave_reached: bool = false
 
 # ONREADYS
+# ========
 ## Tracks if player wants tower range to be displayed when selected
 @onready var __show_selected_tower_range: bool = true
 @onready var __show_selected_tower_stats: bool = true
+
 
 # *****************
 # INHERITED METHODS
@@ -80,6 +73,54 @@ func _ready():
 	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.LEVEL_UPGRADE_PRICES[1]) + ")"
 
 
+# **************
+# PUBLIC METHODS
+# **************
+func handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	_hide_containers_on_tower_kept()
+	# Handle towers awaiting selection
+	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
+		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
+		# Switch the game map state to navigation mode
+		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+		# Give player option to start new wave
+		START_NEW_WAVE_BUTTON.visible = true
+		return
+	
+	# Handle towers on map
+	if __selected_tower.get_state() == Tower.States.BUILT:
+		GAME_MAP.upgrade_from_towers_on_map(__selected_tower, upgradeTowerID)
+		# Switch the game map state to navigation mode
+		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+		return
+
+func handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
+	_hide_containers_on_tower_kept()
+	# Give player option to start new wave
+	START_NEW_WAVE_BUTTON.visible = true
+	GAME_MAP.keep_compound_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
+	# Switch the game map state to navigation mode
+	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
+
+func handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
+	assert(__selected_tower, "No tower is currently selected")
+	assert(__selected_tower.__curr_state == Tower.States.BUILT, "Cannot upgrade tower awaiting selection")
+	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID), "Selected tower is not an upgrade tower")
+
+	# Handle insufficient funds
+	if GAME_MAP.get_curr_balance() < TowerConstants.TowerPrices[upgradeTowerID]:
+		# Play insufficient funds sound
+		HUD_AUDIO_MANAGER.INSUFFICIENT_FUNDS_AUDIO.play_insufficient_funds_sound()
+		return
+
+	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
+
+
+func get_selected_tower() -> Tower:
+	return __selected_tower
+
+
 # ***************
 # PRIVATE METHODS
 # ***************
@@ -91,8 +132,6 @@ func _connect_all_component_signals():
 	_connect_game_map_signals()
 	# Tower properties hbox
 	_connect_tower_properties_hbox_signals()
-	# Tower upgrades container
-	_connect_tower_upgrades_signals()
 	# Path visibility container
 	_connect_path_visibility_container_signals()
 	# Tower range visibility container
@@ -120,11 +159,6 @@ func _connect_path_visibility_container_signals():
 	for button in PATH_LINE_VISIBILITY_CONTAINER.ALL_BUTTONS:
 		button.pressed.connect(PATH_LINE_VISIBILITY_CONTAINER_BUTTON_CALLBACKS[button])
 
-func _connect_tower_upgrades_signals():
-	# Connect the button signals to the appropriate methods
-	for button in TOWER_UPGRADES_CONTAINER.ALL_TOWER_BUTTONS:
-		# Retrieve the callback function from the dictionary using the button as the key.
-		button.pressed.connect(TOWER_UPGRADES_CONTAINER_BUTTON_CALLBACKS[button])
 
 func _connnect_tower_range_visibility_container_signals():
 	TOWER_RANGE_VISIBILITY_CONTAINER.SHOW_TOWER_RANGE_BUTTON.pressed.connect(_on_show_tower_range_button_pressed)
@@ -195,32 +229,6 @@ func _deselect_tower():
 	__selected_tower = null
 	# Clear selected tower stats
 	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
-
-func _handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
-	_hide_containers_on_tower_kept()
-	# Handle towers awaiting selection
-	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
-		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
-		# Switch the game map state to navigation mode
-		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
-		# Give player option to start new wave
-		START_NEW_WAVE_BUTTON.visible = true
-		return
-	
-	# Handle towers on map
-	if __selected_tower.get_state() == Tower.States.BUILT:
-		GAME_MAP.upgrade_from_towers_on_map(__selected_tower, upgradeTowerID)
-		# Switch the game map state to navigation mode
-		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
-		return
-
-func handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
-	_hide_containers_on_tower_kept()
-	# Give player option to start new wave
-	START_NEW_WAVE_BUTTON.visible = true
-	GAME_MAP.keep_compound_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
-	# Switch the game map state to navigation mode
-	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
 ## Handles visibility of viable upgrade buttons if the selected tower is awaiting selection.
 ## Automatically ignores towers that are not awaiting selection.
@@ -301,10 +309,7 @@ func _handle_awaiting_selection_tower_slate_upgrades_display() -> void:
 	AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER.show_buttons(viable_slate_ids)
 	
 
-# ****************
-# SIGNAL CALLBACKS
-# ****************
-#
+
 #                                            | Standalone Buttons |
 # =============================================================================================================
 func _on_start_new_wave_button_pressed():
@@ -342,7 +347,6 @@ func _on_upgrade_build_level_button_pressed():
 		UPGRADE_BUILD_LEVEL_BUTTON.visible = false
 
 	
-
 #                                       | Path Line Visibility Container |
 # =============================================================================================================
 func _on_show_path_button_pressed():
@@ -354,6 +358,7 @@ func _on_hide_path_button_pressed():
 	GAME_MAP.hide_path_line()
 	PATH_LINE_VISIBILITY_CONTAINER.SHOW_PATH_BUTTON.visible = true
 	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON.visible = false
+
 
 #                                       | Tower Range Visibility Container |
 # =============================================================================================================
@@ -372,6 +377,7 @@ func _on_hide_tower_range_button_pressed():
 	# Hide range display of selected tower, provided it is not a barricade
 	if __selected_tower and __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE:
 		__selected_tower.RANGE_DISPLAY_SHAPE.visible = false
+
 
 #                                       | Build Random Tower Container |
 # =============================================================================================================
@@ -392,6 +398,7 @@ func _on_build_random_tower_button_pressed():
 	# Assign random towrer preload to the game map
 	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
 
+
 ## Handle the exit build mode button pressed signal
 func _on_exit_build_mode_button_pressed():
 	# Show build tower button
@@ -400,6 +407,7 @@ func _on_exit_build_mode_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+
 
 ## Handle remove barricade button pressed
 func _on_remove_barricade_button_pressed():
@@ -434,12 +442,15 @@ func _on_final_boss_path_completed(damageInflicted: int, completionTimeSeconds: 
 	# Switch main scene to end game menu
 	get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
 
+
 func _on_lives_depleted():
 	GAME_MAP.remove_remaining_creeps()
 	GAME_MAP.CREEP_SPAWNER.initiate_final_boss_wave()
 
+
 func _on_life_lost(remaining_lives: int):
 	GAME_STATS_CONTAINER.REMAINING_LIVES_AMOUNT_LABEL.text = str(remaining_lives)
+
 
 func _on_wave_completed(total_waves_completed: int):
 	# Handle situation where all waves have been completed
@@ -475,6 +486,7 @@ func _on_wave_completed(total_waves_completed: int):
 	START_NEW_WAVE_BUTTON.visible = false
 	# Update game stats display
 	GAME_STATS_CONTAINER.WAVES_COMPLETED_AMOUNT_LABEL.text = str(total_waves_completed)
+
 
 func _on_tower_selected(tower: Tower):
 	# Reset transparency of previously selected tower sprite and awaiting selection animation
@@ -562,7 +574,6 @@ func _on_maze_length_updated(updated_maze_length: int):
 	GAME_STATS_CONTAINER.MAZE_LENGTH_AMOUNT_LABEL.text = str(updated_maze_length)
 
 
-# WIP
 func _on_slate_placed() -> void:
 	_deselect_tower()
 	_hide_containers_on_tower_kept()
@@ -588,7 +599,6 @@ func _hide_selected_tower_stats() -> void:
 
 #                                         | Tower Stats Visibility Container |
 # =============================================================================================================
-
 func _on_show_tower_stats_button_pressed():
 	__show_selected_tower_stats = true
 	SELECTED_TOWER_STATS_CONTAINER.visible = true
@@ -600,6 +610,7 @@ func _on_show_tower_stats_button_pressed():
 	else:
 		SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
 
+
 func _on_hide_tower_stats_button_pressed():
 	__show_selected_tower_stats = false
 	SELECTED_TOWER_STATS_CONTAINER.clear_tower_stats()
@@ -607,9 +618,10 @@ func _on_hide_tower_stats_button_pressed():
 	SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.visible = false
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.visible = true
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.visible = false
+
+
 #                                      | Tower Properties Container |
 # =============================================================================================================
-
 func _on_keep_tower_button_pressed():
 
 	_hide_containers_on_tower_kept()
@@ -625,52 +637,3 @@ func _on_keep_tower_button_pressed():
 	START_NEW_WAVE_BUTTON.visible = true
 
 	__current_turn_tower_count = 0
-
-
-#                                        | Upgrade Tower Container |
-# =============================================================================================================
-
-func _on_tombstone_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.TOMBSTONE_LVL_1)
-
-func _on_sam_site_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SAM_SITE_LVL_1)
-
-func _on_lava_pool_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.LAVA_POOL_LVL_1)
-
-func _on_ice_shard_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.ICE_SHARD_LVL_1)
-
-func _on_emp_stunner_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.EMP_STUNNER_LVL_1)
-
-func _on_gatling_gun_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.GATLING_GUN_LVL_1)
-
-func _on_sharp_shooter_button_pressed():
-	_handle_built_tower_upgrade(TowerConstants.UpgradeTowerIDs.SHARP_SHOOTER_LVL_1)
-
-
-#                                 | Awaiting Selection Upgrade Tower Container |
-# =============================================================================================================
-
-
-
-
-
-func handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
-	assert(__selected_tower, "No tower is currently selected")
-	assert(__selected_tower.__curr_state == Tower.States.BUILT, "Cannot upgrade tower awaiting selection")
-	assert(TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID), "Selected tower is not an upgrade tower")
-
-	# Handle insufficient funds
-	if GAME_MAP.get_curr_balance() < TowerConstants.TowerPrices[upgradeTowerID]:
-		# Play insufficient funds sound
-		HUD_AUDIO_MANAGER.INSUFFICIENT_FUNDS_AUDIO.play_insufficient_funds_sound()
-		return
-
-	GAME_MAP.upgrade_tower(__selected_tower, upgradeTowerID)
-	
-func get_selected_tower() -> Tower:
-	return __selected_tower
