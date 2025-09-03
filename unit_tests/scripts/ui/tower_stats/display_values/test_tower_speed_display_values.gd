@@ -111,6 +111,9 @@ func test_speed_display_with_tower_speed_aura():
     # Process frame to ensure the tower selected signal is processed
     await get_tree().process_frame
 
+    # Ensure starting speed has also been assigned to primary projectile spawner's cooldown timer
+    assert_eq(black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.__cooldown_timer.wait_time, TEST_STARTING_SPEED, "Projectile spawner's initial timer wait time is correct.")
+
     # Ensure display speed without buff is correct
     var got_initial_display_text: String = test_random_tower_build_hud.SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text
     assert_eq(got_initial_display_text, TEST_STARTING_SPEED_DISPLAY_TEXT, "Display speed without buff amount is correct")
@@ -133,7 +136,7 @@ func test_speed_display_with_tower_speed_aura():
     await get_tree().physics_frame
 
     # Ensure speed buff has reached tower
-    assert_eq(black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.get_cooldown_duration(), TEST_BUFFED_SPEED, "Tower speed has been increased.")
+    assert_eq(black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.get_cooldown_duration(), TEST_BUFFED_SPEED, "Initial tower speed timer wait time is correct.")
 
     # Simulate tower being selected again after speed buff has been applied
     test_game_map.tower_selected.emit(black_marble_lvl_1)
@@ -143,6 +146,9 @@ func test_speed_display_with_tower_speed_aura():
     # Ensure display speed has been updated after speed buff
     var got_buffed_speed_display_text: String = test_random_tower_build_hud.SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text
     assert_eq(got_buffed_speed_display_text, TEST_BUFFED_SPEED_DISPLAY_TEXT, "Display speed with buff amount is correct")
+
+    # Ensure buffed speed has also been assigned to primary projectile spawner's cooldown timer
+    assert_eq(black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.__cooldown_timer.wait_time, TEST_BUFFED_SPEED, "Tower buffed wait time is correct.")
 
     # Remove speed aura from map
     test_speed_aura.queue_free()
@@ -160,6 +166,9 @@ func test_speed_display_with_tower_speed_aura():
     test_game_map.tower_selected.emit(black_marble_lvl_1)
     # Process frame which handles signal emission
     await get_tree().process_frame
+
+    # Ensure starting speed has also been reset to primary projectile spawner's cooldown timer
+    assert_eq(black_marble_lvl_1.PRIMARY_PROJECTILE_SPAWNER.__cooldown_timer.wait_time, TEST_STARTING_SPEED, "Projectile spawner's initial timer wait time has been correctly reset.")
 
     # Ensure display speed has been restored to original value
     got_initial_display_text = test_random_tower_build_hud.SELECTED_TOWER_STATS_CONTAINER.TOWER_ATTR_CONTAINER.COOLDOWN_VALUE.text
