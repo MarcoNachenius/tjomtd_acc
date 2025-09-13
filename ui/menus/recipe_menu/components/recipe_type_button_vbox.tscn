@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://8atbe64nu4qe"]
+
+[ext_resource type="Script" uid="uid://m65xibqh50ar" path="res://ui/menus/recipe_menu/components/recipe_type_button_vbox.gd" id="1_efiij"]
+
+[node name="RecipeTypeButtonVbox" type="VBoxContainer" node_paths=PackedStringArray("BUILDABLE_TOWERS_BUTTON", "UPGRADE_TOWERS_BUTTON", "SLATE_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_efiij")
+BUILDABLE_TOWERS_BUTTON = NodePath("BuildableTowers")
+UPGRADE_TOWERS_BUTTON = NodePath("UpgradeTowers")
+SLATE_BUTTON = NodePath("Slates")
+
+[node name="BuildableTowers" type="Button" parent="."]
+layout_mode = 2
+text = "Buildable Towers"
+
+[node name="UpgradeTowers" type="Button" parent="."]
+layout_mode = 2
+text = "Upgrade Towers"
+
+[node name="Slates" type="Button" parent="."]
+layout_mode = 2
+text = "Slates
+"

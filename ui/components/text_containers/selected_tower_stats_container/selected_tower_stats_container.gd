@@ -28,8 +28,8 @@ func _assign_description(tower: Tower) -> void:
 		TOWER_ATTR_CONTAINER.DESCRIPTION_VALUE.text = " TOWER DESCRIPTION NOT FOUND"
 
 func _assign_tower_name(tower: Tower) -> void:
-	if TowerConstants.TOWER_NAMES.keys().has(tower.TOWER_ID):
-		TOWER_NAME_TEXT.text = TowerConstants.TOWER_NAMES[tower.TOWER_ID]
+	if TowerDescriptions.TOWER_NAMES.keys().has(tower.TOWER_ID):
+		TOWER_NAME_TEXT.text = TowerDescriptions.TOWER_NAMES[tower.TOWER_ID]
 	else:
 		TOWER_NAME_TEXT.text = "Tower name not found"
 
@@ -95,7 +95,7 @@ func _assign_upgrades_into(tower: Tower) -> void:
 	# Construct display text string value
 	for upgrade_tower_id in upgrades_into_tower_list:
 		# Remove "Level x" suffix from tower name
-		var split_tower_name = TowerConstants.TOWER_NAMES[upgrade_tower_id].split(" ")
+		var split_tower_name = TowerDescriptions.TOWER_NAMES[upgrade_tower_id].split(" ")
 		split_tower_name.resize(split_tower_name.size() - 2)
 		var altered_tower_name: String = ""
 		for word in split_tower_name:

@@ -1,5 +1,58 @@
 extends Node2D
 
+const TOWER_NAMES: Dictionary[TowerConstants.TowerIDs, String] = {
+    TowerConstants.TowerIDs.BARRICADE: "Barricade",
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1: "Black Marble Level 1",
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2: "Black Marble Level 2",
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_3: "Black Marble Level 3",
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_4: "Black Marble Level 4",
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_5: "Black Marble Level 5",
+    TowerConstants.TowerIDs.BISMUTH_LVL_1: "Bismuth Level 1",
+    TowerConstants.TowerIDs.BISMUTH_LVL_2: "Bismuth Level 2",
+    TowerConstants.TowerIDs.BISMUTH_LVL_3: "Bismuth Level 3",
+    TowerConstants.TowerIDs.BISMUTH_LVL_4: "Bismuth Level 4",
+    TowerConstants.TowerIDs.BISMUTH_LVL_5: "Bismuth Level 5",
+    TowerConstants.TowerIDs.LARIMAR_LVL_1: "Larimar Level 1",
+    TowerConstants.TowerIDs.LARIMAR_LVL_2: "Larimar Level 2",
+    TowerConstants.TowerIDs.LARIMAR_LVL_3: "Larimar Level 3",
+    TowerConstants.TowerIDs.LARIMAR_LVL_4: "Larimar Level 4",
+    TowerConstants.TowerIDs.LARIMAR_LVL_5: "Larimar Level 5",
+    TowerConstants.TowerIDs.SUNSTONE_LVL_1: "Sunstone Level 1",
+    TowerConstants.TowerIDs.SUNSTONE_LVL_2: "Sunstone Level 2",
+    TowerConstants.TowerIDs.SUNSTONE_LVL_3: "Sunstone Level 3",
+    TowerConstants.TowerIDs.SUNSTONE_LVL_4: "Sunstone Level 4",
+    TowerConstants.TowerIDs.SUNSTONE_LVL_5: "Sunstone Level 5",
+    TowerConstants.TowerIDs.TOMBSTONE_LVL_1: "Tombstone Level 1",
+    TowerConstants.TowerIDs.TOMBSTONE_LVL_2: "Tombstone Level 2",
+    TowerConstants.TowerIDs.TOMBSTONE_LVL_3: "Tombstone Level 3",
+    TowerConstants.TowerIDs.SPINEL_LVL_1: "Spinel Level 1",
+    TowerConstants.TowerIDs.SPINEL_LVL_2: "Spinel Level 2",
+    TowerConstants.TowerIDs.SPINEL_LVL_3: "Spinel Level 3",
+    TowerConstants.TowerIDs.SPINEL_LVL_4: "Spinel Level 4",
+    TowerConstants.TowerIDs.SPINEL_LVL_5: "Spinel Level 5",
+    TowerConstants.TowerIDs.KUNZITE_LVL_1: "Kunzite Level 1",
+    TowerConstants.TowerIDs.KUNZITE_LVL_2: "Kunzite Level 2",
+    TowerConstants.TowerIDs.KUNZITE_LVL_3: "Kunzite Level 3",
+    TowerConstants.TowerIDs.KUNZITE_LVL_4: "Kunzite Level 4",
+    TowerConstants.TowerIDs.KUNZITE_LVL_5: "Kunzite Level 5",
+    TowerConstants.TowerIDs.SAM_SITE_LVL_1: "SAM Site Level 1",
+    TowerConstants.TowerIDs.SAM_SITE_LVL_2: "SAM Site Level 2",
+    TowerConstants.TowerIDs.SAM_SITE_LVL_3: "SAM Site Level 3",
+    TowerConstants.TowerIDs.LAVA_POOL_LVL_1: "Lava Pool Level 1",
+    TowerConstants.TowerIDs.LAVA_POOL_LVL_2: "Lava Pool Level 2",
+    TowerConstants.TowerIDs.LAVA_POOL_LVL_3: "Lava Pool Level 3",
+    TowerConstants.TowerIDs.ICE_SHARD_LVL_1: "Ice Shard Level 1",
+    TowerConstants.TowerIDs.ICE_SHARD_LVL_2: "Ice Shard Level 2",
+    TowerConstants.TowerIDs.ICE_SHARD_LVL_3: "Ice Shard Level 3",
+    TowerConstants.TowerIDs.EMP_STUNNER_LVL_1: "EMP Stunner Level 1",
+    TowerConstants.TowerIDs.EMP_STUNNER_LVL_2: "EMP Stunner Level 2",
+    TowerConstants.TowerIDs.EMP_STUNNER_LVL_3: "EMP Stunner Level 3",
+    TowerConstants.TowerIDs.GATLING_GUN_LVL_1: "Gatling Gun Level 1",
+    TowerConstants.TowerIDs.GATLING_GUN_LVL_2: "Gatling Gun Level 2",
+    TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_1: "Sharp Shooter Level 1",
+    TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_2: "Sharp Shooter Level 2",
+}
+
 const TOWER_ID_TO_DESCRPTION_TEXT: Dictionary[TowerConstants.TowerIDs, String]  = {
     TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1: "Fires bullet towards creep.",
     TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2: "Fires bullet towards creep.\nBullet capable of hitting two creeps before it is destroyed.\nOnce the bullet hits a creep, it will ricochet in a random direction.",
@@ -50,4 +103,24 @@ const TOWER_ID_TO_DESCRPTION_TEXT: Dictionary[TowerConstants.TowerIDs, String]  
     TowerConstants.TowerIDs.GATLING_GUN_LVL_2: "Rapidly fires bullet towards creep.\nBullet capable of hitting two creeps before it is destroyed.\nOnce the bullet hits a creep, it will ricochet in a random direction.",
     TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_1: "Fires bullet towards creep.\nBullet will keep traveling in a straight line and hit all creeps in its path.",
     TowerConstants.TowerIDs.SHARP_SHOOTER_LVL_2: "Fires bullet towards creep.\nBullet will keep traveling in a straight line and hit all creeps in its path.",
+}
+
+
+enum TowerStats {
+    DAMAGE,
+    RANGE,
+    ATTACK_COOLDOWN
+}
+
+const TOWER_ID_TO_STATS: Dictionary[TowerConstants.TowerIDs, Dictionary] = {
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1: {
+        TowerStats.DAMAGE: 8,
+        TowerStats.RANGE: 400,
+        TowerStats.ATTACK_COOLDOWN: 0.5
+    },
+    TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2: {
+        TowerStats.DAMAGE: 12,
+        TowerStats.RANGE: 300,
+        TowerStats.ATTACK_COOLDOWN: 0.5
+    },
 }

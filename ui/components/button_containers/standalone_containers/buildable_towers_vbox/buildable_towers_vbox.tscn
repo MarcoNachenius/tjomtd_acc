@@ -1,0 +1,188 @@
+[gd_scene load_steps=2 format=3 uid="uid://chovoj3agi21n"]
+
+[ext_resource type="Script" uid="uid://dvpf3l5oui2li" path="res://ui/components/button_containers/standalone_containers/buildable_towers_vbox/buildable_towers_vbox.gd" id="1_hswq0"]
+
+[node name="BuildableTowersVBox" type="VBoxContainer" node_paths=PackedStringArray("BLACK_MARBLE_LVL_1_BUTTON", "BLACK_MARBLE_LVL_2_BUTTON", "BLACK_MARBLE_LVL_3_BUTTON", "BLACK_MARBLE_LVL_4_BUTTON", "BLACK_MARBLE_LVL_5_BUTTON", "BISMUTH_LVL_1_BUTTON", "BISMUTH_LVL_2_BUTTON", "BISMUTH_LVL_3_BUTTON", "BISMUTH_LVL_4_BUTTON", "BISMUTH_LVL_5_BUTTON", "SUNSTONE_LVL_1_BUTTON", "SUNSTONE_LVL_2_BUTTON", "SUNSTONE_LVL_3_BUTTON", "SUNSTONE_LVL_4_BUTTON", "SUNSTONE_LVL_5_BUTTON", "SPINEL_LVL_1_BUTTON", "SPINEL_LVL_2_BUTTON", "SPINEL_LVL_3_BUTTON", "SPINEL_LVL_4_BUTTON", "SPINEL_LVL_5_BUTTON", "KUNZITE_LVL_1_BUTTON", "KUNZITE_LVL_2_BUTTON", "KUNZITE_LVL_3_BUTTON", "KUNZITE_LVL_4_BUTTON", "KUNZITE_LVL_5_BUTTON", "LARIMAR_LVL_1_BUTTON", "LARIMAR_LVL_2_BUTTON", "LARIMAR_LVL_3_BUTTON", "LARIMAR_LVL_4_BUTTON", "LARIMAR_LVL_5_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hswq0")
+BLACK_MARBLE_LVL_1_BUTTON = NodePath("BlackMarbleLvl1")
+BLACK_MARBLE_LVL_2_BUTTON = NodePath("BlackMarbleLvl2")
+BLACK_MARBLE_LVL_3_BUTTON = NodePath("BlackMarbleLvl3")
+BLACK_MARBLE_LVL_4_BUTTON = NodePath("BlackMarbleLvl4")
+BLACK_MARBLE_LVL_5_BUTTON = NodePath("BlackMarbleLvl5")
+BISMUTH_LVL_1_BUTTON = NodePath("BismuthLvl1")
+BISMUTH_LVL_2_BUTTON = NodePath("BismuthLvl2")
+BISMUTH_LVL_3_BUTTON = NodePath("BismuthLvl3")
+BISMUTH_LVL_4_BUTTON = NodePath("BismuthLvl4")
+BISMUTH_LVL_5_BUTTON = NodePath("BismuthLvl5")
+SUNSTONE_LVL_1_BUTTON = NodePath("SunstoneLvl1")
+SUNSTONE_LVL_2_BUTTON = NodePath("SunstoneLvl2")
+SUNSTONE_LVL_3_BUTTON = NodePath("SunstoneLvl3")
+SUNSTONE_LVL_4_BUTTON = NodePath("SunstoneLvl4")
+SUNSTONE_LVL_5_BUTTON = NodePath("SunstoneLvl5")
+SPINEL_LVL_1_BUTTON = NodePath("SpinelLvl1")
+SPINEL_LVL_2_BUTTON = NodePath("SpinelLvl2")
+SPINEL_LVL_3_BUTTON = NodePath("SpinelLvl3")
+SPINEL_LVL_4_BUTTON = NodePath("SpinelLvl4")
+SPINEL_LVL_5_BUTTON = NodePath("SpinelLvl5")
+KUNZITE_LVL_1_BUTTON = NodePath("KunziteLvl1")
+KUNZITE_LVL_2_BUTTON = NodePath("KunziteLvl2")
+KUNZITE_LVL_3_BUTTON = NodePath("KunziteLvl3")
+KUNZITE_LVL_4_BUTTON = NodePath("KunziteLvl4")
+KUNZITE_LVL_5_BUTTON = NodePath("KunziteLvl5")
+LARIMAR_LVL_1_BUTTON = NodePath("LarimarLvl1")
+LARIMAR_LVL_2_BUTTON = NodePath("LarimarLvl2")
+LARIMAR_LVL_3_BUTTON = NodePath("LarimarLvl3")
+LARIMAR_LVL_4_BUTTON = NodePath("LarimarLvl4")
+LARIMAR_LVL_5_BUTTON = NodePath("LarimarLvl5")
+
+[node name="BlackMarbleLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 1"
+
+[node name="BlackMarbleLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 2"
+
+[node name="BlackMarbleLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 3"
+
+[node name="BlackMarbleLvl4" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 4"
+
+[node name="BlackMarbleLvl5" type="Button" parent="."]
+layout_mode = 2
+text = "Black Marble
+Level 5"
+
+[node name="BismuthLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 1"
+
+[node name="BismuthLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 2"
+
+[node name="BismuthLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 3"
+
+[node name="BismuthLvl4" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 4"
+
+[node name="BismuthLvl5" type="Button" parent="."]
+layout_mode = 2
+text = "Bismuth
+Level 5"
+
+[node name="SunstoneLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 1"
+
+[node name="SunstoneLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 2"
+
+[node name="SunstoneLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 3"
+
+[node name="SunstoneLvl4" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 4"
+
+[node name="SunstoneLvl5" type="Button" parent="."]
+layout_mode = 2
+text = "Sunstone
+Level 5"
+
+[node name="SpinelLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Spinel
+Level 1"
+
+[node name="SpinelLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Spinel
+Level 2"
+
+[node name="SpinelLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Spinel
+Level 3"
+
+[node name="SpinelLvl4" type="Button" parent="."]
+layout_mode = 2
+text = "Spinel
+Level 4"
+
+[node name="SpinelLvl5" type="Button" parent="."]
+layout_mode = 2
+text = "Spinel
+Level 5"
+
+[node name="KunziteLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Kunzite
+Level 1"
+
+[node name="KunziteLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Kunzite
+Level 2"
+
+[node name="KunziteLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Kunzite
+Level 3"
+
+[node name="KunziteLvl4" type="Button" parent="."]
+layout_mode = 2
+text = "Kunzite
+Level 4"
+
+[node name="KunziteLvl5" type="Button" parent="."]
+layout_mode = 2
+text = "Kunzite
+Level 5"
+
+[node name="LarimarLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Larimar
+Level 1"
+
+[node name="LarimarLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Larimar
+Level 2"
+
+[node name="LarimarLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Larimar
+Level 3"
+
+[node name="LarimarLvl4" type="Button" parent="."]
+layout_mode = 2
+text = "Larimar
+Level 4"
+
+[node name="LarimarLvl5" type="Button" parent="."]
+layout_mode = 2
+text = "Larimar
+Level 5"

@@ -2,21 +2,27 @@
 
 [ext_resource type="Script" uid="uid://cbc7kilv02031" path="res://ui/components/button_containers/start_game_menu/starting_menu_container/starting_menu_container.gd" id="1_v2dhc"]
 
-[node name="StartingMenuContainer" type="VBoxContainer" node_paths=PackedStringArray("NEW_GAME_BUTTON", "LOAD_GAME_BUTTON", "EXIT_GAME_BUTTON")]
+[node name="StartingMenuContainer" type="VBoxContainer" node_paths=PackedStringArray("NEW_GAME_BUTTON", "LOAD_GAME_BUTTON", "TOWER_AND_SLATE_INFO_BUTTON", "EXIT_GAME_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_v2dhc")
 NEW_GAME_BUTTON = NodePath("NewGame")
-LOAD_GAME_BUTTON = NodePath("LoadGame")
+LOAD_GAME_BUTTON = NodePath("ContinueGame")
+TOWER_AND_SLATE_INFO_BUTTON = NodePath("TowerAndSlateInfo")
 EXIT_GAME_BUTTON = NodePath("ExitGame")
 
-[node name="LoadGame" type="Button" parent="."]
+[node name="ContinueGame" type="Button" parent="."]
 layout_mode = 2
 text = "Continue Game"
 
 [node name="NewGame" type="Button" parent="."]
 layout_mode = 2
 text = "New Game"
+
+[node name="TowerAndSlateInfo" type="Button" parent="."]
+layout_mode = 2
+text = "Tower and Slate
+Information"
 
 [node name="ExitGame" type="Button" parent="."]
 layout_mode = 2

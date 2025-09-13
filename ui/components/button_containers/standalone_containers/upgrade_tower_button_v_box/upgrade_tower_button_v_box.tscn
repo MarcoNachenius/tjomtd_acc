@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0p0ayftxmdcb"]
+
+[ext_resource type="Script" uid="uid://op7uf17l005j" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.gd" id="1_edcjm"]
+
+[node name="UpgradeTowerButtonVBox" type="VBoxContainer" node_paths=PackedStringArray("TOMBSTONE_LVL_1_BUTTON", "TOMBSTONE_LVL_2_BUTTON", "TOMBSTONE_LVL_3_BUTTON", "SAM_SITE_LVL_1_BUTTON", "SAM_SITE_LVL_2_BUTTON", "SAM_SITE_LVL_3_BUTTON", "LAVA_POOL_LVL_1_BUTTON", "LAVA_POOL_LVL_2_BUTTON", "LAVA_POOL_LVL_3_BUTTON", "ICE_SHARD_LVL_1_BUTTON", "ICE_SHARD_LVL_2_BUTTON", "ICE_SHARD_LVL_3_BUTTON", "EMP_STUNNER_LVL_1_BUTTON", "EMP_STUNNER_LVL_2_BUTTON", "EMP_STUNNER_LVL_3_BUTTON", "GATLING_GUN_LVL_1_BUTTON", "GATLING_GUN_LVL_2_BUTTON", "SHARP_SHOOTER_LVL_1_BUTTON", "SHARP_SHOOTER_LVL_2_BUTTON")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_edcjm")
+TOMBSTONE_LVL_1_BUTTON = NodePath("TombstoneLvl1")
+TOMBSTONE_LVL_2_BUTTON = NodePath("TombstoneLvl2")
+TOMBSTONE_LVL_3_BUTTON = NodePath("TombstoneLvl3")
+SAM_SITE_LVL_1_BUTTON = NodePath("SamSiteLvl1")
+SAM_SITE_LVL_2_BUTTON = NodePath("SamSiteLvl2")
+SAM_SITE_LVL_3_BUTTON = NodePath("SamSiteLvl3")
+LAVA_POOL_LVL_1_BUTTON = NodePath("LavaPoolLvl1")
+LAVA_POOL_LVL_2_BUTTON = NodePath("LavaPoolLvl2")
+LAVA_POOL_LVL_3_BUTTON = NodePath("LavaPoolLvl3")
+ICE_SHARD_LVL_1_BUTTON = NodePath("IceShardLvl1")
+ICE_SHARD_LVL_2_BUTTON = NodePath("IceShardLvl2")
+ICE_SHARD_LVL_3_BUTTON = NodePath("IceShardLvl3")
+EMP_STUNNER_LVL_1_BUTTON = NodePath("EmpStunnerLvl1")
+EMP_STUNNER_LVL_2_BUTTON = NodePath("EmpStunnerLvl2")
+EMP_STUNNER_LVL_3_BUTTON = NodePath("EmpStunnerLvl3")
+GATLING_GUN_LVL_1_BUTTON = NodePath("GatlingGunLvl1")
+GATLING_GUN_LVL_2_BUTTON = NodePath("GatlingGunLvl2")
+SHARP_SHOOTER_LVL_1_BUTTON = NodePath("SharpShooterLvl1")
+SHARP_SHOOTER_LVL_2_BUTTON = NodePath("SharpShooterLvl2")
+
+[node name="TombstoneLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Tombstone
+Level 1"
+
+[node name="TombstoneLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Tombstone
+Level 2"
+
+[node name="TombstoneLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Tombstone
+Level 3"
+
+[node name="SamSiteLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Sam Site
+Level 1"
+
+[node name="SamSiteLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Sam Site
+Level 2"
+
+[node name="SamSiteLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Sam Site
+Level 3"
+
+[node name="LavaPoolLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Lava Pool
+Level 1"
+
+[node name="LavaPoolLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Lava Pool
+Level 2"
+
+[node name="LavaPoolLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Lava Pool
+Level 3"
+
+[node name="IceShardLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Ice Shard
+Level 1"
+
+[node name="IceShardLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Ice Shard
+Level 2"
+
+[node name="IceShardLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Ice Shard
+Level 3"
+
+[node name="EmpStunnerLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "EMP Stunner
+Level 1"
+
+[node name="EmpStunnerLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "EMP Stunner
+Level 2"
+
+[node name="EmpStunnerLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "EMP Stunner
+Level 3"
+
+[node name="GatlingGunLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Gatling Gun
+Level 1"
+
+[node name="GatlingGunLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Gatling Gun
+Level 2"
+
+[node name="SharpShooterLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Sharp Shooter
+Level 1"
+
+[node name="SharpShooterLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Sharp Shooter
+Level 2"

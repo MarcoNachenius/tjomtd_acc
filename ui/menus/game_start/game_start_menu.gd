@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var STARTING_MENU_CONTAINER: StartingMenuContainer
+@export var RECIPE_MENU: RecipeMenu
 @export var SELECT_MAP_CONTAINER: SelectMapContainer
 @export var BACKGROUND_MUSIC_TRACK: AudioStreamPlayer
 
@@ -16,16 +17,21 @@ func _ready() -> void:
 func _connect_all_button_container_signals():
 	_connect_starting_menu_container_button_signals()
 	_connect_select_map_container_button_signals()
+	_connect_recipe_menu_buttons()
 
 func _connect_starting_menu_container_button_signals():
 	STARTING_MENU_CONTAINER.NEW_GAME_BUTTON.pressed.connect(_on_new_game_button_pressed)
 	STARTING_MENU_CONTAINER.LOAD_GAME_BUTTON.pressed.connect(_on_load_game_button_pressed)
+	STARTING_MENU_CONTAINER.TOWER_AND_SLATE_INFO_BUTTON.pressed.connect(_on_tower_and_slate_info_button_pressed)
 	STARTING_MENU_CONTAINER.EXIT_GAME_BUTTON.pressed.connect(_on_exit_game_button_pressed)
 
 func _connect_select_map_container_button_signals():
 	SELECT_MAP_CONTAINER.GEM_TD_BUTTON.pressed.connect(_on_gem_td_button_pressed)
 	SELECT_MAP_CONTAINER.LINE_TD_BUTTON.pressed.connect(_on_line_td_button_pressed)
 	SELECT_MAP_CONTAINER.BACK_TO_MAIN_MENU_BUTTON.pressed.connect(_on_return_to_main_menu_button_pressed)
+
+func _connect_recipe_menu_buttons():
+	RECIPE_MENU.RETURN_TO_MENU_BUTTON.pressed.connect(_display_starting_menu)
 
 #									STARTING MENU CONTAINER
 # ==============================================================================================
@@ -88,8 +94,12 @@ func _on_load_game_button_pressed():
 	# Update upgrade build tower button text
 	hud.UPGRADE_BUILD_LEVEL_BUTTON.text = hud.UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(game_map.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost()) + ")"
 	
-
-	
+func _on_tower_and_slate_info_button_pressed() -> void:
+	# Hide unwanted components
+	STARTING_MENU_CONTAINER.visible = false
+	SELECT_MAP_CONTAINER.visible = false
+	# Show recipe menu
+	RECIPE_MENU.visible = true
 
 func _on_exit_game_button_pressed():
 	get_tree().quit()
@@ -100,6 +110,8 @@ func _display_starting_menu():
 	STARTING_MENU_CONTAINER.visible = true
 	# Hide select map container
 	SELECT_MAP_CONTAINER.visible = false
+	# Hide recipe menu
+	RECIPE_MENU.visible = false
 
 
 #									 SELECT MAP CONTAINER

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfm7atx3a0lat"]
+
+[ext_resource type="Script" uid="uid://c78kgkoqlyapg" path="res://ui/menus/recipe_menu/components/tower_and_slate_scroll_container.gd" id="1_84p47"]
+[ext_resource type="PackedScene" uid="uid://chovoj3agi21n" path="res://ui/components/button_containers/standalone_containers/buildable_towers_vbox/buildable_towers_vbox.tscn" id="2_raced"]
+[ext_resource type="PackedScene" uid="uid://d0p0ayftxmdcb" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.tscn" id="2_wq50m"]
+[ext_resource type="PackedScene" uid="uid://bc8qyhcgomyfb" path="res://ui/components/button_containers/standalone_containers/slate_button_vbox/slate_button_v_box.tscn" id="3_raced"]
+
+[node name="TowerAndSlateScrollContainer" type="ScrollContainer" node_paths=PackedStringArray("BUILDABLE_TOWER_BUTTONS", "UPGRADE_TOWER_BUTTONS", "SLATE_BUTTONS")]
+offset_right = 124.0
+offset_bottom = 719.0
+script = ExtResource("1_84p47")
+BUILDABLE_TOWER_BUTTONS = NodePath("BaseVBox/BuildableTowersVBox")
+UPGRADE_TOWER_BUTTONS = NodePath("BaseVBox/UpgradeTowerButtonVBox")
+SLATE_BUTTONS = NodePath("BaseVBox/SlateButtonVBox")
+
+[node name="BaseVBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BuildableTowersVBox" parent="BaseVBox" instance=ExtResource("2_raced")]
+layout_mode = 2
+
+[node name="UpgradeTowerButtonVBox" parent="BaseVBox" instance=ExtResource("2_wq50m")]
+layout_mode = 2
+
+[node name="SlateButtonVBox" parent="BaseVBox" instance=ExtResource("3_raced")]
+layout_mode = 2
