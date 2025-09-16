@@ -1,15 +1,23 @@
 extends CanvasLayer
 class_name RecipeMenu
 
+# ==================================================
+#                  EXPORT VARS
+# ==================================================
 @export var RETURN_TO_MENU_BUTTON: Button
 @export var RECIPE_TYPE_BUTTON_VBOX: RecipeTypeButtonVbox
 @export var TOWER_AND_SLATE_BUTTONS: TowerAndSlateScrollContainer
-@export var BUILDABLE_TOWER_INFO_CONTAINER: BuildableTowerInfoContainer
+@export var TOWER_AND_SLATE_INFO_CONTAINERS: TowerAndSlateInfoContainers
 
+
+# ==================================================
+#                     PRIVATE VARS
+# ==================================================
 # Set arbitrary last selected towers and slates on ready
 @onready var __last_selected_buildable_tower_id: TowerConstants.TowerIDs = TowerConstants.TowerIDs.BLACK_MARBLE_LVL_1
 @onready var __last_selected_upgrade_tower_id: TowerConstants.TowerIDs = TowerConstants.TowerIDs.TOMBSTONE_LVL_1
 @onready var __last_selected_slate_id: SlateConstants.SlateIDs = SlateConstants.SlateIDs.DAMAGE_SLATE_LVL_1
+
 
 # ==================================================
 #                  INHERITED METHODS
@@ -18,8 +26,9 @@ func _ready() -> void:
     _connect_tower_and_slate_button_signals()
     _connect_recipe_type_button_signals()
 
-    # Default starting point
+    # Set default starting point
     _on_show_buildable_tower_buttons_pressed()
+
 
 # ==================================================
 #                  SIGNAL CONNECTORS
@@ -53,8 +62,11 @@ func _on_buildable_tower_button_pressed(towerID: TowerConstants.TowerIDs) -> voi
     # Ensure only buildable tower buttons are visible in scroll bar
     TOWER_AND_SLATE_BUTTONS.show_buildable_tower_buttons()
 
+    # Ensure only buildable tower information is visible
+    TOWER_AND_SLATE_INFO_CONTAINERS.show_buildable_tower_info_container()
+
     # Load tower information to display container
-    BUILDABLE_TOWER_INFO_CONTAINER.display_tower_information(towerID)
+    TOWER_AND_SLATE_INFO_CONTAINERS.BUILDABLE_TOWER_INFO_CONTAINER.display_tower_information(towerID)
 
     # Highlight 'Buildable Towers' button
     RECIPE_TYPE_BUTTON_VBOX.BUILDABLE_TOWERS_BUTTON.toggle_mode = true
@@ -64,7 +76,6 @@ func _on_buildable_tower_button_pressed(towerID: TowerConstants.TowerIDs) -> voi
     RECIPE_TYPE_BUTTON_VBOX.UPGRADE_TOWERS_BUTTON.set_pressed_no_signal(false)
     RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.toggle_mode = false
     RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.set_pressed_no_signal(false)
-
 
 
 # WIP
@@ -79,6 +90,12 @@ func _on_upgrade_tower_button_pressed(towerID: TowerConstants.TowerIDs) -> void:
 
     # Ensure only upgrade tower buttons are visible in scroll bar
     TOWER_AND_SLATE_BUTTONS.show_upgrade_tower_buttons()
+
+    # Ensure only upgrade tower information is visible
+    TOWER_AND_SLATE_INFO_CONTAINERS.show_upgrade_tower_info_container()
+
+    # Load tower information to display container
+    TOWER_AND_SLATE_INFO_CONTAINERS.UPGRADE_TOWER_INFO_CONTAINER.display_tower_information(towerID)
 
     # Highlight 'Upgrade Towers' button
     RECIPE_TYPE_BUTTON_VBOX.UPGRADE_TOWERS_BUTTON.toggle_mode = true

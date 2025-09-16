@@ -41,7 +41,7 @@ signal buildable_tower_button_pressed(tower_id: TowerConstants.TowerIDs)
 @export var LARIMAR_LVL_5_BUTTON: Button
 
 
-var ALL_BUTTONS: Array[Button] = [
+@onready var ALL_BUTTONS: Array[Button] = [
 	# BLACK MARBLE
 	BLACK_MARBLE_LVL_1_BUTTON,
 	BLACK_MARBLE_LVL_2_BUTTON,
@@ -177,6 +177,8 @@ func hide_all_buttons() -> void:
 		button.visible = false
 
 func show_buttons(towerIDs: Array[TowerConstants.TowerIDs]) -> void:
+	# Ensure all buttons are hidden first
+	hide_all_buttons()
 	for tower_id in towerIDs:
 		TOWER_ID_TO_BUTTON[tower_id].visible = true
 

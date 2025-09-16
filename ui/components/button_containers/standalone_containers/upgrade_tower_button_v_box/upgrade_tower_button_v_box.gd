@@ -135,6 +135,8 @@ func hide_all_buttons() -> void:
 		button.visible = false
 
 func show_buttons(towerIDs: Array[TowerConstants.TowerIDs]) -> void:
+	# Ensure all buttons are hidden first
+	hide_all_buttons()
 	for tower_id in towerIDs:
 		TOWER_ID_TO_BUTTON[tower_id].visible = true
 

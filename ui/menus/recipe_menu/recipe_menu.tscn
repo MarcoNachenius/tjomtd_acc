@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://dpiayxy61h1js" path="res://ui/menus/recipe_menu/recipe_menu.gd" id="1_npolj"]
 [ext_resource type="PackedScene" uid="uid://8atbe64nu4qe" path="res://ui/menus/recipe_menu/components/recipe_type_button_vbox.tscn" id="2_solgh"]
 [ext_resource type="PackedScene" uid="uid://bfm7atx3a0lat" path="res://ui/menus/recipe_menu/components/tower_and_slate_scroll_container.tscn" id="3_solgh"]
-[ext_resource type="PackedScene" uid="uid://cbr4cbp4x416s" path="res://ui/menus/recipe_menu/components/buildable_tower_info_container.tscn" id="4_eic4r"]
+[ext_resource type="PackedScene" uid="uid://d03117du635qy" path="res://ui/menus/recipe_menu/components/tower_and_slate_info_containers.tscn" id="4_eic4r"]
 
-[node name="RecipeMenu" type="CanvasLayer" node_paths=PackedStringArray("RETURN_TO_MENU_BUTTON", "RECIPE_TYPE_BUTTON_VBOX", "TOWER_AND_SLATE_BUTTONS", "BUILDABLE_TOWER_INFO_CONTAINER")]
+[node name="RecipeMenu" type="CanvasLayer" node_paths=PackedStringArray("RETURN_TO_MENU_BUTTON", "RECIPE_TYPE_BUTTON_VBOX", "TOWER_AND_SLATE_BUTTONS", "TOWER_AND_SLATE_INFO_CONTAINERS")]
 script = ExtResource("1_npolj")
 RETURN_TO_MENU_BUTTON = NodePath("HBoxContainer/VBoxContainer/ReturnToMainMenu")
 RECIPE_TYPE_BUTTON_VBOX = NodePath("HBoxContainer/VBoxContainer/RecipeTypeButtonVbox")
 TOWER_AND_SLATE_BUTTONS = NodePath("HBoxContainer/TowerAndSlateScrollContainer")
-BUILDABLE_TOWER_INFO_CONTAINER = NodePath("BuildableTowerInfoContainer")
+TOWER_AND_SLATE_INFO_CONTAINERS = NodePath("TowerAndSlateInfoContainers")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 6
@@ -42,4 +42,4 @@ layout_mode = 2
 text = "Return to
 Main Menu"
 
-[node name="BuildableTowerInfoContainer" parent="." instance=ExtResource("4_eic4r")]
+[node name="TowerAndSlateInfoContainers" parent="." instance=ExtResource("4_eic4r")]

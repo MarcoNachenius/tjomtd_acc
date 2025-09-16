@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbr4cbp4x416s"]
+[gd_scene load_steps=4 format=3 uid="uid://bixblut542mej"]
 
-[ext_resource type="Script" uid="uid://c4f1owxtyc317" path="res://ui/menus/recipe_menu/components/buildable_tower_info_container.gd" id="1_kckn6"]
-[ext_resource type="PackedScene" uid="uid://bc8qyhcgomyfb" path="res://ui/components/button_containers/standalone_containers/slate_button_vbox/slate_button_v_box.tscn" id="2_vumuq"]
-[ext_resource type="PackedScene" uid="uid://d0p0ayftxmdcb" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.tscn" id="3_8e4xr"]
+[ext_resource type="Script" uid="uid://p721lfxwf8sw" path="res://ui/menus/recipe_menu/components/upgrade_tower_info_container.gd" id="1_63hut"]
+[ext_resource type="PackedScene" uid="uid://chovoj3agi21n" path="res://ui/components/button_containers/standalone_containers/buildable_towers_vbox/buildable_towers_vbox.tscn" id="1_vvggc"]
+[ext_resource type="PackedScene" uid="uid://d0p0ayftxmdcb" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.tscn" id="2_63hut"]
 
-[node name="BuildableTowerInfoContainer" type="VBoxContainer" node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_STATS_TEXT", "TOWER_DESCRIPTION_TEXT", "UPGRADES_INTO_TOWER_BUTTONS", "UPGRADES_INTO_SLATES_BUTTONS", "UPGRADES_INTO_SLATES_COLUMN", "UPGRADES_INTO_TOWERS_COLUMN", "TOWER_STATS_COLUMN", "TOWER_DESCRIPTION_COLUMN")]
-offset_right = 966.0
-offset_bottom = 523.0
-script = ExtResource("1_kckn6")
+[node name="UpgradeTowerInfoContainer" type="VBoxContainer" node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_STATS_TEXT", "TOWER_DESCRIPTION_TEXT", "UPGRADES_INTO_TOWER_BUTTONS", "REQUIRES_BUILDABLE_TOWERS_BUTTONS", "REQUIRES_UPGRADE_TOWERS_BUTTONS", "REQUIRES_TOWERS_COLUMN", "UPGRADES_INTO_TOWERS_COLUMN", "TOWER_STATS_COLUMN", "TOWER_DESCRIPTION_COLUMN")]
+offset_right = 793.0
+offset_bottom = 1252.0
+script = ExtResource("1_63hut")
 TOWER_NAME_TEXT = NodePath("TowerNameHeader")
 TOWER_STATS_TEXT = NodePath("StatsAndDescription/TowerStatsContainer/TowerStatsText")
 TOWER_DESCRIPTION_TEXT = NodePath("StatsAndDescription/TowerDesctiptionContainer/TowerDescriptionText")
 UPGRADES_INTO_TOWER_BUTTONS = NodePath("ButtonLists/UpgradesIntoTower/UpgradeTowerButtonVBox")
-UPGRADES_INTO_SLATES_BUTTONS = NodePath("ButtonLists/UpgradesIntoSlate/SlateButtonVBox")
-UPGRADES_INTO_SLATES_COLUMN = NodePath("ButtonLists/UpgradesIntoSlate")
+REQUIRES_BUILDABLE_TOWERS_BUTTONS = NodePath("ButtonLists/RequiresTowers/BuildableTowersVBox")
+REQUIRES_UPGRADE_TOWERS_BUTTONS = NodePath("ButtonLists/RequiresTowers/UpgradeTowerButtonVBox")
+REQUIRES_TOWERS_COLUMN = NodePath("ButtonLists/RequiresTowers")
 UPGRADES_INTO_TOWERS_COLUMN = NodePath("ButtonLists/UpgradesIntoTower")
 TOWER_STATS_COLUMN = NodePath("StatsAndDescription/TowerStatsContainer")
 TOWER_DESCRIPTION_COLUMN = NodePath("StatsAndDescription/TowerDesctiptionContainer")
@@ -64,16 +65,19 @@ autowrap_mode = 0
 [node name="ButtonLists" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="UpgradesIntoSlate" type="VBoxContainer" parent="ButtonLists"]
+[node name="RequiresTowers" type="VBoxContainer" parent="ButtonLists"]
 layout_mode = 2
 
-[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoSlate"]
+[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/RequiresTowers"]
 layout_mode = 2
-text = "Upgrades Into Slates:"
+text = "Requires Towers:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="SlateButtonVBox" parent="ButtonLists/UpgradesIntoSlate" instance=ExtResource("2_vumuq")]
+[node name="BuildableTowersVBox" parent="ButtonLists/RequiresTowers" instance=ExtResource("1_vvggc")]
+layout_mode = 2
+
+[node name="UpgradeTowerButtonVBox" parent="ButtonLists/RequiresTowers" instance=ExtResource("2_63hut")]
 layout_mode = 2
 
 [node name="UpgradesIntoTower" type="VBoxContainer" parent="ButtonLists"]
@@ -85,5 +89,5 @@ text = "Upgrades Into Towers:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="UpgradeTowerButtonVBox" parent="ButtonLists/UpgradesIntoTower" instance=ExtResource("3_8e4xr")]
+[node name="UpgradeTowerButtonVBox" parent="ButtonLists/UpgradesIntoTower" instance=ExtResource("2_63hut")]
 layout_mode = 2
