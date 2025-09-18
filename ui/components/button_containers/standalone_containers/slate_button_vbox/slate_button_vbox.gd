@@ -23,6 +23,10 @@ signal slate_button_pressed(slate_id: SlateConstants.SlateIDs)
 @export var BURN_SLATE_LVL_1_BUTTON: Button
 @export var BURN_SLATE_LVL_2_BUTTON: Button
 @export var BURN_SLATE_LVL_3_BUTTON: Button
+# HOLD SLATES
+@export var HOLD_SLATE_LVL_1_BUTTON: Button
+@export var HOLD_SLATE_LVL_2_BUTTON: Button
+@export var HOLD_SLATE_LVL_3_BUTTON: Button
 
 
 @onready var ALL_BUTTONS: Array[Button] = [
@@ -46,6 +50,10 @@ signal slate_button_pressed(slate_id: SlateConstants.SlateIDs)
 	BURN_SLATE_LVL_1_BUTTON,
 	BURN_SLATE_LVL_2_BUTTON,
 	BURN_SLATE_LVL_3_BUTTON,
+	# HOLD SLATES
+	HOLD_SLATE_LVL_1_BUTTON,
+	HOLD_SLATE_LVL_2_BUTTON,
+	HOLD_SLATE_LVL_3_BUTTON,
 ]
 
 
@@ -70,6 +78,10 @@ var SLATE_ID_TO_BUTTON_PRESSED_CALLABLES: Dictionary[SlateConstants.SlateIDs, Ca
 	SlateConstants.SlateIDs.BURN_SLATE_LVL_1: on_burn_slate_lvl_1_button_pressed,
 	SlateConstants.SlateIDs.BURN_SLATE_LVL_2: on_burn_slate_lvl_2_button_pressed,
 	SlateConstants.SlateIDs.BURN_SLATE_LVL_3: on_burn_slate_lvl_3_button_pressed,
+	# HOLD SLATES
+	SlateConstants.SlateIDs.HOLD_SLATE_LVL_1: on_hold_slate_lvl_1_button_pressed,
+	SlateConstants.SlateIDs.HOLD_SLATE_LVL_2: on_hold_slate_lvl_2_button_pressed,
+	SlateConstants.SlateIDs.HOLD_SLATE_LVL_3: on_hold_slate_lvl_3_button_pressed,
 }
 
 
@@ -94,6 +106,10 @@ var SLATE_ID_TO_BUTTON_PRESSED_CALLABLES: Dictionary[SlateConstants.SlateIDs, Ca
 	SlateConstants.SlateIDs.BURN_SLATE_LVL_1: BURN_SLATE_LVL_1_BUTTON,
 	SlateConstants.SlateIDs.BURN_SLATE_LVL_2: BURN_SLATE_LVL_2_BUTTON,
 	SlateConstants.SlateIDs.BURN_SLATE_LVL_3: BURN_SLATE_LVL_3_BUTTON,
+	# HOLD SLATES
+	SlateConstants.SlateIDs.HOLD_SLATE_LVL_1: HOLD_SLATE_LVL_1_BUTTON,
+	SlateConstants.SlateIDs.HOLD_SLATE_LVL_2: HOLD_SLATE_LVL_2_BUTTON,
+	SlateConstants.SlateIDs.HOLD_SLATE_LVL_3: HOLD_SLATE_LVL_3_BUTTON,
 }
 
 func _ready() -> void:
@@ -169,3 +185,13 @@ func on_burn_slate_lvl_2_button_pressed() -> void:
 
 func on_burn_slate_lvl_3_button_pressed() -> void:
 	slate_button_pressed.emit(SlateConstants.SlateIDs.BURN_SLATE_LVL_3)
+
+# HOLD SLATES
+func on_hold_slate_lvl_1_button_pressed() -> void:
+	slate_button_pressed.emit(SlateConstants.SlateIDs.HOLD_SLATE_LVL_1)
+
+func on_hold_slate_lvl_2_button_pressed() -> void:
+	slate_button_pressed.emit(SlateConstants.SlateIDs.HOLD_SLATE_LVL_2)
+
+func on_hold_slate_lvl_3_button_pressed() -> void:
+	slate_button_pressed.emit(SlateConstants.SlateIDs.HOLD_SLATE_LVL_3)

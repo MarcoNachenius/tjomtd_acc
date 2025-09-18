@@ -25,6 +25,7 @@ class_name RecipeMenu
 func _ready() -> void:
     _connect_tower_and_slate_button_signals()
     _connect_recipe_type_button_signals()
+    _connect_info_container_button_list_signals()
 
     # Set default starting point
     _on_show_buildable_tower_buttons_pressed()
@@ -45,6 +46,19 @@ func _connect_recipe_type_button_signals() -> void:
     RECIPE_TYPE_BUTTON_VBOX.BUILDABLE_TOWERS_BUTTON.pressed.connect(_on_show_buildable_tower_buttons_pressed)
     RECIPE_TYPE_BUTTON_VBOX.UPGRADE_TOWERS_BUTTON.pressed.connect(_on_show_upgrade_tower_buttons_pressed)
     RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.pressed.connect(_on_show_slate_buttons_pressed)
+
+## WIP
+func _connect_info_container_button_list_signals() -> void:
+    # BUILDABLE TOWER INFO
+    TOWER_AND_SLATE_INFO_CONTAINERS.BUILDABLE_TOWER_INFO_CONTAINER.UPGRADES_INTO_TOWER_BUTTONS.upgrade_tower_button_pressed.connect(_on_upgrade_tower_button_pressed)
+    TOWER_AND_SLATE_INFO_CONTAINERS.BUILDABLE_TOWER_INFO_CONTAINER.UPGRADES_INTO_SLATES_BUTTONS.slate_button_pressed.connect(_on_slate_button_pressed)
+    # UPGRADE TOWER INFO
+    TOWER_AND_SLATE_INFO_CONTAINERS.UPGRADE_TOWER_INFO_CONTAINER.REQUIRES_BUILDABLE_TOWERS_BUTTONS.buildable_tower_button_pressed.connect(_on_buildable_tower_button_pressed)
+    TOWER_AND_SLATE_INFO_CONTAINERS.UPGRADE_TOWER_INFO_CONTAINER.REQUIRES_UPGRADE_TOWERS_BUTTONS.upgrade_tower_button_pressed.connect(_on_upgrade_tower_button_pressed)
+    TOWER_AND_SLATE_INFO_CONTAINERS.UPGRADE_TOWER_INFO_CONTAINER.UPGRADES_INTO_TOWER_BUTTONS.upgrade_tower_button_pressed.connect(_on_upgrade_tower_button_pressed)
+    # SLATE INFO
+    TOWER_AND_SLATE_INFO_CONTAINERS.SLATE_INFO_CONTAINER.REQUIRES_BUILDABLE_TOWERS_BUTTONS.buildable_tower_button_pressed.connect(_on_buildable_tower_button_pressed)
+    TOWER_AND_SLATE_INFO_CONTAINERS.SLATE_INFO_CONTAINER.REQUIRES_UPGRADE_TOWERS_BUTTONS.upgrade_tower_button_pressed.connect(_on_upgrade_tower_button_pressed)
 
 
 # ==================================================
@@ -118,6 +132,12 @@ func _on_slate_button_pressed(slateID: SlateConstants.SlateIDs) -> void:
 
     # Ensure only slate buttons are visible in scroll bar
     TOWER_AND_SLATE_BUTTONS.show_slate_buttons()
+
+    # Ensure only slate information is visible
+    TOWER_AND_SLATE_INFO_CONTAINERS.show_slate_info_container()
+
+    # Load tower information to display container
+    TOWER_AND_SLATE_INFO_CONTAINERS.SLATE_INFO_CONTAINER.display_slate_information(slateID)
 
     # Highlight 'Slates' button
     RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.toggle_mode = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2wijj67dgt7f" path="res://ui/components/button_containers/standalone_containers/slate_button_vbox/slate_button_vbox.gd" id="1_1vkji"]
 
-[node name="SlateButtonVBox" type="VBoxContainer" node_paths=PackedStringArray("DAMAGE_SLATE_LVL_1_BUTTON", "DAMAGE_SLATE_LVL_2_BUTTON", "DAMAGE_SLATE_LVL_3_BUTTON", "SLOW_SLATE_LVL_1_BUTTON", "SLOW_SLATE_LVL_2_BUTTON", "SLOW_SLATE_LVL_3_BUTTON", "RANGE_SLATE_LVL_1_BUTTON", "RANGE_SLATE_LVL_2_BUTTON", "RANGE_SLATE_LVL_3_BUTTON", "SPEED_SLATE_LVL_1_BUTTON", "SPEED_SLATE_LVL_2_BUTTON", "SPEED_SLATE_LVL_3_BUTTON", "BURN_SLATE_LVL_1_BUTTON", "BURN_SLATE_LVL_2_BUTTON", "BURN_SLATE_LVL_3_BUTTON")]
+[node name="SlateButtonVBox" type="VBoxContainer" node_paths=PackedStringArray("DAMAGE_SLATE_LVL_1_BUTTON", "DAMAGE_SLATE_LVL_2_BUTTON", "DAMAGE_SLATE_LVL_3_BUTTON", "SLOW_SLATE_LVL_1_BUTTON", "SLOW_SLATE_LVL_2_BUTTON", "SLOW_SLATE_LVL_3_BUTTON", "RANGE_SLATE_LVL_1_BUTTON", "RANGE_SLATE_LVL_2_BUTTON", "RANGE_SLATE_LVL_3_BUTTON", "SPEED_SLATE_LVL_1_BUTTON", "SPEED_SLATE_LVL_2_BUTTON", "SPEED_SLATE_LVL_3_BUTTON", "BURN_SLATE_LVL_1_BUTTON", "BURN_SLATE_LVL_2_BUTTON", "BURN_SLATE_LVL_3_BUTTON", "HOLD_SLATE_LVL_1_BUTTON", "HOLD_SLATE_LVL_2_BUTTON", "HOLD_SLATE_LVL_3_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_1vkji")
@@ -21,6 +21,9 @@ SPEED_SLATE_LVL_3_BUTTON = NodePath("SpeedSlateLvl3")
 BURN_SLATE_LVL_1_BUTTON = NodePath("BurnSlateLvl1")
 BURN_SLATE_LVL_2_BUTTON = NodePath("BurnSlateLvl2")
 BURN_SLATE_LVL_3_BUTTON = NodePath("BurnSlateLvl3")
+HOLD_SLATE_LVL_1_BUTTON = NodePath("HoldSlateLvl1")
+HOLD_SLATE_LVL_2_BUTTON = NodePath("HoldSlateLvl2")
+HOLD_SLATE_LVL_3_BUTTON = NodePath("HoldSlateLvl3")
 
 [node name="DamageSlateLvl1" type="Button" parent="."]
 layout_mode = 2
@@ -95,4 +98,19 @@ Level 2"
 [node name="BurnSlateLvl3" type="Button" parent="."]
 layout_mode = 2
 text = "Burn Slate
+Level 3"
+
+[node name="HoldSlateLvl1" type="Button" parent="."]
+layout_mode = 2
+text = "Hold Slate
+Level 1"
+
+[node name="HoldSlateLvl2" type="Button" parent="."]
+layout_mode = 2
+text = "Hold Slate
+Level 2"
+
+[node name="HoldSlateLvl3" type="Button" parent="."]
+layout_mode = 2
+text = "Hold Slate
 Level 3"

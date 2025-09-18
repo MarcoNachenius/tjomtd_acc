@@ -49,7 +49,7 @@ func hide_stats_and_description_columns() -> void:
 	TOWER_DESCRIPTION_COLUMN.visible = false
 	TOWER_STATS_COLUMN.visible = false
 
-## WIP
+## Displays tower information based on provided towerID.
 func display_tower_information(towerID: TowerConstants.TowerIDs) -> void:
 	# Header text
 	TOWER_NAME_TEXT.text = TowerDescriptions.TOWER_NAMES[towerID]

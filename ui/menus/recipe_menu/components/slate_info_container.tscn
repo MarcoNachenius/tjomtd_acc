@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba7xnb5lxo3xc"]
+
+[ext_resource type="PackedScene" uid="uid://chovoj3agi21n" path="res://ui/components/button_containers/standalone_containers/buildable_towers_vbox/buildable_towers_vbox.tscn" id="1_bjxrk"]
+[ext_resource type="Script" uid="uid://brnnekf63xlwk" path="res://ui/menus/recipe_menu/components/slate_info_container.gd" id="1_hs2g6"]
+[ext_resource type="PackedScene" uid="uid://d0p0ayftxmdcb" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.tscn" id="2_hs2g6"]
+
+[node name="SlateInfoContainer" type="VBoxContainer" node_paths=PackedStringArray("SLATE_NAME_TEXT", "SLATE_STATS_TEXT", "SLATE_DESCRIPTION_TEXT", "REQUIRES_BUILDABLE_TOWERS_BUTTONS", "REQUIRES_UPGRADE_TOWERS_BUTTONS", "REQUIRES_TOWERS_COLUMN", "SLATE_STATS_COLUMN", "SLATE_DESCRIPTION_COLUMN")]
+offset_right = 793.0
+offset_bottom = 1252.0
+script = ExtResource("1_hs2g6")
+SLATE_NAME_TEXT = NodePath("SlateNameHeader")
+SLATE_STATS_TEXT = NodePath("StatsAndDescription/SlateStatsContainer/SlateStatsText")
+SLATE_DESCRIPTION_TEXT = NodePath("StatsAndDescription/SlateDesctiptionContainer/SlateDescriptionText")
+REQUIRES_BUILDABLE_TOWERS_BUTTONS = NodePath("ButtonLists/RequiresTowers/BuildableTowersVBox")
+REQUIRES_UPGRADE_TOWERS_BUTTONS = NodePath("ButtonLists/RequiresTowers/UpgradeTowerButtonVBox")
+REQUIRES_TOWERS_COLUMN = NodePath("ButtonLists/RequiresTowers")
+SLATE_STATS_COLUMN = NodePath("StatsAndDescription/SlateStatsContainer")
+SLATE_DESCRIPTION_COLUMN = NodePath("StatsAndDescription/SlateDesctiptionContainer")
+
+[node name="SlateNameHeader" type="RichTextLabel" parent="."]
+layout_mode = 2
+text = "SLATE NAME"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="StatsAndDescription" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SlateStatsContainer" type="VBoxContainer" parent="StatsAndDescription"]
+layout_mode = 2
+
+[node name="SlateStatsHeader" type="RichTextLabel" parent="StatsAndDescription/SlateStatsContainer"]
+layout_mode = 2
+text = "ATTRIBUTES:"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="SlateStatsText" type="RichTextLabel" parent="StatsAndDescription/SlateStatsContainer"]
+layout_mode = 2
+text = "Range: 0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="SlateDesctiptionContainer" type="VBoxContainer" parent="StatsAndDescription"]
+layout_mode = 2
+
+[node name="SlateDescriptionHeader" type="RichTextLabel" parent="StatsAndDescription/SlateDesctiptionContainer"]
+layout_mode = 2
+text = "DESCRIPTION:"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="SlateDescriptionText" type="RichTextLabel" parent="StatsAndDescription/SlateDesctiptionContainer"]
+layout_mode = 2
+text = "This is the tower description with very long ling line text to wrapping functionality"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ButtonLists" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RequiresTowers" type="VBoxContainer" parent="ButtonLists"]
+layout_mode = 2
+
+[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/RequiresTowers"]
+layout_mode = 2
+text = "Requires Towers
+Awaiting Selection:"
+fit_content = true
+autowrap_mode = 0
+
+[node name="BuildableTowersVBox" parent="ButtonLists/RequiresTowers" instance=ExtResource("1_bjxrk")]
+layout_mode = 2
+
+[node name="UpgradeTowerButtonVBox" parent="ButtonLists/RequiresTowers" instance=ExtResource("2_hs2g6")]
+layout_mode = 2

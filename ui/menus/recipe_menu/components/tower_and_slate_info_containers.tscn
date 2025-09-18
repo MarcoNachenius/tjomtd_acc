@@ -1,18 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://d03117du635qy"]
+[gd_scene load_steps=5 format=3 uid="uid://d03117du635qy"]
 
 [ext_resource type="Script" uid="uid://crgfh6oct638p" path="res://ui/menus/recipe_menu/components/tower_and_slate_info_containers.gd" id="1_jgxog"]
 [ext_resource type="PackedScene" uid="uid://cbr4cbp4x416s" path="res://ui/menus/recipe_menu/components/buildable_tower_info_container.tscn" id="2_r6tfv"]
 [ext_resource type="PackedScene" uid="uid://bixblut542mej" path="res://ui/menus/recipe_menu/components/upgrade_tower_info_container.tscn" id="3_uwptw"]
+[ext_resource type="PackedScene" uid="uid://ba7xnb5lxo3xc" path="res://ui/menus/recipe_menu/components/slate_info_container.tscn" id="4_uwptw"]
 
-[node name="TowerAndSlateInfoContainers" type="VBoxContainer" node_paths=PackedStringArray("BUILDABLE_TOWER_INFO_CONTAINER", "UPGRADE_TOWER_INFO_CONTAINER")]
+[node name="TowerAndSlateInfoContainers" type="VBoxContainer" node_paths=PackedStringArray("BUILDABLE_TOWER_INFO_CONTAINER", "UPGRADE_TOWER_INFO_CONTAINER", "SLATE_INFO_CONTAINER")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_jgxog")
 BUILDABLE_TOWER_INFO_CONTAINER = NodePath("BuildableTowerInfoContainer")
 UPGRADE_TOWER_INFO_CONTAINER = NodePath("UpgradeTowerInfoContainer")
+SLATE_INFO_CONTAINER = NodePath("SlateInfoContainer")
 
 [node name="BuildableTowerInfoContainer" parent="." instance=ExtResource("2_r6tfv")]
 layout_mode = 2
 
 [node name="UpgradeTowerInfoContainer" parent="." instance=ExtResource("3_uwptw")]
+layout_mode = 2
+
+[node name="SlateInfoContainer" parent="." instance=ExtResource("4_uwptw")]
 layout_mode = 2
