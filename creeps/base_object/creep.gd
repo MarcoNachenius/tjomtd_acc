@@ -89,7 +89,7 @@ func _create_hitbox():
 
 func _set_ordering():
 	# Scene root
-	z_index = 4
+	z_index = 5
 	z_as_relative = false
 	y_sort_enabled = true
 	# Animations
