@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @export var STARTING_MENU_CONTAINER: StartingMenuContainer
 @export var RECIPE_MENU: RecipeMenu

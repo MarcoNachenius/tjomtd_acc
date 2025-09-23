@@ -6,7 +6,13 @@
 [ext_resource type="AudioStream" uid="uid://7hruyuyswp8p" path="res://audio/hud/background_music/audio_files/main_menu_music.mp3" id="4_sa2yr"]
 [ext_resource type="PackedScene" uid="uid://sx45aaxd3bt1" path="res://ui/menus/recipe_menu/recipe_menu.tscn" id="5_ssxmm"]
 
-[node name="GameStartMenu" type="CanvasLayer" node_paths=PackedStringArray("STARTING_MENU_CONTAINER", "RECIPE_MENU", "SELECT_MAP_CONTAINER", "BACKGROUND_MUSIC_TRACK")]
+[node name="GameStartMenu" type="Control" node_paths=PackedStringArray("STARTING_MENU_CONTAINER", "RECIPE_MENU", "SELECT_MAP_CONTAINER", "BACKGROUND_MUSIC_TRACK")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ttwxv")
 STARTING_MENU_CONTAINER = NodePath("StartingMenuContainer")
 RECIPE_MENU = NodePath("RecipeMenu")
@@ -14,6 +20,7 @@ SELECT_MAP_CONTAINER = NodePath("SelectMapContainer")
 BACKGROUND_MUSIC_TRACK = NodePath("AudioStreamPlayer")
 
 [node name="StartingMenuContainer" parent="." instance=ExtResource("1_x4qmd")]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,6 +35,7 @@ grow_vertical = 2
 
 [node name="SelectMapContainer" parent="." instance=ExtResource("3_jc11y")]
 visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
