@@ -84,18 +84,58 @@ func _display_slate_stats(slateID: SlateConstants.SlateIDs) -> void:
 	# Ensure stats column is visible
 	SLATE_STATS_COLUMN.visible = true
 	
-	# Create placeholder for stats text
-	var combined_output_text: String = ""
-	# Fetch relevant slate stats dict
-	var slate_stats_dict = SlateDescriptions.SLATE_ID_TO_STATS[slateID]
-
-	# Assign Range (int)
-	if slate_stats_dict.get(SlateDescriptions.SlateStats.RANGE, 0) > 0:
-		combined_output_text += "Range: %d\n" % slate_stats_dict[SlateDescriptions.SlateStats.RANGE]
-	
-	# Populate description text content 
+	# Build description text string value
+	var combined_output_text: String = _generate_output_stats_text(slateID)
+	# Assign description text to ui display element
 	SLATE_STATS_TEXT.text = combined_output_text
 
+func _generate_output_stats_text(slateID: SlateConstants.SlateIDs) -> String:
+	# Create return value
+	var combined_output_text: String = ""
+
+	# Fetch relevant slate stats
+	var slate_stats_dict = SlateDescriptions.SLATE_ID_TO_STATS[slateID]
+
+	# BUILD DESCRIPTION TEXT
+	# ===== Shared Values =====
+	# Range (int)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.RANGE):
+		combined_output_text += "Range: %d\n" % slate_stats_dict[SlateDescriptions.SlateStats.RANGE]
+	# Max Simul Targets (int)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.MAX_SIMUL_TARGETS):
+		combined_output_text += "Max Simultaneous Targets: %d\n" % slate_stats_dict[SlateDescriptions.SlateStats.MAX_SIMUL_TARGETS]
+	
+	# ===== Hold slates =====
+	# Hold Duration (float)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.HOLD_DURATION):
+		combined_output_text += "Hold Duration: %.1f seconds\n" % slate_stats_dict[SlateDescriptions.SlateStats.HOLD_DURATION]
+	
+	# ===== Slow slates =====
+	# Slow Percentage (float)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.SLOW_PERCENTAGE):
+		combined_output_text += "Slow Percentage: %.1f%%\n" % slate_stats_dict[SlateDescriptions.SlateStats.SLOW_PERCENTAGE]
+	
+	# ===== Burn slates =====
+	# Damage Per Second (int)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.DAMAGE_PER_SECOND):
+		combined_output_text += "Damage Per Second: %d\n" % slate_stats_dict[SlateDescriptions.SlateStats.DAMAGE_PER_SECOND]
+	
+	# ===== Damage slates =====
+	# Damage Increase Percentage (int)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.DAMAGE_INCREASE_PERCENTAGE):
+		combined_output_text += "Damage Increase Percentage: %d%%\n" % slate_stats_dict[SlateDescriptions.SlateStats.DAMAGE_INCREASE_PERCENTAGE]
+	
+	# ===== Range slates =====
+	# Range Increase Percentage (int)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.RANGE_INCREASE_PERCENTAGE):
+		combined_output_text += "Range Increase Percentage: %d%%\n" % slate_stats_dict[SlateDescriptions.SlateStats.RANGE_INCREASE_PERCENTAGE]
+	
+	# ===== Speed slates =====
+	# Speed Increase Percentage (int)
+	if slate_stats_dict.get(SlateDescriptions.SlateStats.SPEED_INCREASE_PERCENTAGE):
+		combined_output_text += "Speed Increase Percentage: %d%%\n" % slate_stats_dict[SlateDescriptions.SlateStats.SPEED_INCREASE_PERCENTAGE]
+
+	return combined_output_text
 
 func _display_requires_towers_buttons(slateID: SlateConstants.SlateIDs) -> void:
 	# Fetch list of possible required towers
