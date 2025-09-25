@@ -1,9 +1,5 @@
 extends Node
 
-enum SlateStats {
-    RANGE
-}
-
 const SLATE_NAMES: Dictionary[SlateConstants.SlateIDs, String] = {
     # ===== Hold slates =====
     SlateConstants.SlateIDs.HOLD_SLATE_LVL_1: "Hold Slate Level 1",
@@ -32,24 +28,48 @@ const SLATE_NAMES: Dictionary[SlateConstants.SlateIDs, String] = {
 }
 
 const SLATE_ID_TO_DESCRIPTION_TEXT: Dictionary[SlateConstants.SlateIDs, String] = {
+    # ===== Hold slates =====
     SlateConstants.SlateIDs.HOLD_SLATE_LVL_1: "Description text for HOLD_SLATE_LVL_1",
     SlateConstants.SlateIDs.HOLD_SLATE_LVL_2: "Description text for HOLD_SLATE_LVL_2",
     SlateConstants.SlateIDs.HOLD_SLATE_LVL_3: "Description text for HOLD_SLATE_LVL_3",
+    # ===== Slow slates =====
     SlateConstants.SlateIDs.SLOW_SLATE_LVL_1: "Description text for SLOW_SLATE_LVL_1",
     SlateConstants.SlateIDs.SLOW_SLATE_LVL_2: "Description text for SLOW_SLATE_LVL_2",
     SlateConstants.SlateIDs.SLOW_SLATE_LVL_3: "Description text for SLOW_SLATE_LVL_3",
+    # ===== Burn slates =====
     SlateConstants.SlateIDs.BURN_SLATE_LVL_1: "Description text for BURN_SLATE_LVL_1",
     SlateConstants.SlateIDs.BURN_SLATE_LVL_2: "Description text for BURN_SLATE_LVL_2",
     SlateConstants.SlateIDs.BURN_SLATE_LVL_3: "Description text for BURN_SLATE_LVL_3",
+    # ===== Damage slates =====
     SlateConstants.SlateIDs.DAMAGE_SLATE_LVL_1: "Description text for DAMAGE_SLATE_LVL_1",
     SlateConstants.SlateIDs.DAMAGE_SLATE_LVL_2: "Description text for DAMAGE_SLATE_LVL_2",
     SlateConstants.SlateIDs.DAMAGE_SLATE_LVL_3: "Description text for DAMAGE_SLATE_LVL_3",
+    # ===== Range slates =====
     SlateConstants.SlateIDs.RANGE_SLATE_LVL_1: "Description text for RANGE_SLATE_LVL_1",
     SlateConstants.SlateIDs.RANGE_SLATE_LVL_2: "Description text for RANGE_SLATE_LVL_2",
     SlateConstants.SlateIDs.RANGE_SLATE_LVL_3: "Description text for RANGE_SLATE_LVL_3",
+    # ===== Speed slates =====
     SlateConstants.SlateIDs.SPEED_SLATE_LVL_1: "Description text for SPEED_SLATE_LVL_1",
     SlateConstants.SlateIDs.SPEED_SLATE_LVL_2: "Description text for SPEED_SLATE_LVL_2",
     SlateConstants.SlateIDs.SPEED_SLATE_LVL_3: "Description text for SPEED_SLATE_LVL_3",
+}
+
+enum SlateStats {
+    # ===== Shared Values =====
+    RANGE,
+    MAX_SIMUL_TARGETS, # AWAITING IMPLIMENTATION
+    # ===== Hold slates =====
+    HOLD_DURATION, # AWAITING IMPLIMENTATION
+    # ===== Slow slates =====
+    SLOW_PERCENTAGE, # AWAITING IMPLIMENTATION
+    # ===== Burn slates =====
+    DAMAGE_PER_SECOND, # AWAITING IMPLIMENTATION
+    # ===== Damage slates =====
+    DAMAGE_INCREASE_PERCENTAGE, # AWAITING IMPLIMENTATION
+    # ===== Range slates =====
+    RANGE_INCREASE_PERCENTAGE, # AWAITING IMPLIMENTATION
+    # ===== Speed slates =====
+    SPEED_INCREASE_PERCENTAGE, # AWAITING IMPLIMENTATION
 }
 
 const SLATE_ID_TO_STATS: Dictionary[SlateConstants.SlateIDs, Dictionary] = {
