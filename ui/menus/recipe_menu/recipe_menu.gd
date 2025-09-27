@@ -26,6 +26,7 @@ func _ready() -> void:
 	_connect_tower_and_slate_button_signals()
 	_connect_recipe_type_button_signals()
 	_connect_info_container_button_list_signals()
+	_connect_return_to_menu_button_signal()
 
 	# Set default starting point
 	_on_show_buildable_tower_buttons_pressed()
@@ -47,7 +48,7 @@ func _connect_recipe_type_button_signals() -> void:
 	RECIPE_TYPE_BUTTON_VBOX.UPGRADE_TOWERS_BUTTON.pressed.connect(_on_show_upgrade_tower_buttons_pressed)
 	RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.pressed.connect(_on_show_slate_buttons_pressed)
 
-## WIP
+
 func _connect_info_container_button_list_signals() -> void:
 	# BUILDABLE TOWER INFO
 	TOWER_AND_SLATE_INFO_CONTAINERS.BUILDABLE_TOWER_INFO_CONTAINER.UPGRADES_INTO_TOWER_BUTTONS.upgrade_tower_button_pressed.connect(_on_upgrade_tower_button_pressed)
@@ -59,6 +60,11 @@ func _connect_info_container_button_list_signals() -> void:
 	# SLATE INFO
 	TOWER_AND_SLATE_INFO_CONTAINERS.SLATE_INFO_CONTAINER.REQUIRES_BUILDABLE_TOWERS_BUTTONS.buildable_tower_button_pressed.connect(_on_buildable_tower_button_pressed)
 	TOWER_AND_SLATE_INFO_CONTAINERS.SLATE_INFO_CONTAINER.REQUIRES_UPGRADE_TOWERS_BUTTONS.upgrade_tower_button_pressed.connect(_on_upgrade_tower_button_pressed)
+
+
+func _connect_return_to_menu_button_signal() -> void:
+	assert(RETURN_TO_MENU_BUTTON, "Return to menu button has not been assigned as an export")
+	RETURN_TO_MENU_BUTTON.pressed.connect(_on_return_to_main_menu_button_pressed)
 
 
 # ==================================================
@@ -92,7 +98,7 @@ func _on_buildable_tower_button_pressed(towerID: TowerConstants.TowerIDs) -> voi
 	RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.set_pressed_no_signal(false)
 
 
-# WIP
+
 func _on_upgrade_tower_button_pressed(towerID: TowerConstants.TowerIDs) -> void:
 	# Update last selected upgrade tower
 	__last_selected_upgrade_tower_id = towerID
@@ -120,7 +126,7 @@ func _on_upgrade_tower_button_pressed(towerID: TowerConstants.TowerIDs) -> void:
 	RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.toggle_mode = false
 	RECIPE_TYPE_BUTTON_VBOX.SLATE_BUTTON.set_pressed_no_signal(false)
 
-# WIP
+
 func _on_slate_button_pressed(slateID: SlateConstants.SlateIDs) -> void:
 	# Update last selected buildable tower
 	__last_selected_slate_id = slateID
@@ -155,8 +161,17 @@ func _on_slate_button_pressed(slateID: SlateConstants.SlateIDs) -> void:
 func _on_show_buildable_tower_buttons_pressed():
 	_on_buildable_tower_button_pressed(__last_selected_buildable_tower_id)
 
+
 func _on_show_upgrade_tower_buttons_pressed():
 	_on_upgrade_tower_button_pressed(__last_selected_upgrade_tower_id)
 
+
 func _on_show_slate_buttons_pressed():
 	_on_slate_button_pressed(__last_selected_slate_id)
+
+
+# ==================================================
+#              STANDALONE BUTTONS
+# ==================================================
+func _on_return_to_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_packed(UIConstants.START_GAME_MENU_LOAD)
