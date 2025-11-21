@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccm02lktqyca1"]
+
+[ext_resource type="AudioStream" uid="uid://7hruyuyswp8p" path="res://audio/background_music/audio_files/main_menu_track.mp3" id="1_xmjy5"]
+
+[node name="MainMenuTrack" type="AudioStreamPlayer"]
+stream = ExtResource("1_xmjy5")

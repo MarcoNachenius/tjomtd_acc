@@ -33,6 +33,7 @@ GameDataStorage="*res://autoloads/game_data_storage.gd"
 SlateConstants="*res://autoloads/slate_constants.gd"
 TowerAuraConstants="*res://autoloads/tower_aura_constants.gd"
 SlateDescriptions="*res://autoloads/slate_descriptions.gd"
+BackgroundMusicPlayer="*res://audio/background_music/background_music_player.tscn"
 
 [display]
 

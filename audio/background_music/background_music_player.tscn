@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhi321fd8lc0c"]
+
+[ext_resource type="Script" uid="uid://c4nmunnonru8m" path="res://audio/background_music/background_music_player.gd" id="1_wa3vs"]
+[ext_resource type="PackedScene" uid="uid://ccm02lktqyca1" path="res://audio/background_music/audio_files/main_menu_track.tscn" id="2_q2pqu"]
+[ext_resource type="PackedScene" uid="uid://c4xs3uqatqmyp" path="res://audio/background_music/audio_files/level_track_1.tscn" id="3_tyxo3"]
+
+[node name="BackgroundMusicPlayer" type="Node2D" node_paths=PackedStringArray("MAIN_MENU_TRACK", "LEVEL_TRACK_1")]
+script = ExtResource("1_wa3vs")
+MAIN_MENU_TRACK = NodePath("MainMenuTrack")
+LEVEL_TRACK_1 = NodePath("LevelTrack1")
+
+[node name="MainMenuTrack" parent="." instance=ExtResource("2_q2pqu")]
+
+[node name="LevelTrack1" parent="." instance=ExtResource("3_tyxo3")]

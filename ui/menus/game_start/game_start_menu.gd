@@ -10,6 +10,8 @@ func _ready() -> void:
 		STARTING_MENU_CONTAINER.LOAD_GAME_BUTTON.visible = true
 	else:
 		STARTING_MENU_CONTAINER.LOAD_GAME_BUTTON.visible = false
+	
+	BackgroundMusicPlayer.play_main_menu_track()
 
 func _connect_all_button_container_signals():
 	_connect_starting_menu_container_button_signals()
@@ -109,12 +111,16 @@ func _on_gem_td_button_pressed():
 	GameDataStorage.create_new_game_data(MapConstants.MapID.GEM_TD)
 	# Change scene to the Gem TD complete build
 	get_tree().change_scene_to_packed(GameConstants.GEM_TD_COMPLETE_BUILD)
+	# Play level background music
+	BackgroundMusicPlayer.play_level_track()
 
 func _on_line_td_button_pressed():
 	# Create new game data
 	GameDataStorage.create_new_game_data(MapConstants.MapID.LINE_TD)
 	# Change scene to the Line TD complete build
 	get_tree().change_scene_to_packed(GameConstants.LINE_TD_COMPLETE_BUILD)
+	# Play level background music
+	BackgroundMusicPlayer.play_level_track()
 
 func _display_select_map_container():
 	# Hide starting menu container

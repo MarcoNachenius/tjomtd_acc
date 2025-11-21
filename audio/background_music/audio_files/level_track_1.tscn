@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4xs3uqatqmyp"]
+
+[ext_resource type="AudioStream" uid="uid://cywnlq8x31vp2" path="res://audio/background_music/audio_files/level_track_1.mp3" id="1_vlodw"]
+
+[node name="LevelTrack1" type="AudioStreamPlayer"]
+stream = ExtResource("1_vlodw")
