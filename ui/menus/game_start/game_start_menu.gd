@@ -10,9 +10,12 @@ func _ready() -> void:
 		STARTING_MENU_CONTAINER.LOAD_GAME_BUTTON.visible = true
 	else:
 		STARTING_MENU_CONTAINER.LOAD_GAME_BUTTON.visible = false
-	
+	# Start background music
 	BackgroundMusicPlayer.play_main_menu_track()
 
+# ==============================================================================================
+#								    SIGNAL CONNECTIONS
+# ==============================================================================================
 func _connect_all_button_container_signals():
 	_connect_starting_menu_container_button_signals()
 	_connect_select_map_container_button_signals()
@@ -21,6 +24,7 @@ func _connect_starting_menu_container_button_signals():
 	STARTING_MENU_CONTAINER.NEW_GAME_BUTTON.pressed.connect(_on_new_game_button_pressed)
 	STARTING_MENU_CONTAINER.LOAD_GAME_BUTTON.pressed.connect(_on_load_game_button_pressed)
 	STARTING_MENU_CONTAINER.TOWER_AND_SLATE_INFO_BUTTON.pressed.connect(_on_tower_and_slate_info_button_pressed)
+	STARTING_MENU_CONTAINER.HOW_TO_PLAY_BUTTON.pressed.connect(_on_how_to_play_button_pressed)
 	STARTING_MENU_CONTAINER.EXIT_GAME_BUTTON.pressed.connect(_on_exit_game_button_pressed)
 
 func _connect_select_map_container_button_signals():
@@ -28,7 +32,12 @@ func _connect_select_map_container_button_signals():
 	SELECT_MAP_CONTAINER.LINE_TD_BUTTON.pressed.connect(_on_line_td_button_pressed)
 	SELECT_MAP_CONTAINER.BACK_TO_MAIN_MENU_BUTTON.pressed.connect(_on_return_to_main_menu_button_pressed)
 
+# SHARED BUTTON SIGNALS
+# ---------------------
+func _on_return_to_main_menu_button_pressed():
+	_display_starting_menu()
 
+# ==============================================================================================
 #									STARTING MENU CONTAINER
 # ==============================================================================================
 func _on_new_game_button_pressed():
@@ -39,16 +48,17 @@ func _on_load_game_button_pressed():
 	GameDataStorage.load_game_data()
 
 	if !GameDataStorage.ACTIVE_GAME_DATA:
-		push_error("Step 3: No active game data found after loading. Please check your save file.")
+		push_error("No active game data found after loading. Check save file.")
 		return
 	
 	var map_id = GameDataStorage.ACTIVE_GAME_DATA.get_map_id()
 
 	# Ensure map ID is valid
 	if !GameConstants.MAP_ID_TO_COMPLETE_BUILD.has(map_id):
-		push_error("Step 5: No complete build found for map ID: %d" % map_id)
+		push_error("No complete build found for map ID: %d" % map_id)
 		return
 	
+	# Instantiate map scene
 	var new_scene_root = GameConstants.MAP_ID_TO_COMPLETE_BUILD[map_id].instantiate()
 
 	# Replace current scene
@@ -69,7 +79,7 @@ func _on_load_game_button_pressed():
 	# Load the game map with the active game data
 	game_map.load_game()
 
-	# Find the RandomTowerBuildHUD node in the new scene
+	# Find the RandomTowerBuildHUD node in the new scene root
 	var hud: RandomTowerBuildHUD = null
 	for child in new_scene_root.get_children():
 		if child is RandomTowerBuildHUD:
@@ -77,7 +87,9 @@ func _on_load_game_button_pressed():
 			break
 	assert(hud, "HUD not found in loaded scene.")
 
-	# Assign display values from load file
+	# ------------------------------------
+	# ASSIGN DISPLAY VALUES FROM LOAD FILE
+	# ------------------------------------
 	# Balance
 	hud.GAME_STATS_CONTAINER.CURR_BALANCE_AMOUNT_LABEL.text = str(GameDataStorage.ACTIVE_GAME_DATA.get_remaining_balance())
 	# Remaining lives
@@ -88,12 +100,18 @@ func _on_load_game_button_pressed():
 	hud.GAME_STATS_CONTAINER.CURR_BUILD_LEVEL_AMOUNT_LABEL.text = str(GameDataStorage.ACTIVE_GAME_DATA.build_level)
 	# Update upgrade build tower button text
 	hud.UPGRADE_BUILD_LEVEL_BUTTON.text = hud.UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(game_map.RANDOM_TOWER_GENERATOR.get_curr_upgrade_cost()) + ")"
-	
+
+
+func _on_how_to_play_button_pressed() -> void:
+	get_tree().change_scene_to_packed(UIConstants.HOW_TO_PLAY_MENU_LOAD)
+
 func _on_tower_and_slate_info_button_pressed() -> void:
 	get_tree().change_scene_to_packed(UIConstants.RECIPE_MENU_LOAD)
 
+
 func _on_exit_game_button_pressed():
 	get_tree().quit()
+
 
 ## Shows and hides components that are required for displaying the main menu
 func _display_starting_menu():
@@ -103,7 +121,7 @@ func _display_starting_menu():
 	SELECT_MAP_CONTAINER.visible = false
 
 
-
+# ==============================================================================================
 #									 SELECT MAP CONTAINER
 # ==============================================================================================
 func _on_gem_td_button_pressed():
@@ -127,9 +145,3 @@ func _display_select_map_container():
 	STARTING_MENU_CONTAINER.visible = false
 	# Show select map container
 	SELECT_MAP_CONTAINER.visible = true
-
-#									 SHARED BUTTON SIGNALS
-# ===============================================================================================
-
-func _on_return_to_main_menu_button_pressed():
-	_display_starting_menu()

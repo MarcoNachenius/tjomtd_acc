@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://gbytegi04vye"]
+
+[ext_resource type="Script" uid="uid://dab8eby25vj0v" path="res://ui/menus/how_to_play/how_to_play_menu.gd" id="1_sjy3t"]
+
+[node name="HowToPlayMenu" type="Control" node_paths=PackedStringArray("RETURN_TO_MAIN_MENU_BUTTON", "TOWER_AND_SLATE_INFO_BUTTON")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sjy3t")
+RETURN_TO_MAIN_MENU_BUTTON = NodePath("MenuChangeContainer/MainMenuButton")
+TOWER_AND_SLATE_INFO_BUTTON = NodePath("MenuChangeContainer/TowerAndSlateStatsButton")
+
+[node name="MenuChangeContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TowerAndSlateStatsButton" type="Button" parent="MenuChangeContainer"]
+layout_mode = 2
+text = "Tower and Slate
+Information"
+
+[node name="MainMenuButton" type="Button" parent="MenuChangeContainer"]
+layout_mode = 2
+text = "Main Menu"
