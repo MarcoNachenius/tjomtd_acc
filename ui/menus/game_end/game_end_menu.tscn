@@ -1,20 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch1yg4n4t6d5f"]
+[gd_scene format=3 uid="uid://ch1yg4n4t6d5f"]
 
 [ext_resource type="Script" uid="uid://csdfau5cwh873" path="res://ui/menus/game_end/game_end_menu.gd" id="1_cybof"]
+[ext_resource type="Theme" uid="uid://dt1to6ujkjj53" path="res://ui/themes/menus/default_menu_theme.tres" id="1_whtdw"]
 [ext_resource type="PackedScene" uid="uid://dn5ve3rui2hq2" path="res://ui/components/text_containers/game_end_data/game_end_results_text.tscn" id="2_kjpk8"]
 
-[node name="GameEndMenu" type="Control" node_paths=PackedStringArray("BACK_TO_MAIN_MENU_BUTTON", "EXIT_GAME_BUTTON")]
+[node name="GameEndMenu" type="Control" unique_id=968429690 node_paths=PackedStringArray("BACK_TO_MAIN_MENU_BUTTON", "EXIT_GAME_BUTTON")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_whtdw")
 script = ExtResource("1_cybof")
 BACK_TO_MAIN_MENU_BUTTON = NodePath("MainContainer/ReturnToMainMenu")
 EXIT_GAME_BUTTON = NodePath("MainContainer/ExitGame")
 
-[node name="MainContainer" type="VBoxContainer" parent="."]
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=1334643681]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,18 +30,18 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameEndResultsText" parent="MainContainer" instance=ExtResource("2_kjpk8")]
+[node name="GameEndResultsText" parent="MainContainer" unique_id=212242928 instance=ExtResource("2_kjpk8")]
 layout_mode = 2
 
-[node name="EmptySpace" type="RichTextLabel" parent="MainContainer"]
+[node name="EmptySpace" type="RichTextLabel" parent="MainContainer" unique_id=1469085903]
 layout_mode = 2
 text = " "
 fit_content = true
 
-[node name="ReturnToMainMenu" type="Button" parent="MainContainer"]
+[node name="ReturnToMainMenu" type="Button" parent="MainContainer" unique_id=316032709]
 layout_mode = 2
 text = "Main Menu"
 
-[node name="ExitGame" type="Button" parent="MainContainer"]
+[node name="ExitGame" type="Button" parent="MainContainer" unique_id=1138703938]
 layout_mode = 2
 text = "Exit Game"

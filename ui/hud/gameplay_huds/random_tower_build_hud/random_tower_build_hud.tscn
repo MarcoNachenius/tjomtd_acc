@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8u365aao1ox5"]
+[gd_scene format=3 uid="uid://c8u365aao1ox5"]
 
 [ext_resource type="Script" uid="uid://tlx4dpamwe4b" path="res://ui/hud/gameplay_huds/random_tower_build_hud/random_tower_build_hud.gd" id="1_kyn4q"]
+[ext_resource type="Theme" uid="uid://bop7o186b38p" path="res://ui/themes/hud/show_hide_buttons.tres" id="2_2u6un"]
 [ext_resource type="PackedScene" uid="uid://cpy2hm61yp3tb" path="res://ui/components/button_containers/build_random_tower_container/build_random_tower_container.tscn" id="2_ntkvv"]
+[ext_resource type="Theme" uid="uid://cxwg4ik0t63vr" path="res://ui/themes/hud/tower_command_buttons.tres" id="2_oxdav"]
 [ext_resource type="PackedScene" uid="uid://cb2sqbhyw2ing" path="res://ui/components/button_containers/tower_properties_container/tower_properties_container.tscn" id="3_puoe6"]
 [ext_resource type="PackedScene" uid="uid://24wnsdvwnkv0" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.tscn" id="4_im64j"]
 [ext_resource type="PackedScene" uid="uid://b8jv68io5tjec" path="res://ui/components/button_containers/path_line_visibility_container/path_line_visibility_container.tscn" id="5_saysw"]
@@ -10,12 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://c7y4vlh6bkosx" path="res://ui/components/button_containers/awaiting_selection_upgrade_slates_container/awaiting_selection_upgrade_slates_container.tscn" id="6_prtqx"]
 [ext_resource type="PackedScene" uid="uid://djnhreo88oyik" path="res://ui/components/button_containers/tower_range_visibility_container/tower_range_visibility_container.tscn" id="7_2ld34"]
 [ext_resource type="PackedScene" uid="uid://d3ip48f1k42il" path="res://ui/components/text_containers/game_stats_container/game_stats_contianer.tscn" id="7_jg8ij"]
+[ext_resource type="Theme" uid="uid://cb77wwil1kpha" path="res://ui/themes/hud/map_commands_buttons.tres" id="8_vpl5b"]
 [ext_resource type="PackedScene" uid="uid://d18hp1umtvwps" path="res://debug_and_testing/debug_buttons/exit_game_button.tscn" id="9_gouwm"]
+[ext_resource type="Theme" uid="uid://cticeqm0jrp42" path="res://ui/themes/hud/exit_game_button.tres" id="10_ua866"]
 [ext_resource type="PackedScene" uid="uid://r7v6g63is2hk" path="res://ui/components/text_containers/selected_tower_stats_container/selected_tower_stats_container.tscn" id="12_5rmau"]
 [ext_resource type="PackedScene" uid="uid://dh1y0gw52bkw6" path="res://ui/components/button_containers/tower_stats_visibility_container/tower_stats_visibility_container.tscn" id="13_243pv"]
 [ext_resource type="PackedScene" uid="uid://bqhfcjp7un861" path="res://audio/hud/hud_audio_manager.tscn" id="14_prtqx"]
 
-[node name="RandomTowerBuildHUD" type="CanvasLayer" node_paths=PackedStringArray("AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER", "GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "EXTENDED_UPGRADES_CONTAINER", "SELECTED_TOWER_STATS_CONTAINER", "TOWER_STATS_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON", "HUD_AUDIO_MANAGER")]
+[node name="RandomTowerBuildHUD" type="CanvasLayer" unique_id=789190923 node_paths=PackedStringArray("AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER", "GAME_STATS_CONTAINER", "BUILD_RANDOM_TOWER_CONTAINER", "TOWER_PROPERTIES_CONTAINER", "TOWER_UPGRADES_CONTAINER", "AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER", "PATH_LINE_VISIBILITY_CONTAINER", "TOWER_RANGE_VISIBILITY_CONTAINER", "EXTENDED_UPGRADES_CONTAINER", "SELECTED_TOWER_STATS_CONTAINER", "TOWER_STATS_VISIBILITY_CONTAINER", "START_NEW_WAVE_BUTTON", "UPGRADE_BUILD_LEVEL_BUTTON", "HUD_AUDIO_MANAGER")]
 script = ExtResource("1_kyn4q")
 AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER = NodePath("TowerCommands/AwaitingSelectionUpgradeSlatesContainer")
 GAME_STATS_CONTAINER = NodePath("StatsContainer/GameStatsPanel/GameStatsContianer")
@@ -26,13 +30,13 @@ AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER = NodePath("TowerCommands/A
 PATH_LINE_VISIBILITY_CONTAINER = NodePath("ComponentVisibility/PathLineVisibilityContainer")
 TOWER_RANGE_VISIBILITY_CONTAINER = NodePath("ComponentVisibility/TowerRangeVisibilityContainer")
 EXTENDED_UPGRADES_CONTAINER = NodePath("TowerCommands/ExtendedUpgradesContainer")
-SELECTED_TOWER_STATS_CONTAINER = NodePath("StatsContainer/SelectedTowerStatsPanel/SelectedTowerStatsContainer")
+SELECTED_TOWER_STATS_CONTAINER = NodePath("StatsContainer/SelectedTowerStatsContainer")
 TOWER_STATS_VISIBILITY_CONTAINER = NodePath("ComponentVisibility/TowerStatsVisibilityContainer")
 START_NEW_WAVE_BUTTON = NodePath("MapCommands/VBoxContainer/StartNewWaveButton")
 UPGRADE_BUILD_LEVEL_BUTTON = NodePath("MapCommands/Upgrade Tower Probability")
 HUD_AUDIO_MANAGER = NodePath("HudAudioManager")
 
-[node name="TowerCommands" type="HBoxContainer" parent="."]
+[node name="TowerCommands" type="HBoxContainer" parent="." unique_id=303035056]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -43,28 +47,29 @@ offset_top = -54.0
 offset_right = 623.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("2_2u6un")
 alignment = 1
 
-[node name="TowerPropertiesContainer" parent="TowerCommands" instance=ExtResource("3_puoe6")]
+[node name="TowerPropertiesContainer" parent="TowerCommands" unique_id=1907675311 instance=ExtResource("3_puoe6")]
 layout_mode = 2
 
-[node name="AwaitingSelectionUpgradeTowers" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_x72he")]
-layout_mode = 2
-CONNECTED_MAIN_HUB = NodePath("../..")
-
-[node name="TowerUpgradesContainer" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("4_im64j")]
+[node name="AwaitingSelectionUpgradeTowers" parent="TowerCommands" unique_id=1342693517 node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_x72he")]
 layout_mode = 2
 CONNECTED_MAIN_HUB = NodePath("../..")
 
-[node name="ExtendedUpgradesContainer" parent="TowerCommands" node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_xie52")]
+[node name="TowerUpgradesContainer" parent="TowerCommands" unique_id=1429590364 node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("4_im64j")]
 layout_mode = 2
 CONNECTED_MAIN_HUB = NodePath("../..")
 
-[node name="AwaitingSelectionUpgradeSlatesContainer" parent="TowerCommands" node_paths=PackedStringArray("__connected_main_hud") instance=ExtResource("6_prtqx")]
+[node name="ExtendedUpgradesContainer" parent="TowerCommands" unique_id=1708621518 node_paths=PackedStringArray("CONNECTED_MAIN_HUB") instance=ExtResource("5_xie52")]
+layout_mode = 2
+CONNECTED_MAIN_HUB = NodePath("../..")
+
+[node name="AwaitingSelectionUpgradeSlatesContainer" parent="TowerCommands" unique_id=2126619810 node_paths=PackedStringArray("__connected_main_hud") instance=ExtResource("6_prtqx")]
 layout_mode = 2
 __connected_main_hud = NodePath("../..")
 
-[node name="MapCommands" type="VBoxContainer" parent="."]
+[node name="MapCommands" type="VBoxContainer" parent="." unique_id=1058436409]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -75,28 +80,29 @@ offset_top = -53.5
 offset_bottom = 53.5
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("8_vpl5b")
 theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MapCommands"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MapCommands" unique_id=181243555]
 layout_mode = 2
 
-[node name="BuildRandomTowerContainer" parent="MapCommands/VBoxContainer" instance=ExtResource("2_ntkvv")]
+[node name="BuildRandomTowerContainer" parent="MapCommands/VBoxContainer" unique_id=607274132 instance=ExtResource("2_ntkvv")]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="StartNewWaveButton" type="Button" parent="MapCommands/VBoxContainer"]
+[node name="StartNewWaveButton" type="Button" parent="MapCommands/VBoxContainer" unique_id=1021229515]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Start
 New Wave"
 
-[node name="Upgrade Tower Probability" type="Button" parent="MapCommands"]
+[node name="Upgrade Tower Probability" type="Button" parent="MapCommands" unique_id=45582859]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Upgrade
 Build Level (0)"
 
-[node name="ComponentVisibility" type="VBoxContainer" parent="."]
+[node name="ComponentVisibility" type="VBoxContainer" parent="." unique_id=930334693]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -105,19 +111,20 @@ offset_right = 220.0
 offset_bottom = 136.0
 grow_vertical = 2
 size_flags_horizontal = 0
+theme = ExtResource("10_ua866")
 
-[node name="TowerStatsVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("13_243pv")]
+[node name="TowerStatsVisibilityContainer" parent="ComponentVisibility" unique_id=1162599362 instance=ExtResource("13_243pv")]
 layout_mode = 2
 
-[node name="PathLineVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("5_saysw")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="TowerRangeVisibilityContainer" parent="ComponentVisibility" instance=ExtResource("7_2ld34")]
+[node name="PathLineVisibilityContainer" parent="ComponentVisibility" unique_id=992468490 instance=ExtResource("5_saysw")]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ExitGameButton" parent="." instance=ExtResource("9_gouwm")]
+[node name="TowerRangeVisibilityContainer" parent="ComponentVisibility" unique_id=991937840 instance=ExtResource("7_2ld34")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ExitGameButton" parent="." unique_id=245116742 instance=ExtResource("9_gouwm")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -125,28 +132,24 @@ offset_left = -87.0
 offset_right = 0.0
 offset_bottom = 31.0
 grow_horizontal = 0
+theme = ExtResource("2_oxdav")
 
-[node name="StatsContainer" type="HBoxContainer" parent="."]
+[node name="StatsContainer" type="HBoxContainer" parent="." unique_id=1621910082]
 offset_right = 566.0
 offset_bottom = 266.0
 theme_override_constants/separation = 20
 
-[node name="GameStatsPanel" type="PanelContainer" parent="StatsContainer"]
+[node name="GameStatsPanel" type="PanelContainer" parent="StatsContainer" unique_id=581495137]
 layout_mode = 2
 
-[node name="GameStatsContianer" parent="StatsContainer/GameStatsPanel" instance=ExtResource("7_jg8ij")]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="SelectedTowerStatsPanel" type="PanelContainer" parent="StatsContainer"]
+[node name="GameStatsContianer" parent="StatsContainer/GameStatsPanel" unique_id=2069260098 instance=ExtResource("7_jg8ij")]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
 
-[node name="SelectedTowerStatsContainer" parent="StatsContainer/SelectedTowerStatsPanel" instance=ExtResource("12_5rmau")]
+[node name="SelectedTowerStatsContainer" parent="StatsContainer" unique_id=841130012 instance=ExtResource("12_5rmau")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 alignment = 1
 
-[node name="HudAudioManager" parent="." instance=ExtResource("14_prtqx")]
+[node name="HudAudioManager" parent="." unique_id=1435333761 instance=ExtResource("14_prtqx")]
