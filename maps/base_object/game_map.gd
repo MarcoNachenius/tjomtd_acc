@@ -821,10 +821,12 @@ func _on_creep_end_of_path_reached(creep: Creep) -> void:
 
 func _on_creep_death(creep: Creep) -> void:
 	var creep_points: int = creep.get_points_for_death()
+	# Handle balance update
 	__curr_balance += creep_points
 	__total_points_earned += creep_points
 	balance_altered.emit(__curr_balance)
 	
+	__total_active_creeps -= 1
 	if !creep.get_is_wave_creep():
 		return
 	__total_active_wave_creeps -= 1
