@@ -441,7 +441,7 @@ func _on_final_boss_path_completed(damageInflicted: int, completionTimeSeconds: 
 
 	# Switch main scene to end game menu
 	get_tree().change_scene_to_packed(UIConstants.END_GAME_MENU_LOAD)
-
+	BackgroundMusicPlayer.play_end_menu_track()
 
 func _on_lives_depleted():
 	GAME_MAP.remove_remaining_creeps()
