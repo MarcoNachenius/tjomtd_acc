@@ -87,6 +87,9 @@ func _on_load_game_button_pressed():
 			break
 	assert(hud, "HUD not found in loaded scene.")
 
+	# Play level background music
+	BackgroundMusicPlayer.play_level_track()
+
 	# ------------------------------------
 	# ASSIGN DISPLAY VALUES FROM LOAD FILE
 	# ------------------------------------
