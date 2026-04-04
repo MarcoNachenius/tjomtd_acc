@@ -97,7 +97,6 @@ autowrap_mode = 0
 
 [node name="DescrptionText" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/VBoxContainer2" unique_id=2130526372]
 layout_mode = 2
-text = "Tower description text container.
-Use cunstom new line chars"
+text = "Tower description text container. Use cunstom new line chars"
 fit_content = true
 autowrap_mode = 0
