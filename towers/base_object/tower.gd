@@ -13,10 +13,12 @@ enum TowerOrigin {
 }
 
 # ORDERING CONTSTANTS
-const TOWER_Z_INDEX: int = 4
+const TOWER_Z_INDEX: int = 0
 const TOWER_Z_AS_RELATIVE: bool = true
-const TOWER_SPRITE_Z_INDEX: int = 1
+const TOWER_SPRITE_Z_INDEX: int = 0
 const TOWER_SPRITE_Z_AS_RELATIVE: bool = true
+const SURFACE_SPRITE_Z_INDEX: int = -1
+const SURFACE_SPRITE_Z_AS_RELATIVE: bool = true
 
 # ANIMATION CONSTANTS
 const AWAITING_SELECTION_ANIMATION_NAME: String = "awaiting_selection"
@@ -157,6 +159,10 @@ func _handle_ordering() -> void:
 		TOWER_SPRITE.y_sort_enabled = true
 		TOWER_SPRITE.z_as_relative = TOWER_SPRITE_Z_AS_RELATIVE
 		TOWER_SPRITE.z_index = TOWER_SPRITE_Z_INDEX 
+	
+    # Always renders BEHIND tower sprite AND creeps
+	SURFACE_SPRITE.z_as_relative = SURFACE_SPRITE_Z_AS_RELATIVE
+	SURFACE_SPRITE.z_index = SURFACE_SPRITE_Z_INDEX
 
 
 # GETTERS

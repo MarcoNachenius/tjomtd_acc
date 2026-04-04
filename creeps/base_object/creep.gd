@@ -31,6 +31,7 @@ var __distance_to_next_point: float
 var __hitbox: CreepHitbox
 var __health_bar: HealthBar
 var __is_wave_creep: bool
+
 ## Tracks the time at which the final boss starts maze.
 var __maze_start_millisecond_timestamp: int
 var __num_of_active_stun_effects: int
@@ -89,8 +90,8 @@ func _create_hitbox():
 
 func _set_ordering():
 	# Scene root
-	z_index = 5
-	z_as_relative = false
+	z_index = 0
+	z_as_relative = true
 	y_sort_enabled = true
 	# Animations
 	MOVEMENT_ANIMATIONS.z_index = 0

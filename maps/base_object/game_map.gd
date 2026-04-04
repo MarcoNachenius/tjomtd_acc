@@ -73,6 +73,7 @@ var __valid_build_position_surface_highlight: Sprite2D
 var CREEP_SPAWNER: CreepSpawner
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
 var SLATE_MANAGER: SlateManager
+var ENTITY_LAYER: Node2D
 
 # -----------------
 # INHERITED METHODS
@@ -119,6 +120,9 @@ func _ready() -> void:
 
 	# SLATE MANAGER
 	_create_slate_manager()
+
+	# ENTITY LAYER
+	_create_entity_layer()
 
 
 func _unhandled_input(event) -> void:
@@ -289,6 +293,15 @@ func is_idle() -> bool:
 # ---------------
 # PRIVATE METHODS
 # ---------------
+func _create_entity_layer() -> void:
+	var new_entity_layer := Node2D.new()
+	new_entity_layer.y_sort_enabled = true
+	new_entity_layer.z_index = 4
+	new_entity_layer.z_as_relative = true
+	add_child(new_entity_layer)
+	ENTITY_LAYER = new_entity_layer
+
+
 func _create_slate_manager() -> void:
 	var new_slate_manager_instance: SlateManager = SlateManager.new(self)
 	add_child(new_slate_manager_instance)
@@ -878,7 +891,7 @@ func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = f
 		place_tower_impediment_points(placementGridPoint)
 	# Place barricade
 	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
-	add_child(new_barricade)
+	ENTITY_LAYER.add_child(new_barricade)
 
 	# Ensure barricades do not appear as towers awaiting selection
 	new_barricade.switch_state(Tower.States.BUILT)
@@ -904,7 +917,7 @@ func place_built_tower(placementGridPoint: Vector2i, towerID: int) -> void:
 	# Create new tower instance
 	var new_tower: Tower = __build_tower_preload.instantiate()
 	new_tower.set_placement_grid_coordinate(placementGridPoint)
-	add_child(new_tower)
+	ENTITY_LAYER.add_child(new_tower)
 	new_tower.position = __placement_grid.map_to_local(placementGridPoint)
 	
 
@@ -925,7 +938,7 @@ func place_tower(placementGridPoint: Vector2i) -> void:
 	# Create new tower instance
 	var new_tower: Tower = __build_tower_preload.instantiate()
 	new_tower.set_placement_grid_coordinate(placementGridPoint)
-	add_child(new_tower)
+	ENTITY_LAYER.add_child(new_tower)
 	new_tower.position = __placement_grid.map_to_local(placementGridPoint)
 	
 	# Ensure tower is awaiting selection
@@ -1037,7 +1050,7 @@ func upgrade_from_towers_on_map(selectedTower: Tower, upgradeTowerID: TowerConst
 	
 	# Place the new upgrade tower
 	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
-	add_child(new_upgrade_tower)
+	ENTITY_LAYER.add_child(new_upgrade_tower)
 	
 	# Set the upgrade tower's placement grid coordinate and global position
 	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
@@ -1074,7 +1087,7 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 	
 	# Create new tower based on provided tower ID
 	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
-	add_child(new_upgrade_tower)
+	ENTITY_LAYER.add_child(new_upgrade_tower)
 
 	# Set upgrade tower placement grid coordinate and global position
 	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
@@ -1146,7 +1159,7 @@ func keep_extended_upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerCons
 	
 	# Create new tower based on provided tower ID
 	var new_upgrade_tower: Tower = TowerConstants.UPGRADE_TOWER_PRELOADS[upgradeTowerID].instantiate()
-	add_child(new_upgrade_tower)
+	ENTITY_LAYER.add_child(new_upgrade_tower)
 
 	# Set upgrade tower placement grid coordinate and global position
 	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
@@ -1181,7 +1194,7 @@ func keep_compound_upgrade_tower_from_towers_awaiting_selection(selectedTower: T
 	
 	# Create new tower based on provided tower ID
 	var new_upgrade_tower: Tower = TowerConstants.BUILD_TOWER_PRELOADS[compoundUpgradeTowerID].instantiate()
-	add_child(new_upgrade_tower)
+	ENTITY_LAYER.add_child(new_upgrade_tower)
 
 	# Set upgrade tower placement grid coordinate and global position
 	new_upgrade_tower.set_placement_grid_coordinate(tower_placement_grid_coord)
@@ -1280,7 +1293,7 @@ func place_slate(slateID: SlateConstants.SlateIDs, placementGridCoord: Vector2i)
 	# Instantiate the slate from the preload
 	var new_slate: Slate = SlateConstants.SLATE_LOADS[slateID].instantiate()
 	# Add the slate to 
-	add_child(new_slate)
+	ENTITY_LAYER.add_child(new_slate)
 	# Set the slate's placement grid coordinate
 	new_slate.set_placement_grid_coordinate(placementGridCoord)
 	# Set the slate's global position based on the placement grid coordinate
