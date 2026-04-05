@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://oaqhph1hwbl8" path="res://ui/menus/game_start/game_start_menu.gd" id="1_ttwxv"]
 [ext_resource type="PackedScene" uid="uid://b0l4rok7p0ldy" path="res://ui/components/button_containers/start_game_menu/starting_menu_container/starting_menu_container.tscn" id="1_x4qmd"]
 [ext_resource type="PackedScene" uid="uid://dohp51h4peqp7" path="res://ui/components/button_containers/start_game_menu/select_map_container/select_map_container.tscn" id="3_jc11y"]
+[ext_resource type="Texture2D" uid="uid://pffocuco0ecu" path="res://game/game_logo_transparent.png" id="3_ssxmm"]
 
 [node name="GameStartMenu" type="Control" unique_id=288094177 node_paths=PackedStringArray("STARTING_MENU_CONTAINER", "SELECT_MAP_CONTAINER")]
 layout_mode = 3
@@ -17,13 +18,26 @@ script = ExtResource("1_ttwxv")
 STARTING_MENU_CONTAINER = NodePath("StartingMenuContainer")
 SELECT_MAP_CONTAINER = NodePath("SelectMapContainer")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=932304501]
+[node name="BaseBackground" type="ColorRect" parent="." unique_id=1074723783]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=181736881]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3765625
+anchor_top = 0.054166667
+anchor_right = 1.1765625
+anchor_bottom = 1.4763889
+grow_horizontal = 2
+scale = Vector2(0.31118336, 0.27168524)
+texture = ExtResource("3_ssxmm")
+metadata/_edit_use_anchors_ = true
 
 [node name="StartingMenuContainer" parent="." unique_id=478116591 instance=ExtResource("1_x4qmd")]
 layout_mode = 1
@@ -32,10 +46,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.5
+offset_left = -93.0
 offset_top = -33.0
-offset_right = 46.5
-offset_bottom = 33.0
+offset_right = 94.0
+offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -47,9 +61,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -33.0
-offset_right = 35.0
-offset_bottom = 33.0
+offset_left = -108.0
+offset_top = -47.0
+offset_right = 111.0
+offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
