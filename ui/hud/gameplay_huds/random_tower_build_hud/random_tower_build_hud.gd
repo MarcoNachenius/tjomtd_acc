@@ -281,7 +281,6 @@ func _handle_initial_container_visibility():
 
 ## Ensures that all containers before a wave starts are properly hidden
 func _hide_containers_on_tower_kept():
-	print("Hiding containers on tower kept")
 	# Hide tower properties hbox
 	TOWER_PROPERTIES_CONTAINER.visible = false
 	# Hide tower upgrades container
