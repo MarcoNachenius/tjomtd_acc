@@ -281,6 +281,7 @@ func _handle_initial_container_visibility():
 
 ## Ensures that all containers before a wave starts are properly hidden
 func _hide_containers_on_tower_kept():
+	print("Hiding containers on tower kept")
 	# Hide tower properties hbox
 	TOWER_PROPERTIES_CONTAINER.visible = false
 	# Hide tower upgrades container
@@ -289,6 +290,11 @@ func _hide_containers_on_tower_kept():
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 	# Hide build tower properties
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
+	# If the max placed towers has not been reached, ensure player can still build new tower
+	if __current_turn_tower_count < __max_towers_per_turn:
+		BUILD_RANDOM_TOWER_CONTAINER.visible = true
+		BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = true
+		BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Hide extended upgrade containers
 	EXTENDED_UPGRADES_CONTAINER.visible = false
 	# Hide awaiting selection slate container
@@ -566,8 +572,7 @@ func _on_tower_placed(_tower: Tower):
 		GAME_MAP.clear_build_tower_values()
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 	
-	# Avoid tower preload staying the same when a tower is placed, the max nummber of turn towers has
-	# not been reached and the game map is still in build mode.
+	# Avoid tower preload staying the same after tower is placed and player is still in build mode
 	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
 
 func _on_maze_length_updated(updated_maze_length: int):
