@@ -289,11 +289,6 @@ func _hide_containers_on_tower_kept():
 	AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.visible = false
 	# Hide build tower properties
 	BUILD_RANDOM_TOWER_CONTAINER.visible = false
-	# If the max placed towers has not been reached, ensure player can still build new tower
-	if __current_turn_tower_count < __max_towers_per_turn:
-		BUILD_RANDOM_TOWER_CONTAINER.visible = true
-		BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = true
-		BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Hide extended upgrade containers
 	EXTENDED_UPGRADES_CONTAINER.visible = false
 	# Hide awaiting selection slate container

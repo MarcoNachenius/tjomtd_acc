@@ -256,7 +256,7 @@ func test_sam_site_lvl_1_button_appearance_awaiting_selection():
     # Process frame to ensure the random tower build hud is ready
     await get_tree().process_frame
 
-    # Create towers required for upgrade to tombstone
+    # Create towers required for upgrade to sam site
     var spinel_lvl_1: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.SPINEL_LVL_1].instantiate()
     test_game_map.add_child(spinel_lvl_1)
     var kunzite_lvl_1: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.KUNZITE_LVL_1].instantiate()
@@ -341,7 +341,7 @@ func test_lava_pool_lvl_1_button_appearance_awaiting_selection():
     # Process frame to ensure the random tower build hud is ready
     await get_tree().process_frame
 
-    # Create towers required for upgrade to tombstone
+    # Create towers required for upgrade to lava pool
     var black_marble_lvl_2: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BLACK_MARBLE_LVL_2].instantiate()
     test_game_map.add_child(black_marble_lvl_2)
     var spinel_lvl_2: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.SPINEL_LVL_2].instantiate()
