@@ -217,6 +217,7 @@ func test_stay_hidden_continer_after_built_tower_upgrade_wave_in_progress():
     # ================================================================
     # Simulate wave starting
     random_build_tower_hud._on_start_new_wave_button_pressed()
+    await get_tree().process_frame
     # Simulate black marble lvl 2 being selected
     random_build_tower_hud._on_tower_selected(black_marble_lvl_2)
     await get_tree().process_frame

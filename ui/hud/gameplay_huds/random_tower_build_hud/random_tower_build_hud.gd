@@ -77,7 +77,6 @@ func _ready():
 # PUBLIC METHODS
 # **************
 func handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
-	_hide_containers_on_tower_kept()
 	# Handle towers awaiting selection
 	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
 		GAME_MAP.keep_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
@@ -85,6 +84,7 @@ func handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 		# Give player option to start new wave
 		START_NEW_WAVE_BUTTON.visible = true
+		_hide_containers_on_tower_kept()
 		return
 	
 	# Handle towers on map
@@ -92,6 +92,9 @@ func handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 		GAME_MAP.upgrade_from_towers_on_map(__selected_tower, upgradeTowerID)
 		# Switch the game map state to navigation mode
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+		# Hide upgrade tower buttons if wave is in progress
+		if !GAME_MAP.is_idle():
+			BUILD_RANDOM_TOWER_CONTAINER.visible = false
 		return
 
 func handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs):
