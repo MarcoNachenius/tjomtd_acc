@@ -416,21 +416,36 @@ func _on_exit_build_mode_button_pressed():
 
 
 ## Handle remove barricade button pressed
-func _on_remove_barricade_button_pressed():
+func _on_remove_barricade_button_pressed() -> void:
 	assert(__selected_tower, "No tower/barricade is currently selected")
 	assert(__selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Selected tower is not a barricade")
 	# Remove barricade from map
 	GAME_MAP.remove_barricade(__selected_tower)
 	# Deselect tower
 	__selected_tower = null
-	# Hide remove barricade button
+	# Hide remove and replace barricade buttons
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
 	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
 
 
 ## Handle replace barricade with tower button pressed
-func _on_replace_barricade_button_pressed(): # TODO
-	print("Replace tower button pressed")
+func _on_replace_barricade_button_pressed() -> void:
+	assert(__selected_tower, "No tower/barricade is currently selected")
+	assert(__selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE, "Selected tower is not a barricade")
+
+	# Replace barricade with tower on map
+	var old_barricade_placement_coords: Vector2i = __selected_tower.get_placement_grid_coordinate()
+	GAME_MAP.remove_barricade(__selected_tower)
+	# Assign random towrer preload to the game map
+	GAME_MAP.set_build_tower_preload(GAME_MAP.RANDOM_TOWER_GENERATOR.generate_random_tower_preload())
+	GAME_MAP.place_tower(old_barricade_placement_coords)
+
+	
+	# Hide remove and replace barricade buttons
+	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
+	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
+
+	
 
 
 #                                              | Game Map |
