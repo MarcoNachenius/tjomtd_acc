@@ -2,7 +2,7 @@ extends Node
 class_name RandomTowerGenerator
 
 # CONSTANTS
-const MAX_LEVEL: int = 5
+const MAX_LEVEL: int = 6
 
 # LOCALS
 var __curr_buildable_tower_preloads: Array[PackedScene] = []
