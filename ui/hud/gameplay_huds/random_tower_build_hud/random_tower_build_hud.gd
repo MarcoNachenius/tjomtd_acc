@@ -156,7 +156,8 @@ func _connect_tower_stats_visibility_container():
 	TOWER_STATS_VISIBILITY_CONTAINER.SHOW_TOWER_STATS_BUTTON.pressed.connect(_on_show_tower_stats_button_pressed)
 	TOWER_STATS_VISIBILITY_CONTAINER.HIDE_TOWER_STATS_BUTTON.pressed.connect(_on_hide_tower_stats_button_pressed)
 	# Set initial state
-	_on_hide_tower_stats_button_pressed()
+	# Show tower stats on game start
+	_on_show_tower_stats_button_pressed()
 
 func _connect_path_visibility_container_signals():
 	for button in PATH_LINE_VISIBILITY_CONTAINER.ALL_BUTTONS:
@@ -185,6 +186,7 @@ func _connect_game_map_signals():
 func _connect_tower_properties_hbox_signals():
 	TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.pressed.connect(_on_keep_tower_button_pressed)
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.pressed.connect(_on_remove_barricade_button_pressed)
+	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.pressed.connect(_on_replace_barricade_button_pressed)
 
 ## Connects pressed signals to callables for buttons on the hud that are not part of containers.
 func _connect_standalone_buttons_signals():
@@ -321,8 +323,9 @@ func _on_start_new_wave_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
 	# Hide start new wave button
 	START_NEW_WAVE_BUTTON.visible = false
-	# Ensure remove barricade button is hidden in case barricade is selected
+	# Ensure remove and replace barricade button is hidden in case barricade is selected
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
+	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
@@ -422,6 +425,12 @@ func _on_remove_barricade_button_pressed():
 	__selected_tower = null
 	# Hide remove barricade button
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
+	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
+
+
+## Handle replace barricade with tower button pressed
+func _on_replace_barricade_button_pressed(): # TODO
+	print("Replace tower button pressed")
 
 
 #                                              | Game Map |
@@ -510,10 +519,12 @@ func _on_tower_selected(tower: Tower):
 	if __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE and __show_selected_tower_range:
 		__selected_tower.RANGE_DISPLAY_SHAPE.visible = true
 	
-	# Allow ability for player to remove barricade once wave has been completed
+	# Allow ability for player to remove OR replace barricade once wave has been completed
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
+	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
 	if __selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE and GAME_MAP.is_idle():
 		TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = true
+		TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = true
 
 	# Ensure properties container is visible 
 	TOWER_PROPERTIES_CONTAINER.visible = true
