@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ctq8pd231ywrx"]
+
+[ext_resource type="Script" uid="uid://d3i26yrhheg64" path="res://ui/components/isometric_grid_display/isometric_grid_display.gd" id="1_2mmec"]
+
+[node name="IsometricGridDisplay" type="Node2D" unique_id=182163017]
+script = ExtResource("1_2mmec")
+LINE_COLOR = Color(0, 0, 0, 0.2509804)
