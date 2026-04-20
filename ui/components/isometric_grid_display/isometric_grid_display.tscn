@@ -4,4 +4,5 @@
 
 [node name="IsometricGridDisplay" type="Node2D" unique_id=182163017]
 script = ExtResource("1_2mmec")
+LINE_WIDTH = 5.0
 LINE_COLOR = Color(0, 0, 0, 0.2509804)
