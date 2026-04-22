@@ -24,12 +24,23 @@ func _ready() -> void:
 # PRIVATE METHODS
 # ---------------
 func _draw_isometric_grid() -> void:
-	# Draw horizontal lines
+	# Draw vertical lines
 	var line_offset: Vector2 = Vector2(GAME_MAP.tile_set.tile_size.x, -GAME_MAP.tile_set.tile_size.y)
 	for from_x in range(GAME_MAP.MAP_WIDTH * 2 + 1):
 		var line: Line2D = Line2D.new()
 		var from_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, 1)) + line_offset
 		var to_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, GAME_MAP.MAP_HEIGHT * 2 + 1)) + line_offset
+		line.points = PackedVector2Array([from_coord/2, to_coord/2])
+		line.width = LINE_WIDTH
+		line.default_color = LINE_COLOR
+		self.add_child(line)
+	
+	# Draw horizontal lines
+	var h_line_offset: Vector2 = Vector2(-GAME_MAP.tile_set.tile_size.x, -GAME_MAP.tile_set.tile_size.y)
+	for from_y in range(GAME_MAP.MAP_HEIGHT * 2 + 1):
+		var line: Line2D = Line2D.new()
+		var from_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(2, from_y - 1)) + h_line_offset
+		var to_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(GAME_MAP.MAP_WIDTH * 2 + 2, from_y - 1)) + h_line_offset
 		line.points = PackedVector2Array([from_coord/2, to_coord/2])
 		line.width = LINE_WIDTH
 		line.default_color = LINE_COLOR

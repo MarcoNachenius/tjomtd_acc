@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://d3i26yrhheg64" path="res://ui/components/isometric_grid_display/isometric_grid_display.gd" id="1_2mmec"]
 
 [node name="IsometricGridDisplay" type="Node2D" unique_id=182163017]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_2mmec")
-LINE_WIDTH = 5.0
-LINE_COLOR = Color(0, 0, 0, 0.2509804)
+LINE_WIDTH = 3.0
+LINE_COLOR = Color(0, 0, 0, 0.84705883)

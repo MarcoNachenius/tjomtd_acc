@@ -30,6 +30,7 @@ class_name RandomTowerBuildHUD
 	PATH_LINE_VISIBILITY_CONTAINER.HIDE_PATH_BUTTON: _on_hide_path_button_pressed
 }
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
+var GRID_DISPLAY: IsometricGridDisplay
 
 
 # CONSTANTS
@@ -68,6 +69,8 @@ func _ready():
 	_initialise_all_game_stats()
 	# Ensure awaiting selection slate upgrades container has been added
 	assert(AWAITING_SELECTION_SLATE_UPGRADES_CONTAINER, "No awaiting selection slate upgrades container assigned")
+
+	_add_grid_display()
 	
 	# Assign display amount of upgrade build level container
 	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.LEVEL_UPGRADE_PRICES[1]) + ")"
@@ -127,6 +130,22 @@ func get_selected_tower() -> Tower:
 # ***************
 # PRIVATE METHODS
 # ***************
+## Adds the isometric grid display to the game map and assigns it as a child of
+## the game map to ensure it is drawn underneath towers.
+func _add_grid_display() -> void:
+	# Add grid display
+	GRID_DISPLAY = UIConstants.ISOMETRIC_GRID_DISPLAY_LOAD.instantiate()
+	GRID_DISPLAY.GAME_MAP = GAME_MAP
+	GRID_DISPLAY.visible = false
+
+	GRID_DISPLAY.y_sort_enabled = false
+	GRID_DISPLAY.z_as_relative = false
+	GRID_DISPLAY.z_index = 3
+
+
+	GAME_MAP.add_child(GRID_DISPLAY)
+
+
 ## Connect signals from all components to relevant handler methods on ready.
 func _connect_all_component_signals():
 	# Build random tower hbox
@@ -399,6 +418,9 @@ func _on_build_random_tower_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = true
 	# Hide extended upgrade container
 	EXTENDED_UPGRADES_CONTAINER.visible = false
+	# Show display grid
+	GRID_DISPLAY.visible = true
+
 	# Switch to build mode
 	GAME_MAP.set_state(GAME_MAP.States.BUILD_MODE)
 	# Assign random towrer preload to the game map
@@ -411,6 +433,9 @@ func _on_exit_build_mode_button_pressed():
 	BUILD_RANDOM_TOWER_CONTAINER.BUILD_RANDOM_TOWER_BUTTON.visible = true
 	# Hide exit build mode button
 	BUILD_RANDOM_TOWER_CONTAINER.EXIT_BUILD_MODE_BUTTON.visible = false
+	# Hide display grid
+	GRID_DISPLAY.visible = false
+
 	# Switch to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 
@@ -591,7 +616,9 @@ func _on_tower_placed(_tower: Tower):
 	__current_turn_tower_count += 1
 	# If the max number of towers has been placed, exit build mode.
 	if __current_turn_tower_count == __max_towers_per_turn:
+		GRID_DISPLAY.visible = false
 		BUILD_RANDOM_TOWER_CONTAINER.visible = false
+		
 		GAME_MAP.clear_build_tower_values()
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 	
