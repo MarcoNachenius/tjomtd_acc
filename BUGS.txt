@@ -1,3 +1,0 @@
-RandomTowerBuildHUD.UPGRADE_BUILD_LEVEL_BUTTON:
-    When a game is loaded with max level, the upgrade build level button still appears
-
