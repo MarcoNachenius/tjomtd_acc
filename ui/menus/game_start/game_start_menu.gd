@@ -87,6 +87,12 @@ func _on_load_game_button_pressed():
 			break
 	assert(hud, "HUD not found in loaded scene.")
 
+	# Hide upgrade build level button if max build level has been reached
+	if game_map.RANDOM_TOWER_GENERATOR.get_curr_level() >= game_map.RANDOM_TOWER_GENERATOR.MAX_LEVEL:
+		hud.UPGRADE_BUILD_LEVEL_BUTTON.visible = false
+	else:
+		hud.UPGRADE_BUILD_LEVEL_BUTTON.visible = true
+
 	# Play level background music
 	BackgroundMusicPlayer.play_level_track()
 
