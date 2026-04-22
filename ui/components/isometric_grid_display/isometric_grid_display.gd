@@ -17,20 +17,20 @@ func _ready() -> void:
 	assert(GAME_MAP, "No game map (GAME_MAP) has been assigned.")
 	# Ensure the GameMap has a tile set to derive dimensions from.
 	assert(GAME_MAP.tile_set, "GAME_MAP has no tile_set assigned.")
-	self._build_isometric_grid()
+	self._draw_isometric_grid()
 
 
 # ---------------
 # PRIVATE METHODS
 # ---------------
-func _build_isometric_grid() -> void:
+func _draw_isometric_grid() -> void:
 	# Draw horizontal lines
-	var y_offset: Vector2 = Vector2(0, GAME_MAP.tile_set.tile_size.y / 2)
+	var line_offset: Vector2 = Vector2(GAME_MAP.tile_set.tile_size.x, -GAME_MAP.tile_set.tile_size.y)
 	for from_x in range(GAME_MAP.MAP_WIDTH + 1):
 		var line: Line2D = Line2D.new()
-		var from_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, 0)) - y_offset
-		var to_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, GAME_MAP.MAP_HEIGHT)) - y_offset
-		line.points = PackedVector2Array([from_coord, to_coord])
+		var from_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, 1)) + line_offset
+		var to_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, GAME_MAP.MAP_HEIGHT + 1)) + line_offset
+		line.points = PackedVector2Array([from_coord/2, to_coord/2])
 		line.width = LINE_WIDTH
 		line.default_color = LINE_COLOR
 		self.add_child(line)
