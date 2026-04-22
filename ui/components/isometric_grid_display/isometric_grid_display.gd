@@ -26,10 +26,10 @@ func _ready() -> void:
 func _draw_isometric_grid() -> void:
 	# Draw horizontal lines
 	var line_offset: Vector2 = Vector2(GAME_MAP.tile_set.tile_size.x, -GAME_MAP.tile_set.tile_size.y)
-	for from_x in range(GAME_MAP.MAP_WIDTH + 1):
+	for from_x in range(GAME_MAP.MAP_WIDTH * 2 + 1):
 		var line: Line2D = Line2D.new()
 		var from_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, 1)) + line_offset
-		var to_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, GAME_MAP.MAP_HEIGHT + 1)) + line_offset
+		var to_coord: Vector2 = GAME_MAP.map_to_local(Vector2i(from_x, GAME_MAP.MAP_HEIGHT * 2 + 1)) + line_offset
 		line.points = PackedVector2Array([from_coord/2, to_coord/2])
 		line.width = LINE_WIDTH
 		line.default_color = LINE_COLOR
