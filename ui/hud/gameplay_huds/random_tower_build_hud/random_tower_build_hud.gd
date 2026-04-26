@@ -517,7 +517,7 @@ func _on_wave_completed(total_waves_completed: int):
 	# Reset tracking of player keeping or upgrading towers awaiting selection this turn 
 	__built_tower_this_turn = false
 	# Handle situation where all waves have been completed
-	if total_waves_completed == GAME_MAP.CREEP_SPAWNER.get_wave_number():
+	if GAME_MAP.CREEP_SPAWNER.get_wave_number() == WaveConstants.TOTAL_WAVES:
 		__final_wave_reached = true
 		# Remove any remaining projectiles still on map
 		GAME_MAP.remove_remaining_projectiles()

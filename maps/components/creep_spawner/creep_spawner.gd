@@ -151,10 +151,8 @@ func get_wave_number() -> int:
 
 ## Saves the current wave data 
 func update_wave_data() -> void:
-	GameDataStorage.ACTIVE_GAME_DATA.wave_number = __wave_number
+	GameDataStorage.ACTIVE_GAME_DATA.wave_number = __game_map.get_total_waves_completed()
 
 ## Loads creep spawner data from save file
 func load_wave_data() -> void:
-	# Wave number is increased by 1 because wave number is only
-	# incremented AFTER new wave has been initiated.
-	__wave_number = GameDataStorage.ACTIVE_GAME_DATA.wave_number + 1
+	__wave_number = GameDataStorage.ACTIVE_GAME_DATA.wave_number
