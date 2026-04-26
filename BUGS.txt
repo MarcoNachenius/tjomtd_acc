@@ -1,7 +1,4 @@
 -----------------------------------------------------------------------------------------
-Extended upgrade button still visible after upgrade is triggered.
-As soon as other tower is selected the button disappears as expected.
-Lava pool original upgrade button still visible when upgade is triggered. Lava pool lvl 1
-button can be pressed and reverts the tower back to lvl 1.
+'Replace with Tower' button remains visible after tower has been selected for the level
 -----------------------------------------------------------------------------------------
 
