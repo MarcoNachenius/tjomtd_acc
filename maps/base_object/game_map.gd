@@ -1108,6 +1108,7 @@ func keep_upgrade_tower_from_towers_awaiting_selection(selectedTower: Tower, upg
 
 	# Update the placement grid coordinates reference for the new tower
 	_replace_tower_in_placement_grid_coords_dict(selectedTower, new_upgrade_tower, __placement_grid_coords_for_towers)
+	
 
 	# Reselect tower to update hud containers
 	tower_selected.emit(new_upgrade_tower)
