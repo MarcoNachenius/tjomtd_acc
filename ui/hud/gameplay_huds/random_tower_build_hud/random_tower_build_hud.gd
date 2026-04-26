@@ -31,6 +31,7 @@ class_name RandomTowerBuildHUD
 }
 var TOWER_UPGRADE_MANAGER: TowerUpgradeManager
 var GRID_DISPLAY: IsometricGridDisplay
+var TOWER_HIGHLIGHT_ANIMATION: AnimatedSprite2D
 
 
 # CONSTANTS
@@ -76,6 +77,8 @@ func _ready():
 	
 	# Assign display amount of upgrade build level container
 	UPGRADE_BUILD_LEVEL_BUTTON.text = UPGRADE_BUILD_LEVEL_BUTTON_STRING_PREFIX + str(GAME_MAP.RANDOM_TOWER_GENERATOR.LEVEL_UPGRADE_PRICES[1]) + ")"
+
+	_add_tower_highlight_animation()
 
 
 # **************
@@ -150,6 +153,13 @@ func _add_grid_display() -> void:
 
 
 	GAME_MAP.add_child(GRID_DISPLAY)
+
+
+func _add_tower_highlight_animation() -> void:
+	# Add tower highlight animation to the scene tree
+	TOWER_HIGHLIGHT_ANIMATION = UIConstants.TOWER_HIGHLIGHT_ANIMATION_LOAD.instantiate()
+	GAME_MAP.add_child(TOWER_HIGHLIGHT_ANIMATION)
+	TOWER_HIGHLIGHT_ANIMATION.visible = false
 
 
 ## Connect signals from all components to relevant handler methods on ready.
@@ -249,6 +259,8 @@ func _show_upgrade_tower_buttons(selectedTower: Tower, towerArray: Array[Tower])
 			TOWER_UPGRADES_CONTAINER.TOWER_ID_TO_BUTTON_DICT[upgrade_tower_id].visible = true
 
 func _deselect_tower():
+	# Hide tower highlight
+	TOWER_HIGHLIGHT_ANIMATION.visible = false
 	# Do nothing if there is no selected tower
 	if !__selected_tower:
 		return
@@ -567,6 +579,13 @@ func _on_tower_selected(tower: Tower):
 
 	# Set newly selected tower
 	__selected_tower = tower
+
+	# Handle tower highlight visibility
+	TOWER_HIGHLIGHT_ANIMATION.global_position = __selected_tower.global_position
+	TOWER_HIGHLIGHT_ANIMATION.visible = true
+	if __selected_tower.get_state() == Tower.States.AWAITING_SELECTION:
+		TOWER_HIGHLIGHT_ANIMATION.visible = false
+
 
 	# Handle range display of newly selected tower
 	if __selected_tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE and __show_selected_tower_range:

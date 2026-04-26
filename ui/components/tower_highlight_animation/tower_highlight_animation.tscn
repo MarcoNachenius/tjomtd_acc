@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cm55o1xk6ct8d"]
+
+[ext_resource type="Texture2D" uid="uid://dtg8jwi3ei8gq" path="res://ui/components/tower_highlight_animation/awaiting_selection_animation_rotated_and_scaled.png" id="1_aj2wc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21ajm"]
+atlas = ExtResource("1_aj2wc")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt7r6"]
+atlas = ExtResource("1_aj2wc")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr31a"]
+atlas = ExtResource("1_aj2wc")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37e2v"]
+atlas = ExtResource("1_aj2wc")
+region = Rect2(0, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3jtg"]
+atlas = ExtResource("1_aj2wc")
+region = Rect2(256, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bofji"]
+atlas = ExtResource("1_aj2wc")
+region = Rect2(512, 128, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvwok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21ajm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt7r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr31a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37e2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3jtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bofji")
+}],
+"loop": true,
+"name": &"tower_highlight",
+"speed": 20.0
+}]
+
+[node name="TowerHighlightAnimation" type="AnimatedSprite2D" unique_id=1734956061]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_lvwok")
+animation = &"tower_highlight"
+autoplay = "tower_highlight"
