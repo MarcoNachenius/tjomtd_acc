@@ -46,6 +46,8 @@ var __max_towers_per_turn = GameConstants.MAX_PLACEABLE_TOWERS_PER_TURN
 ## Number of towers that have been placed this turn
 var __current_turn_tower_count = 0
 var __final_wave_reached: bool = false
+# Tracks if player has built a tower for the current turn
+var __built_tower_this_turn: bool = false
 
 # ONREADYS
 # ========
@@ -87,6 +89,8 @@ func handle_built_tower_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
 		GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
 		# Give player option to start new wave
 		START_NEW_WAVE_BUTTON.visible = true
+		# Track that a tower has been built this turn
+		__built_tower_this_turn = true
 		_hide_containers_on_tower_kept()
 		return
 	
@@ -107,6 +111,8 @@ func handle_built_tower_compound_upgrade(upgradeTowerID: TowerConstants.TowerIDs
 	GAME_MAP.keep_compound_upgrade_tower_from_towers_awaiting_selection(__selected_tower, upgradeTowerID)
 	# Switch the game map state to navigation mode
 	GAME_MAP.switch_states(GameMap.States.NAVIGATION_MODE)
+	# Track that a tower has been built this turn
+	__built_tower_this_turn = true
 
 
 func handle_extended_upgrade(upgradeTowerID: TowerConstants.UpgradeTowerIDs):
@@ -287,6 +293,9 @@ func _handle_compound_upgrade_for_towers_awaiting_selection():
 	# Show tower buttons corresponding to viable compound upgrade tower IDs
 	for viable_tower_id in viable_compound_upgrade_tower_ids:
 		AWAITING_SELECTION_COMPOUND_UPGRADE_TOWERS_CONTAINER.TOWER_ID_TO_BUTTON_DICT[viable_tower_id].visible = true
+	
+	# Track that a tower has been built this turn
+		__built_tower_this_turn = true
 
 ## Controls the visibility of containers when the HUD is initiated
 func _handle_initial_container_visibility():
@@ -505,6 +514,8 @@ func _on_life_lost(remaining_lives: int):
 
 
 func _on_wave_completed(total_waves_completed: int):
+	# Reset tracking of player keeping or upgrading towers awaiting selection this turn 
+	__built_tower_this_turn = false
 	# Handle situation where all waves have been completed
 	if total_waves_completed == WaveConstants.TOTAL_WAVES:
 		__final_wave_reached = true
@@ -566,6 +577,12 @@ func _on_tower_selected(tower: Tower):
 	if __selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE and GAME_MAP.is_idle():
 		TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = true
 		TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = true
+		# Handle situation where player has already built a tower this turn and has selected a barricade
+		if __built_tower_this_turn:
+			TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
+		# Handle situation where max towers per turn has been reached and player has selected a barricade
+		if __current_turn_tower_count == __max_towers_per_turn:
+			TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
 
 	# Ensure properties container is visible 
 	TOWER_PROPERTIES_CONTAINER.visible = true
@@ -695,3 +712,5 @@ func _on_keep_tower_button_pressed():
 	START_NEW_WAVE_BUTTON.visible = true
 
 	__current_turn_tower_count = 0
+
+	__built_tower_this_turn = true
