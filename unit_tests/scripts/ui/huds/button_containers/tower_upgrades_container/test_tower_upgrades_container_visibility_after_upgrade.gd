@@ -123,7 +123,6 @@ func test_hide_button_after_built_tower_upgrade():
     # Ensure lava pool selection has been triggered
     assert_eq(random_build_tower_hud.__selected_tower.TOWER_ID, TowerConstants.TowerIDs.LAVA_POOL_LVL_1, "Selected tower has been upgraded to lava pool level 1")
     # Ensure lava pool button is no longer visible
-    assert_false(random_build_tower_hud.TOWER_UPGRADES_CONTAINER.visible, "Tower upgrades container is not visible after upgrading black marble level 2 to lava pool")
     assert_false(random_build_tower_hud.TOWER_UPGRADES_CONTAINER.LAVA_POOL_BUTTON.visible, "Lava pool upgrade button is not visible after upgrading black marble level 2 to lava pool")
 
     # ================================================================

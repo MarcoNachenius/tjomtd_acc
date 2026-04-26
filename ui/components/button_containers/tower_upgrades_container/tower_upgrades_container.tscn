@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://24wnsdvwnkv0"]
+[gd_scene format=3 uid="uid://24wnsdvwnkv0"]
 
 [ext_resource type="Script" uid="uid://nkdpi8i71fo5" path="res://ui/components/button_containers/tower_upgrades_container/tower_upgrades_container.gd" id="1_8dg2t"]
 
-[node name="TowerUpgradesContainer" type="HBoxContainer" node_paths=PackedStringArray("TOMBSTONE_BUTTON", "SAM_SITE_BUTTON", "LAVA_POOL_BUTTON", "ICE_SHARD_BUTTON", "EMP_STUNNER_BUTTON", "GATLING_GUN_BUTTON", "SHARP_SHOOTER_BUTTON")]
+[node name="TowerUpgradesContainer" type="HBoxContainer" unique_id=1226758739 node_paths=PackedStringArray("TOMBSTONE_BUTTON", "SAM_SITE_BUTTON", "LAVA_POOL_BUTTON", "ICE_SHARD_BUTTON", "EMP_STUNNER_BUTTON", "GATLING_GUN_BUTTON", "SHARP_SHOOTER_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_8dg2t")
@@ -14,34 +14,34 @@ EMP_STUNNER_BUTTON = NodePath("EMPStunnerButton")
 GATLING_GUN_BUTTON = NodePath("GatlingGunButton")
 SHARP_SHOOTER_BUTTON = NodePath("SharpShooterButton")
 
-[node name="TombstoneButton" type="Button" parent="."]
+[node name="TombstoneButton" type="Button" parent="." unique_id=861811478]
 layout_mode = 2
 text = "Tombstone"
 
-[node name="SamSiteButton" type="Button" parent="."]
+[node name="SamSiteButton" type="Button" parent="." unique_id=100512490]
 visible = false
 layout_mode = 2
 text = "Sam Site"
 
-[node name="LavaPoolButton" type="Button" parent="."]
+[node name="LavaPoolButton" type="Button" parent="." unique_id=264246922]
 visible = false
 layout_mode = 2
 text = "Lava Pool"
 
-[node name="IceShardButton" type="Button" parent="."]
+[node name="IceShardButton" type="Button" parent="." unique_id=934819881]
 layout_mode = 2
 text = "Ice Shard"
 
-[node name="EMPStunnerButton" type="Button" parent="."]
+[node name="EMPStunnerButton" type="Button" parent="." unique_id=1785428554]
 layout_mode = 2
 text = "EMP Stunner"
 
-[node name="GatlingGunButton" type="Button" parent="."]
+[node name="GatlingGunButton" type="Button" parent="." unique_id=338690333]
 visible = false
 layout_mode = 2
 text = "Gatling Gun
 "
 
-[node name="SharpShooterButton" type="Button" parent="."]
+[node name="SharpShooterButton" type="Button" parent="." unique_id=1159319406]
 layout_mode = 2
 text = "Sharp Shooter"

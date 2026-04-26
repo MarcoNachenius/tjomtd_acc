@@ -562,6 +562,7 @@ func _on_tower_selected(tower: Tower):
 	# Allow ability for player to remove OR replace barricade once wave has been completed
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
 	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
+	
 	if __selected_tower.TOWER_ID == TowerConstants.TowerIDs.BARRICADE and GAME_MAP.is_idle():
 		TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = true
 		TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = true
@@ -589,6 +590,8 @@ func _on_tower_selected(tower: Tower):
 	
 	# Handle upgrade tower selection
 	if TowerConstants.UpgradeTowerIDs.values().has(__selected_tower.TOWER_ID):
+		# Hide upgrade tower buttons
+		TOWER_UPGRADES_CONTAINER.hide_all_tower_buttons()
 		# Hide keep tower button 
 		TOWER_PROPERTIES_CONTAINER.KEEP_TOWER_BUTTON.visible = false
 		# Hide compound upgrades container
