@@ -141,6 +141,7 @@ theme_override_constants/separation = 20
 
 [node name="GameStatsPanel" type="PanelContainer" parent="StatsContainer" unique_id=581495137]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="GameStatsContianer" parent="StatsContainer/GameStatsPanel" unique_id=2069260098 instance=ExtResource("7_jg8ij")]
 layout_mode = 2
