@@ -1,44 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://bixblut542mej"]
+[gd_scene format=3 uid="uid://bixblut542mej"]
 
 [ext_resource type="Script" uid="uid://p721lfxwf8sw" path="res://ui/menus/recipe_menu/components/upgrade_tower_info_container.gd" id="1_63hut"]
 [ext_resource type="PackedScene" uid="uid://chovoj3agi21n" path="res://ui/components/button_containers/standalone_containers/buildable_towers_vbox/buildable_towers_vbox.tscn" id="1_vvggc"]
 [ext_resource type="PackedScene" uid="uid://d0p0ayftxmdcb" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.tscn" id="2_63hut"]
 
-[node name="UpgradeTowerInfoContainer" type="VBoxContainer" node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_STATS_TEXT", "TOWER_DESCRIPTION_TEXT", "UPGRADES_INTO_TOWER_BUTTONS", "REQUIRES_BUILDABLE_TOWERS_BUTTONS", "REQUIRES_UPGRADE_TOWERS_BUTTONS", "REQUIRES_TOWERS_COLUMN", "UPGRADES_INTO_TOWERS_COLUMN", "TOWER_STATS_COLUMN", "TOWER_DESCRIPTION_COLUMN")]
+[node name="UpgradeTowerInfoContainer" type="VBoxContainer" unique_id=877950284 node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_STATS_TEXT", "TOWER_DESCRIPTION_TEXT", "UPGRADES_INTO_TOWER_BUTTONS", "REQUIRES_BUILDABLE_TOWERS_BUTTONS", "REQUIRES_UPGRADE_TOWERS_BUTTONS", "REQUIRES_TOWERS_COLUMN", "UPGRADES_INTO_TOWERS_COLUMN", "TOWER_STATS_COLUMN", "TOWER_DESCRIPTION_COLUMN")]
 offset_right = 793.0
 offset_bottom = 1252.0
 script = ExtResource("1_63hut")
 TOWER_NAME_TEXT = NodePath("TowerNameHeader")
 TOWER_STATS_TEXT = NodePath("StatsAndDescription/TowerStatsContainer/TowerStatsText")
-TOWER_DESCRIPTION_TEXT = NodePath("StatsAndDescription/TowerDesctiptionContainer/TowerDescriptionText")
+TOWER_DESCRIPTION_TEXT = NodePath("ButtonLists/TowerDesctiptionContainer/TowerDescriptionText")
 UPGRADES_INTO_TOWER_BUTTONS = NodePath("ButtonLists/UpgradesIntoTower/UpgradeTowerButtonVBox")
 REQUIRES_BUILDABLE_TOWERS_BUTTONS = NodePath("ButtonLists/RequiresTowers/BuildableTowersVBox")
 REQUIRES_UPGRADE_TOWERS_BUTTONS = NodePath("ButtonLists/RequiresTowers/UpgradeTowerButtonVBox")
 REQUIRES_TOWERS_COLUMN = NodePath("ButtonLists/RequiresTowers")
 UPGRADES_INTO_TOWERS_COLUMN = NodePath("ButtonLists/UpgradesIntoTower")
 TOWER_STATS_COLUMN = NodePath("StatsAndDescription/TowerStatsContainer")
-TOWER_DESCRIPTION_COLUMN = NodePath("StatsAndDescription/TowerDesctiptionContainer")
+TOWER_DESCRIPTION_COLUMN = NodePath("ButtonLists/TowerDesctiptionContainer")
 
-[node name="TowerNameHeader" type="RichTextLabel" parent="."]
+[node name="TowerNameHeader" type="RichTextLabel" parent="." unique_id=1359135839]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
 text = "TOWER NAME"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="StatsAndDescription" type="HBoxContainer" parent="."]
+[node name="StatsAndDescription" type="HBoxContainer" parent="." unique_id=1237022493]
 layout_mode = 2
 
-[node name="TowerStatsContainer" type="VBoxContainer" parent="StatsAndDescription"]
+[node name="TowerStatsContainer" type="VBoxContainer" parent="StatsAndDescription" unique_id=624303743]
 layout_mode = 2
 
-[node name="TowerStatsHeader" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer"]
+[node name="TowerStatsHeader" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer" unique_id=415100563]
 layout_mode = 2
 text = "ATTRIBUTES:"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="TowerStatsText" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer"]
+[node name="TowerStatsText" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer" unique_id=1700595901]
 layout_mode = 2
 text = "Damage: 0
 Cooldown speed: 0.0
@@ -46,48 +47,48 @@ Range: 0"
 fit_content = true
 autowrap_mode = 0
 
-[node name="TowerDesctiptionContainer" type="VBoxContainer" parent="StatsAndDescription"]
+[node name="ButtonLists" type="HBoxContainer" parent="." unique_id=1548521639]
 layout_mode = 2
 
-[node name="TowerDescriptionHeader" type="RichTextLabel" parent="StatsAndDescription/TowerDesctiptionContainer"]
+[node name="TowerDesctiptionContainer" type="VBoxContainer" parent="ButtonLists" unique_id=655462061]
+layout_mode = 2
+
+[node name="TowerDescriptionHeader" type="RichTextLabel" parent="ButtonLists/TowerDesctiptionContainer" unique_id=1068091033]
 layout_mode = 2
 text = "DESCRIPTION:"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="TowerDescriptionText" type="RichTextLabel" parent="StatsAndDescription/TowerDesctiptionContainer"]
+[node name="TowerDescriptionText" type="RichTextLabel" parent="ButtonLists/TowerDesctiptionContainer" unique_id=1509221866]
 layout_mode = 2
 text = "This is the tower description with very long ling line text to wrapping functionality"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ButtonLists" type="HBoxContainer" parent="."]
+[node name="RequiresTowers" type="VBoxContainer" parent="ButtonLists" unique_id=972302575]
 layout_mode = 2
 
-[node name="RequiresTowers" type="VBoxContainer" parent="ButtonLists"]
-layout_mode = 2
-
-[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/RequiresTowers"]
+[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/RequiresTowers" unique_id=1433687496]
 layout_mode = 2
 text = "Requires Towers:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="BuildableTowersVBox" parent="ButtonLists/RequiresTowers" instance=ExtResource("1_vvggc")]
+[node name="BuildableTowersVBox" parent="ButtonLists/RequiresTowers" unique_id=797046615 instance=ExtResource("1_vvggc")]
 layout_mode = 2
 
-[node name="UpgradeTowerButtonVBox" parent="ButtonLists/RequiresTowers" instance=ExtResource("2_63hut")]
+[node name="UpgradeTowerButtonVBox" parent="ButtonLists/RequiresTowers" unique_id=1061980115 instance=ExtResource("2_63hut")]
 layout_mode = 2
 
-[node name="UpgradesIntoTower" type="VBoxContainer" parent="ButtonLists"]
+[node name="UpgradesIntoTower" type="VBoxContainer" parent="ButtonLists" unique_id=674106171]
 layout_mode = 2
 
-[node name="UpgradesIntoTowerText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoTower"]
+[node name="UpgradesIntoTowerText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoTower" unique_id=221293100]
 layout_mode = 2
 text = "Upgrades Into Towers:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="UpgradeTowerButtonVBox" parent="ButtonLists/UpgradesIntoTower" instance=ExtResource("2_63hut")]
+[node name="UpgradeTowerButtonVBox" parent="ButtonLists/UpgradesIntoTower" unique_id=1162715882 instance=ExtResource("2_63hut")]
 layout_mode = 2

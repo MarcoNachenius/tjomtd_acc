@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://sx45aaxd3bt1"]
+[gd_scene format=3 uid="uid://sx45aaxd3bt1"]
 
 [ext_resource type="Script" uid="uid://dpiayxy61h1js" path="res://ui/menus/recipe_menu/recipe_menu.gd" id="1_npolj"]
 [ext_resource type="PackedScene" uid="uid://8atbe64nu4qe" path="res://ui/menus/recipe_menu/components/recipe_type_button_vbox.tscn" id="2_solgh"]
 [ext_resource type="PackedScene" uid="uid://bfm7atx3a0lat" path="res://ui/menus/recipe_menu/components/tower_and_slate_scroll_container.tscn" id="3_solgh"]
 [ext_resource type="PackedScene" uid="uid://d03117du635qy" path="res://ui/menus/recipe_menu/components/tower_and_slate_info_containers.tscn" id="4_eic4r"]
 
-[node name="RecipeMenu" type="Control" node_paths=PackedStringArray("RETURN_TO_MENU_BUTTON", "RECIPE_TYPE_BUTTON_VBOX", "TOWER_AND_SLATE_BUTTONS", "TOWER_AND_SLATE_INFO_CONTAINERS")]
+[node name="RecipeMenu" type="Control" unique_id=1699059756 node_paths=PackedStringArray("RETURN_TO_MENU_BUTTON", "RECIPE_TYPE_BUTTON_VBOX", "TOWER_AND_SLATE_BUTTONS", "TOWER_AND_SLATE_INFO_CONTAINERS")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,16 @@ RECIPE_TYPE_BUTTON_VBOX = NodePath("HBoxContainer/VBoxContainer/RecipeTypeButton
 TOWER_AND_SLATE_BUTTONS = NodePath("HBoxContainer/TowerAndSlateScrollContainer")
 TOWER_AND_SLATE_INFO_CONTAINERS = NodePath("TowerAndSlateInfoContainers")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=531910544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1128113634]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -31,23 +40,23 @@ offset_bottom = 202.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="TowerAndSlateScrollContainer" parent="HBoxContainer" instance=ExtResource("3_solgh")]
+[node name="TowerAndSlateScrollContainer" parent="HBoxContainer" unique_id=1377997493 instance=ExtResource("3_solgh")]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=344946108]
 layout_mode = 2
 
-[node name="RecipeTypeButtonVbox" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_solgh")]
+[node name="RecipeTypeButtonVbox" parent="HBoxContainer/VBoxContainer" unique_id=888014325 instance=ExtResource("2_solgh")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 alignment = 1
 
-[node name="ReturnToMainMenu" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="ReturnToMainMenu" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1387647067]
 layout_mode = 2
 text = "Return to
 Main Menu"
 
-[node name="TowerAndSlateInfoContainers" parent="." instance=ExtResource("4_eic4r")]
+[node name="TowerAndSlateInfoContainers" parent="." unique_id=849831126 instance=ExtResource("4_eic4r")]
 layout_mode = 0

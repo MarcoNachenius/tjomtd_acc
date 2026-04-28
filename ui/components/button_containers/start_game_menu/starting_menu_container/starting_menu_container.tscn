@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0l4rok7p0ldy"]
+[gd_scene format=3 uid="uid://b0l4rok7p0ldy"]
 
 [ext_resource type="Script" uid="uid://cbc7kilv02031" path="res://ui/components/button_containers/start_game_menu/starting_menu_container/starting_menu_container.gd" id="1_v2dhc"]
 
-[node name="StartingMenuContainer" type="VBoxContainer" node_paths=PackedStringArray("NEW_GAME_BUTTON", "LOAD_GAME_BUTTON", "TOWER_AND_SLATE_INFO_BUTTON", "HOW_TO_PLAY_BUTTON", "EXIT_GAME_BUTTON")]
+[node name="StartingMenuContainer" type="VBoxContainer" unique_id=1181310230 node_paths=PackedStringArray("NEW_GAME_BUTTON", "LOAD_GAME_BUTTON", "TOWER_AND_SLATE_INFO_BUTTON", "HOW_TO_PLAY_BUTTON", "EXIT_GAME_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_v2dhc")
@@ -12,23 +12,24 @@ TOWER_AND_SLATE_INFO_BUTTON = NodePath("TowerAndSlateInfo")
 HOW_TO_PLAY_BUTTON = NodePath("HowToPlay")
 EXIT_GAME_BUTTON = NodePath("ExitGame")
 
-[node name="ContinueGame" type="Button" parent="."]
+[node name="ContinueGame" type="Button" parent="." unique_id=231462524]
 layout_mode = 2
 text = "Continue Game"
 
-[node name="NewGame" type="Button" parent="."]
+[node name="NewGame" type="Button" parent="." unique_id=1193178169]
 layout_mode = 2
 text = "New Game"
 
-[node name="TowerAndSlateInfo" type="Button" parent="."]
+[node name="TowerAndSlateInfo" type="Button" parent="." unique_id=1780309653]
 layout_mode = 2
 text = "Tower and Slate
 Information"
 
-[node name="HowToPlay" type="Button" parent="."]
+[node name="HowToPlay" type="Button" parent="." unique_id=1787319491]
+visible = false
 layout_mode = 2
 text = "How to Play"
 
-[node name="ExitGame" type="Button" parent="."]
+[node name="ExitGame" type="Button" parent="." unique_id=1232772988]
 layout_mode = 2
 text = "Exit Game"

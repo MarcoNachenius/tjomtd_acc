@@ -1,43 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbr4cbp4x416s"]
+[gd_scene format=3 uid="uid://cbr4cbp4x416s"]
 
 [ext_resource type="Script" uid="uid://c4f1owxtyc317" path="res://ui/menus/recipe_menu/components/buildable_tower_info_container.gd" id="1_kckn6"]
 [ext_resource type="PackedScene" uid="uid://bc8qyhcgomyfb" path="res://ui/components/button_containers/standalone_containers/slate_button_vbox/slate_button_v_box.tscn" id="2_vumuq"]
 [ext_resource type="PackedScene" uid="uid://d0p0ayftxmdcb" path="res://ui/components/button_containers/standalone_containers/upgrade_tower_button_v_box/upgrade_tower_button_v_box.tscn" id="3_8e4xr"]
 
-[node name="BuildableTowerInfoContainer" type="VBoxContainer" node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_STATS_TEXT", "TOWER_DESCRIPTION_TEXT", "UPGRADES_INTO_TOWER_BUTTONS", "UPGRADES_INTO_SLATES_BUTTONS", "UPGRADES_INTO_SLATES_COLUMN", "UPGRADES_INTO_TOWERS_COLUMN", "TOWER_STATS_COLUMN", "TOWER_DESCRIPTION_COLUMN")]
+[node name="BuildableTowerInfoContainer" type="VBoxContainer" unique_id=1774355035 node_paths=PackedStringArray("TOWER_NAME_TEXT", "TOWER_STATS_TEXT", "TOWER_DESCRIPTION_TEXT", "UPGRADES_INTO_TOWER_BUTTONS", "UPGRADES_INTO_SLATES_BUTTONS", "UPGRADES_INTO_SLATES_COLUMN", "UPGRADES_INTO_TOWERS_COLUMN", "TOWER_STATS_COLUMN", "TOWER_DESCRIPTION_COLUMN")]
 offset_right = 966.0
 offset_bottom = 523.0
 script = ExtResource("1_kckn6")
 TOWER_NAME_TEXT = NodePath("TowerNameHeader")
 TOWER_STATS_TEXT = NodePath("StatsAndDescription/TowerStatsContainer/TowerStatsText")
-TOWER_DESCRIPTION_TEXT = NodePath("StatsAndDescription/TowerDesctiptionContainer/TowerDescriptionText")
+TOWER_DESCRIPTION_TEXT = NodePath("ButtonLists/TowerDesctiptionContainer/TowerDescriptionText")
 UPGRADES_INTO_TOWER_BUTTONS = NodePath("ButtonLists/UpgradesIntoTower/UpgradeTowerButtonVBox")
 UPGRADES_INTO_SLATES_BUTTONS = NodePath("ButtonLists/UpgradesIntoSlate/SlateButtonVBox")
 UPGRADES_INTO_SLATES_COLUMN = NodePath("ButtonLists/UpgradesIntoSlate")
 UPGRADES_INTO_TOWERS_COLUMN = NodePath("ButtonLists/UpgradesIntoTower")
 TOWER_STATS_COLUMN = NodePath("StatsAndDescription/TowerStatsContainer")
-TOWER_DESCRIPTION_COLUMN = NodePath("StatsAndDescription/TowerDesctiptionContainer")
+TOWER_DESCRIPTION_COLUMN = NodePath("ButtonLists/TowerDesctiptionContainer")
 
-[node name="TowerNameHeader" type="RichTextLabel" parent="."]
+[node name="TowerNameHeader" type="RichTextLabel" parent="." unique_id=1209353981]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
 text = "TOWER NAME"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="StatsAndDescription" type="HBoxContainer" parent="."]
+[node name="StatsAndDescription" type="HBoxContainer" parent="." unique_id=1399713231]
 layout_mode = 2
 
-[node name="TowerStatsContainer" type="VBoxContainer" parent="StatsAndDescription"]
+[node name="TowerStatsContainer" type="VBoxContainer" parent="StatsAndDescription" unique_id=2024979213]
 layout_mode = 2
 
-[node name="TowerStatsHeader" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer"]
+[node name="TowerStatsHeader" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer" unique_id=984195731]
 layout_mode = 2
 text = "ATTRIBUTES:"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="TowerStatsText" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer"]
+[node name="TowerStatsText" type="RichTextLabel" parent="StatsAndDescription/TowerStatsContainer" unique_id=1766892510]
 layout_mode = 2
 text = "Damage: 0
 Cooldown speed: 0.0
@@ -45,45 +46,46 @@ Range: 0"
 fit_content = true
 autowrap_mode = 0
 
-[node name="TowerDesctiptionContainer" type="VBoxContainer" parent="StatsAndDescription"]
+[node name="ButtonLists" type="HBoxContainer" parent="." unique_id=606142009]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TowerDesctiptionContainer" type="VBoxContainer" parent="ButtonLists" unique_id=1728281061]
 layout_mode = 2
 
-[node name="TowerDescriptionHeader" type="RichTextLabel" parent="StatsAndDescription/TowerDesctiptionContainer"]
+[node name="TowerDescriptionHeader" type="RichTextLabel" parent="ButtonLists/TowerDesctiptionContainer" unique_id=2105982714]
 layout_mode = 2
 text = "DESCRIPTION:"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="TowerDescriptionText" type="RichTextLabel" parent="StatsAndDescription/TowerDesctiptionContainer"]
+[node name="TowerDescriptionText" type="RichTextLabel" parent="ButtonLists/TowerDesctiptionContainer" unique_id=1469910310]
 layout_mode = 2
 text = "This is the tower description with very long ling line text to wrapping functionality"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ButtonLists" type="HBoxContainer" parent="."]
+[node name="UpgradesIntoSlate" type="VBoxContainer" parent="ButtonLists" unique_id=146548102]
 layout_mode = 2
 
-[node name="UpgradesIntoSlate" type="VBoxContainer" parent="ButtonLists"]
-layout_mode = 2
-
-[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoSlate"]
+[node name="UpgradesIntoSlateText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoSlate" unique_id=863709609]
 layout_mode = 2
 text = "Upgrades Into Slates:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="SlateButtonVBox" parent="ButtonLists/UpgradesIntoSlate" instance=ExtResource("2_vumuq")]
+[node name="SlateButtonVBox" parent="ButtonLists/UpgradesIntoSlate" unique_id=1192614301 instance=ExtResource("2_vumuq")]
 layout_mode = 2
 
-[node name="UpgradesIntoTower" type="VBoxContainer" parent="ButtonLists"]
+[node name="UpgradesIntoTower" type="VBoxContainer" parent="ButtonLists" unique_id=1670086270]
 layout_mode = 2
 
-[node name="UpgradesIntoTowerText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoTower"]
+[node name="UpgradesIntoTowerText" type="RichTextLabel" parent="ButtonLists/UpgradesIntoTower" unique_id=620453285]
 layout_mode = 2
 text = "Upgrades Into Towers:"
 fit_content = true
 autowrap_mode = 0
 
-[node name="UpgradeTowerButtonVBox" parent="ButtonLists/UpgradesIntoTower" instance=ExtResource("3_8e4xr")]
+[node name="UpgradeTowerButtonVBox" parent="ButtonLists/UpgradesIntoTower" unique_id=1464069000 instance=ExtResource("3_8e4xr")]
 layout_mode = 2
