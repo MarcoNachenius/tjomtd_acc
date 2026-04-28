@@ -16,6 +16,7 @@ WAVES_COMPLETED_AMOUNT_LABEL = NodePath("WavesCompletedAmount")
 
 [node name="GameOutcomeLabel" type="RichTextLabel" parent="." unique_id=770680826]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 26
 text = "You won!"
 fit_content = true
 autowrap_mode = 0

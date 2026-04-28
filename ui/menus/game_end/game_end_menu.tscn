@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://csdfau5cwh873" path="res://ui/menus/game_end/game_end_menu.gd" id="1_cybof"]
 [ext_resource type="Theme" uid="uid://dt1to6ujkjj53" path="res://ui/themes/menus/default_menu_theme.tres" id="1_whtdw"]
 [ext_resource type="PackedScene" uid="uid://dn5ve3rui2hq2" path="res://ui/components/text_containers/game_end_data/game_end_results_text.tscn" id="2_kjpk8"]
+[ext_resource type="Texture2D" uid="uid://pffocuco0ecu" path="res://game/game_logo_transparent.png" id="3_silm3"]
 
 [node name="GameEndMenu" type="Control" unique_id=968429690 node_paths=PackedStringArray("BACK_TO_MAIN_MENU_BUTTON", "EXIT_GAME_BUTTON")]
 layout_mode = 3
@@ -15,6 +16,24 @@ theme = ExtResource("1_whtdw")
 script = ExtResource("1_cybof")
 BACK_TO_MAIN_MENU_BUTTON = NodePath("MainContainer/ReturnToMainMenu")
 EXIT_GAME_BUTTON = NodePath("MainContainer/ExitGame")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=753370775]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=91159316]
+layout_mode = 0
+offset_left = 550.00006
+offset_top = 23.000004
+offset_right = 1574.0
+offset_bottom = 1047.0
+scale = Vector2(0.18843566, 0.18843566)
+texture = ExtResource("3_silm3")
 
 [node name="MainContainer" type="VBoxContainer" parent="." unique_id=1334643681]
 layout_mode = 1
