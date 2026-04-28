@@ -52,7 +52,8 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="TowerHighlightAnimation" type="AnimatedSprite2D" unique_id=1734956061]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=1734956061]
+modulate = Color(1, 1, 1, 0.7176471)
 z_index = 2
 z_as_relative = false
 y_sort_enabled = true
