@@ -2,6 +2,7 @@ extends TileMapLayer
 class_name GameMap
 
 # ENUMS
+# =====
 enum ImpedimentPlacementTypes {
 	SINGLE_POINT,
 	TOWER
@@ -13,7 +14,16 @@ enum States {
 	NAVIGATION_MODE
 }
 
+# CONSTANTS
+# =========
+const CREEP_PATH_LINE_Z_INDEX: int = 3
+const CREEP_PATH_LINE_Y_SORT_ENABLED: bool = true
+# Green with 25% transparency
+const CREEP_PATH_LINE_COLOR: Color = Color(0, 1, 0, 0.25)
+
+
 # SIGNALS
+# =======
 signal camera_moved(distance: Vector2)
 signal balance_altered(remaining_balance: int)
 signal lost_life(remaining_lives: int)
@@ -25,7 +35,9 @@ signal lives_depleted
 signal final_boss_path_completed(total_damage_taken: int, maze_completion_time: float)
 signal slate_placed
 
+
 # EXPORTS
+# =======
 ## Map ID
 @export var MAP_ID: MapConstants.MapID
 ## Number of map tiles
@@ -38,6 +50,7 @@ signal slate_placed
 @export var __path_end_point: Vector2i
 ## Main grid coodrinate.
 @export var __path_start_point: Vector2i
+
 
 # PRIVATE VARS
 # ============
@@ -68,12 +81,14 @@ var __towers_awaiting_selection: Array[Tower]
 var __towers_on_map: Array[Tower]
 var __valid_build_position_surface_highlight: Sprite2D
 
+
 # SINGLETONS
 # ==========
 var CREEP_SPAWNER: CreepSpawner
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
 var SLATE_MANAGER: SlateManager
 var ENTITY_LAYER: Node2D
+
 
 # -----------------
 # INHERITED METHODS
@@ -541,9 +556,9 @@ func update_path_line() -> void:
 	# Create new line
 	var new_path_line = Line2D.new()
 	# Edit presentation
-	new_path_line.z_index = 3
-	new_path_line.y_sort_enabled = true
-	new_path_line.default_color = Color.GREEN
+	new_path_line.z_index = CREEP_PATH_LINE_Z_INDEX
+	new_path_line.y_sort_enabled = CREEP_PATH_LINE_Y_SORT_ENABLED
+	new_path_line.default_color = CREEP_PATH_LINE_COLOR
 	# Add points
 	for point in __curr_path:
 		new_path_line.add_point(__main_tileset.map_to_local(point))
