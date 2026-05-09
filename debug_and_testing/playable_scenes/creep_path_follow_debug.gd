@@ -20,10 +20,28 @@ var __found_creep: Creep
 
 func _ready() -> void:
 	if FOLLOW_CREEP:
-		CAMERA.zoom = Vector2(1.5, 1.5)
+		CAMERA.zoom = Vector2(1, 1)
 	 
 	GAME_MAP.__curr_path = [
 		Vector2i(20, 20),
+		Vector2i(20, 30),
+		Vector2i(30, 30),
+		Vector2i(30, 20),
+		Vector2i(20, 20),
+		Vector2i(10, 10),
+		Vector2i(0, 20),
+		Vector2i(10, 30),
+		Vector2i(20, 20),
+		# Repeat
+		Vector2i(20, 30),
+		Vector2i(30, 30),
+		Vector2i(30, 20),
+		Vector2i(20, 20),
+		Vector2i(10, 10),
+		Vector2i(0, 20),
+		Vector2i(10, 30),
+		Vector2i(20, 20),
+		# Repeat
 		Vector2i(20, 30),
 		Vector2i(30, 30),
 		Vector2i(30, 20),
