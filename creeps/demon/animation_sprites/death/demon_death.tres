@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=136 format=3 uid="uid://btrg871jxtxx8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://btrg871jxtxx8"]
 
 [ext_resource type="Texture2D" uid="uid://c6motol6m5s03" path="res://creeps/demon/animation_sprites/death/death_e.png" id="1_j4lu0"]
 [ext_resource type="Texture2D" uid="uid://p7atukopi3o7" path="res://creeps/demon/animation_sprites/death/death_n.png" id="2_oo11r"]

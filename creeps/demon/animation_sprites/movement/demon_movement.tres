@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=73 format=3 uid="uid://c04vlxrqrfvwe"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://c04vlxrqrfvwe"]
 
 [ext_resource type="Texture2D" uid="uid://dotrukq7k3mat" path="res://creeps/demon/animation_sprites/movement/move_e.png" id="1_a3ytk"]
 [ext_resource type="Texture2D" uid="uid://pmcqaibuc4u7" path="res://creeps/demon/animation_sprites/movement/move_n.png" id="2_udwuw"]

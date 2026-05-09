@@ -1,4 +1,4 @@
-[gd_scene load_steps=477 format=3 uid="uid://dofmud70hi37u"]
+[gd_scene format=3 uid="uid://dofmud70hi37u"]
 
 [ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_yqf6o"]
 [ext_resource type="Texture2D" uid="uid://ldkj1gpso1m4" path="res://creeps/robot/animated_sprites/movement/move_e.png" id="2_iyg3v"]
@@ -3291,24 +3291,27 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="RobotCreep" type="Node2D" node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS")]
+[node name="RobotCreep" type="Node2D" unique_id=1951171578 node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS")]
 script = ExtResource("1_yqf6o")
 DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
-[node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
-visible = false
+[node name="MovementAnimations" type="AnimatedSprite2D" parent="." unique_id=2038490718]
+position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_nfolr")
-animation = &"move_w"
+animation = &"move_sw"
 
-[node name="IdleAnimations" type="AnimatedSprite2D" parent="."]
+[node name="IdleAnimations" type="AnimatedSprite2D" parent="." unique_id=40429311]
 visible = false
+position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_uayfo")
 animation = &"idle_w"
 
-[node name="DeathAnimations" type="AnimatedSprite2D" parent="."]
+[node name="DeathAnimations" type="AnimatedSprite2D" parent="." unique_id=1938249732]
+visible = false
+position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_fmr4c")
 animation = &"death_w"
 frame = 15

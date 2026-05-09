@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=89 format=3 uid="uid://c2gvrv3ihej3w"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://c2gvrv3ihej3w"]
 
 [ext_resource type="Texture2D" uid="uid://bujaajsuu4uqh" path="res://creeps/demon/animation_sprites/idle/idle_n.png" id="1_fhvpy"]
 [ext_resource type="Texture2D" uid="uid://cjqnwrgw8lj32" path="res://creeps/demon/animation_sprites/idle/idle_e.png" id="1_kn36p"]

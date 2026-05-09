@@ -1,4 +1,4 @@
-[gd_scene load_steps=239 format=3 uid="uid://brqdb2l5kktuo"]
+[gd_scene format=3 uid="uid://brqdb2l5kktuo"]
 
 [ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_m02ng"]
 [ext_resource type="Texture2D" uid="uid://dv5ruqnc3uv58" path="res://creeps/tree/animation_sprites/move/move_e.png" id="2_jcuag"]
@@ -1613,7 +1613,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Tree" type="Node2D" node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS", "TAKE_DAMAGE_AUDIO", "DEATH_AUDIO")]
+[node name="Tree" type="Node2D" unique_id=280052732 node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS", "TAKE_DAMAGE_AUDIO", "DEATH_AUDIO")]
 script = ExtResource("1_m02ng")
 DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
@@ -1623,22 +1623,25 @@ TAKE_DAMAGE_AUDIO = NodePath("TakeDamageAudio")
 DEATH_AUDIO = NodePath("DeathAudio")
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
-[node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
+[node name="MovementAnimations" type="AnimatedSprite2D" parent="." unique_id=838502845]
+position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_cgj75")
 animation = &"move_w"
 
-[node name="IdleAnimations" type="AnimatedSprite2D" parent="."]
+[node name="IdleAnimations" type="AnimatedSprite2D" parent="." unique_id=392799007]
 visible = false
+position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_ymsai")
 animation = &"idle_w"
 
-[node name="DeathAnimations" type="AnimatedSprite2D" parent="."]
+[node name="DeathAnimations" type="AnimatedSprite2D" parent="." unique_id=1246641158]
 visible = false
+position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_tkrii")
 animation = &"death_w"
 
-[node name="TakeDamageAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="TakeDamageAudio" type="AudioStreamPlayer2D" parent="." unique_id=1041378351]
 stream = ExtResource("26_3o2di")
 
-[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="." unique_id=754581528]
 stream = ExtResource("27_lkfts")

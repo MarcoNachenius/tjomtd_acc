@@ -1,4 +1,4 @@
-[gd_scene load_steps=381 format=3 uid="uid://c1iw1rxe1nc0t"]
+[gd_scene format=3 uid="uid://c1iw1rxe1nc0t"]
 
 [ext_resource type="Script" uid="uid://ca4vcvptvjr6u" path="res://creeps/base_object/creep.gd" id="1_f1gtt"]
 [ext_resource type="Texture2D" uid="uid://cy7ydpyxrgf5h" path="res://creeps/centipede/animation_sprites/movement/move_e.png" id="2_o4uq5"]
@@ -2619,7 +2619,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Centipede" type="Node2D" node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS")]
+[node name="Centipede" type="Node2D" unique_id=1162685307 node_paths=PackedStringArray("DEATH_ANIMATIONS", "IDLE_ANIMATIONS", "MOVEMENT_ANIMATIONS")]
 z_index = 3
 z_as_relative = false
 y_sort_enabled = true
@@ -2629,20 +2629,22 @@ IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
-[node name="MovementAnimations" type="AnimatedSprite2D" parent="."]
-visible = false
+[node name="MovementAnimations" type="AnimatedSprite2D" parent="." unique_id=946875986]
 y_sort_enabled = true
+position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_ih4eo")
-animation = &"move_w"
+animation = &"move_ne"
 
-[node name="IdleAnimations" type="AnimatedSprite2D" parent="."]
+[node name="IdleAnimations" type="AnimatedSprite2D" parent="." unique_id=1554919829]
 visible = false
 y_sort_enabled = true
+position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_sig72")
 animation = &"idle_w"
 
-[node name="DeathAnimations" type="AnimatedSprite2D" parent="."]
+[node name="DeathAnimations" type="AnimatedSprite2D" parent="." unique_id=1897126510]
 visible = false
 y_sort_enabled = true
+position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_vq8hx")
 animation = &"death_w"
