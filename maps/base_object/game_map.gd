@@ -214,7 +214,7 @@ func tower_count_dict_to_tower_id_array(tower_count_dict: Dictionary[TowerConsta
 
 ## Removes all creeps from the map
 func remove_remaining_creeps() -> void:
-	for child in get_children():
+	for child in ENTITY_LAYER.get_children():
 		if child is Creep:
 			child.queue_free()
 
