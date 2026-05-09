@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://egen2uww00jv"]
+
+[ext_resource type="Script" uid="uid://bvx3rgn80uk4w" path="res://debug_and_testing/playable_scenes/creep_path_follow_debug.gd" id="1_x8hr4"]
+[ext_resource type="Script" uid="uid://wadk3qruggns" path="res://game/components/camera/map_camera.gd" id="3_3li0t"]
+[ext_resource type="PackedScene" uid="uid://byinno575xp64" path="res://debug_and_testing/debug_maps/empty_debug_map.tscn" id="3_ssi56"]
+
+[node name="CreepPathFollowDebug" type="Node2D" unique_id=863510955 node_paths=PackedStringArray("GAME_MAP", "CAMERA")]
+script = ExtResource("1_x8hr4")
+GAME_MAP = NodePath("GameMap")
+__creep_speed = 10
+CAMERA = NodePath("MapCamera")
+
+[node name="MapCamera" type="Camera2D" parent="." unique_id=1540060920 node_paths=PackedStringArray("__game_map")]
+position = Vector2(6400, 3200)
+zoom = Vector2(0.1, 0.1)
+script = ExtResource("3_3li0t")
+__game_map = NodePath("../GameMap")
+metadata/_custom_type_script = "uid://wadk3qruggns"
+
+[node name="GameMap" parent="." unique_id=1899885665 instance=ExtResource("3_ssi56")]
+MAP_HEIGHT = 50
+MAP_WIDTH = 50
+__path_end_point = Vector2i(99, 99)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1774182894]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=2020068744]
+offset_right = 87.0
+offset_bottom = 31.0
+text = "Exit Game"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_exit_game_pressed"]
