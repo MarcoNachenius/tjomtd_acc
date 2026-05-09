@@ -7,7 +7,7 @@
 [node name="CreepPathFollowDebug" type="Node2D" unique_id=863510955 node_paths=PackedStringArray("GAME_MAP", "CAMERA")]
 script = ExtResource("1_x8hr4")
 GAME_MAP = NodePath("GameMap")
-__creep_id = 7
+__creep_id = 1
 __creep_speed = 5
 CAMERA = NodePath("MapCamera")
 

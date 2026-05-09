@@ -472,6 +472,8 @@ func _on_remove_barricade_button_pressed() -> void:
 	# Hide remove and replace barricade buttons
 	TOWER_PROPERTIES_CONTAINER.REMOVE_BARRICADE_BUTTON.visible = false
 	TOWER_PROPERTIES_CONTAINER.REPLACE_BARRICADE_BUTTON.visible = false
+	# Hide Tower animation highlight
+	TOWER_HIGHLIGHT_ANIMATION.visible = false
 
 
 ## Handle replace barricade with tower button pressed

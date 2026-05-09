@@ -13,6 +13,7 @@ script = ExtResource("1_fvybj")
 DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
+HEALTH_BAR_Y_ELEVATION = 128
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="." unique_id=732426473]
 visible = false

@@ -3296,6 +3296,7 @@ script = ExtResource("1_yqf6o")
 DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
+HEALTH_BAR_Y_ELEVATION = 112
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
 [node name="MovementAnimations" type="AnimatedSprite2D" parent="." unique_id=2038490718]

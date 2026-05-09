@@ -1619,6 +1619,7 @@ DEATH_ANIMATIONS = NodePath("DeathAnimations")
 IDLE_ANIMATIONS = NodePath("IdleAnimations")
 MOVEMENT_ANIMATIONS = NodePath("MovementAnimations")
 SPEED_TO_MOVEMENT_FPS_RATIO = 0.3
+HEALTH_BAR_Y_ELEVATION = 94
 TAKE_DAMAGE_AUDIO = NodePath("TakeDamageAudio")
 DEATH_AUDIO = NodePath("DeathAudio")
 metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
