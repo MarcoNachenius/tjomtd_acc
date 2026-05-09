@@ -7,12 +7,12 @@
 [node name="CreepPathFollowDebug" type="Node2D" unique_id=863510955 node_paths=PackedStringArray("GAME_MAP", "CAMERA")]
 script = ExtResource("1_x8hr4")
 GAME_MAP = NodePath("GameMap")
-__creep_speed = 10
+__creep_speed = 5
 CAMERA = NodePath("MapCamera")
 
 [node name="MapCamera" type="Camera2D" parent="." unique_id=1540060920 node_paths=PackedStringArray("__game_map")]
-position = Vector2(6400, 3200)
-zoom = Vector2(0.1, 0.1)
+position = Vector2(1225, 700)
+zoom = Vector2(0.5, 0.5)
 script = ExtResource("3_3li0t")
 __game_map = NodePath("../GameMap")
 metadata/_custom_type_script = "uid://wadk3qruggns"
@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://wadk3qruggns"
 MAP_HEIGHT = 50
 MAP_WIDTH = 50
 __path_end_point = Vector2i(99, 99)
+__path_start_point = Vector2i(20, 20)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1774182894]
 

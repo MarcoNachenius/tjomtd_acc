@@ -22,15 +22,24 @@ func _ready() -> void:
 	if FOLLOW_CREEP:
 		CAMERA.zoom = Vector2(1.5, 1.5)
 	 
-	# Place barricaes
-	GAME_MAP.place_barricade(Vector2i(5, 5), true)
-	GAME_MAP.place_barricade(Vector2i(7, 5), true) 
-
+	GAME_MAP.__curr_path = [
+		Vector2i(20, 20),
+		Vector2i(20, 30),
+		Vector2i(30, 30),
+		Vector2i(30, 20),
+		Vector2i(20, 20),
+		Vector2i(10, 10),
+		Vector2i(0, 20),
+		Vector2i(10, 30),
+		Vector2i(20, 20),
+	]
+	GAME_MAP.update_path_line()
 	GAME_MAP.show_path_line()
+	
 	
 	# Hide barricades
 	#for barricade in GAME_MAP.__barricades_on_map:
-	#    barricade.visible = false
+	#	barricade.visible = false
 
 	# Set creep spawner values
 	GAME_MAP.CREEP_SPAWNER.__wave_creep_properties = WAVE_PROPERTIES
