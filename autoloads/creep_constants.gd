@@ -1,7 +1,12 @@
 extends Node
 
-# INSTANCES
-# =========
+# SINGLE VALUE CONSTANTS
+# ======================
+const GHOST_CREEP_TRANSPARENCY: float = 0.5
+
+
+# ENUMS
+# =====
 enum CreepIDs {
     RED_SPIDER,
     DEMON,
@@ -13,6 +18,10 @@ enum CreepIDs {
     ROBOT
 }
 
+
+# PACKED SCENE LOADS
+# ==================
+# CREEP OBJECTS
 var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
     CreepIDs.RED_SPIDER: load("res://creeps/red_spider/red_spider.tscn"),
     CreepIDs.DEMON: load("res://creeps/demon/demon.tscn"),
@@ -24,9 +33,13 @@ var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
     CreepIDs.ROBOT: load("res://creeps/robot/robot_creep.tscn"),
 }
 
+# BASE COMPONENTS
+var HITBOX_PRELOAD: PackedScene = load("res://creeps/components/hitbox/creep_hitbox.tscn")
+var HEALTH_BAR_PRELOAD: PackedScene = load("res://creeps/components/health_bar/health_bar.tscn")
 
-# MOVEMENT
-# ========
+
+# MOVEMENT VALUES
+# ===============
 enum CompassDirections {
     EAST,
     WEST,
@@ -48,7 +61,6 @@ const CompassDirToVelocities: Dictionary = {
     CompassDirections.SOUTH_WEST: Vector2(-1 , 0),
     CompassDirections.SOUTH_EAST: Vector2(0, 0.5)
 }
-
 
 const CompassDirToMovementAnimations: Dictionary = {
     CompassDirections.EAST: "move_e",
@@ -93,9 +105,3 @@ const CompassDirToStr: Dictionary = {
     CompassDirections.SOUTH_WEST: "sw",
     CompassDirections.SOUTH_EAST:  "se"
 }
-
-
-# COMPONENTS
-# ==========
-var HITBOX_PRELOAD: PackedScene = load("res://creeps/components/hitbox/creep_hitbox.tscn")
-var HEALTH_BAR_PRELOAD: PackedScene = load("res://creeps/components/health_bar/health_bar.tscn")
