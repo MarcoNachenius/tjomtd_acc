@@ -36,6 +36,7 @@ var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
 # BASE COMPONENTS
 var HITBOX_PRELOAD: PackedScene = load("res://creeps/components/hitbox/creep_hitbox.tscn")
 var HEALTH_BAR_PRELOAD: PackedScene = load("res://creeps/components/health_bar/health_bar.tscn")
+var CRAWL_SCANNER_PRELOAD: PackedScene = load("res://creeps/components/crawl_scanner/creep_crawl_scanner.tscn")
 
 
 # MOVEMENT VALUES

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dcehwmw7gov4m"]
+
+[ext_resource type="Script" uid="uid://ev6nkhr0d7fs" path="res://creeps/mummy/mummy.gd" id="1_hcnnu"]
+
+[node name="Mummy" type="Node2D" unique_id=1952844777]
+script = ExtResource("1_hcnnu")
+metadata/_custom_type_script = "uid://ca4vcvptvjr6u"

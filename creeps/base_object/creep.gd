@@ -4,7 +4,8 @@ class_name Creep
 enum States {
 	MOVING,
 	IDLE,
-	DYING
+	DYING,
+	CRAWLING
 }
 
 signal creep_death(creep: Creep)

@@ -80,8 +80,8 @@ pointing/android/enable_pan_and_scale_gestures=true
 2d_physics/layer_2="Creep Hitbox"
 2d_physics/layer_3="Projectile Hurtbox"
 2d_physics/layer_4="Tower Aura"
-2d_physics/layer_5="Creep Crawl Area"
-2d_physics/layer_6="Tower Crawl Trigger"
+2d_physics/layer_5="Creep Crawl Scanner"
+2d_physics/layer_6="Creep Crawl Trigger"
 
 [rendering]
 
