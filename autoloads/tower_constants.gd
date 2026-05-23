@@ -1,5 +1,8 @@
 extends Node
 
+# LOADS
+var CRAWL_TRIGGER_LOAD: PackedScene = load("res://towers/components/crawl_trigger/crawl_trigger.tscn")
+
 
 # NB: Add new towers to the END of the enum list to avoid breaking current tower IDs assignment.
 enum TowerIDs {

@@ -45,6 +45,7 @@ var RANGE_DISPLAY_SHAPE: RangeDisplayShape
 ## Area responsible for triggereing detection by tower auras.
 var DETECTION_AREA: TowerDetectionArea
 var TOWER_AURA_MANAGER: TowerAuraManager
+var CRAWL_TRIGGER: CrawlTrigger
 
 # BUILTINS
 func _ready():
@@ -54,16 +55,16 @@ func _ready():
 	__upgrades_into = TowerConstants.UPGRADES_INTO[TOWER_ID]
 	assert(TowerConstants.REQUIRES_TOWERS.has(TOWER_ID), "Missing requires towers for tower. Assign value in TowerConstants.REQUIRES_TOWERS")
 	__requires_towers = TowerConstants.REQUIRES_TOWERS[TOWER_ID]
+	
 	# Instantiate child scenes
 	_create_surface_sprite()
 	_create_awaiting_selection_animation()
 	_create_range_display_shape()
 	_create_detection_area()
+	_create_crawl_trigger()
+
 	# Set up z index and z as relative values
 	_handle_ordering()
-
-# PUBLIC METHODS
-# ==============
 
 
 # PRIVATE METHODS
@@ -79,6 +80,7 @@ func _create_aura_manager() -> void:
 	var new_aura_manager_instance: TowerAuraManager = TowerAuraManager.new(self)
 	add_child(new_aura_manager_instance)
 	TOWER_AURA_MANAGER = new_aura_manager_instance
+
 
 ## Creates Area2D responsible for triggereing detection by tower auras.
 ## This method also creates the TowerAuraManager singleton if detection area is created.
@@ -104,6 +106,7 @@ func _create_surface_sprite() -> void:
 	SURFACE_SPRITE = new_surface_sprite
 	add_child(SURFACE_SPRITE)
 
+
 func _create_awaiting_selection_animation() -> void:
 	# Do not add animation for barricades
 	if TOWER_ID == TowerConstants.TowerIDs.BARRICADE:
@@ -113,6 +116,7 @@ func _create_awaiting_selection_animation() -> void:
 	add_child(AWAITING_SELECTION_ANIMATION)
 	# Hide by default
 	AWAITING_SELECTION_ANIMATION.visible = false
+
 
 ## Creates circle indicating range whenever tower is selected.
 ## Does not create range shape if tower is a barricade
@@ -147,6 +151,7 @@ func _create_range_display_shape() -> void:
 	# display range shape if tower has no range to update
 	PRIMARY_PROJECTILE_SPAWNER.range_altered.connect(_on_range_altered)
 
+
 ## Avoid human error and ensure that tower and its sprite are always ordered correctly
 func _handle_ordering() -> void:
 	# Handle scene root ordering
@@ -164,6 +169,12 @@ func _handle_ordering() -> void:
 	SURFACE_SPRITE.z_as_relative = SURFACE_SPRITE_Z_AS_RELATIVE
 	SURFACE_SPRITE.z_index = SURFACE_SPRITE_Z_INDEX
 
+
+## Creates Area2D responsible for triggereing crawl state for mummies travelling over tower.
+func _create_crawl_trigger() -> void:
+	var new_crawl_trigger: CrawlTrigger = TowerConstants.CRAWL_TRIGGER_LOAD.instantiate()
+	add_child(new_crawl_trigger)
+	CRAWL_TRIGGER = new_crawl_trigger
 
 # GETTERS
 # =======

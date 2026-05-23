@@ -32,7 +32,6 @@ var __distance_to_next_point: float
 var __hitbox: CreepHitbox
 var __health_bar: HealthBar
 var __is_wave_creep: bool
-
 ## Tracks the time at which the final boss starts maze.
 var __maze_start_millisecond_timestamp: int
 var __num_of_active_stun_effects: int

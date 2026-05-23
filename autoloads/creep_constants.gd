@@ -1,9 +1,5 @@
 extends Node
 
-# SINGLE VALUE CONSTANTS
-# ======================
-const GHOST_CREEP_TRANSPARENCY: float = 0.5
-
 
 # ENUMS
 # =====
@@ -15,7 +11,8 @@ enum CreepIDs {
     HUMAN,
     PUMPKIN,
     TREE,
-    ROBOT
+    ROBOT,
+    MUMMY
 }
 
 
@@ -94,6 +91,17 @@ const CompassDirToIdleAnimations: Dictionary = {
     CompassDirections.SOUTH: "idle_s",
     CompassDirections.SOUTH_WEST: "idle_sw",
     CompassDirections.SOUTH_EAST:  "idle_se"
+}
+
+const CompassDirToCrawlAnimations: Dictionary = {
+    CompassDirections.EAST: "crawl_e",
+    CompassDirections.WEST: "crawl_w",
+    CompassDirections.NORTH: "crawl_n",
+    CompassDirections.NORTH_WEST: "crawl_nw",
+    CompassDirections.NORTH_EAST: "crawl_ne",
+    CompassDirections.SOUTH: "crawl_s",
+    CompassDirections.SOUTH_WEST: "crawl_sw",
+    CompassDirections.SOUTH_EAST:  "crawl_se"
 }
 
 const CompassDirToStr: Dictionary = {
