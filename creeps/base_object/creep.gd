@@ -341,14 +341,12 @@ func _handle_movement():
 	__total_distance_travelled += __curr_speed
 	# Update the position
 	position += position_change
-	# Play movement animation
-	MOVEMENT_ANIMATIONS.play(CreepConstants.CompassDirToMovementAnimations[__curr_compass_direction])
 	# Adjust animation speed
 	MOVEMENT_ANIMATIONS.speed_scale = __curr_speed * SPEED_TO_MOVEMENT_FPS_RATIO
+	# Play movement animation
+	MOVEMENT_ANIMATIONS.play(CreepConstants.CompassDirToMovementAnimations[__curr_compass_direction])
+	
 
-# ***********
-# WIP METHODS
-# ***********
 
 func _switch_state(state: States):
 	# Update the current state

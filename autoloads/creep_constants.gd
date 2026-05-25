@@ -30,7 +30,8 @@ var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
     CreepIDs.ROBOT: load("res://creeps/robot/robot_creep.tscn"),
 }
 
-# BASE COMPONENTS
+# COMPONENT LOADS
+# ===============
 var HITBOX_PRELOAD: PackedScene = load("res://creeps/components/hitbox/creep_hitbox.tscn")
 var HEALTH_BAR_PRELOAD: PackedScene = load("res://creeps/components/health_bar/health_bar.tscn")
 var CRAWL_SCANNER_PRELOAD: PackedScene = load("res://creeps/components/crawl_scanner/creep_crawl_scanner.tscn")
