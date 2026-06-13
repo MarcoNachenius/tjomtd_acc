@@ -144,14 +144,30 @@ func test_robot_idle_animations():
     add_child_autofree(dummy_creep)
     dummy_creep.stun(10)
 
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_n"), "Tree creep has 'idle_n animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_ne"), "Tree creep has 'idle_ne animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_e"), "Tree creep has 'idle_e animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_se"), "Tree creep has 'idle_se animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_s"), "Tree creep has 'idle_s animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_sw"), "Tree creep has 'idle_sw animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_w"), "Tree creep has 'idle_w animation'")
-    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_nw"), "Tree creep has 'idle_nw animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_n"), "Robot creep has 'idle_n animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_ne"), "Robot creep has 'idle_ne animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_e"), "Robot creep has 'idle_e animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_se"), "Robot creep has 'idle_se animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_s"), "Robot creep has 'idle_s animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_sw"), "Robot creep has 'idle_sw animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_w"), "Robot creep has 'idle_w animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_nw"), "Robot creep has 'idle_nw animation'")
 
     # Clean up
     dummy_creep.queue_free()
+
+
+func test_mummy_idle_animations():
+    # Create dummy creep
+    var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.MUMMY].instantiate()
+    add_child_autofree(dummy_creep)
+    dummy_creep.stun(10)
+
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_n"), "Mummy creep has 'idle_n animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_ne"), "Mummy creep has 'idle_ne animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_e"), "Mummy creep has 'idle_e animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_se"), "Mummy creep has 'idle_se animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_s"), "Mummy creep has 'idle_s animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_sw"), "Mummy creep has 'idle_sw animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_w"), "Mummy creep has 'idle_w animation'")
+    assert_true(dummy_creep.IDLE_ANIMATIONS.sprite_frames.has_animation("idle_nw"), "Mummy creep has 'idle_nw animation'")

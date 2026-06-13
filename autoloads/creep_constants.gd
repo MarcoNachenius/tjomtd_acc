@@ -28,6 +28,7 @@ var CreepPreloads: Dictionary[CreepIDs, PackedScene] = {
     CreepIDs.PUMPKIN: load("res://creeps/pumpkin/pumpkin.tscn"),
     CreepIDs.TREE: load("res://creeps/tree/tree.tscn"),
     CreepIDs.ROBOT: load("res://creeps/robot/robot_creep.tscn"),
+    CreepIDs.MUMMY: load("res://creeps/mummy/mummy.tscn")
 }
 
 # COMPONENT LOADS

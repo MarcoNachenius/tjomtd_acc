@@ -146,14 +146,33 @@ func test_robot_movement_animations():
     add_child_autofree(dummy_creep)
     dummy_creep.stun(10)
 
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_n"), "Tree creep has 'move_n animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_ne"), "Tree creep has 'move_ne animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_e"), "Tree creep has 'move_e animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_se"), "Tree creep has 'move_se animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_s"), "Tree creep has 'move_s animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_sw"), "Tree creep has 'move_sw animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_w"), "Tree creep has 'move_w animation'")
-    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_nw"), "Tree creep has 'move_nw animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_n"), "Robot creep has 'move_n animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_ne"), "Robot creep has 'move_ne animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_e"), "Robot creep has 'move_e animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_se"), "Robot creep has 'move_se animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_s"), "Robot creep has 'move_s animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_sw"), "Robot creep has 'move_sw animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_w"), "Robot creep has 'move_w animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_nw"), "Robot creep has 'move_nw animation'")
+
+    # Clean up
+    dummy_creep.queue_free()
+
+
+func test_mummy_movement_animations():
+    # Create dummy creep
+    var dummy_creep: Creep = CreepConstants.CreepPreloads[CreepConstants.CreepIDs.MUMMY].instantiate()
+    add_child_autofree(dummy_creep)
+    dummy_creep.stun(10)
+
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_n"), "Mummy creep has 'move_n animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_ne"), "Mummy creep has 'move_ne animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_e"), "Mummy creep has 'move_e animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_se"), "Mummy creep has 'move_se animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_s"), "Mummy creep has 'move_s animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_sw"), "Mummy creep has 'move_sw animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_w"), "Mummy creep has 'move_w animation'")
+    assert_true(dummy_creep.MOVEMENT_ANIMATIONS.sprite_frames.has_animation("move_nw"), "Mummy creep has 'move_nw animation'")
 
     # Clean up
     dummy_creep.queue_free()
