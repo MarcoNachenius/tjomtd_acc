@@ -14,10 +14,18 @@ var __final_boss_spawnning: bool = false
 
 signal creep_spawned(creep: Creep)
 
+
+# *****************
+# INHERITED METHODS
+# *****************
 func _ready():
 	__wave_number = 0
 	_create_spawn_cooldown_timer()
 
+
+# ***************
+# PRIVATE METHODS
+# ***************
 func _create_spawn_cooldown_timer():
 	# Create the Timer instance
 	var new_timer = Timer.new()
@@ -56,7 +64,7 @@ func _spawn_wave_creep():
 	__game_map.ENTITY_LAYER.add_child(new_creep)
 	
 	# Set creep properties
-	new_creep.set_path_points(__game_map.creep_mapped_to_local_path_positions())
+	new_creep.set_path_points(__game_map.creep_mapped_to_local_path_positions(__wave_creep_properties[WaveConstants.WaveProperties.CREEP_ID]))
 	new_creep.set_starting_health(__wave_creep_properties[WaveConstants.WaveProperties.CREEP_HEALTH])
 	new_creep.set_starting_speed(__wave_creep_properties[WaveConstants.WaveProperties.CREEP_SPEED])
 	new_creep.set_detectability(true)
@@ -70,6 +78,10 @@ func _spawn_wave_creep():
 	# Start cooldown timer
 	__spawn_cooldown_timer.start()
 
+
+# **************
+# PUBLIC METHODS
+# **************
 func initiate_new_wave():
 	# Retireve wave properties
 	__wave_creep_properties = WaveConstants.WAVES[__wave_number]
@@ -93,16 +105,17 @@ func initiate_final_boss_wave():
 	__wave_size = __wave_creep_properties[WaveConstants.WaveProperties.WAVE_SIZE]
 	_spawn_wave_creep()
 
+
 # *******
 # SIGNALS
 # *******
 func _on_spawn_cooldown_timer_timeout():
 	_spawn_wave_creep()
 
+
 # *******
 # SETTERS
 # *******
-
 # Setter for __wave_creep_preload
 func set_creep_preload(scene: PackedScene) -> void:
 	if scene is PackedScene:

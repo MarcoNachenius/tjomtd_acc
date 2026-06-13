@@ -88,6 +88,9 @@ var CREEP_SPAWNER: CreepSpawner
 var RANDOM_TOWER_GENERATOR: RandomTowerGenerator
 var SLATE_MANAGER: SlateManager
 var ENTITY_LAYER: Node2D
+## Used for assigning paths for creeps like Mummy which
+## have the ability to climb/fly over towers.
+var INITIAL_PATH: Array[Vector2i]
 
 
 # -----------------
@@ -114,7 +117,7 @@ func _ready() -> void:
 	# ASTAR GRID
 	self._create_astar_grid()
 
-	# DERIVED TileMapLayerS
+	# TILE MAPS
 	self._create_main_tileset()
 	self._create_placement_grid()
 
@@ -124,8 +127,9 @@ func _ready() -> void:
 	# MAP TILE IMPEDIMENTS
 	self._set_map_tile_impediments()
 
-	# CURRENT PATH
+	# IITIALIZE CREEP PATHS
 	self._update_current_path()
+	INITIAL_PATH = __curr_path.duplicate()
 
 	# CREEP SPAWNER
 	self._create_creep_spawner()
@@ -531,11 +535,44 @@ func _create_tower_placement_validity_tiles() -> void:
 	__insufficient_balance_surface_highlight.modulate.a = MapConstants.PLACEMENT_TILE_TRANSPARENCY
 	add_child(__insufficient_balance_surface_highlight)
 
-func creep_mapped_to_local_path_positions() -> Array[Vector2i]:
-	var mapped_positions: Array[Vector2i] = []
+
+## Converts path waypoints from tile coordinates to local pixel positions for a specific creep type.
+##
+## This function takes a path defined in tile coordinates (grid positions) and converts each point
+## to actual in-world pixel coordinates by mapping through the tileset and applying an offset.
+## Different creep types can follow different paths - currently handles the MUMMY creep as a special case.
+##
+## @param creepID - The type of creep requesting the path (from CreepConstants.CreepIDs enum)
+## @returns Array[Vector2i] - An array of 2D integer vectors representing the path in local pixel coordinates.
+##                           Each point is offset by +64 pixels on the X axis from the tile's local position.
+##
+## @example
+## ```gdscript
+## var path = creep_mapped_to_local_path_positions(CreepConstants.CreepIDs.MUMMY)
+## if not path.is_empty():
+##     creep.set_path_points(path)
+## ```
+##
+## @note The +64 X-axis offset is applied to center creeps on their tiles. Adjust this value if
+##       your tile alignment is different.
+##
+## @warning The function assumes __main_tileset has a valid map_to_local() method and that
+##          __curr_path or INITIAL_PATH are properly populated before calling.
+##
+## @see CreepConstants.CreepIDs for all available creep types
+## @see __main_tileset.map_to_local() for coordinate conversion details
+func creep_mapped_to_local_path_positions(creepID: CreepConstants.CreepIDs) -> Array[Vector2i]:
+	var mapped_positions: Array[Vector2i] = []	
+	# Handle Mummy creep (Crawls over impediments)
+	if creepID == CreepConstants.CreepIDs.MUMMY:
+		for point in INITIAL_PATH:
+			mapped_positions.append(Vector2i(__main_tileset.map_to_local(point)) + Vector2i(64, 0))
+		return mapped_positions
+	
 	for point in __curr_path:
 		mapped_positions.append(Vector2i(__main_tileset.map_to_local(point)) + Vector2i(64, 0))
 	return mapped_positions
+
 
 func switch_states(new_state: States) -> void:
 	if __curr_state == new_state:
