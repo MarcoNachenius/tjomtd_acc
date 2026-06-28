@@ -1,6 +1,7 @@
 extends Creep
 class_name Mummy
 
+# EXPORTS
 @export var CRAWL_ANIMATIONS: AnimatedSprite2D
 ## CRAWL SPEED FACTOR: Multiplier applied to the creep's speed when crawling. 
 ## This allows for fine-tuning the crawl speed without affecting the base movement speed.
@@ -9,7 +10,11 @@ class_name Mummy
 ## speed to the appropriate animation speed for movement animations.
 @export var SPEED_TO_CREEP_FPS_RATIO: float = 0.5
 
+# SINGLETONS
 var CRAWL_TRIGGER_AREA: CrawlTrigger
+
+# PRIVATE VARS
+var __above_tower: bool = false
 
 # ********
 # BUILTINS
@@ -180,6 +185,7 @@ func _on_crawl_trigger_entered(_area: Area2D) -> void:
 	# Avoid same-frame signal conflict when mummy dies
 	if __curr_state == States.DYING:
 		return
+	__above_tower = true
 	_switch_state(States.CRAWLING)
 
 
@@ -187,4 +193,5 @@ func _on_crawl_trigger_exited(_area: Area2D) -> void:
 	# Acoid same-frame signal conflict when mummy dies
 	if __curr_state == States.DYING:
 		return
+	__above_tower = false
 	_switch_state(States.MOVING)

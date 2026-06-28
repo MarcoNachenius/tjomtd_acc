@@ -536,30 +536,15 @@ func _create_tower_placement_validity_tiles() -> void:
 	add_child(__insufficient_balance_surface_highlight)
 
 
-## Converts path waypoints from tile coordinates to local pixel positions for a specific creep type.
+## Converts tile-based path points to world pixel coordinates for a given creep type.
 ##
-## This function takes a path defined in tile coordinates (grid positions) and converts each point
-## to actual in-world pixel coordinates by mapping through the tileset and applying an offset.
-## Different creep types can follow different paths - currently handles the MUMMY creep as a special case.
+## Mummy creeps use INITIAL_PATH (allowing them to crawl over impediments), while all other
+## creeps follow the standard __curr_path.
 ##
-## @param creepID - The type of creep requesting the path (from CreepConstants.CreepIDs enum)
-## @returns Array[Vector2i] - An array of 2D integer vectors representing the path in local pixel coordinates.
-##                           Each point is offset by +64 pixels on the X axis from the tile's local position.
+## @param creepID - The creep type enum value determining which path to use
+## @returns Array of Vector2i positions in local pixel coordinates (offset by +64 on X-axis)
 ##
-## @example
-## ```gdscript
-## var path = creep_mapped_to_local_path_positions(CreepConstants.CreepIDs.MUMMY)
-## if not path.is_empty():
-##     creep.set_path_points(path)
-## ```
-##
-## @note The +64 X-axis offset is applied to center creeps on their tiles. Adjust this value if
-##       your tile alignment is different.
-##
-## @warning The function assumes __main_tileset has a valid map_to_local() method and that
-##          __curr_path or INITIAL_PATH are properly populated before calling.
-##
-## @see CreepConstants.CreepIDs for all available creep types
+## @tutorial Path system overview: (link to your documentation if you have it)
 ## @see __main_tileset.map_to_local() for coordinate conversion details
 func creep_mapped_to_local_path_positions(creepID: CreepConstants.CreepIDs) -> Array[Vector2i]:
 	var mapped_positions: Array[Vector2i] = []	
