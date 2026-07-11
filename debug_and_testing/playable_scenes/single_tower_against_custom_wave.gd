@@ -6,11 +6,8 @@ extends Node2D
 
 func _ready():
 	GAME_MAP.CREEP_SPAWNER.initiate_new_wave()
-	GAME_MAP.place_built_tower(TOWER_PLACEMENT_COORD, TOWER_ID)
-	var tower_aura: TowerDamageAura = TowerAuraConstants.TOWER_DAMAGE_AURA_PRELOAD.instantiate()
-	tower_aura.DAMAGE_INCREASE_FACTOR = 0.8
-	add_child(tower_aura)
-	tower_aura.global_position = GAME_MAP.__towers_on_map[0].global_position
+	GAME_MAP.place_barricade(TOWER_PLACEMENT_COORD)
+	GAME_MAP._update_current_path()
 
 
 func _on_exit_game_pressed():
