@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bbl15appmqkjc" path="res://creeps/components/crawl_scanner/creep_crawl_scanner.gd" id="1_5dh1p"]
 
 [node name="CreepCrawlScanner" type="Area2D" unique_id=740429264]
+y_sort_enabled = true
 collision_layer = 16
 collision_mask = 32
 script = ExtResource("1_5dh1p")

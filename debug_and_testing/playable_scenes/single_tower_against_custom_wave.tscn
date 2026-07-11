@@ -8,7 +8,7 @@
 script = ExtResource("1_hpmdq")
 GAME_MAP = NodePath("GameMap")
 TOWER_ID = 1
-TOWER_PLACEMENT_COORD = Vector2i(9, 9)
+TOWER_PLACEMENT_COORD = Vector2i(7, 6)
 
 [node name="GameMap" parent="." unique_id=996199642 instance=ExtResource("2_kt3m4")]
 MAP_ID = 1

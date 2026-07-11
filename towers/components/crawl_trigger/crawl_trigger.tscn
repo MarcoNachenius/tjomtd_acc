@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dm4o6ewu6mqx0" path="res://towers/components/crawl_trigger/crawl_trigger.gd" id="1_5ko6n"]
 
 [node name="CrawlTrigger" type="Area2D" unique_id=1470659689]
+y_sort_enabled = true
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_5ko6n")
