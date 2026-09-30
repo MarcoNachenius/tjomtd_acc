@@ -543,9 +543,6 @@ func _create_tower_placement_validity_tiles() -> void:
 ##
 ## @param creepID - The creep type enum value determining which path to use
 ## @returns Array of Vector2i positions in local pixel coordinates (offset by +64 on X-axis)
-##
-## @tutorial Path system overview: (link to your documentation if you have it)
-## @see __main_tileset.map_to_local() for coordinate conversion details
 func creep_mapped_to_local_path_positions(creepID: CreepConstants.CreepIDs) -> Array[Vector2i]:
 	var mapped_positions: Array[Vector2i] = []	
 	# Handle Mummy creep (Crawls over impediments)

@@ -65,6 +65,9 @@ func _ready() -> void:
 	GAME_MAP.CREEP_SPAWNER.__spawn_cooldown_timer.wait_time = GAME_MAP.CREEP_SPAWNER.__wave_creep_properties[WaveConstants.WaveProperties.SPAWN_COOLDOWN_TIME]
 	GAME_MAP.CREEP_SPAWNER.__wave_size = GAME_MAP.CREEP_SPAWNER.__wave_creep_properties[WaveConstants.WaveProperties.WAVE_SIZE]
 
+	# Ensure Path remains contant for special creep types (Mummy)
+	GAME_MAP.CREEP_SPAWNER.__wave_creep_properties[WaveConstants.WaveProperties.CREEP_ID] = CreepConstants.CreepIDs.BLUE_SPIDER
+
 	GAME_MAP.CREEP_SPAWNER._spawn_wave_creep()
 
 

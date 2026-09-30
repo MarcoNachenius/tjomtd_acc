@@ -1087,7 +1087,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ci723")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_e",
 "speed": 10.0
 }, {
@@ -1182,7 +1182,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0skxk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_n",
 "speed": 10.0
 }, {
@@ -1277,7 +1277,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2783r")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_ne",
 "speed": 10.0
 }, {
@@ -1372,7 +1372,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_06hc2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_nw",
 "speed": 10.0
 }, {
@@ -1467,7 +1467,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vpwge")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_s",
 "speed": 10.0
 }, {
@@ -1562,7 +1562,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mi56r")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_se",
 "speed": 10.0
 }, {
@@ -1657,7 +1657,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_208j6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_sw",
 "speed": 10.0
 }, {
@@ -1752,7 +1752,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_56r2c")
 }],
-"loop": true,
+"loop": 1,
 "name": &"crawl_w",
 "speed": 10.0
 }]
@@ -2180,7 +2180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ljhe6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_e",
 "speed": 12.0
 }, {
@@ -2221,7 +2221,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lq6fr")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_n",
 "speed": 12.0
 }, {
@@ -2262,7 +2262,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ofauy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_ne",
 "speed": 12.0
 }, {
@@ -2303,7 +2303,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_81ahg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_nw",
 "speed": 12.0
 }, {
@@ -2344,7 +2344,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dbnrg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_s",
 "speed": 12.0
 }, {
@@ -2385,7 +2385,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yfves")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_se",
 "speed": 12.0
 }, {
@@ -2426,7 +2426,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yowv1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_sw",
 "speed": 12.0
 }, {
@@ -2467,7 +2467,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4m2vv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_w",
 "speed": 12.0
 }]
@@ -3035,7 +3035,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_048g3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_e",
 "speed": 25.0
 }, {
@@ -3088,7 +3088,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uis5h")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_n",
 "speed": 25.0
 }, {
@@ -3141,7 +3141,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3emc4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_ne",
 "speed": 25.0
 }, {
@@ -3194,7 +3194,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8n0cg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_nw",
 "speed": 25.0
 }, {
@@ -3247,7 +3247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_02jcx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_s",
 "speed": 25.0
 }, {
@@ -3300,7 +3300,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bejsf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_se",
 "speed": 25.0
 }, {
@@ -3353,7 +3353,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q2xyd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_sw",
 "speed": 25.0
 }, {
@@ -3406,7 +3406,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aegbh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_w",
 "speed": 25.0
 }]
@@ -4254,7 +4254,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jhgxo")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_e",
 "speed": 18.0
 }, {
@@ -4331,7 +4331,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s4bq2")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_n",
 "speed": 18.0
 }, {
@@ -4408,7 +4408,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u3shu")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_ne",
 "speed": 18.0
 }, {
@@ -4485,7 +4485,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6fu3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_nw",
 "speed": 18.0
 }, {
@@ -4562,7 +4562,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iki3y")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_s",
 "speed": 18.0
 }, {
@@ -4639,7 +4639,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2h6kx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_se",
 "speed": 18.0
 }, {
@@ -4716,7 +4716,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nb3et")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_sw",
 "speed": 18.0
 }, {
@@ -4793,7 +4793,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a0taj")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_w",
 "speed": 18.0
 }]
@@ -4808,19 +4808,23 @@ metadata/_custom_type_script = "uid://ca4vcvptvjr6u"
 
 [node name="CrawlAnimations" type="AnimatedSprite2D" parent="." unique_id=1953357285]
 visible = false
+position = Vector2(0, -36)
 sprite_frames = SubResource("SpriteFrames_0byh2")
 animation = &"crawl_n"
 
 [node name="MoveAnimations" type="AnimatedSprite2D" parent="." unique_id=294804464]
-visible = false
+position = Vector2(0, -63)
 sprite_frames = SubResource("SpriteFrames_wgw58")
-animation = &"move_w"
+animation = &"move_nw"
 
 [node name="IdleAnimations" type="AnimatedSprite2D" parent="." unique_id=2051735925]
 visible = false
+position = Vector2(0, -63)
 sprite_frames = SubResource("SpriteFrames_pxgyj")
 animation = &"idle_w"
 
 [node name="DeathAnimations" type="AnimatedSprite2D" parent="." unique_id=1645636535]
+visible = false
+position = Vector2(0, -63)
 sprite_frames = SubResource("SpriteFrames_qc6qr")
 animation = &"death_e"
