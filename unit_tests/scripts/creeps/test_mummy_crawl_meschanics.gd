@@ -248,5 +248,16 @@ func test_mummy_exit_crawl_trigger_area():
 	# Test state change to crawling when entering crawl trigger area
 	assert_eq(detected_mummy.get_curr_state(), detected_mummy.States.CRAWLING, "Mummy state transitioned to States.CRAWLING when entering crawl trigger area")
 
+	#Move mummy outside of crawl trigger area
+	detected_mummy.global_position = test_map.__placement_grid.map_to_local(Vector2i(16, 16))
+
+	# Emit signal
+	await  get_tree().process_frame
+	# Change state
+	await  get_tree().process_frame
+
+	# Test state change to crawling when entering crawl trigger area
+	assert_eq(detected_mummy.get_curr_state(), detected_mummy.States.MOVING, "Mummy state transitioned to States.MOVING when exiting crawl trigger area")
+
 	# Clean up
 	test_map.queue_free()
