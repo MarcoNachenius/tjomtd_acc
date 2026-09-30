@@ -1,7 +1,7 @@
 extends Area2D
 class_name CreepCrawlScanner
 
-@export var  RADIUS: int = 31
+@export var  RADIUS: float = 31
 # Private reference to the shape resource
 var __shape: ConvexPolygonShape2D
 
@@ -32,14 +32,3 @@ func _generate_oval_points() -> Array[Vector2]:
 		points.append(Vector2(x, y))
 	
 	return points
-
-# ************
-# TODO METHODS
-# ************
-
-
-
-
-# **********
-# DEGBUGGING
-# **********

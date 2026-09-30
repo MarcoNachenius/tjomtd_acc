@@ -11,7 +11,7 @@ class_name Mummy
 @export var SPEED_TO_CREEP_FPS_RATIO: float = 0.5
 
 # SINGLETONS
-var CRAWL_TRIGGER_AREA: CrawlTrigger
+var CRAWL_TRIGGER_AREA: CreepCrawlScanner
 
 # PRIVATE VARS
 var __above_tower: bool = false
@@ -22,6 +22,7 @@ var __above_tower: bool = false
 func _ready():
 	_create_stun_timer()
 	_create_hitbox()
+	_create_crawl_scanner()
 	_set_ordering()
 	_switch_state(States.MOVING)
 
@@ -170,11 +171,11 @@ func _handle_crawl():
 	CRAWL_ANIMATIONS.play(CreepConstants.CompassDirToCrawlAnimations[__curr_compass_direction])
 
 
-func _create_crawl_trigger() -> void:
+func _create_crawl_scanner() -> void:
 	# Add to scene
-	var new_crawl_trigger: CrawlTrigger = CreepConstants.CRAWL_SCANNER_PRELOAD.instantiate()
-	add_child(new_crawl_trigger)
-	CRAWL_TRIGGER_AREA = new_crawl_trigger
+	var new_crawl_scanner: CreepCrawlScanner = CreepConstants.CRAWL_SCANNER_PRELOAD.instantiate()
+	add_child(new_crawl_scanner)
+	CRAWL_TRIGGER_AREA = new_crawl_scanner
 	
 	# Connect signals
 	CRAWL_TRIGGER_AREA.area_entered.connect(_on_crawl_trigger_entered)
