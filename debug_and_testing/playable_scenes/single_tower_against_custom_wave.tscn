@@ -12,7 +12,6 @@ TOWER_PLACEMENT_COORD = Vector2i(7, 6)
 
 [node name="GameMap" parent="." unique_id=996199642 instance=ExtResource("2_kt3m4")]
 MAP_ID = 1
-__path_line_visible = true
 
 [node name="MapCamera" type="Camera2D" parent="." unique_id=393508420 node_paths=PackedStringArray("__game_map")]
 position = Vector2(162, 658)

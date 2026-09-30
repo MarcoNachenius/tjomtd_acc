@@ -155,10 +155,14 @@ func test_mummy_enter_crawl_trigger_area():
 	assert_false(detected_mummy.CRAWL_ANIMATIONS.visible, "Assigned creep is Mummy")
 
 	# Verify initial state of mummy
-	assert_true(detected_mummy.get_curr_state() == detected_mummy.States.MOVING, "Mummy was in moving state before entering crawl trigger area")
+	assert_eq(detected_mummy.get_curr_state(), detected_mummy.States.MOVING, "Mummy was in moving state before entering crawl trigger area")
 
 	# Simulate mummy entering crawl trigger
 	detected_mummy.global_position = test_map.__placement_grid.map_to_local(TST_BARRICADE_POSITION)
+	
+	# Emit signal
+	await  get_tree().process_frame
+	# Change state
 	await  get_tree().process_frame
 
 	# Test state change to crawling when entering crawl trigger area
@@ -234,10 +238,15 @@ func test_mummy_exit_crawl_trigger_area():
 
 	# Simulate mummy entering crawl trigger
 	detected_mummy.global_position = test_map.__placement_grid.map_to_local(TST_BARRICADE_POSITION)
+	
+	# Emit signal
+	await  get_tree().process_frame
+	# Change state
 	await  get_tree().process_frame
 
+
 	# Test state change to crawling when entering crawl trigger area
-	assert_true(detected_mummy.get_curr_state() == detected_mummy.States.CRAWLING, "Mummy state transitioned to States.CRAWLING when entering crawl trigger area")
+	assert_eq(detected_mummy.get_curr_state(), detected_mummy.States.CRAWLING, "Mummy state transitioned to States.CRAWLING when entering crawl trigger area")
 
 	# Clean up
 	test_map.queue_free()
