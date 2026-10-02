@@ -60,7 +60,7 @@ func _spawn_wave_creep():
 	
 	# Place creep on map 
 	new_creep.position = __game_map.__main_tileset.map_to_local(__game_map.__path_start_point)
-	new_creep.position.x += 64 # I have no idea why this is fixes creep starting position
+	new_creep.position.x += 64 # I have no fucking idea why this fixes creep starting position
 	__game_map.ENTITY_LAYER.add_child(new_creep)
 	
 	# Set creep properties
