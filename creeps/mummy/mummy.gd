@@ -29,7 +29,7 @@ func _ready():
 	if FINAL_BOSS_MODE:
 		_create_maze_completion_timer()
 
-func _process(delta):
+func _process(_delta):
 	match __curr_state:
 		States.MOVING:
 			_handle_movement()
@@ -196,3 +196,7 @@ func _on_crawl_trigger_exited(_area: Area2D) -> void:
 		return
 	__above_tower = false
 	_switch_state(States.MOVING)
+
+
+func set_crawl_speed_factor(new_crawl_factor: float) -> void:
+	CRAWL_SPEED_FACTOR = new_crawl_factor

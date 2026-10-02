@@ -71,6 +71,12 @@ func _spawn_wave_creep():
 	new_creep.set_is_wave_creep(true)
 	new_creep.set_points_for_death(__wave_creep_properties[WaveConstants.WaveProperties.POINTS_FOR_DEATH])
 	
+	# Set Mummy properties
+	var wave_proterties_has_custom_speed_crawl_factor :bool = __wave_creep_properties.keys().has(WaveConstants.WaveProperties.CRAWL_SPEED_FACTOR)
+	var is_mummy :bool = __wave_creep_properties[WaveConstants.WaveProperties.CREEP_ID] == CreepConstants.CreepIDs.MUMMY
+	if is_mummy and wave_proterties_has_custom_speed_crawl_factor:
+		new_creep.set_crawl_speed_factor(__wave_creep_properties[WaveConstants.WaveProperties.CRAWL_SPEED_FACTOR])
+	
 	# Emit signal
 	creep_spawned.emit(new_creep)
 	# Update counter
