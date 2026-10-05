@@ -1,35 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://dohp51h4peqp7"]
+[gd_scene format=3 uid="uid://dohp51h4peqp7"]
 
 [ext_resource type="Script" uid="uid://cqcs0tk4543r0" path="res://ui/components/button_containers/start_game_menu/select_map_container/select_map_container.gd" id="1_qa10y"]
 
-[node name="SelectMapContainer" type="VBoxContainer" node_paths=PackedStringArray("GEM_TD_BUTTON", "LINE_TD_BUTTON", "BACK_TO_MAIN_MENU_BUTTON")]
+[node name="SelectMapContainer" type="VBoxContainer" unique_id=1252579037 node_paths=PackedStringArray("GEM_TD_BUTTON", "LINE_TD_BUTTON", "SQUARE_TD_BUTTON", "BACK_TO_MAIN_MENU_BUTTON")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_qa10y")
 GEM_TD_BUTTON = NodePath("GemTd")
 LINE_TD_BUTTON = NodePath("LineTd")
+SQUARE_TD_BUTTON = NodePath("SquareTd")
 BACK_TO_MAIN_MENU_BUTTON = NodePath("BackToMainMenu")
 
-[node name="HeaderText" type="RichTextLabel" parent="."]
+[node name="HeaderText" type="RichTextLabel" parent="." unique_id=1170087124]
 layout_mode = 2
 text = "Select Map"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="GemTd" type="Button" parent="."]
+[node name="GemTd" type="Button" parent="." unique_id=741906629]
 layout_mode = 2
 text = "Gem TD"
 
-[node name="LineTd" type="Button" parent="."]
+[node name="LineTd" type="Button" parent="." unique_id=222544429]
 layout_mode = 2
 text = "Line TD"
 
-[node name="BlankSpace" type="RichTextLabel" parent="."]
+[node name="SquareTd" type="Button" parent="." unique_id=848269910]
+visible = false
+layout_mode = 2
+text = "Square TD"
+
+[node name="BlankSpace" type="RichTextLabel" parent="." unique_id=2095133243]
 layout_mode = 2
 text = "   "
 fit_content = true
 horizontal_alignment = 1
 
-[node name="BackToMainMenu" type="Button" parent="."]
+[node name="BackToMainMenu" type="Button" parent="." unique_id=1341292159]
 layout_mode = 2
 text = "Back to Main Menu"

@@ -6,7 +6,8 @@ const MAP_TILE_HEIGHT: int = 128
 enum MapID {
     LINE_TD = 1,
     GEM_TD = 2,
-    BLANK_MAP = 3
+    BLANK_MAP = 3,
+    SQUARE_TD = 4,
 }
 
 # BLANK MAP
@@ -17,15 +18,21 @@ const BLANK_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = []
 const LINE_TD_MANDATORY_WAYPOINTS: Array[Vector2i] = []
 const LINE_TD_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = []
 
+# SQUARE TD
+const SQUARE_TD_MANDATORY_WAYPOINTS: Array[Vector2i] = []
+const SQUARE_TD_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = []
+
 ## Does not include start or end points
 const MandatoryWaypoints = {
     MapID.LINE_TD: LINE_TD_MANDATORY_WAYPOINTS,
+    MapID.SQUARE_TD: LINE_TD_MANDATORY_WAYPOINTS,
     MapID.GEM_TD: GEM_TD_MANDATORY_WAYPOINTS,
     MapID.BLANK_MAP: BLANK_MAP_MANDATORY_WAYPOINTS,
 }
 
 const MapTileImpediments = {
     MapID.LINE_TD: LINE_TD_MAP_TILE_IMPEDIMENTS,
+    MapID.SQUARE_TD: LINE_TD_MANDATORY_WAYPOINTS,
     MapID.GEM_TD: GEM_TD_MAP_TILE_IMPEDIMENTS,
     MapID.BLANK_MAP: BLANK_MAP_TILE_IMPEDIMENTS,
 }
@@ -56,8 +63,6 @@ const GTD_WP_5 = GTD_WP_4 + Vector2i(-25, 0)
 const GTD_WP_6 = GTD_WP_5 + Vector2i(0, 53)
 const GEM_TD_MANDATORY_WAYPOINTS: Array[Vector2i] = [GTD_WP_1, GTD_WP_2, GTD_WP_3, GTD_WP_4, GTD_WP_5, GTD_WP_6]
 
-
-var GEM_TD_MAP_LOAD = load("res://maps/gem_td/gem_td.tscn")
 
 ## Does not include start or end points
 const GEM_TD_MAP_TILE_IMPEDIMENTS: Array[Vector2i] = [

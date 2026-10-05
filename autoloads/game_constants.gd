@@ -10,10 +10,12 @@ const COLLISION_SHAPE_PRECISION: int = 16
 # ============================
 var GEM_TD_COMPLETE_BUILD: PackedScene = load("res://ui/complete_hud_builds_with_maps/completed_gem_td_hud.tscn")
 var LINE_TD_COMPLETE_BUILD: PackedScene = load("res://ui/complete_hud_builds_with_maps/completed_line_td_hud.tscn")
+var SQUARE_TD_COMPLETE_BUILD: PackedScene = load("res://ui/complete_hud_builds_with_maps/completed_square_td_hud.tscn")
 
 var MAP_ID_TO_COMPLETE_BUILD: Dictionary = {
     MapConstants.MapID.GEM_TD: GEM_TD_COMPLETE_BUILD,
     MapConstants.MapID.LINE_TD: LINE_TD_COMPLETE_BUILD,
+    MapConstants.MapID.SQUARE_TD: SQUARE_TD_COMPLETE_BUILD,
 }
 
 # START NEW GAME
@@ -27,7 +29,7 @@ const MAX_PLACEABLE_TOWERS_PER_TURN = 5
 # Zoom Constants
 const MAX_ZOOM = 2.0
 const MIN_ZOOM = 0.2
-const ZOOM_SPEED = 0.005
+const ZOOM_SPEED = 0.008
 
 # TOWER PLACEMENT
 # ===============

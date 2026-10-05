@@ -30,6 +30,7 @@ func _connect_starting_menu_container_button_signals():
 func _connect_select_map_container_button_signals():
 	SELECT_MAP_CONTAINER.GEM_TD_BUTTON.pressed.connect(_on_gem_td_button_pressed)
 	SELECT_MAP_CONTAINER.LINE_TD_BUTTON.pressed.connect(_on_line_td_button_pressed)
+	SELECT_MAP_CONTAINER.SQUARE_TD_BUTTON.pressed.connect(_on_square_td_button_pressed)
 	SELECT_MAP_CONTAINER.BACK_TO_MAIN_MENU_BUTTON.pressed.connect(_on_return_to_main_menu_button_pressed)
 
 # SHARED BUTTON SIGNALS
@@ -146,6 +147,14 @@ func _on_line_td_button_pressed():
 	GameDataStorage.create_new_game_data(MapConstants.MapID.LINE_TD)
 	# Change scene to the Line TD complete build
 	get_tree().change_scene_to_packed(GameConstants.LINE_TD_COMPLETE_BUILD)
+	# Play level background music
+	BackgroundMusicPlayer.play_level_track()
+
+func _on_square_td_button_pressed():
+	# Create new game data
+	GameDataStorage.create_new_game_data(MapConstants.MapID.SQUARE_TD)
+	# Change scene to the SQUARE_TD complete build
+	get_tree().change_scene_to_packed(GameConstants.SQUARE_TD_COMPLETE_BUILD)
 	# Play level background music
 	BackgroundMusicPlayer.play_level_track()
 
