@@ -550,7 +550,7 @@ func creep_mapped_to_local_path_positions(creepID: CreepConstants.CreepIDs) -> A
 	var mapped_positions: Array[Vector2i] = []	
 	# Handle Mummy creep (crawls over barricades)
 	if creepID == CreepConstants.CreepIDs.MUMMY:
-		for point in INITIAL_PATH:
+		for point in __curr_mummy_path:
 			mapped_positions.append(Vector2i(__main_tileset.map_to_local(point)) + Vector2i(64, 0))
 		return mapped_positions
 	
@@ -1018,6 +1018,7 @@ func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = f
 func place_built_tower(placementGridPoint: Vector2i, towerID: int) -> void:
 	# Place tower impediment points
 	place_tower_impediment_points(placementGridPoint)
+	place_mummy_path_impediment_points(placementGridPoint)
 	
 	__build_tower_preload = TowerConstants.ALL_TOWER_LOADS[towerID]
 
@@ -1041,6 +1042,7 @@ func place_built_tower(placementGridPoint: Vector2i, towerID: int) -> void:
 func place_tower(placementGridPoint: Vector2i) -> void:
 	# Place tower impediment points
 	place_tower_impediment_points(placementGridPoint)
+	place_mummy_path_impediment_points(placementGridPoint)
 	
 	# Create new tower instance
 	var new_tower: Tower = __build_tower_preload.instantiate()
