@@ -59,6 +59,7 @@ var __build_tower_preload: PackedScene
 var __build_tower_cost: int
 var __barricades_on_map: Array[Tower]
 var __curr_balance: int
+var __curr_mummy_path: Array[Vector2i]
 var __curr_path: Array[Vector2i]
 var __curr_state: States
 var __impediment_placement_type: ImpedimentPlacementTypes = ImpedimentPlacementTypes.TOWER
@@ -67,6 +68,7 @@ var __invalid_build_position_surface_highlight: Sprite2D
 var __mandatory_waypoints: Array[Vector2i]
 var __main_tileset: TileMapLayer
 var __mouse_position: Vector2
+var __mummy_astar_grid: AStarGrid2D
 var __path_impediments: Array[Vector2i]
 var __path_line: Line2D
 var __placement_grid: TileMapLayer
@@ -112,30 +114,31 @@ func _ready() -> void:
 	_create_random_tower_generator()
 
 	# TOWER PLACEMENT TILES
-	self._create_tower_placement_validity_tiles()
+	_create_tower_placement_validity_tiles()
 
-	# ASTAR GRID
-	self._create_astar_grid()
+	# ASTAR GRIDS
+	_create_astar_grid()
+	_create_mummy_astar_grid()
 
 	# TILE MAPS
-	self._create_main_tileset()
-	self._create_placement_grid()
+	_create_main_tileset()
+	_create_placement_grid()
 
 	# MANDATORY WAYPOINTS
-	self._set_mandatory_waypoints()
+	_set_mandatory_waypoints()
 
 	# MAP TILE IMPEDIMENTS
-	self._set_map_tile_impediments()
+	_set_map_tile_impediments()
 
 	# IITIALIZE CREEP PATHS
-	self._update_current_path()
+	_update_current_path()
 	INITIAL_PATH = __curr_path.duplicate()
 
 	# CREEP SPAWNER
-	self._create_creep_spawner()
+	_create_creep_spawner()
 
 	# PROJECTILE BOUNDARY AREA
-	self._create_projectile_boundary_area()
+	_create_projectile_boundary_area()
 
 	# SLATE MANAGER
 	_create_slate_manager()
@@ -545,7 +548,7 @@ func _create_tower_placement_validity_tiles() -> void:
 ## @returns Array of Vector2i positions in local pixel coordinates (offset by +64 on X-axis)
 func creep_mapped_to_local_path_positions(creepID: CreepConstants.CreepIDs) -> Array[Vector2i]:
 	var mapped_positions: Array[Vector2i] = []	
-	# Handle Mummy creep (Crawls over impediments)
+	# Handle Mummy creep (crawls over barricades)
 	if creepID == CreepConstants.CreepIDs.MUMMY:
 		for point in INITIAL_PATH:
 			mapped_positions.append(Vector2i(__main_tileset.map_to_local(point)) + Vector2i(64, 0))
@@ -554,6 +557,33 @@ func creep_mapped_to_local_path_positions(creepID: CreepConstants.CreepIDs) -> A
 	for point in __curr_path:
 		mapped_positions.append(Vector2i(__main_tileset.map_to_local(point)) + Vector2i(64, 0))
 	return mapped_positions
+
+
+## Initializes the AStar grid for pathfinding for Mummy creeps. 
+## The grid dimensions are set to double the map's width and height, allowing 
+## finer granularity for placement and movement, such as units that can occupy 
+## positions halfway between tiles, similar to Warcraft 3 building placement.
+func _create_mummy_astar_grid() -> void:
+	# Create a new instance of AStarGrid2D for pathfinding.
+	__mummy_astar_grid = AStarGrid2D.new()
+	__mummy_astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	# Validate that map dimensions are properly assigned.
+	# The map height and width are crucial for defining the grid's size.
+	assert(MAP_HEIGHT, "No map height (self.MAP_HEIGHT) has been assigned.")
+	assert(MAP_WIDTH, "No map width (self.MAP_WIDTH) has been assigned.")
+
+	# Set the region of the AStar grid.
+	# The grid dimensions are doubled to allow more precise positioning
+	# for units and buildings that can occupy half-tile spaces.
+	__mummy_astar_grid.region = Rect2i(0, 0, MAP_WIDTH * 2, MAP_HEIGHT * 2)
+
+	# Enable path jumping for the grid if the feature is configured.
+	# This setting allows units to "jump" over specific obstacles as defined
+	# by the pathfinding logic, enhancing pathing flexibility.
+	__mummy_astar_grid.jumping_enabled = true
+
+	# Commit the grid configuration to apply the changes.
+	__mummy_astar_grid.update()
 
 
 func switch_states(new_state: States) -> void:
@@ -641,12 +671,14 @@ func get_tower_from_global_position(globalPosition: Vector2) -> Tower:
 
 ## Governs validity surface hightlights and impediment placements on map
 func _handle_build_mode(event: InputEvent = null) -> void:
-	match __impediment_placement_type:
-		ImpedimentPlacementTypes.SINGLE_POINT:
-			self.handle_single_point_impediment_placement()
-		
-		ImpedimentPlacementTypes.TOWER:
-			self._handle_tower_placement(event)
+	if __impediment_placement_type == ImpedimentPlacementTypes.TOWER:
+		self._handle_tower_placement(event)
+		return
+
+	if __impediment_placement_type == ImpedimentPlacementTypes.SINGLE_POINT:
+		self.handle_single_point_impediment_placement()
+		return
+
 
 ## Handles the placement of a tower impediment by snapping the position to the grid and 
 ## displaying a placement highlight. The highlight changes color based on whether the 
@@ -707,8 +739,7 @@ func place_single_point_path_impediment(mainGridPoint: Vector2i) -> void:
 	__astar_grid.set_point_solid(mainGridPoint)
 	self._update_current_path()
 
-## I want to make it clear here that I am not actually adding a tower to the scene, 
-## rather I am simply adding the solid points to the main grid
+## Adds solid points to the astar grid of regular creeps and updates their path accordingly
 func place_tower_impediment_points(placementGridPoint: Vector2i) -> void:
 	var new_impediments: Array[Vector2i] = self.get_tower_impediment_points(placementGridPoint)
 	for point in new_impediments:
@@ -716,6 +747,16 @@ func place_tower_impediment_points(placementGridPoint: Vector2i) -> void:
 		__path_impediments.append(point)
 	# Update path line
 	self._update_current_path()
+
+
+## Adds solid points to the astar grid of Mummy creeps and updates their path accordingly
+func place_mummy_path_impediment_points(placementGridPoint: Vector2i) -> void:
+	var new_impediments: Array[Vector2i] = self.get_tower_impediment_points(placementGridPoint)
+	for point in new_impediments:
+		__mummy_astar_grid.set_point_solid(point)
+	# Update path line
+	self._update_current_mummy_path()
+
 
 ## Resets mandatory path points if it already exists
 func _set_mandatory_waypoints() -> void:
@@ -741,10 +782,11 @@ func _set_mandatory_waypoints() -> void:
 	for impediment in __mandatory_waypoints:
 		__path_impediments.append(impediment)
 	
-	self._update_current_path()
+	_update_current_path()
+	_update_current_mummy_path()
 
-## Updates the current path based on the mandatory waypoints, as
-## well as the path line.
+## Updates the path creeps must follow when spawned.
+## NB- Does not apply to creeps with special paths like Mummy creeps
 func _update_current_path() -> void:
 	var updated_path: Array[Vector2i] = []
 	for i in range(__mandatory_waypoints.size() - 1):
@@ -776,6 +818,33 @@ func _update_current_path() -> void:
 
 	# Update path line
 	self.update_path_line()
+
+
+## Updates the path Mummy creeps must follow when spawned.
+func _update_current_mummy_path() -> void:
+	var updated_path: Array[Vector2i] = []
+	for i in range(__mandatory_waypoints.size() - 1):
+		# Construct path segment
+		var from_point: Vector2i = __mandatory_waypoints[i]
+		var to_point: Vector2i = __mandatory_waypoints[i + 1]
+		var path_segment = __mummy_astar_grid.get_id_path(from_point, to_point)
+
+		# Check for path blockage
+		if path_segment.size() == 0:
+			__curr_mummy_path = []
+			return
+		
+		# Avoid duplication of end point of one path segment with beginning of next segment
+		if !updated_path.is_empty():
+			# Remove last elemnt in array
+			updated_path.resize(updated_path.size() - 1)
+		
+		# Add path segment to updated path
+		updated_path.append_array(path_segment)
+
+	# Perform update
+	__curr_mummy_path = updated_path
+
 
 ## Restets all of the values in the CurrGameData autoload when a new map is loaded
 func _reset_curr_game_data() -> void:
@@ -921,8 +990,12 @@ func _set_map_tile_impediments() -> void:
 ## Instantiates a barraciade at the specified grid position and updates the lists/dicts accordingly.
 ## Primarily used for loading game and debugging. 
 func place_barricade(placementGridPoint: Vector2i, addImpedimentPoints: bool = false) -> void:
+	# When a tower gets converted into a barricade, it only needs to alter the Mummy's path.
 	if addImpedimentPoints:
 		place_tower_impediment_points(placementGridPoint)
+	else:
+		place_mummy_path_impediment_points(placementGridPoint)
+	
 	# Place barricade
 	var new_barricade: Tower = TowerConstants.BUILD_TOWER_PRELOADS[TowerConstants.TowerIDs.BARRICADE].instantiate()
 	ENTITY_LAYER.add_child(new_barricade)
@@ -1273,8 +1346,9 @@ func _handle_navigation_mode() -> void:
 		__mouse_position = new_mouse_position
 
 func remove_tower(tower: Tower) -> void:
+	assert(tower.TOWER_ID != TowerConstants.TowerIDs.BARRICADE, "Cannot remove barricate using remove_tower()")
 	# Remove tower from list
-	assert(__towers_on_map.has(tower), "Tower not found in map")
+	assert(__towers_on_map.has(tower), "Tower not found in list of towers awaiting selection")
 	__towers_on_map.erase(tower)
 	# Remove path impediments
 	_remove_tower_impediment_points(tower.get_placement_grid_coordinate())
@@ -1298,6 +1372,14 @@ func _remove_tower_impediment_points(placementGridPoint: Vector2i) -> void:
 		__path_impediments.remove_at(__path_impediments.find(point))
 	# Update path 
 	self._update_current_path()
+
+## Removes the solid points from the Mummy path's astar grid and updates its
+## path accordingly.
+func _remove_mummy_path_impediment_points(placementGridPoint: Vector2i) -> void:
+	for point in get_tower_impediment_points(placementGridPoint):
+		__mummy_astar_grid.set_point_solid(point, false)
+	# Update path 
+	self._update_current_mummy_path()
 
 ## Handles awaiting selection towers AND upgrade towers
 func upgrade_tower(selectedTower: Tower, upgradeTowerID: TowerConstants.UpgradeTowerIDs) -> void:
